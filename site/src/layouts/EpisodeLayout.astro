@@ -15,7 +15,7 @@ const episodeSchema = {
   '@context': 'https://schema.org',
   '@type': 'PodcastEpisode',
   name: title,
-  episodeNumber: episode,
+  episodeNumber: parseInt(episode),
   datePublished: date,
   description: description || '',
   partOfSeries: {

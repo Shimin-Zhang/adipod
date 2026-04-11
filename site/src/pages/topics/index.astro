@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const topics = await getCollection('topics');
+const sorted = topics.sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<BaseLayout title="Topics" description="Deep-dive topic guides from the ADI Pod — AI coding agents, vibe coding, Claude Code, and more.">
+  <section style="padding: 2rem 0;">
+    <h1>Topics</h1>
+    <p>Deep-dive guides on the topics we cover most on the ADI Pod.</p>
+    {sorted.length === 0 ? (
+      <p><em>Topic guides coming soon.</em></p>
+    ) : (
+      sorted.map((t) => (
+        <article class="topic-card">
+          <h2><a href={`/topics/${t.data.slug}/`}>{t.data.title}</a></h2>
+          <p>{t.data.description}</p>
+        </article>
+      ))
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .topic-card { margin-bottom: 2rem; }
+  h2 { margin-top: 0; font-size: 1.25rem; }
+  h2 a { text-decoration: none; }
+</style>
