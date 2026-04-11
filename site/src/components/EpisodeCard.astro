@@ -1,0 +1,53 @@
+---
+interface Props {
+  episode: string;
+  title: string;
+  date: string;
+  slug: string;
+  description?: string;
+}
+
+const { episode, title, date, slug, description } = Astro.props;
+---
+
+<a href={`/episodes/${slug}/`} class="episode-card">
+  <span class="ep-num">Ep {episode}</span>
+  <span class="ep-date">{new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+  <h3>{title}</h3>
+  {description && <p>{description}</p>}
+</a>
+
+<style>
+  .episode-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 1.25rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: border-color 0.15s;
+  }
+  .episode-card:hover {
+    border-color: #2563eb;
+  }
+  .ep-num {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #2563eb;
+  }
+  .ep-date {
+    color: #888;
+    font-size: 0.85rem;
+    margin-left: 0.75rem;
+  }
+  h3 {
+    margin: 0.25rem 0;
+    font-size: 1.1rem;
+  }
+  p {
+    color: #555;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EpisodeCard from '../../components/EpisodeCard.astro';
+
+const episodes = await getCollection('episodes');
+const sorted = episodes.sort((a, b) => parseInt(b.data.episode) - parseInt(a.data.episode));
+---
+
+<BaseLayout title="Episodes" description="All episodes of the ADI Pod — Artificial Developer Intelligence.">
+  <section style="padding: 2rem 0;">
+    <h1>Episodes</h1>
+    <p>All {sorted.length} episodes of the ADI Pod.</p>
+    {sorted.map((ep) => (
+      <EpisodeCard
+        episode={ep.data.episode}
+        title={ep.data.title}
+        date={ep.data.date}
+        slug={ep.data.slug}
+        description={ep.data.description}
+      />
+    ))}
+  </section>
+</BaseLayout>

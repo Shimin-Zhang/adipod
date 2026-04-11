@@ -1,0 +1,61 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  episode: string;
+  title: string;
+  date: string;
+  description?: string;
+  keywords?: string;
+}
+
+const { episode, title, date, description, keywords } = Astro.props;
+
+const episodeSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'PodcastEpisode',
+  name: title,
+  episodeNumber: episode,
+  datePublished: date,
+  description: description || '',
+  partOfSeries: {
+    '@type': 'PodcastSeries',
+    name: 'Artificial Developer Intelligence',
+    url: 'https://adipod.ai',
+  },
+  author: [
+    { '@type': 'Person', name: 'Shimin Zhang' },
+    { '@type': 'Person', name: 'Dan Lasky' },
+  ],
+};
+---
+
+<BaseLayout title={`Ep ${episode}: ${title}`} description={description} schema={episodeSchema} ogType="article">
+  <article>
+    <header>
+      <p class="episode-meta">Episode {episode} &middot; {new Date(date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+      <h1>{title}</h1>
+      {keywords && <p class="keywords">{keywords}</p>}
+    </header>
+    <slot />
+  </article>
+</BaseLayout>
+
+<style>
+  .episode-meta {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+  h1 {
+    margin-top: 0.25rem;
+  }
+  .keywords {
+    color: #888;
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+  article {
+    padding: 2rem 0;
+  }
+</style>
