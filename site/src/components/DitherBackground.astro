@@ -1,0 +1,213 @@
+---
+// Full-viewport dithered WebGL background with mouse-reactive bump effect.
+// Neon (muted) in dark theme, black-and-white in light theme.
+// Source image: /dither-src.jpg (700x700)
+---
+
+<canvas id="dither-bg"></canvas>
+
+<style>
+  #dither-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+  }
+</style>
+
+<script is:inline>
+(function(){
+var canvas=document.getElementById('dither-bg');
+var gl=canvas.getContext('webgl')||canvas.getContext('experimental-webgl');
+if(!gl) return;
+
+var vs=`
+attribute vec2 a;
+varying vec2 uv;
+void main(){uv=a*.5+.5;gl_Position=vec4(a,0.,1.);}`;
+
+var fs=`
+precision mediump float;
+varying vec2 uv;
+uniform sampler2D tex;
+uniform float time, neon;
+uniform vec2  mouse, velocity, res, imgRes;
+
+float bayer(vec2 p){
+  int x=int(mod(p.x,8.)),y=int(mod(p.y,8.));
+  float m[64];
+  m[0]=0.;m[1]=32.;m[2]=8.;m[3]=40.;m[4]=2.;m[5]=34.;m[6]=10.;m[7]=42.;
+  m[8]=48.;m[9]=16.;m[10]=56.;m[11]=24.;m[12]=50.;m[13]=18.;m[14]=58.;m[15]=26.;
+  m[16]=12.;m[17]=44.;m[18]=4.;m[19]=36.;m[20]=14.;m[21]=46.;m[22]=6.;m[23]=38.;
+  m[24]=60.;m[25]=28.;m[26]=52.;m[27]=20.;m[28]=62.;m[29]=30.;m[30]=54.;m[31]=22.;
+  m[32]=3.;m[33]=35.;m[34]=11.;m[35]=43.;m[36]=1.;m[37]=33.;m[38]=9.;m[39]=41.;
+  m[40]=51.;m[41]=19.;m[42]=59.;m[43]=27.;m[44]=49.;m[45]=17.;m[46]=57.;m[47]=25.;
+  m[48]=15.;m[49]=47.;m[50]=7.;m[51]=39.;m[52]=13.;m[53]=45.;m[54]=5.;m[55]=37.;
+  m[56]=63.;m[57]=31.;m[58]=55.;m[59]=23.;m[60]=61.;m[61]=29.;m[62]=53.;m[63]=21.;
+  int idx=y*8+x;float v=0.;
+  for(int i=0;i<64;i++){if(i==idx){v=m[i];break;}}
+  return v/64.;
+}
+
+void main(){
+  float cell=2., reach=1., strength=1.;
+
+  float spd=length(velocity);
+  vec2 vdir=spd>.0005?normalize(velocity):vec2(0.);
+  vec2 toM=uv-mouse;
+  float dist=length(toM);
+  float sigma=.04+(reach/10.)*.14;
+  float bump=exp(-(dist*dist)/(2.*sigma*sigma));
+  float disp=bump*clamp(spd*20.,0.,1.)*(strength/5.)*.07;
+  vec2 wUV=uv+vdir*disp;
+
+  float ambient=sin(uv.y*6.28-time*1.8)*.02
+               +sin(uv.x*5.1+time*1.3)*.012;
+
+  vec2 wpx=wUV*res;
+  float a45=.7854;
+  vec2 rpx=vec2(cos(a45)*wpx.x-sin(a45)*wpx.y,
+                sin(a45)*wpx.x+cos(a45)*wpx.y);
+  float b=bayer(floor(rpx/cell));
+
+  /* sample image texture at warped cell centre — cover crop */
+  vec2 cellUV=(floor(wpx/cell)*cell+cell*.5)/res;
+  cellUV.y=1.-cellUV.y;
+  float sa=res.x/res.y, ia=imgRes.x/imgRes.y;
+  vec2 sc=vec2(1.);
+  if(sa>ia) sc.y=sa/ia; else sc.x=ia/sa;
+  vec2 texUV=(cellUV-.5)/sc+.5;
+  vec4 col=texture2D(tex,clamp(texUV,.001,.999));
+  float luma=dot(col.rgb,vec3(.299,.587,.114));
+
+  float lit=step(b+ambient,luma);
+
+  if(neon>.5){
+    vec3 dark=vec3(.059,.059,.067);
+    float h=mod(uv.x*.7+uv.y*.3+time*.06,1.);
+    vec3 c1=vec3(.15,.03,.12),c2=vec3(.02,.12,.15),c3=vec3(.10,.02,.15);
+    vec3 nc=h<.33?mix(c1,c2,h*3.):h<.66?mix(c2,c3,(h-.33)*3.):mix(c3,c1,(h-.66)*3.);
+    gl_FragColor=vec4(mix(dark,nc,lit),1.);
+  } else {
+    gl_FragColor=vec4(vec3(mix(.94,1.,lit)),1.);
+  }
+}`;
+
+function mkShader(type,src){
+  var s=gl.createShader(type);
+  gl.shaderSource(s,src);gl.compileShader(s);
+  if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))console.error(gl.getShaderInfoLog(s));
+  return s;
+}
+var prog=gl.createProgram();
+gl.attachShader(prog,mkShader(gl.VERTEX_SHADER,vs));
+gl.attachShader(prog,mkShader(gl.FRAGMENT_SHADER,fs));
+gl.linkProgram(prog);gl.useProgram(prog);
+
+var vbuf=gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER,vbuf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+var aloc=gl.getAttribLocation(prog,'a');
+gl.enableVertexAttribArray(aloc);
+gl.vertexAttribPointer(aloc,2,gl.FLOAT,false,0,0);
+
+var uTime=gl.getUniformLocation(prog,'time');
+var uNeon=gl.getUniformLocation(prog,'neon');
+var uMouse=gl.getUniformLocation(prog,'mouse');
+var uVelocity=gl.getUniformLocation(prog,'velocity');
+var uRes=gl.getUniformLocation(prog,'res');
+var uImgRes=gl.getUniformLocation(prog,'imgRes');
+
+/* --- texture --- */
+var texObj=gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D,texObj);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+/* placeholder 1x1 pixel until image loads */
+gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([128,128,128,255]));
+
+/* --- theme detection --- */
+function isDark(){
+  var t=document.documentElement.getAttribute('data-theme');
+  if(t==='dark') return true;
+  if(t==='light') return false;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+var neonV=isDark()?1:0;
+
+var mo=new MutationObserver(function(){neonV=isDark()?1:0;});
+mo.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){neonV=isDark()?1:0;});
+
+/* --- click-based bump (replaces hover) --- */
+var mx=0.5,my=0.5,vx=0,vy=0;
+var rawX=0.5,rawY=0.5,prevRawX=0.5,prevRawY=0.5;
+var clicking=false;
+var speedV=4;
+
+document.addEventListener('mousedown',function(e){
+  rawX=e.clientX/window.innerWidth;
+  rawY=1-e.clientY/window.innerHeight;
+  clicking=true;
+});
+document.addEventListener('mouseup',function(){clicking=false;});
+document.addEventListener('touchstart',function(e){
+  rawX=e.touches[0].clientX/window.innerWidth;
+  rawY=1-e.touches[0].clientY/window.innerHeight;
+  clicking=true;
+},{passive:true});
+document.addEventListener('touchend',function(){clicking=false;});
+
+/* --- resize --- */
+function resize(){
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+  gl.viewport(0,0,canvas.width,canvas.height);
+}
+window.addEventListener('resize',resize);
+resize();
+
+/* --- render loop --- */
+var lerp=function(a,b,t){return a+(b-a)*t;};
+var t0=performance.now();
+
+function frame(now){
+  var rawVx=(rawX-prevRawX)*60;
+  var rawVy=(rawY-prevRawY)*60;
+  prevRawX=rawX;prevRawY=rawY;
+
+  vx=lerp(vx,clicking?rawVx:0,.2)*(clicking?1:.92);
+  vy=lerp(vy,clicking?rawVy:0,.2)*(clicking?1:.92);
+  mx=lerp(mx,rawX,.12);
+  my=lerp(my,rawY,.12);
+
+  var t=(now-t0)/1000*speedV*.25;
+  gl.uniform1f(uTime,t);
+  gl.uniform1f(uNeon,neonV);
+  gl.uniform2f(uMouse,mx,my);
+  gl.uniform2f(uVelocity,vx,vy);
+  gl.uniform2f(uRes,canvas.width,canvas.height);
+  gl.uniform2f(uImgRes,imgW,imgH);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+  requestAnimationFrame(frame);
+}
+
+/* load image then start rendering */
+var imgW=1,imgH=1;
+var img=new Image();
+img.onload=function(){
+  imgW=img.naturalWidth;
+  imgH=img.naturalHeight;
+  gl.bindTexture(gl.TEXTURE_2D,texObj);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+  t0=performance.now();
+  requestAnimationFrame(frame);
+};
+img.src='/dither-src.jpg';
+})();
+</script>

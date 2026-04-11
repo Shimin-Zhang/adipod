@@ -23,21 +23,21 @@ const { episode, title, date, slug, description } = Astro.props;
     text-decoration: none;
     color: inherit;
     padding: 1.25rem;
-    border: 1px solid #e5e5e5;
+    border: 1px solid var(--color-border);
     border-radius: 8px;
     margin-bottom: 1rem;
     transition: border-color 0.15s;
   }
   .episode-card:hover {
-    border-color: #2563eb;
+    border-color: var(--color-accent);
   }
   .ep-num {
     font-weight: 600;
     font-size: 0.85rem;
-    color: #2563eb;
+    color: var(--color-accent);
   }
   .ep-date {
-    color: #888;
+    color: var(--color-text-muted);
     font-size: 0.85rem;
     margin-left: 0.75rem;
   }
@@ -46,7 +46,7 @@ const { episode, title, date, slug, description } = Astro.props;
     font-size: 1.1rem;
   }
   p {
-    color: #555;
+    color: var(--color-text-secondary);
     font-size: 0.9rem;
     margin: 0;
   }

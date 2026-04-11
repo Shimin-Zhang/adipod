@@ -47,7 +47,7 @@ const episodeSchema = {
       <ListenAnywhere appleUrl={appleUrl} spotifyUrl={spotifyUrl} overcastUrl={overcastUrl} pocketCastsUrl={pocketCastsUrl} amazonUrl={amazonUrl} />
       {transistorId && (
         <div class="player">
-          <iframe src={`https://share.transistor.fm/e/${transistorId}`} width="100%" height="180" frameborder="0" scrolling="no" seamless={true} style="width:100%;height:180px;"></iframe>
+          <iframe src={`https://share.transistor.fm/e/${transistorId}`} width="100%" height="180" scrolling="no" seamless={true} style="width:100%;height:180px;border:none;"></iframe>
         </div>
       )}
     </header>
@@ -57,7 +57,7 @@ const episodeSchema = {
 
 <style>
   .episode-meta {
-    color: #888;
+    color: var(--color-text-muted);
     font-size: 0.9rem;
     margin-bottom: 0.25rem;
   }
@@ -65,7 +65,7 @@ const episodeSchema = {
     margin-top: 0.25rem;
   }
   .keywords {
-    color: #888;
+    color: var(--color-text-muted);
     font-size: 0.85rem;
     font-style: italic;
   }
