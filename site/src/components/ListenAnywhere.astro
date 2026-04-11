@@ -1,0 +1,64 @@
+---
+interface Props {
+  appleUrl?: string;
+  spotifyUrl?: string;
+  overcastUrl?: string;
+  pocketCastsUrl?: string;
+  amazonUrl?: string;
+}
+
+const { appleUrl, spotifyUrl, overcastUrl, pocketCastsUrl, amazonUrl } = Astro.props;
+const links = [
+  { name: 'Apple Podcasts', url: appleUrl },
+  { name: 'Spotify', url: spotifyUrl },
+  { name: 'Overcast', url: overcastUrl },
+  { name: 'Pocket Casts', url: pocketCastsUrl },
+  { name: 'Amazon Music', url: amazonUrl },
+].filter(l => l.url);
+---
+
+{links.length > 0 && (
+  <div class="listen-anywhere">
+    <p class="listen-label">Listen on</p>
+    <div class="listen-links">
+      {links.map(link => (
+        <a href={link.url} target="_blank" rel="noopener">{link.name}</a>
+      ))}
+    </div>
+  </div>
+)}
+
+<style>
+  .listen-anywhere {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin: 1rem 0 1.5rem;
+  }
+  .listen-label {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #888;
+    font-weight: 500;
+  }
+  .listen-links {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .listen-links a {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .listen-links a:hover {
+    border-color: #999;
+    background: #f9fafb;
+  }
+</style>

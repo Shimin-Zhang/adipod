@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EpisodeCard from '../components/EpisodeCard.astro';
+import ListenAnywhere from '../components/ListenAnywhere.astro';
 
 const episodes = await getCollection('episodes');
 const latest = episodes
@@ -17,6 +18,13 @@ const latest = episodes
       <a href="/episodes/" class="cta">Browse Episodes</a>
       <a href="/topics/" class="cta-secondary">Explore Topics</a>
     </div>
+    <ListenAnywhere
+      appleUrl="https://podcasts.apple.com/podcast/artificial-developer-intelligence/id1857109105"
+      spotifyUrl="https://open.spotify.com/show/4eDLlGoktxMngPNq9aGqLX"
+      overcastUrl="https://overcast.fm/itunes1857109105"
+      pocketCastsUrl="https://pca.st/itunes/1857109105"
+      amazonUrl="https://music.amazon.com/podcasts/da06d4c3-ecf6-498f-abe3-4d3b00026bf2"
+    />
   </section>
 
   <section class="latest">

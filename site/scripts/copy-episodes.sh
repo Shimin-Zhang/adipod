@@ -3,7 +3,7 @@ set -euo pipefail
 
 TRANSCRIPT_DIR="/home/shimin/agents/podcast-agent/workspace/.pi/skills/podcast-transcripts/transcripts"
 SUMMARY_DIR="/home/shimin/agents/podcast-agent/workspace/.pi/skills/podcast-transcripts/summaries"
-OUTPUT_DIR="/home/shimin/projects/adi_pod/site/src/content/episodes"
+OUTPUT_DIR="/home/shimin/projects/adi_pod/episodes"
 
 mkdir -p "$OUTPUT_DIR"
 
@@ -50,6 +50,12 @@ date: "$date"
 slug: "$slug"
 description: "$(echo "$description" | sed 's/"/\\"/g')"
 keywords: "$keywords"
+appleUrl: "https://podcasts.apple.com/podcast/artificial-developer-intelligence/id1857109105"
+spotifyUrl: "https://open.spotify.com/show/4eDLlGoktxMngPNq9aGqLX"
+overcastUrl: "https://overcast.fm/itunes1857109105"
+pocketCastsUrl: "https://pca.st/itunes/1857109105"
+amazonUrl: "https://music.amazon.com/podcasts/da06d4c3-ecf6-498f-abe3-4d3b00026bf2"
+transistorId: ""
 ---
 
 $summary_body

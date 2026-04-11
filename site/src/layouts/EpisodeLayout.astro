@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import ListenAnywhere from '../components/ListenAnywhere.astro';
 
 interface Props {
   episode: string;
@@ -7,9 +8,15 @@ interface Props {
   date: string;
   description?: string;
   keywords?: string;
+  appleUrl?: string;
+  spotifyUrl?: string;
+  overcastUrl?: string;
+  pocketCastsUrl?: string;
+  amazonUrl?: string;
+  transistorId?: string;
 }
 
-const { episode, title, date, description, keywords } = Astro.props;
+const { episode, title, date, description, keywords, appleUrl, spotifyUrl, overcastUrl, pocketCastsUrl, amazonUrl, transistorId } = Astro.props;
 
 const episodeSchema = {
   '@context': 'https://schema.org',
@@ -36,6 +43,12 @@ const episodeSchema = {
       <p class="episode-meta">Episode {episode} &middot; {new Date(date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
       <h1>{title}</h1>
       {keywords && <p class="keywords">{keywords}</p>}
+      <ListenAnywhere appleUrl={appleUrl} spotifyUrl={spotifyUrl} overcastUrl={overcastUrl} pocketCastsUrl={pocketCastsUrl} amazonUrl={amazonUrl} />
+      {transistorId && (
+        <div class="player">
+          <iframe src={`https://share.transistor.fm/e/${transistorId}`} width="100%" height="180" frameborder="0" scrolling="no" seamless={true} style="width:100%;height:180px;"></iframe>
+        </div>
+      )}
     </header>
     <slot />
   </article>
@@ -54,6 +67,12 @@ const episodeSchema = {
     color: #888;
     font-size: 0.85rem;
     font-style: italic;
+  }
+  .player {
+    margin: 1.5rem 0;
+  }
+  .player iframe {
+    border-radius: 8px;
   }
   article {
     padding: 2rem 0;

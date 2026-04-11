@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const episodes = defineCollection({
-  loader: glob({ base: './src/content/episodes', pattern: '**/*.md' }),
+  loader: glob({ base: '../episodes', pattern: '**/*.md' }),
   schema: z.object({
     episode: z.string(),
     title: z.string(),
@@ -11,6 +11,12 @@ const episodes = defineCollection({
     slug: z.string(),
     description: z.string().optional(),
     keywords: z.string().optional(),
+    appleUrl: z.string().optional(),
+    spotifyUrl: z.string().optional(),
+    overcastUrl: z.string().optional(),
+    pocketCastsUrl: z.string().optional(),
+    amazonUrl: z.string().optional(),
+    transistorId: z.string().optional(),
   }),
 });
 
