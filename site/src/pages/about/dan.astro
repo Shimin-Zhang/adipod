@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Dan Lasky',
+  jobTitle: 'Software Engineer',
+  description: 'Co-host of the ADI Pod. Software engineer, resident ranter, hardware enthusiast.',
+  url: 'https://adipod.ai/about/dan/',
+};
+---
+
+<BaseLayout title="Dan Lasky" description="Dan Lasky — co-host of the ADI Pod. Software engineer, resident ranter, hardware enthusiast." schema={personSchema}>
+  <section style="padding: 2rem 0;">
+    <p><a href="/about/">&larr; About</a></p>
+    <h1>Dan Lasky</h1>
+    <p>Co-host of the ADI Pod. Software engineer with strong opinions about AI developer tools. Known for Dan's Rant segment, hardware experiments (TuringPie clusters, Arch Linux), and saying what everyone's thinking about the AI hype cycle.</p>
+  </section>
+</BaseLayout>

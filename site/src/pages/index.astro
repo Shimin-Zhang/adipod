@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EpisodeCard from '../components/EpisodeCard.astro';
+
+const episodes = await getCollection('episodes');
+const latest = episodes
+  .sort((a, b) => parseInt(b.data.episode) - parseInt(a.data.episode))
+  .slice(0, 5);
+---
+
+<BaseLayout title="ADI Pod" description="Artificial Developer Intelligence — weekly AI news and deep dives for software developers. Claude Code, vibe coding, AI agents, LLM architectures, and AI bubble analysis from practicing engineers.">
+  <section class="hero">
+    <h1>Artificial Developer Intelligence</h1>
+    <p>Weekly AI news and deep dives for software developers. No LinkedIn cringe. No corporate hype. Just two engineers navigating the AI-enabled software engineering landscape.</p>
+    <div class="cta-row">
+      <a href="/episodes/" class="cta">Browse Episodes</a>
+      <a href="/topics/" class="cta-secondary">Explore Topics</a>
+    </div>
+  </section>
+
+  <section class="latest">
+    <h2>Latest Episodes</h2>
+    {latest.map((ep) => (
+      <EpisodeCard
+        episode={ep.data.episode}
+        title={ep.data.title}
+        date={ep.data.date}
+        slug={ep.data.slug}
+        description={ep.data.description}
+      />
+    ))}
+    <p><a href="/episodes/">View all episodes &rarr;</a></p>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 3rem 0 2rem;
+  }
+  .hero h1 {
+    margin-top: 0;
+    font-size: 2.5rem;
+  }
+  .hero p {
+    font-size: 1.15rem;
+    color: #555;
+    max-width: 600px;
+  }
+  .cta-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .cta {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+  .cta:hover { background: #333; color: #fff; }
+  .cta-secondary {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid #d1d5db;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+  .cta-secondary:hover { border-color: #999; }
+  .latest {
+    padding: 2rem 0;
+  }
+</style>

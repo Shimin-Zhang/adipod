@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Rahul Yadav',
+  jobTitle: 'Director of Engineering',
+  worksFor: { '@type': 'Organization', name: 'Functionize' },
+  description: 'Recurring guest on the ADI Pod. Director of Engineering at Functionize.',
+  url: 'https://adipod.ai/about/rahul/',
+};
+---
+
+<BaseLayout title="Rahul Yadav" description="Rahul Yadav — recurring guest on the ADI Pod. Director of Engineering at Functionize." schema={personSchema}>
+  <section style="padding: 2rem 0;">
+    <p><a href="/about/">&larr; About</a></p>
+    <h1>Rahul Yadav</h1>
+    <p>Recurring guest and third host of the ADI Pod. Director of Engineering at Functionize. Brings enterprise AI transformation perspective and engineering leadership insights to discussions.</p>
+  </section>
+</BaseLayout>
