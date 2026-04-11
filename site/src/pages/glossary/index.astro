@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const terms = await getCollection('glossary');
+const sorted = terms.sort((a, b) => a.data.term.localeCompare(b.data.term));
+---
+
+<BaseLayout title="Glossary" description="Key terms and concepts from the ADI Pod — AI developer vocabulary defined by practitioners.">
+  <section style="padding: 2rem 0;">
+    <h1>Glossary</h1>
+    <p>Key terms and concepts discussed on the ADI Pod, defined by practitioners.</p>
+    {sorted.length === 0 ? (
+      <p><em>Glossary entries coming soon.</em></p>
+    ) : (
+      <dl>
+        {sorted.map((t) => (
+          <>
+            <dt><a href={`/glossary/${t.data.slug}/`}>{t.data.term}</a></dt>
+            <dd>{t.data.definition}</dd>
+          </>
+        ))}
+      </dl>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  dl { margin-top: 1.5rem; }
+  dt { font-weight: 600; margin-top: 1rem; }
+  dt a { text-decoration: none; }
+  dd { color: #555; margin-left: 0; margin-bottom: 0.5rem; }
+</style>

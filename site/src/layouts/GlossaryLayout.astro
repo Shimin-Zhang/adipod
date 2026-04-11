@@ -1,0 +1,44 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  term: string;
+  definition: string;
+  episodes?: string[];
+}
+
+const { term, definition, episodes } = Astro.props;
+
+const definedTermSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTerm',
+  name: term,
+  description: definition,
+  inDefinedTermSet: {
+    '@type': 'DefinedTermSet',
+    name: 'ADI Pod Glossary',
+    url: 'https://adipod.ai/glossary/',
+  },
+};
+---
+
+<BaseLayout title={term} description={definition} schema={definedTermSchema}>
+  <article style="padding: 2rem 0;">
+    <p><a href="/glossary/">&larr; Glossary</a></p>
+    <h1>{term}</h1>
+    <p class="definition"><em>{definition}</em></p>
+    <slot />
+    {episodes && episodes.length > 0 && (
+      <section>
+        <h2>Related Episodes</h2>
+        <ul>
+          {episodes.map((ep) => <li>Episode {ep}</li>)}
+        </ul>
+      </section>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .definition { font-size: 1.1rem; color: #555; margin-bottom: 1.5rem; }
+</style>

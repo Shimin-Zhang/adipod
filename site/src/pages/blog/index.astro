@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = await getCollection('blog');
+const sorted = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<BaseLayout title="Blog" description="Articles on AI development, coding agents, and LLM engineering from the ADI Pod.">
+  <section style="padding: 2rem 0;">
+    <h1>Blog</h1>
+    {sorted.length === 0 ? (
+      <p><em>Blog posts coming soon.</em></p>
+    ) : (
+      sorted.map((post) => (
+        <article class="post-card">
+          <p class="meta">{new Date(post.data.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+          <h2><a href={`/blog/${post.data.slug}/`}>{post.data.title}</a></h2>
+          <p>{post.data.description}</p>
+        </article>
+      ))
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .post-card { margin-bottom: 2rem; }
+  .meta { color: #888; font-size: 0.85rem; margin-bottom: 0.25rem; }
+  h2 { margin-top: 0; font-size: 1.25rem; }
+  h2 a { text-decoration: none; }
+</style>
