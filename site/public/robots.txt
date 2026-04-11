@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://adipod.ai/sitemap-index.xml

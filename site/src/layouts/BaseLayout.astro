@@ -1,0 +1,77 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  ogType?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title,
+  description = 'Artificial Developer Intelligence — a weekly podcast where practicing engineers navigate AI-enabled software development.',
+  schema,
+  ogType = 'website',
+  canonicalUrl,
+} = Astro.props;
+
+const siteUrl = 'https://adipod.ai';
+const fullTitle = title === 'ADI Pod' ? title : `${title} — ADI Pod`;
+const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
+
+const podcastSeriesSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'PodcastSeries',
+  name: 'Artificial Developer Intelligence',
+  alternateName: 'ADI Pod',
+  url: siteUrl,
+  description: 'Weekly AI news and deep dives for software developers. Claude Code, vibe coding, AI coding agents, LLM architectures, and AI bubble analysis from practicing engineers.',
+  author: [
+    { '@type': 'Person', name: 'Shimin Zhang' },
+    { '@type': 'Person', name: 'Dan Lasky' },
+  ],
+  genre: ['Technology', 'Software Development', 'Artificial Intelligence'],
+  inLanguage: 'en',
+};
+
+const allSchemas = [podcastSeriesSchema, ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="ADI Pod" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <SchemaMarkup schema={allSchemas} />
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

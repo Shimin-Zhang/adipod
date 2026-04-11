@@ -1,0 +1,53 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/episodes/', label: 'Episodes' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/topics/', label: 'Topics' },
+  { href: '/glossary/', label: 'Glossary' },
+  { href: '/about/', label: 'About' },
+];
+---
+
+<nav>
+  <a href="/" class="nav-brand">ADI Pod</a>
+  <div class="nav-links">
+    {links.map(({ href, label }) => (
+      <a href={href} class:list={[{ active: currentPath.startsWith(href) && href !== '/' || currentPath === href }]}>
+        {label}
+      </a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #e5e5e5;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .nav-brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-decoration: none;
+    color: #111;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9rem;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: #111;
+  }
+</style>
