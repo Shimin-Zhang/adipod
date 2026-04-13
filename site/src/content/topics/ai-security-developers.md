@@ -4,6 +4,7 @@ description: "A developer-focused guide to AI security — the real attack vecto
 slug: "ai-security-developers"
 keywords: "AI agent security, MCP security, prompt injection prevention, AI coding security, agent trust model, AI security best practices"
 lastUpdated: "2026-04-10"
+ogImage: "/og/ai-security-developers"
 ---
 
 AI coding agents introduce security risks that traditional application security frameworks don't address: prompt injection through crafted inputs, credential proxying through inherited permissions, verification gaps in AI-generated code, and cognitive security risks from over-trusting AI assessments. This guide covers the attack vectors that actually affect developers building with AI tools — based on real incidents at Meta, Amazon, and others, covered across eight episodes of the ADI Pod.

@@ -4,6 +4,7 @@ description: "Everything we've learned about Claude Code across 20 episodes — 
 slug: "claude-code-guide"
 keywords: "Claude Code best practices, Claude Code tips, Claude.md guide, Claude Code workflow, Claude Code context management, Claude Code plan mode"
 lastUpdated: "2026-04-10"
+ogImage: "/og/claude-code-guide"
 ---
 
 Claude Code is Anthropic's terminal-based AI coding agent that uses Claude models to read files, write code, and execute commands directly in your development environment. This guide covers the practical workflows, context management strategies, and configuration patterns we've learned from using Claude Code across 20 episodes of the ADI Pod — the tips the official documentation doesn't cover.

@@ -4,6 +4,7 @@ description: "A living tracker of the AI investment bubble — CAPEX vs revenue 
 slug: "ai-bubble-tracker"
 keywords: "AI bubble 2026, will AI bubble burst, AI CAPEX vs revenue, AI investment bubble tracker, AI market analysis"
 lastUpdated: "2026-04-10"
+ogImage: "/og/ai-bubble-tracker"
 ---
 
 The AI investment bubble refers to the widening gap between the hundreds of billions being spent on AI infrastructure — data centers, GPUs, model training — and the revenue AI products actually generate. This page tracks the financial signals, market events, and economic frameworks for understanding whether and when the AI bubble will correct, updated with each new episode of the ADI Pod.
