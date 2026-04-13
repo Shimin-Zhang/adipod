@@ -12,8 +12,46 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+// Extract FAQ Q&A pairs from markdown body for FAQPage schema
+function extractFAQs(body: string): { question: string; answer: string }[] {
+  // Isolate FAQ section: split at "## Frequently Asked Questions", take content after it,
+  // then trim at the trailing "---" separator
+  const splitAtFAQ = body.split(/^## Frequently Asked Questions$/m);
+  if (splitAtFAQ.length < 2) return [];
+  let faqContent = splitAtFAQ[1];
+  // Remove trailing horizontal rule and anything after it
+  const hrIndex = faqContent.indexOf('\n---');
+  if (hrIndex > -1) faqContent = faqContent.slice(0, hrIndex);
+
+  const faqs: { question: string; answer: string }[] = [];
+  const parts = faqContent.split(/^### /m).filter(Boolean);
+
+  for (const part of parts) {
+    const lines = part.trim().split('\n');
+    const question = lines[0]?.trim();
+    if (!question) continue;
+    // Collect answer paragraphs, strip markdown formatting
+    const answerLines: string[] = [];
+    for (const l of lines.slice(1)) {
+      if (l.startsWith('---')) break;
+      answerLines.push(l);
+    }
+    const answer = answerLines
+      .join(' ')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\*([^*]+)\*/g, '$1')
+      .replace(/`([^`]+)`/g, '$1')
+      .trim();
+    if (answer) faqs.push({ question, answer });
+  }
+  return faqs;
+}
+
+const faqs = extractFAQs(entry.body || '');
 ---
 
-<ArticleLayout title={entry.data.title} description={entry.data.description} keywords={entry.data.keywords} lastUpdated={entry.data.lastUpdated}>
+<ArticleLayout title={entry.data.title} description={entry.data.description} keywords={entry.data.keywords} lastUpdated={entry.data.lastUpdated} faqs={faqs}>
   <Content />
 </ArticleLayout>
