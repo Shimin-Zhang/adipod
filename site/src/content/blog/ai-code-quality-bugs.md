@@ -1,7 +1,8 @@
 ---
-title: "Why AI-Generated Code Has 1.7x More Bugs (and What to Do About It)"
-description: "CodeRabbit's data shows AI-authored PRs have significantly more findings — but the number alone misses the real story. Here is what the data actually means for your team."
+title: "Why AI Code Has 1.7x More Bugs (and What to Do About It)"
+description: "CodeRabbit's data shows AI-authored PRs have 1.7x more findings. The number alone misses the real story — here is what it means for your team."
 date: "2026-04-11"
+lastUpdated: "2026-04-12"
 slug: "ai-code-quality-bugs"
 keywords: "AI code quality, AI code bugs, AI-generated code review, CodeRabbit AI report"
 episodes: ["7", "12", "15"]
@@ -24,6 +25,14 @@ Human bugs tend to cluster around oversight: a missed edge case, a forgotten nul
 This distinction maps cleanly to something the [ThoughtWorks Future of Software Engineering retreat](https://www.thoughtworks.com/content/dam/thoughtworks/documents/report/tw_future%20_of_software_development_retreat_%20key_takeaways.pdf) identified — a concept they call [cognitive debt](/glossary/cognitive-debt/). As we [discussed on the show](/episodes/15-convincing-ai-the-earth-is-flat-inference-at-17k-tokens-sec-and-an-agile-manifesto-for-the-agentic-age/), when agents are writing the code and humans are reviewing it all day, your brain eventually stops being fully engaged. The first few PRs get rigorous scrutiny. By the afternoon, you are rubber-stamping. Same phenomenon as judicial decision fatigue — judges' rulings measurably deteriorate as they get closer to lunch.
 
 So the 1.7x finding is not just about the AI producing more bugs. It is about the combination: AI produces a specific type of bug — logic errors that look correct on the surface — and humans are reviewing under conditions that make those exact bugs harder to catch. The failure is systemic, not attributable to one side.
+
+| | Human-Written Code | AI-Generated Code |
+|---|---|---|
+| **Dominant bug type** | Oversight (missed edge cases, forgotten checks) | Logic errors (plausible but incorrect behavior) |
+| **Failure signature** | Obviously wrong when found | Looks correct on the surface |
+| **Root cause** | Developer knew the domain, missed a detail | Model pattern-matched without business context |
+| **Detection method** | Standard code review catches most | Requires domain knowledge and active reasoning |
+| **Review risk** | Fatigued reviewers still spot obvious gaps | Fatigued reviewers rubber-stamp plausible code |
 
 ## What the Numbers Do Not Mean
 

@@ -1,11 +1,14 @@
 ---
-title: "Two Minutes to Midnight: Tracking the AI Bubble Across 20 Episodes"
-description: "We have been rating the AI bubble every episode since November 2025 — from cautious optimism to quiet alarm. Here is the full timeline and what the trend line says."
+title: "AI Bubble 2026: Two Minutes to Midnight Across 20 Episodes"
+description: "We have rated the AI bubble every episode since November 2025 — from cautious optimism to quiet alarm. Here is the full timeline and what it says."
 date: "2026-04-11"
+lastUpdated: "2026-04-12"
 slug: "ai-bubble-two-minutes-to-midnight"
 keywords: "AI bubble 2026, AI bubble tracker, AI market bubble, two minutes to midnight AI"
 episodes: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
 ---
+
+As of March 2026, the AI bubble clock sits at 1:15 — one minute and fifteen seconds to midnight, and closer to a correction than at any point since we started tracking five months ago. The load-bearing number: hyperscalers are spending $700 billion on AI infrastructure while direct AI revenue covers roughly 4% of that.
 
 The Bulletin of the Atomic Scientists has maintained a Doomsday Clock since 1947, measuring how close humanity is to self-inflicted annihilation. We borrowed their metaphor for something less existential but more personally relevant: the [AI market bubble](/topics/ai-bubble-tracker/). Every episode of ADI Pod since November 2025, we have closed the show with a segment called [Two Minutes to Midnight](/glossary/two-minutes-to-midnight/) — an assessment of how close the AI industry is to a correction, a pop, or whatever euphemism you prefer for "a lot of people losing a lot of money."
 
@@ -21,6 +24,8 @@ There are a few things the clock is not. It is not a stock price prediction. It 
 
 ### Phase 1: Cautious Optimism (Nov 2025, Episodes 1-5)
 
+*The clock started close to midnight (0:20) on peak hype, then pulled back to 0:50 as early data tempered the initial alarm.*
+
 **Episode 1** (November 7, 2025) — We introduced the segment with the clock at roughly **0:20** — twenty seconds to midnight, meaning we thought a correction was quite close. The AI hype was deafening. An Oxford Internet Institute study had just found that only 16% of 445 AI benchmarks used rigorous scientific methods. The OpenAI CFO had implied the company was seeking government help meeting revenue targets. The vibes were not great.
 
 **Episode 2** (November 14) — Dan brought in a [Project Syndicate piece by William H. Janeway](https://www.project-syndicate.org/onpoint/will-ai-bubble-burst-trigger-financial-crisis-by-william-h-janeway-2025-11) that introduced a framework I still think about: any financial bubble has both a focus (are the assets valuable?) and a locus (will the underlying technology deliver productivity gains?). The dot-com bubble had a technology that delivered but assets that were wildly mispriced. We also discussed a [Ben Thompson argument](https://www.youtube.com/watch?v=IplmaMf1xMU) that bubbles are beneficial — cheap capital investment during manias creates lasting infrastructure. The fiber optic cables that bankrupted telecom companies in 2001 gave us AWS a decade later. Maybe the AI bubble builds something equally durable. We also flagged [Perplexity as a potential first AI unicorn to fail](https://medium.com/@anwarzaid76/is-perplexity-the-first-ai-unicorn-to-fail-eb0e827b5e7e).
@@ -31,6 +36,8 @@ There are a few things the clock is not. It is not a stock price prediction. It 
 
 ### Phase 2: Tense Stability (Dec 2025 - Jan 2026, Episodes 6-12)
 
+*The clock held at 1:30 for nearly two months as strong enterprise adoption numbers balanced out increasingly creative financing schemes.*
+
 **Episode 6** (December 12) — Clock at **1:30**. A significant move toward optimism. [CoreWeave's CEO was defending circular deals](https://techcrunch.com) as "just working together," which was not confidence-inspiring. But OpenAI's enterprise numbers were genuinely strong: 36% of US businesses using ChatGPT enterprise, and employees self-reporting 40-60 minutes saved per day. The enterprise revenue numbers gave us something real to weigh against the speculation. I noted the use of GPTs for institutional knowledge was a sticky moat that was harder to dismiss.
 
 **Episodes 7-9** (December 19 - January 9) — The clock held at 1:30 through the holidays. Episode 7 replaced the bubble segment with a year-end retrospective. By episode 9 we were back, with no significant movement. The calm before the storm, as it turned out.
@@ -40,6 +47,8 @@ There are a few things the clock is not. It is not a stock price prediction. It 
 **Episodes 11-12** (January 23-30) — The clock hovered. [Brex's AI pivot and subsequent Capital One acquisition](/episodes/11-brex-on-ai-claude-code-updates-gnomes-ai-assistant-feat-rahul/) at roughly 50% of peak valuation was a micro-case study: the fallen unicorn pattern. You could tell a hopeful story (AI transformation led to acquisition) or a dark one (company needed a buyer because the independent path was unsustainable). We discussed both.
 
 ### Phase 3: Divergence (Feb 2026, Episodes 13-16)
+
+*The clock oscillated between 1:45 and 2:45 — peak optimism coinciding with mass layoffs, hundred-year bonds, and the emergence of the announcement economy.*
 
 This is where the data got interesting. The clock started oscillating — and the oscillation itself was the signal.
 
@@ -53,11 +62,33 @@ This is where the data got interesting. The clock started oscillating — and th
 
 ### Phase 4: The Turn (Mar 2026, Episodes 17-20)
 
+*The clock reversed sharply from 2:45 back to 1:15 as products started dying faster than narratives — Oracle retrenching, Sora shuttered, Stargate dissolving.*
+
 **Episode 17** (March 3) — Clock swung forward to **1:45**. Oracle was [cutting thousands of jobs](https://www.reuters.com/business/oracle-plans-thousands-job-cuts-data-center-costs-rise-bloomberg-news-reports-2026-03-05/) as data center costs rose and OpenAI pulled out of their joint Stargate investment. AWS suffered another outage — this time [AI-assisted Terraform nuked a production database](https://arstechnica.com/ai/2026/03/after-outages-amazon-to-make-senior-engineers-sign-off-on-ai-assisted-changes/), leading Amazon to require senior engineers to sign off on all AI-assisted changes. I floated the idea that Oracle, not the frontier labs, might be the canary in the coal mine. They had taken on massive debt to build data centers using today's architecture for tomorrow's workloads. If Oracle stopped servicing that debt, it could bring the infrastructure house of cards down.
 
 **Episode 19** (March 17) — Clock moved to **1:15** — the closest to midnight since the earliest episodes. Jensen Huang projected [$1 trillion in demand](https://techcrunch.com/2026/03/16/jensen-just-put-nvidias-blackwell-and-vera-rubin-sales-projections-into-the-1-trillion-stratosphere/) for Blackwell and Vera Rubin chips, a number so large it loops back around to comedy — Dr. Evil territory. And then [OpenAI shuttered Sora](https://www.theguardian.com/technology/2026/mar/24/openai-ai-video-sora), its AI video generation product, just six months after launch and four months after inking a three-year partnership with Disney. Not pivoting it. Not open-sourcing it. Shutting it down entirely, app and API. Rahul speculated they were cleaning the books ahead of an IPO. Dan was blunter: "Sounds like trouble." If a flagship product from the most valuable AI company in the world cannot survive six months, the question of what is sustainable starts to feel urgent.
 
 **Episode 20** (March 31) — We took a two-week break. The clock held at 1:15.
+
+### Clock Position Summary
+
+| Episode | Date | Clock | Phase | Key Signal |
+|---|---|---|---|---|
+| 1 | Nov 7, 2025 | 0:20 | Cautious Optimism | AI hype peak, Oxford benchmark study |
+| 2 | Nov 14 | 0:20 | Cautious Optimism | Bubble anatomy framework (Janeway) |
+| 3 | Nov 21 | 0:20 | Cautious Optimism | NVIDIA beat earnings, stock fell |
+| 5 | Dec 5 | 0:50 | Cautious Optimism | Data center analysis tempers alarm |
+| 6 | Dec 12 | 1:30 | Tense Stability | OpenAI enterprise numbers strong |
+| 7-9 | Dec 19 - Jan 9 | 1:30 | Tense Stability | Holiday hold |
+| 10 | Jan 16 | 1:30 | Tense Stability | OpenAI introduces ads in free tier |
+| 11-12 | Jan 23-30 | 1:30 | Tense Stability | Brex acquired at ~50% peak valuation |
+| 13 | Feb 6 | 1:45 | Divergence | Anthropic $20B round, Google 100-year bond |
+| 14 | Feb 13 | 2:15 | Divergence | Chinese models unimpressive, SaaSapocalypse math |
+| 15 | Feb 17 | 2:15 | Divergence | 20-90% GDP growth from AI CAPEX |
+| 16 | Feb 24 | 2:45 | Divergence | Peak optimism; Block lays off 45% |
+| 17 | Mar 3 | 1:45 | The Turn | Oracle cuts jobs, Stargate dissolves |
+| 19 | Mar 17 | 1:15 | The Turn | $1T chip demand, Sora shuttered |
+| 20 | Mar 31 | 1:15 | The Turn | Clock holds |
 
 ## What the Trend Line Says
 

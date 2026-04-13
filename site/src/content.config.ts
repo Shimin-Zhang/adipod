@@ -39,6 +39,7 @@ const blog = defineCollection({
     date: z.string(),
     slug: z.string(),
     keywords: z.string().optional(),
+    lastUpdated: z.string().optional(),
     episodes: z.array(z.string()).optional(),
   }),
 });

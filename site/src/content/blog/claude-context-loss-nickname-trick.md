@@ -1,15 +1,16 @@
 ---
-title: "The Nickname Trick: How to Detect When Claude Loses Your Context"
-description: "Add one line to your CLAUDE.md and get a binary signal when the model's context window has degraded. The trick is simple — the implications are not."
+title: "How to Detect Claude Context Loss (The Nickname Trick)"
+description: "Detect Claude context loss with one line in your CLAUDE.md. When the nickname disappears, your instructions have degraded. Simple trick, profound implications."
 date: "2026-04-11"
+lastUpdated: "2026-04-12"
 slug: "claude-context-loss-nickname-trick"
 keywords: "Claude context loss detection, Claude Code context window, Claude context management"
 episodes: ["4"]
 ---
 
-You have no reliable way to know when Claude has stopped following your instructions.
+Claude context loss is when the model silently stops following your CLAUDE.md instructions as a conversation grows. There is no progress bar, no warning, no "context 78% consumed" indicator — the model simply gets worse, and you will not notice until the damage is already in your diff.
 
-That sentence should bother you more than it does. You are working inside a tool that reads a configuration file on boot, loads your project context, accepts your request, and begins generating code — all while silently degrading its adherence to your rules as the conversation grows. There is no progress bar. No warning. No "context 78% consumed" indicator in the status line. The model simply gets worse, and unless you are paying close attention to the output quality, you will not notice until the damage is already in your diff.
+That should bother you more than it does. You are working inside a tool that reads a configuration file on boot, loads your project context, accepts your request, and begins generating code — all while silently degrading its adherence to your rules. Unless you are paying close attention to the output quality, the drift is invisible.
 
 I found a fix for this on Hacker News a few months ago, and I have been using it ever since. It takes two sentences to implement. The implications, however, go deeper than the trick itself — they point to a fundamental constraint of how context windows actually work, and why most developers are managing them wrong.
 

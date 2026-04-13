@@ -1,11 +1,14 @@
 ---
 title: "CLAUDE.md Best Practices: 7 Things to Put In and 3 to Leave Out"
-description: "Your CLAUDE.md is not a knowledge base — it is a finite instruction budget with roughly 150-200 slots. Here is a practitioner's framework for what belongs, what does not, and the maintenance problem nobody warns you about."
+description: "CLAUDE.md is a finite instruction budget of ~150-200 slots, not a knowledge dump. Here is what to include, what to leave out, and how to prevent prompt debt."
 date: "2026-04-11"
+lastUpdated: "2026-04-12"
 slug: "claude-md-best-practices"
 keywords: "Claude.md best practices, Claude.md guide, Claude Code configuration"
 episodes: ["4", "10", "17"]
 ---
+
+CLAUDE.md best practices come down to one principle: treat the file as a finite instruction budget, not a knowledge base. Frontier models can reliably follow roughly 150 to 200 discrete instructions before performance degrades — that is your budget, and most teams blow through it by week two.
 
 Your CLAUDE.md file is slowly rotting, and you probably have not noticed yet.
 

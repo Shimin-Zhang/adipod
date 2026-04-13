@@ -11,6 +11,9 @@ interface Props {
   schema?: Record<string, unknown> | Record<string, unknown>[];
   ogType?: string;
   canonicalUrl?: string;
+  ogImage?: string;
+  keywords?: string;
+  publishedDate?: string;
 }
 
 const {
@@ -19,6 +22,9 @@ const {
   schema,
   ogType = 'website',
   canonicalUrl,
+  ogImage,
+  keywords,
+  publishedDate,
 } = Astro.props;
 
 const siteUrl = 'https://adipod.ai';
@@ -61,11 +67,15 @@ const allSchemas = [podcastSeriesSchema, ...(schema ? (Array.isArray(schema) ? s
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="ADI Pod" />
+    {ogImage && <meta property="og:image" content={new URL(ogImage, siteUrl).href} />}
+    {publishedDate && ogType === 'article' && <meta property="article:published_time" content={publishedDate} />}
+    {keywords && <meta name="keywords" content={keywords} />}
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />}
 
     <SchemaMarkup schema={allSchemas} />
 
