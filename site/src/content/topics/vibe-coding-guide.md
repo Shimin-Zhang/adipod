@@ -4,6 +4,7 @@ description: "A practitioner's guide to vibe coding — the psychology of dark f
 slug: "vibe-coding-guide"
 keywords: "vibe coding guide, vibe coding pros cons, dark flow coding, cognitive debt AI, vibe coding risks, AI coding best practices"
 lastUpdated: "2026-04-10"
+ogImage: "/og/vibe-coding-guide"
 ---
 
 Vibe coding is the practice of using AI coding assistants to generate code by prompting rather than writing, where the developer accepts AI output based on whether it looks right and seems to work, without deeply understanding the underlying logic. Coined by Andrej Karpathy in February 2025, the term has evolved from a neutral descriptor to a cautionary concept as practitioners have documented its failure modes — including dark flow, cognitive debt, and cognitive bankruptcy.

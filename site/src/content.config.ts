@@ -53,6 +53,7 @@ const topics = defineCollection({
     slug: z.string(),
     keywords: z.string().optional(),
     lastUpdated: z.string().optional(),
+    ogImage: z.string().optional(),
   }),
 });
 

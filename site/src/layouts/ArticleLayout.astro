@@ -13,9 +13,10 @@ interface Props {
   keywords?: string;
   lastUpdated?: string;
   faqs?: FAQ[];
+  ogImage?: string;
 }
 
-const { title, description, date, keywords, lastUpdated, faqs } = Astro.props;
+const { title, description, date, keywords, lastUpdated, faqs, ogImage } = Astro.props;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -93,9 +94,22 @@ if (faqs && faqs.length > 0) {
 }
 ---
 
-<BaseLayout title={title} description={description} schema={schemas} ogType="article" keywords={keywords} publishedDate={date}>
+<BaseLayout title={title} description={description} schema={schemas} ogType="article" keywords={keywords} publishedDate={date} ogImage={ogImage}>
   <article style="padding: 2rem 0;">
     <header>
+      {ogImage && (
+        <picture class="hero">
+          <source srcset={ogImage + '.webp'} type="image/webp" />
+          <img
+            src={ogImage + '.jpg'}
+            alt={title}
+            width="1200"
+            height="630"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
+      )}
       {date && <p class="meta">{new Date(date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}{lastUpdated ? ` · Updated ${new Date(lastUpdated + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}` : ''}</p>}
       <h1>{title}</h1>
       {keywords && <p class="keywords">{keywords}</p>}
@@ -105,6 +119,8 @@ if (faqs && faqs.length > 0) {
 </BaseLayout>
 
 <style>
+  .hero { display: block; margin-bottom: 1.5rem; }
+  .hero img { width: 100%; height: auto; border-radius: 6px; }
   .meta { color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 0.25rem; }
   h1 { margin-top: 0.25rem; }
   .keywords { color: var(--color-text-muted); font-size: 0.85rem; font-style: italic; }
