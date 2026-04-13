@@ -1,4 +1,3 @@
-src/content/episodes/
 node_modules/
 .astro/
 dist/

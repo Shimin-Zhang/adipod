@@ -1,0 +1,40 @@
+# ADI Pod — Artificial Developer Intelligence
+
+> A technical podcast covering AI engineering, LLMs, and developer tooling. Hosted by Shimin Zhang, Dan Lasky, and Rahul Yadav. "AI news without the LinkedIn cringe."
+
+Website: https://adipod.ai
+Contact: humans@adipod.ai
+
+## What We Cover
+
+ADI Pod is a weekly podcast for working software engineers navigating AI tooling. We cover AI coding agents (Claude Code, Codex, Cursor, Pi Agent), the AI investment bubble, vibe coding risks, AI security for developers, and the career impact of AI on software engineering. 20+ episodes with 200K+ words of transcripts.
+
+## Key Pages
+
+- Topics (pillar guides): https://adipod.ai/topics/
+  - Claude Code Guide: https://adipod.ai/topics/claude-code-guide/
+  - AI Coding Agents Compared: https://adipod.ai/topics/ai-coding-agents-compared/
+  - Vibe Coding Guide: https://adipod.ai/topics/vibe-coding-guide/
+  - AI Bubble Tracker: https://adipod.ai/topics/ai-bubble-tracker/
+  - AI Developer Careers: https://adipod.ai/topics/ai-developer-careers/
+  - AI Security for Developers: https://adipod.ai/topics/ai-security-developers/
+- Episodes: https://adipod.ai/episodes/
+- Glossary: https://adipod.ai/glossary/
+- About: https://adipod.ai/about/
+
+## Hosts
+
+- Shimin Zhang — Software Engineer, co-host. https://adipod.ai/about/shimin/
+- Dan Lasky — Software Engineer, co-host. https://adipod.ai/about/dan/
+- Rahul Yadav — Director of Engineering at Functionize, co-host. https://adipod.ai/about/rahul/
+
+## Original Concepts
+
+The podcast has introduced several original concepts now referenced in AI engineering discussions:
+- Cognitive debt / cognitive bankruptcy — the gap between AI-generated code and developer understanding
+- Dark flow — the gambling-like psychology of vibe coding
+- Verification debt — accumulated cost of unreviewed AI output
+- Prompt debt — configuration rot in CLAUDE.md and agent instruction files
+- Workflow automation convexity — why AI displacement will be sudden, not gradual
+- The middle loop — the new cognitive burden of overseeing AI agents
+- Two Minutes to Midnight — a Doomsday Clock for the AI investment bubble
