@@ -11,6 +11,7 @@ overcastUrl: "https://overcast.fm/itunes1857109105"
 pocketCastsUrl: "https://pca.st/itunes/1857109105"
 amazonUrl: "https://music.amazon.com/podcasts/da06d4c3-ecf6-498f-abe3-4d3b00026bf2"
 transistorId: "62fec857"
+youtubeId: "NB2USIoImwI"
 ---
 
 In this episode of Artificial Developer Intelligence, hosts Shimin and Dan discuss the evolving landscape of AI in software engineering, touching on topics such as OpenAI's recent challenges, the significance of Google TPUs, and effective techniques for working with large language models. They also delve into a deep dive on general agentic memory, share insights on code quality, and assess the current state of the AI bubble.

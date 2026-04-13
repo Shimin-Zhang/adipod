@@ -11,6 +11,7 @@ overcastUrl: "https://overcast.fm/itunes1857109105"
 pocketCastsUrl: "https://pca.st/itunes/1857109105"
 amazonUrl: "https://music.amazon.com/podcasts/da06d4c3-ecf6-498f-abe3-4d3b00026bf2"
 transistorId: "b9a327ce"
+youtubeId: "JgVVozgG0M4"
 ---
 
 The podcast "Artificial Developer Intelligence" features hosts Shimin Zhang and co-host Dan Lasky discuss the evolving landscape of AI in programming, recent news, innovative tools, and the implications of AI on various sectors. They explore the partnership between Apple and Google, the concept of 'doom coding', and how humans make LLM like mistakes. The conversation also delves into the efficiency of programming languages, a deep dive into dynamic large concept models, and the societal perceptions of AI, culminating in a discussion about the potential AI bubble.

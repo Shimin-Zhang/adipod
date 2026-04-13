@@ -14,9 +14,10 @@ interface Props {
   pocketCastsUrl?: string;
   amazonUrl?: string;
   transistorId?: string;
+  youtubeId?: string;
 }
 
-const { episode, title, date, description, keywords, appleUrl, spotifyUrl, overcastUrl, pocketCastsUrl, amazonUrl, transistorId } = Astro.props;
+const { episode, title, date, description, keywords, appleUrl, spotifyUrl, overcastUrl, pocketCastsUrl, amazonUrl, transistorId, youtubeId } = Astro.props;
 
 const episodeSchema = {
   '@context': 'https://schema.org',
@@ -50,6 +51,11 @@ const episodeSchema = {
           <iframe src={`https://share.transistor.fm/e/${transistorId}`} width="100%" height="180" scrolling="no" seamless={true} style="width:100%;height:180px;border:none;"></iframe>
         </div>
       )}
+      {youtubeId && (
+        <div class="video">
+          <iframe src={`https://www.youtube.com/embed/${youtubeId}`} width="100%" height="400" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      )}
     </header>
     <slot />
   </article>
@@ -74,6 +80,13 @@ const episodeSchema = {
   }
   .player iframe {
     border-radius: 8px;
+  }
+  .video {
+    margin: 1.5rem 0;
+  }
+  .video iframe {
+    border-radius: 8px;
+    border: none;
   }
   article {
     padding: 2rem 0;

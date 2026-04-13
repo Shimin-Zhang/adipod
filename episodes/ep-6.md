@@ -11,6 +11,7 @@ overcastUrl: "https://overcast.fm/itunes1857109105"
 pocketCastsUrl: "https://pca.st/itunes/1857109105"
 amazonUrl: "https://music.amazon.com/podcasts/da06d4c3-ecf6-498f-abe3-4d3b00026bf2"
 transistorId: "30a0719a"
+youtubeId: "XgV5KUejktU"
 ---
 
 In this episode of "Artificial Developer Intelligence," hosts Shimin Zhang and Dan explore the latest advancements in AI, including the release of GPT 5.2 and its implications for the industry. They discuss the integration of Cloud Code into Slack, Mistral AI's new coding model, and the innovative MindEval framework for assessing AI's clinical competence. The episode also features a deep dive into AI-generated user interfaces and a lively discussion on the evolving role of hackers in the tech industry.

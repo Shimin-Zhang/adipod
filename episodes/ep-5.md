@@ -11,6 +11,7 @@ overcastUrl: "https://overcast.fm/itunes1857109105"
 pocketCastsUrl: "https://pca.st/itunes/1857109105"
 amazonUrl: "https://music.amazon.com/podcasts/da06d4c3-ecf6-498f-abe3-4d3b00026bf2"
 transistorId: "da86085c"
+youtubeId: "tAewpdK7IhM"
 ---
 
 In this episode, Shimin and Dan explore the evolving landscape of AI in software engineering, discussing the implications of the Cloud Opus 4.5 sole document, the ethical considerations of AI models, and the impact of AI on developer productivity. They delve into spec-driven development, the latest advancements in AI models like DeepSeek v3.2, and the intersection of AI and mental health. The conversation also touches on the potential AI bubble and the challenges faced by developers in integrating AI tools effectively.

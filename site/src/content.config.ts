@@ -17,6 +17,7 @@ const episodes = defineCollection({
     pocketCastsUrl: z.string().optional(),
     amazonUrl: z.string().optional(),
     transistorId: z.string().optional(),
+    youtubeId: z.string().optional(),
   }),
 });
 

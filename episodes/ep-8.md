@@ -11,6 +11,7 @@ overcastUrl: "https://overcast.fm/itunes1857109105"
 pocketCastsUrl: "https://pca.st/itunes/1857109105"
 amazonUrl: "https://music.amazon.com/podcasts/da06d4c3-ecf6-498f-abe3-4d3b00026bf2"
 transistorId: "a48706bf"
+youtubeId: "CBmHcXv7_NY"
 ---
 
 The podcast "Artificial Developer Intelligence" features hosts Shimin Zhang and guest co-host Rahul Yadav discussing the evolving landscape of AI in software engineering. They cover recent AI-related acquisitions, such as Nvidia's purchase of Groq and Meta's acquisition of Manus, and explore the implications of these moves. The conversation also delves into the challenges and opportunities presented by AI in the tech industry, including the role of AI in automation and the potential for AI to reshape job roles. The episode concludes with a discussion on the AI bubble and its impact on the economy, highlighting the balance between technological advancement and financial stability.

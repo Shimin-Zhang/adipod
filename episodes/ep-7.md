@@ -11,6 +11,7 @@ overcastUrl: "https://overcast.fm/itunes1857109105"
 pocketCastsUrl: "https://pca.st/itunes/1857109105"
 amazonUrl: "https://music.amazon.com/podcasts/da06d4c3-ecf6-498f-abe3-4d3b00026bf2"
 transistorId: "8effe510"
+youtubeId: "9GRumvVXyUQ"
 ---
 
 In this episode, Shimin and Dan explore the latest advancements in AI coding, including NVIDIA's new models, the implications of AI-generated code, and the outcome of Anthropic's project Vend, AI management of vending machines. They also discuss the significance of multi-agent systems in coding, the concept of vibe coding, and delve into the research on hallucination neurons in large language models. The episode concludes with a year-end review reflecting on the rapid developments in AI technology throughout 2025.

@@ -11,6 +11,7 @@ overcastUrl: "https://overcast.fm/itunes1857109105"
 pocketCastsUrl: "https://pca.st/itunes/1857109105"
 amazonUrl: "https://music.amazon.com/podcasts/da06d4c3-ecf6-498f-abe3-4d3b00026bf2"
 transistorId: "9d8ec5ad"
+youtubeId: "VAqYyKyolxc"
 ---
 
 In this episode of Artificial Developer Intelligence, hosts Shimin and Dan explore the latest advancements in AI models, including the release of Claude Opus 4.5 and Gemini 3. They discuss the implications of these models on software engineering, the rise of open-source models like Olmo 3, and the enhancements in the Claude Developer Platform. The conversation also delves into the challenges of relying on AI for coding tasks, the potential pitfalls of the AI bubble, and the future of written exams in the age of AI.

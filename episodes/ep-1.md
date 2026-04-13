@@ -11,6 +11,7 @@ overcastUrl: "https://overcast.fm/itunes1857109105"
 pocketCastsUrl: "https://pca.st/itunes/1857109105"
 amazonUrl: "https://music.amazon.com/podcasts/da06d4c3-ecf6-498f-abe3-4d3b00026bf2"
 transistorId: "3c2d9719"
+youtubeId: "ry6axvt1dIo"
 ---
 
 In this episode of Artificial Developer Intelligence, hosts Shimin and Dan explore the rapidly evolving landscape of AI, discussing recent news, benchmarking challenges, and the implications of AGI as a conspiracy theory. They delve into the latest techniques in AI development, ethical considerations, and the potential impact of AI on human intelligence. The conversation culminates in the latest advancements in LLM architectures, and the ongoing concerns surrounding the AI bubble.

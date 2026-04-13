@@ -11,6 +11,7 @@ overcastUrl: "https://overcast.fm/itunes1857109105"
 pocketCastsUrl: "https://pca.st/itunes/1857109105"
 amazonUrl: "https://music.amazon.com/podcasts/da06d4c3-ecf6-498f-abe3-4d3b00026bf2"
 transistorId: "b064776c"
+youtubeId: "5CMtHRUw5V8"
 ---
 
 In this episode of Artificial Developer Intelligence, hosts Shimin and Dan explore the latest developments in AI, including Google's Gemini 3 model and its implications for software engineering. They discuss the rise of AI-driven cybersecurity threats, the concept of world models, and the evolving landscape of software development techniques. The conversation also delves into the ethical considerations of AI compliance and the challenges of running open weight models. Finally, they reflect on the current state of the AI bubble and its potential future.
