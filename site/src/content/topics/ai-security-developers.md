@@ -6,15 +6,15 @@ keywords: "AI agent security, MCP security, prompt injection prevention, AI codi
 lastUpdated: "2026-04-10"
 ---
 
-The AI security industry has a credibility problem.
+AI coding agents introduce security risks that traditional application security frameworks don't address: prompt injection through crafted inputs, credential proxying through inherited permissions, verification gaps in AI-generated code, and cognitive security risks from over-trusting AI assessments. This guide covers the attack vectors that actually affect developers building with AI tools — based on real incidents at Meta, Amazon, and others, covered across eight episodes of the ADI Pod.
 
-Half the discourse is vendors selling fear about threats that don't exist at scale. The other half is developers ignoring threats that do. In [Episode 13](/episodes/13-pi-coding-agent-dark-factories-the-furniture-makers-of-carolina/), we covered the article "The AI Security Industry is Bullshit," and while the title is provocative, the core argument has merit: much of the AI security industry is selling FUD rather than solving real problems.
+The AI security industry has a credibility problem. Half the discourse is vendors selling fear about threats that don't exist at scale. The other half is developers ignoring threats that do. In [Episode 13](/episodes/13-pi-coding-agent-dark-factories-the-furniture-makers-of-carolina/), we covered the article "The AI Security Industry is Bullshit," and while the title is provocative, the core argument has merit: much of the AI security industry is selling FUD rather than solving real problems.
 
 But here's the thing about dismissing the AI security industry as bullshit: some of it isn't. Meta had rogue AI agents causing production incidents. Amazon mandated senior sign-off on AI-assisted changes after outages. Claude Code's source leak revealed the safety architecture isn't what anyone assumed. The real threats are specific, technical, and growing — they just don't look like the threats the security vendors are selling.
 
 This guide focuses on the attack vectors and trust problems that actually affect developers building with AI tools. Not theoretical. Not speculative. The stuff that's already happening.
 
-## The Threat Model Has Changed
+## How AI Agents Change the Security Threat Model
 
 Traditional application security assumes a human developer writing code, a human reviewer reading it, and a deployment pipeline with human-controlled gates. AI agents break every one of these assumptions.
 
@@ -51,7 +51,7 @@ If your AI agent reads external content — user input, web pages, API responses
 
 The mitigation isn't a single defense but a layered approach: limit agent permissions, validate agent actions, treat agent output as untrusted, and don't give agents access to credentials they don't need.
 
-## Credential Proxying: The Silent Risk
+## What Is Credential Proxying in AI Agents?
 
 This is the security problem that gets the least attention and causes the most damage.
 
@@ -142,7 +142,7 @@ MCP creates a chain of trust: you trust the agent, the agent trusts the MCP serv
 
 **Monitor MCP traffic.** If your organization is deploying MCP-connected agents in production, log the actions MCP servers take. Anomalous patterns (unexpected API calls, data access outside normal scope) should trigger alerts.
 
-## Cognitive Security: The Human Vulnerability
+## How AI Agents Compromise Developer Judgment
 
 The most overlooked AI security risk isn't technical — it's cognitive. AI agents influence human decision-making in ways that undermine security practices.
 

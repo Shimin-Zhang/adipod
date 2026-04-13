@@ -6,6 +6,8 @@ keywords: "AI bubble 2026, will AI bubble burst, AI CAPEX vs revenue, AI investm
 lastUpdated: "2026-04-10"
 ---
 
+The AI investment bubble refers to the widening gap between the hundreds of billions being spent on AI infrastructure — data centers, GPUs, model training — and the revenue AI products actually generate. This page tracks the financial signals, market events, and economic frameworks for understanding whether and when the AI bubble will correct, updated with each new episode of the ADI Pod.
+
 Every episode of the ADI Pod ends with "Two Minutes to Midnight" — our Doomsday Clock-style segment tracking how close the AI investment bubble is to bursting. We borrowed the metaphor from the Bulletin of the Atomic Scientists because the dynamics are similar: the people building the thing are the worst judges of when it becomes dangerous, and the clock is a useful forcing function for honest assessment.
 
 This page is the running record. Not predictions — data points, financial signals, and the frameworks for interpreting them.
@@ -20,7 +22,7 @@ A note on methodology: the clock position is vibes, not math. It's three practit
 
 *Disclaimer: The "Two Minutes to Midnight" clock is for entertainment purposes only. It is not financial advice, investment guidance, or a prediction of market outcomes. We are software developers who read earnings reports for fun, not analysts, economists, or fiduciaries. Do not make financial decisions based on a podcast segment named after an Iron Maiden song.*
 
-## The Core Tension: CAPEX vs. Revenue
+## AI Investment vs. Revenue: The CAPEX Gap Explained
 
 The AI bubble isn't about whether AI is useful. AI is demonstrably useful. The bubble is about whether the **investment** in AI infrastructure is proportional to the **revenue** AI generates.
 
@@ -89,7 +91,7 @@ A chronological record of the events we've tracked across 20 episodes, with link
 
 **[Episode 20](/episodes/20-claude-code-source-leak-emotion-concepts-in-llms-and-surprising-facts-ais-know-about-us/) (Apr 10):** The Claude Code source leak dominates the episode. Copilot's terms classify it as "for entertainment purposes only." The gap between how AI tools are marketed and how they're legally positioned widens. No bubble segment this episode.
 
-## The Frameworks
+## Economic Frameworks for Understanding the AI Bubble
 
 ### The Benefits of Bubbles (Bull)
 
@@ -160,7 +162,7 @@ The 45% layoff with a 24% stock surge (Episode 16) is the market signal that mat
 | Announcement economy substituting for revenue | Bear | Strong — structural concern |
 | NVIDIA $1T demand projection | Ambiguous | Could indicate real demand or peak hype |
 
-## What We're Watching
+## Key Indicators for the AI Bubble in 2026
 
 **Revenue-to-investment ratios.** The gap between AI CAPEX and AI revenue is the single most important metric. When this ratio starts improving — not announced, but reported in earnings — the bull case strengthens. Until then, the bubble thesis stands.
 

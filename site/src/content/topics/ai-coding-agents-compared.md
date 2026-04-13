@@ -6,13 +6,15 @@ keywords: "Claude Code vs Cursor, AI coding agent comparison, best AI coding too
 lastUpdated: "2026-04-10"
 ---
 
+AI coding agents are tools that use large language models to write, edit, and execute code on behalf of developers. The major options in 2026 include Claude Code (Anthropic), Codex (OpenAI), Cursor, Pi Agent, Gemini CLI, and others — each with different interaction models, strengths, and trade-offs. This comparison is based on hands-on experience shipping code across 20 episodes of the ADI Pod, not benchmark scores.
+
 The AI coding agent market has a benchmarking problem: every tool claims SWE-bench superiority, every launch post uses the word "revolutionary," and the actual experience of using these tools day-to-day bears approximately zero resemblance to the marketing.
 
-We've used Claude Code, Codex, Cursor, Pi Agent, Gas Town, Open Code, Gemini CLI, and Kiro CLI across 20 episodes of the ADI Pod. Not as reviewers testing features for a week. As practitioners shipping code on real projects. The differences between these tools are real, but they're not the differences the comparison posts focus on.
+We've used Claude Code, Codex, Cursor, Pi Agent, Gas Town, Open Code, Gemini CLI, and Kiro CLI across 20 episodes. Not as reviewers testing features for a week. As practitioners shipping code on real projects. The differences between these tools are real, but they're not the differences the comparison posts focus on.
 
 Here's what actually matters when choosing an AI coding agent.
 
-## The Fundamental Split: Terminal vs. IDE vs. Cloud
+## Terminal vs. IDE vs. Cloud: Which AI Coding Agent Type Is Right for You?
 
 Before comparing individual tools, the more important decision is which paradigm fits your workflow. The three paradigms aren't just UI preferences — they imply different models of human-agent interaction.
 
@@ -160,7 +162,7 @@ The practical recommendation: use Gemini's ecosystem for image generation, visua
 
 Open Code is a headless/CI-focused alternative that Martin Alderson (from Catch Metrics) uses for automated PR review. "Using Open Code to run on your CI-CD pipelines to find issues — that's been awesome" (from [Episode 16](/episodes/16-pentagon-anthropic-drama-verified-spec-driven-development-and-interview-with-martin-alderson/)). He uses Claude Code for interactive work and Open Code for automated tasks. This split — interactive agent for development, headless agent for CI/CD — is a pattern worth watching.
 
-## The Comparison That Actually Matters
+## AI Coding Agent Comparison Table (2026)
 
 Here's the comparison table the marketing posts won't give you:
 
@@ -181,7 +183,7 @@ Martin Alderson's research (covered in [Episode 16](/episodes/16-pentagon-anthro
 
 This matters for tool selection because it reframes the question. It's not just "which agent is best?" but "which agent is most efficient with the framework I'm using?" If you're working in a token-heavy framework, you'll burn through context faster in any agent — but the agent's overhead (MCP tools, system prompts, skill definitions) compounds the problem.
 
-## The Moat Question
+## Why the AI Model Matters More Than the Coding Tool
 
 The most important insight from 20 episodes of agent comparison: **the moat is in the model, not the tooling**.
 

@@ -6,9 +6,9 @@ keywords: "vibe coding guide, vibe coding pros cons, dark flow coding, cognitive
 lastUpdated: "2026-04-10"
 ---
 
-Vibe coding feels amazing right up until the moment it doesn't.
+Vibe coding is the practice of using AI coding assistants to generate code by prompting rather than writing, where the developer accepts AI output based on whether it looks right and seems to work, without deeply understanding the underlying logic. Coined by Andrej Karpathy in February 2025, the term has evolved from a neutral descriptor to a cautionary concept as practitioners have documented its failure modes — including dark flow, cognitive debt, and cognitive bankruptcy.
 
-You're prompting an AI agent, watching features materialize, seeing tests pass, deploying something that works — and at no point does the feedback loop tell you that your understanding of your own codebase has been falling behind since the second prompt. The gap between "it works" and "I understand why it works" grows silently, and the bill comes due during the first production bug you can't trace.
+Vibe coding feels amazing right up until the moment it doesn't. You're prompting an AI agent, watching features materialize, seeing tests pass, deploying something that works — and at no point does the feedback loop tell you that your understanding of your own codebase has been falling behind since the second prompt. The gap between "it works" and "I understand why it works" grows silently, and the bill comes due during the first production bug you can't trace.
 
 We've spent eight episodes tracking vibe coding from a neutral descriptor to a cautionary concept, and along the way we accidentally built an entire vocabulary for its failure modes. This guide is the synthesis: what vibe coding actually is, when it's fine, when it's dangerous, and the frameworks that help you stay on the right side of that line.
 
@@ -18,7 +18,7 @@ The term comes from [Andrej Karpathy's tweet](https://x.com/karpathy/status/1886
 
 That definition sounds benign. The problem isn't in the definition. It's in what happens to your brain after three hours of it.
 
-## The Dark Flow Problem
+## What Is Dark Flow in Vibe Coding?
 
 [Dark flow](/glossary/dark-flow/) is the central psychological hazard of vibe coding, and understanding it is the key to understanding everything else that goes wrong.
 
@@ -28,7 +28,7 @@ The critical distinction: this is not the same as [Csikszentmihalyi's flow state
 
 We titled [Episode 12](/episodes/12-the-openclaw-saga-how-ai-affects-programming-skills-and-how-vibe-coding-is-addictive-like-gambling/) "How Vibe Coding is Addictive like Gambling" because the parallel isn't metaphorical — it's mechanistic. The false sense of accomplishment is the addictive mechanism. And like gambling, the people most vulnerable to it are the ones who can't independently evaluate whether they're winning.
 
-## The Debt Taxonomy
+## Types of Cognitive Debt from AI-Assisted Coding
 
 Over the course of eight episodes, we developed a financial metaphor for vibe coding's failure modes. It's not a perfect model, but it's precise enough to be useful — and it maps cleanly to the interventions that actually help.
 
@@ -120,7 +120,7 @@ The empirical pattern from Margaret Storey's research: teams that have been vibe
 
 A coding agent that agrees your approach is correct instead of flagging edge cases is not helpful — it's a source of verification debt. We tested [agent sycophancy](/glossary/agent-sycophancy/) across three models in [Episode 15](/episodes/15-convincing-ai-the-earth-is-flat-inference-at-17k-tokens-sec-and-an-agile-manifesto-for-the-agentic-age/). GPT 5.1 Instant refused all manipulation. Claude Haiku was too empathetic — it admitted to "nudging" its responses toward the user's framing. Gemini 3 agreed with biased claims outright. A *Science* paper confirmed the structural problem: there is no market incentive to fix sycophancy because users consistently rate agreeable responses as higher quality.
 
-## The Risk Frameworks
+## Risk Frameworks for Evaluating Vibe Coding
 
 ### The Minotaur Model
 
@@ -134,7 +134,7 @@ The centaur model — human leading, AI providing labor — is the aspiration. T
 
 The Wharton paper introduces AI as a de facto "System 3" alongside Kahneman's System 1 (fast/intuitive) and System 2 (slow/deliberate). People defer to AI rather than engaging their own reasoning. But this isn't uniformly distributed: high need-for-cognition people use AI as a complement, checking and interrogating outputs. Those who dislike effortful thinking defer more readily, widening the gap between those who benefit from AI and those who are hollowed out by it.
 
-## The Antidotes
+## How to Vibe Code Safely: Proven Mitigations
 
 ### Spec-Driven Development
 

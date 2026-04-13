@@ -6,13 +6,15 @@ keywords: "Claude Code best practices, Claude Code tips, Claude.md guide, Claude
 lastUpdated: "2026-04-10"
 ---
 
+Claude Code is Anthropic's terminal-based AI coding agent that uses Claude models to read files, write code, and execute commands directly in your development environment. This guide covers the practical workflows, context management strategies, and configuration patterns we've learned from using Claude Code across 20 episodes of the ADI Pod — the tips the official documentation doesn't cover.
+
 Most Claude Code guides read like product documentation wearing a blog post costume. Here's what they leave out: the moment your agent silently burns through 80% of its context window on MCP tool discovery before touching your actual task, or the slow realization that your carefully crafted CLAUDE.md file has been rotting for three weeks and nobody noticed.
 
 We've spent 20 episodes using Claude Code on real projects — from solo side projects to multi-agent orchestration systems — and the gap between "how to use Claude Code" and "how Claude Code actually behaves in practice" is wide enough to park a data center in.
 
 This guide covers what we've actually learned. Not the features list. The workflows, the failure modes, and the mental models that make the difference between productive AI-assisted development and expensive context window tourism.
 
-## The Context Window Is Your Scarcest Resource
+## How to Manage Claude Code's Context Window
 
 If there's one thing we'd tattoo on the forehead of every new Claude Code user, it's this: **context management is the central unsolved problem of agentic coding**.
 
@@ -36,7 +38,7 @@ One of Opus 4.6's less-discussed behaviors is that it will proactively drop into
 
 The plan file becomes a persistent artifact that survives context resets. You can clear the context, start a fresh session, and tell Claude Code to read `plan.md` and continue from step 4. We covered this in [Episode 13](/episodes/13-pi-coding-agent-dark-factories-the-furniture-makers-of-carolina/), and it's become one of our most-used patterns. The key insight: **let the agent write the plan, then use the plan to outlive the agent's context**.
 
-## CLAUDE.md: Configuration as Code
+## What to Put in Your CLAUDE.md File
 
 Your CLAUDE.md file is not a README. It's a system prompt extension, and it deserves the same maintenance discipline as any other configuration file in your repository.
 
@@ -64,7 +66,7 @@ Yes. Yes we do. Your CLAUDE.md references a testing framework you migrated off o
 
 The fix is boring but necessary: treat CLAUDE.md updates as part of your PR process. Changed the test runner? Update CLAUDE.md. Moved the API routes? Update CLAUDE.md. It's configuration as code, and configuration that lies is worse than no configuration at all.
 
-## Multi-Agent Workflows: Swarm Mode and Beyond
+## How to Run Multiple Claude Code Agents
 
 Claude Code's multi-agent capabilities have evolved from a hidden feature to a core workflow, and the progression tells you something about where agentic coding is headed.
 
