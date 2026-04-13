@@ -78,4 +78,20 @@ const episodeSchema = {
   article {
     padding: 2rem 0;
   }
+  article :global(details) {
+    border: 1px solid var(--color-border, #333);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+  }
+  article :global(summary) {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+  article :global(details[open] summary) {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border, #333);
+  }
 </style>
