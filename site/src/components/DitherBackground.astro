@@ -92,9 +92,11 @@ void main(){
     vec3 nc=h<.33?mix(c1,c2,h*3.):h<.66?mix(c2,c3,(h-.33)*3.):mix(c3,c1,(h-.66)*3.);
     gl_FragColor=vec4(mix(dark,nc,lit),1.);
   } else {
-    vec3 lightOff=vec3(.92,.91,.95);
+    float h2=mod(uv.x*.7+uv.y*.3+time*.06,1.);
+    vec3 lc1=vec3(.96,.91,.93),lc2=vec3(.91,.93,.96),lc3=vec3(.94,.91,.96);
+    vec3 lhue=h2<.33?mix(lc1,lc2,h2*3.):h2<.66?mix(lc2,lc3,(h2-.33)*3.):mix(lc3,lc1,(h2-.66)*3.);
     vec3 lightOn=vec3(.98,.97,1.);
-    gl_FragColor=vec4(mix(lightOff,lightOn,lit),1.);
+    gl_FragColor=vec4(mix(lhue,lightOn,lit),1.);
   }
 }`;
 
