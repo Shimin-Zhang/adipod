@@ -79,6 +79,15 @@ const allSchemas = [podcastSeriesSchema, ...(schema ? (Array.isArray(schema) ? s
 
     <SchemaMarkup schema={allSchemas} />
 
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKPRYZ1DP4" is:inline></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PKPRYZ1DP4');
+    </script>
+
     <!-- Theme: apply saved preference before first paint to prevent flash -->
     <script is:inline>
       (function() {
