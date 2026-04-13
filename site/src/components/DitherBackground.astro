@@ -64,8 +64,8 @@ void main(){
   float disp=bump*clamp(spd*20.,0.,1.)*(strength/5.)*.07;
   vec2 wUV=uv+vdir*disp;
 
-  float ambient=sin(uv.y*6.28-time*1.8)*.02
-               +sin(uv.x*5.1+time*1.3)*.012;
+  float ambient=sin(uv.y*6.28-time*3.0)*.02
+               +sin(uv.x*5.1+time*2.2)*.012;
 
   vec2 wpx=wUV*res;
   float a45=.7854;
@@ -92,7 +92,9 @@ void main(){
     vec3 nc=h<.33?mix(c1,c2,h*3.):h<.66?mix(c2,c3,(h-.33)*3.):mix(c3,c1,(h-.66)*3.);
     gl_FragColor=vec4(mix(dark,nc,lit),1.);
   } else {
-    gl_FragColor=vec4(vec3(mix(.94,1.,lit)),1.);
+    vec3 lightOff=vec3(.92,.91,.95);
+    vec3 lightOn=vec3(.98,.97,1.);
+    gl_FragColor=vec4(mix(lightOff,lightOn,lit),1.);
   }
 }`;
 
