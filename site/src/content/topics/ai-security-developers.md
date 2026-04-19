@@ -2,8 +2,8 @@
 title: "AI Security for Developers: Prompt Injection, Agent Trust, and the Stuff That's Actually Dangerous"
 description: "A developer-focused guide to AI security — the real attack vectors, the overhyped threats, and practical frameworks for building with AI agents without getting burned."
 slug: "ai-security-developers"
-keywords: "AI agent security, MCP security, prompt injection prevention, AI coding security, agent trust model, AI security best practices"
-lastUpdated: "2026-04-10"
+keywords: "AI agent security, MCP security, prompt injection prevention, AI coding security, agent trust model, AI security best practices, Anthropic Mythos, Project Glasswing, AI vulnerability detection"
+lastUpdated: "2026-04-17"
 ogImage: "/og/ai-security-developers"
 ---
 
@@ -167,6 +167,36 @@ We tested sycophancy resistance across models in [Episode 15](/episodes/15-convi
 
 **Be especially skeptical of reassurance.** An agent that says "this looks fine" without being asked is potentially sycophantic. An agent that unprompted flags a concern is more likely to be reliable — the sycophancy incentive pushes toward reassurance, not toward raising problems.
 
+## Mythos and Project Glasswing: When the Model Finds the Bugs
+
+[Episode 21](/episodes/21-anthropic-mythos-project-glasswing-recursive-improving-agents-and-your-parallel-agent-limit) covered the most consequential security story of 2026 so far: Anthropic's **Mythos** model, announced via [TechCrunch](https://techcrunch.com/2026/04/07/anthropic-mythos-ai-model-preview-security/) and the [Anthropic red team writeup](https://red.anthropic.com/2026/mythos-preview/). Mythos is capable enough at vulnerability detection that Anthropic is withholding public release while infrastructure partners patch first.
+
+### What Mythos actually does
+
+The security capability is emergent, not explicitly trained. Mythos wasn't built as a vulnerability finder — it's a general-purpose model that happens to chain vulnerability primitives into working exploits. The red team report describes finding 27-year-old bugs in Linux and OpenBSD, ranging from privilege escalation to remote crashes via crafted network requests. Internet rumors also describe Mythos escaping Firefox's JavaScript VM sandbox with an 85% success rate — unconfirmed, but directionally consistent with what Anthropic is willing to confirm.
+
+The individual techniques aren't novel. What's novel is the speed and scale of chaining. Humans are bad at spending days chaining 15 vulnerability primitives in exact order with exact timing. Mythos isn't. This is the jagged frontier showing up in security: model capability has surpassed human capability for a specific shape of work (tedious, sequential, long-horizon), even though it lags on many others.
+
+### Project Glasswing
+
+Rather than release Mythos publicly, Anthropic is running a closed preview called **Project Glasswing** with partners that reportedly include Amazon, Apple, Broadcom, Cisco, CrowdStrike, the Federal Reserve, and major US banks. These partners get preview access to identify and patch vulnerabilities in their own infrastructure before the model reaches the public.
+
+Whether this is a Manhattan Project moment or the most masterful viral marketing campaign in AI history depends on what the patched vulnerabilities turn out to be when Glasswing wraps. Anthropic isn't releasing exploit details for obvious reasons, which cuts both ways — it makes independent verification impossible and it makes the claim unfalsifiable in the short term.
+
+### What this means for developers
+
+**Chain-of-primitives attacks become routine.** Defenses that held because "nobody has time to chain 15 exploits in order" no longer hold. If cost-of-exploitation was an implicit layer in your threat model, that layer just got thinner.
+
+**Supply chain attacks scale further.** The same capability that finds bugs in Linux can find bugs in your dependencies — or craft the PRs that introduce them. General-purpose AI is already industrializing supply chain attacks via invisible unicode characters and plausible-looking drive-by contributions; Mythos-class capability makes the economics even worse for defenders.
+
+**Open source may end up more secure, not less.** Linus's Law — given enough eyeballs, all bugs are shallow — gets more valid, not less, when AI is one of the reviewers. Nation-states have been paying millions for human-discovered zero-days; AI-discovered vulnerabilities that get patched before exploitation inverts that asymmetry. The same model that can attack at scale can defend at scale if it's pointed at your code before someone else's.
+
+**Preview programs become the new disclosure pipeline.** Glasswing is a preview of how frontier security disclosure will work: big infrastructure partners get the model first, everyone else gets the patches. Expect other labs to follow this pattern, which means smaller orgs and maintainers will increasingly be downstream of a coordinated disclosure timeline they don't control.
+
+### Practical posture for the next several months
+
+If you run infrastructure that depends on open-source components — which is to say, if you run infrastructure — assume the upstream patch cadence will be dense and material. Subscribe to security announcements for your core dependencies, automate dependency updates in lower environments so you can validate before production, and have an emergency patching playbook that doesn't require a committee meeting to activate. If you maintain open-source components, expect an uptick in reported vulnerabilities that you may not have budget or bandwidth to triage — plan for it now, not during the surge.
+
 ## The Government and Supply Chain Dimension
 
 AI security isn't just about code. The Pentagon-Anthropic drama (covered in Episodes [16](/episodes/16-pentagon-anthropic-drama-verified-spec-driven-development-and-interview-with-martin-alderson/) and [17](/episodes/17-slop-garbage-collection-cleanroom-rewrites-and-will-claude-ruin-our-teams/)) exposed the geopolitical dimensions.
@@ -232,4 +262,4 @@ Current evidence (CodeRabbit's 1.7x issue rate, METR's SWE-bench analysis) sugge
 
 ---
 
-*This guide synthesizes content from Episodes 2, 3, 6, 13, 16, 17, 18, and 19 of the ADI Pod. Updated April 2026.*
+*This guide synthesizes content from Episodes 2, 3, 6, 13, 16, 17, 18, 19, 20, and 21 of the ADI Pod. Updated April 2026.*

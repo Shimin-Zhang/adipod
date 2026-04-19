@@ -2,8 +2,8 @@
 title: "AI Bubble Tracker — Two Minutes to Midnight"
 description: "A living tracker of the AI investment bubble — CAPEX vs revenue data, company financials, bull and bear arguments, and our Doomsday Clock for when it pops."
 slug: "ai-bubble-tracker"
-keywords: "AI bubble 2026, will AI bubble burst, AI CAPEX vs revenue, AI investment bubble tracker, AI market analysis"
-lastUpdated: "2026-04-10"
+keywords: "AI bubble 2026, will AI bubble burst, AI CAPEX vs revenue, AI investment bubble tracker, AI market analysis, Anthropic revenue accounting, OpenAI Anthropic run rate"
+lastUpdated: "2026-04-17"
 ogImage: "/og/ai-bubble-tracker"
 ---
 
@@ -15,9 +15,11 @@ This page is the running record. Not predictions — data points, financial sign
 
 ## The Clock
 
-**Current position: 1 minute 45 seconds to midnight** (as of [Episode 19](/episodes/19-thinking-fast-slow-and-artificial-meta-s-trouble-with-rogue-agents-and-fomo-in-the-age-of-ai/), March 2026)
+**Current position: 2 minutes 45 seconds to midnight** (as of [Episode 21](/episodes/21-anthropic-mythos-project-glasswing-recursive-improving-agents-and-your-parallel-agent-limit/), April 2026)
 
-The clock has moved back from its closest reading of 25 seconds to midnight (Episode 3, November 2025). The retreat reflects a more nuanced read: AI revenue models are still lagging CAPEX, but the infrastructure being built has real long-term value and the Jevons paradox argument has gained weight. The bubble hasn't popped — but the urgency has shifted from "imminent correction" to "slow grind toward reckoning."
+The clock has moved back from its closest reading of 25 seconds to midnight (Episode 3, November 2025). The most recent move — back a full minute from 1:45 to 2:45 — was driven by [Anthropic's Mythos announcement and Project Glasswing](/topics/ai-security-developers/). The reasoning is expected-value, not probability: even at a ~25% chance that Mythos represents a genuine capability step change, the magnitude of that outcome outweighs the near-term urgency of the bubble thesis. If you can reshape Linux and banking infrastructure security in a quarter, the CAPEX gap looks different.
+
+The broader read still holds: AI revenue models are lagging CAPEX, but the infrastructure being built has real long-term value and the Jevons paradox argument has gained weight. The bubble hasn't popped — but the urgency has shifted from "imminent correction" to "slow grind toward reckoning," with intermittent step-change signals that could reshape the expected value of either outcome.
 
 A note on methodology: the clock position is vibes, not math. It's three practitioners reading the same financial reports and market signals as everyone else, filtered through the lens of "does this company's business model make sense?" The clock is a conversation starter, not a financial instrument.
 
@@ -84,13 +86,15 @@ A chronological record of the events we've tracked across 20 episodes, with link
 
 **[Episode 17](/episodes/17-slop-garbage-collection-cleanroom-rewrites-and-will-claude-ruin-our-teams/) (Mar 13):** **[Oracle cuts thousands of jobs as data center costs rise](https://www.reuters.com/business/oracle-plans-thousands-job-cuts-data-center-costs-rise-bloomberg-news-reports-2026-03-05/)** — an infrastructure provider bleeding money on the AI bet. We called this "the canary in the coal mine for the AI bubble, not the frontier labs themselves." When the companies building the infrastructure can't sustain the costs, the bubble's physics become apparent regardless of how the model providers are performing. Amazon [requires senior engineers to sign off on AI-assisted changes](https://arstechnica.com/ai/2026/03/after-outages-amazon-to-make-senior-engineers-sign-off-on-ai-assisted-changes/) after AI-related outages.
 
-### Phase 5: Trillion-Dollar Projections Meet Product Failures (Mar-Apr 2026)
+### Phase 5: Trillion-Dollar Projections, Product Failures, and Capability Step Changes (Mar-Apr 2026)
 
 **[Episode 18](/episodes/18-8-levels-of-ai-engineering-meta-ai-delays-and-llm-neuroanatomy/) (Mar 20):** Meta delays rollout of its "Avocado" AI model after performance concerns and may end up licensing Gemini — despite massive internal AI investment. The parallel to Apple's trajectory (building internally, then licensing externally) is noted.
 
 **[Episode 19](/episodes/19-thinking-fast-slow-and-artificial-meta-s-trouble-with-rogue-agents-and-fomo-in-the-age-of-ai/) (Mar 27):** The contradictions sharpen to a point. [Jensen Huang projects NVIDIA's Blackwell and Vera Rubin sales into the **$1 trillion range**](https://techcrunch.com/2026/03/16/jensen-just-put-nvidias-blackwell-and-vera-rubin-sales-projections-into-the-1-trillion-stratosphere/) — the largest demand projection in semiconductor history. Meanwhile, **[OpenAI shuts down Sora](https://www.theguardian.com/technology/2026/mar/24/openai-ai-video-sora) just 4 months after a 3-year Disney partnership** — signaling either financial pressure or strategic failure. The overriding theme: ["Accelerated FOMO in the Age of AI"](https://www.0xsid.com/blog/accelerated-ai-fomo) — FOMO, not fundamentals, is driving market behavior.
 
 **[Episode 20](/episodes/20-claude-code-source-leak-emotion-concepts-in-llms-and-surprising-facts-ais-know-about-us/) (Apr 10):** The Claude Code source leak dominates the episode. Copilot's terms classify it as "for entertainment purposes only." The gap between how AI tools are marketed and how they're legally positioned widens. No bubble segment this episode.
+
+**[Episode 21](/episodes/21-anthropic-mythos-project-glasswing-recursive-improving-agents-and-your-parallel-agent-limit/) (Apr 17):** The clock moves **back a full minute to 2:45**, driven by the Mythos/Glasswing possibility of a genuine capability step change. On the financial side: [the AI gold rush pulls private wealth into riskier, earlier bets](https://techcrunch.com/2026/04/07/the-ai-gold-rush-is-pulling-private-wealth-into-riskier-earlier-bets/) — investors treat not-having-AI-exposure as a bigger risk than bad deals, so capital flows earlier and lower-quality to stay in the market. A forcing function on risk tolerance, not a vote of confidence. Separately, [OpenAI's CRO tells staff Anthropic inflates its $30B run rate by $8B](https://www.implicator.ai/openai-cro-tells-staff-anthropic-inflates-run-rate-by-8-billion/) via gross-vs-net revenue recognition. Both accounting treatments are GAAP-valid; the signal is the timing. OpenAI's chief revenue officer publicly relitigating Anthropic's numbers is what happens when the enterprise race is close enough that even valid accounting differences feel worth disputing. [MiniMax demonstrates recursive self-improvement](https://firethering.com/minimax-m2-7-agentic-model/) with ~30% benchmark gains — if this generalizes, model improvement shifts from a labor bottleneck (hire PhDs) to a capital bottleneck (run more parallel experiments), which intensifies the CAPEX spiral rather than relieving it.
 
 ## Economic Frameworks for Understanding the AI Bubble
 
@@ -133,6 +137,8 @@ The unit economics question (Episode 12) remains the central issue: does the sub
 The $20B funding round reflects both AI investor appetite and Anthropic's compute needs. The margins and COGS discussion from Episode 14 suggests that even frontier labs with strong technology face the fundamental CAPEX-to-revenue problem.
 
 The Pentagon drama adds complexity: Anthropic's ethical red lines (no mass surveillance, no autonomous weapons) are admirable but create business risk. When the Department of Defense threatens supply-chain risk designation for refusing certain contracts, the tension between values and survival becomes existential.
+
+In [Episode 21](/episodes/21-anthropic-mythos-project-glasswing-recursive-improving-agents-and-your-parallel-agent-limit/) the revenue story sharpened. OpenAI's chief revenue officer told staff Anthropic inflates its reported ~$30B run rate by roughly $8B through revenue recognition — specifically, that Anthropic books gross revenue on third-party resold contracts (the full customer price) while OpenAI books net (the price after the reseller's cut, e.g., AWS's share). Both are valid under US GAAP. The more interesting read is structural: Anthropic's enterprise revenue has been growing fast enough since the Pentagon deal that OpenAI's CRO considered it worth publicly disputing the methodology. That's the kind of move labs make when the race is close enough for accounting conventions to matter.
 
 ### NVIDIA
 
