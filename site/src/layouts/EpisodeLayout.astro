@@ -37,9 +37,11 @@ const episodeSchema = {
     { '@type': 'Person', name: 'Rahul Yadav' },
   ],
 };
+
+const mdPath = Astro.url.pathname.replace(/\/$/, '') + '.md';
 ---
 
-<BaseLayout title={`Ep ${episode}: ${title}`} description={description} schema={episodeSchema} ogType="article">
+<BaseLayout title={`Ep ${episode}: ${title}`} description={description} schema={episodeSchema} ogType="article" mdPath={mdPath}>
   <article>
     <header>
       <p class="episode-meta">Episode {episode} &middot; {new Date(date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>

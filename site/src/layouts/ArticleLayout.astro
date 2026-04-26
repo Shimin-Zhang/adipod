@@ -92,9 +92,11 @@ if (faqs && faqs.length > 0) {
     })),
   });
 }
+
+const mdPath = Astro.url.pathname.replace(/\/$/, '') + '.md';
 ---
 
-<BaseLayout title={title} description={description} schema={schemas} ogType="article" keywords={keywords} publishedDate={date} ogImage={ogImage}>
+<BaseLayout title={title} description={description} schema={schemas} ogType="article" keywords={keywords} publishedDate={date} ogImage={ogImage} mdPath={mdPath}>
   <article style="padding: 2rem 0;">
     <header>
       {ogImage && (

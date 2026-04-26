@@ -20,9 +20,11 @@ const definedTermSchema = {
     url: 'https://adipod.ai/glossary/',
   },
 };
+
+const mdPath = Astro.url.pathname.replace(/\/$/, '') + '.md';
 ---
 
-<BaseLayout title={term} description={definition} schema={definedTermSchema}>
+<BaseLayout title={term} description={definition} schema={definedTermSchema} mdPath={mdPath}>
   <article style="padding: 2rem 0;">
     <p><a href="/glossary/">&larr; Glossary</a></p>
     <h1>{term}</h1>

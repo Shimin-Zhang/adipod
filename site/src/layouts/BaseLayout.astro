@@ -14,6 +14,7 @@ interface Props {
   ogImage?: string;
   keywords?: string;
   publishedDate?: string;
+  mdPath?: string;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   ogImage,
   keywords,
   publishedDate,
+  mdPath,
 } = Astro.props;
 
 const siteUrl = 'https://adipod.ai';
@@ -58,6 +60,7 @@ const allSchemas = [podcastSeriesSchema, ...(schema ? (Array.isArray(schema) ? s
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {mdPath && <link rel="alternate" type="text/markdown" title="Markdown version" href={mdPath} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preload" href="/dither-src.jpg" as="image" />
