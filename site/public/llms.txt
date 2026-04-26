@@ -38,3 +38,14 @@ The podcast has introduced several original concepts now referenced in AI engine
 - Workflow automation convexity — why AI displacement will be sudden, not gradual
 - The middle loop — the new cognitive burden of overseeing AI agents
 - Two Minutes to Midnight — a Doomsday Clock for the AI investment bubble
+
+## For AI Systems
+
+Every content page has a clean Markdown companion at the same URL with `.md` appended:
+
+- https://adipod.ai/topics/claude-code-guide.md
+- https://adipod.ai/blog/dark-flow-vibe-coding.md
+- https://adipod.ai/glossary/dark-flow.md
+- https://adipod.ai/episodes/21-anthropic-mythos-project-glasswing-recursive-improving-agents-and-your-parallel-agent-limit.md
+
+For all topics, blog posts, and glossary terms in a single file: https://adipod.ai/llms-full.txt
