@@ -3,15 +3,15 @@ title: "AI Coding Agents Compared: Claude Code, Codex, Cursor, Pi Agent, and the
 description: "A practitioner's comparison of AI coding agents — what each tool actually does well, where they fall short, and why the moat might not be in the tooling."
 slug: "ai-coding-agents-compared"
 keywords: "Claude Code vs Cursor, AI coding agent comparison, best AI coding tool, Claude Code vs Codex, AI coding agent review 2026"
-lastUpdated: "2026-04-10"
+lastUpdated: "2026-04-28"
 ogImage: "/og/ai-coding-agents-compared"
 ---
 
-AI coding agents are tools that use large language models to write, edit, and execute code on behalf of developers. The major options in 2026 include Claude Code (Anthropic), Codex (OpenAI), Cursor, Pi Agent, Gemini CLI, and others — each with different interaction models, strengths, and trade-offs. This comparison is based on hands-on experience shipping code across 20 episodes of the ADI Pod, not benchmark scores.
+AI coding agents are tools that use large language models to write, edit, and execute code on behalf of developers. The major options in 2026 include Claude Code (Anthropic), Codex (OpenAI), Cursor, Pi Agent, Gemini CLI, and others — each with different interaction models, strengths, and trade-offs. This comparison is based on hands-on experience shipping code across 22 episodes of the ADI Pod, not benchmark scores.
 
 The AI coding agent market has a benchmarking problem: every tool claims SWE-bench superiority, every launch post uses the word "revolutionary," and the actual experience of using these tools day-to-day bears approximately zero resemblance to the marketing.
 
-We've used Claude Code, Codex, Cursor, Pi Agent, Gas Town, Open Code, Gemini CLI, and Kiro CLI across 20 episodes. Not as reviewers testing features for a week. As practitioners shipping code on real projects. The differences between these tools are real, but they're not the differences the comparison posts focus on.
+We've used Claude Code, Codex, Cursor, Pi Agent, Gas Town, Open Code, Gemini CLI, and Kiro CLI across 22 episodes. Not as reviewers testing features for a week. As practitioners shipping code on real projects. The differences between these tools are real, but they're not the differences the comparison posts focus on.
 
 Here's what actually matters when choosing an AI coding agent.
 
@@ -114,6 +114,10 @@ The philosophical point (from [Episode 13](/episodes/13-pi-coding-agent-dark-fac
 ### Limitations
 
 Pi lacks the polish, community, and integration ecosystem of Claude Code. No built-in MCP support (you need a library). No plan mode (the model handles complexity through skills). No multi-agent coordination. For enterprise teams with established workflows, the setup cost is higher than Claude Code's.
+
+### April 2026 update: OAuth revocation and the local-model fallback
+
+In mid-April 2026, Anthropic began revoking third-party OAuth access for Claude Code subscriptions, which broke Pi Agent's ability to drive Opus 4.x through a personal Max plan ([Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/)). Shimin's workaround was to repoint Pi at Alibaba's open-source [Qwen 3.6 35B A3B](https://qwen.ai/blog?id=qwen3.6-35b-a3b) — a 35B-parameter mixture-of-experts model with 3B active params — running locally via llama.cpp + Unsloth GGUF at 90–95 tok/sec, and to register Claude Code itself as a tool Pi can invoke when it needs Opus-level horsepower. The setup is a useful proof point for the Pi philosophy: when the harness is minimal, swapping the underlying model (or layering a stronger model in as a tool) is a configuration change, not a rewrite. Anthropic was rumored as of recording to be reversing the revocation, but the takeaway holds either way — a local-model fallback is now table stakes for any Pi-style setup.
 
 ## [GitHub Copilot](https://github.com/features/copilot)
 
@@ -222,4 +226,4 @@ We haven't covered Devin extensively because the hosts prefer interactive, termi
 
 ---
 
-*This comparison reflects our hands-on experience through April 2026. The AI coding agent market moves fast — check the most recent episodes for updates on tools released after this guide was written.*
+*This comparison reflects our hands-on experience through late April 2026, including the Anthropic OAuth revocation covered in Episode 22. The AI coding agent market moves fast — check the most recent episodes for updates on tools released after this guide was written.*
