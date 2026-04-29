@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you're looking for doesn't exist on adipod.ai."
+>
+  <section class="notfound">
+    <p class="status">404</p>
+    <h1>This page didn't make it to production.</h1>
+    <p class="lede">
+      Either the URL is wrong, or you found a link that's gone stale. Either way, here are some better places to go:
+    </p>
+
+    <ul class="links">
+      <li><a href="/">Home</a> — latest episodes and overview</li>
+      <li><a href="/episodes/">All episodes</a> — every show, with full transcripts</li>
+      <li><a href="/topics/">Topics</a> — pillar guides on Claude Code, vibe coding, AI bubble, and more</li>
+      <li><a href="/blog/">Blog</a> — standalone articles from the show</li>
+      <li><a href="/glossary/">Glossary</a> — terms the show has coined or covered</li>
+      <li><a href="/about/">About</a> — who we are</li>
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    padding: 3rem 0 4rem;
+    max-width: 640px;
+  }
+  .status {
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+    margin: 0 0 1rem;
+  }
+  .notfound h1 {
+    margin: 0 0 1rem;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  .lede {
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+  }
+  .links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .links li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+  }
+  .links li:last-child {
+    border-bottom: none;
+  }
+  .links a {
+    color: var(--color-cta-secondary-text);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .links a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 640px) {
+    .notfound {
+      padding: 2rem 0 3rem;
+    }
+    .notfound h1 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
