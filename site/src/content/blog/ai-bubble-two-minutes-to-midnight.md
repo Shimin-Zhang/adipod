@@ -1,14 +1,14 @@
 ---
-title: "AI Bubble 2026: Two Minutes to Midnight Across 20 Episodes"
-description: "We've rated the AI bubble every episode since November 2025, from cautious optimism to quiet alarm. Here's the full timeline and what it says."
+title: "AI Bubble 2026: Two Minutes to Midnight Across 22 Episodes"
+description: "We've rated the AI bubble every episode since November 2025, from cautious optimism to quiet alarm and back. Here's the full timeline and what it says."
 date: "2026-04-11"
-lastUpdated: "2026-04-12"
+lastUpdated: "2026-04-28"
 slug: "ai-bubble-two-minutes-to-midnight"
 keywords: "AI bubble 2026, AI bubble tracker, AI market bubble, two minutes to midnight AI"
-episodes: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+episodes: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"]
 ---
 
-As of March 2026, the AI bubble clock sits at 1:15, one minute and fifteen seconds to midnight, and closer to a correction than at any point since we started tracking five months ago. The load-bearing number: hyperscalers are spending $700 billion on AI infrastructure while direct AI revenue covers roughly 4% of that.
+As of late April 2026, the AI bubble clock sits at 3:30 — three minutes and thirty seconds to midnight — after a sharp two-episode dovish swing from 1:15. The reversal was driven by Anthropic's Mythos disclosure pulling the Federal Reserve into AI infrastructure planning and Paul Graham's log-scale chart contextualizing AI capex against the US railroad bubble. The load-bearing concern that pushed us toward midnight earlier in the year still hasn't gone away: hyperscalers are spending $700 billion on AI infrastructure while direct AI revenue covers roughly 4% of that. But the comparison set has changed, and so has the math.
 
 The Bulletin of the Atomic Scientists has maintained a Doomsday Clock since 1947, measuring how close humanity is to self-inflicted annihilation. We borrowed their metaphor for something less existential but more personally relevant: the [AI market bubble](/topics/ai-bubble-tracker/). Every episode of ADI Pod since November 2025, we've closed the show with a segment called [Two Minutes to Midnight](/glossary/two-minutes-to-midnight/): an assessment of how close the AI industry is to a correction, a pop, or whatever euphemism you prefer for "a lot of people losing a lot of money."
 
@@ -70,6 +70,14 @@ This is where the data got interesting. The clock started oscillating, and the o
 
 **Episode 20** (March 31). We took a two-week break. The clock held at 1:15.
 
+### Phase 5: The Snapback (Apr 2026, Episodes 21-22)
+
+*The clock reversed sharply from 1:15 to 3:30 over two episodes — the most optimistic reading in the show's history — as Anthropic's Mythos disclosure reframed the systemic-risk math and Paul Graham's railroad-capex chart contextualized current spend against a bigger historical bubble.*
+
+**Episode 21** (April 17, 2026). Clock moved to **2:45**. Anthropic disclosed Mythos and Project Glasswing — a model so capable at vulnerability detection that Anthropic withheld release while the Federal Reserve and major infrastructure partners (Amazon, Apple, Cisco, CrowdStrike, Broadcom) patched first. The argument that moved the dial: if a single model release drives Federal Reserve coordination, the AI sector has tipped from "speculative" to "systemically important." Even on a 25%-chance-of-step-change basis, the expected value of "this is a real industrial inflection" rose enough to dial the clock back.
+
+**Episode 22** (April 21). Clock moved to **3:30**. Paul Graham's [log-scale tweet](https://x.com/paulg/status/2045120274551423142/photo/1) on US investment cycles became the load-bearing data point: AI capex sits at ~1% of GDP versus US railroad investment which peaked at ~10% of GDP, suggesting another ~9 points of GDP and roughly 40 years of headroom before the comparable railroad-bubble peak. Friction signals also got more concrete — Ars Technica's [satellite/drone analysis](https://arstechnica.com/ai/2026/04/construction-delays-hit-40-of-us-data-centers-planned-for-2026/) showed 40% of 2026 data center construction is delayed, and Epoch AI's [Stargate analysis](https://epochai.substack.com/p/openai-stargate-where-the-us-sites) reported 9 GW of planned capacity (roughly NYC's peak demand) across nine sites running into 2028, with local opposition slowing several. Construction lag delays revenue but also delays capex — a self-cooling dynamic Phase 3's spending-vs-revenue framing didn't price in.
+
 ### Clock Position Summary
 
 | Episode | Date | Clock | Phase | Key Signal |
@@ -89,6 +97,8 @@ This is where the data got interesting. The clock started oscillating, and the o
 | 17 | Mar 3 | 1:45 | The Turn | Oracle cuts jobs, Stargate dissolves |
 | 19 | Mar 17 | 1:15 | The Turn | $1T chip demand, Sora shuttered |
 | 20 | Mar 31 | 1:15 | The Turn | Clock holds |
+| 21 | Apr 17 | 2:45 | The Snapback | Mythos disclosure, Fed coordination |
+| 22 | Apr 21 | 3:30 | The Snapback | Paul Graham railroad-capex chart, 40% of data centers delayed |
 
 ## What the Trend Line Says
 
@@ -106,7 +116,7 @@ Three patterns stand out:
 
 ## Where the Clock Is Now
 
-As of our most recent assessment, the clock sits at **1:15** (one minute and fifteen seconds to midnight). That's closer to the danger zone than at any point since we started except the very first episode, when we were reacting to initial shock more than data.
+As of episode 22 (late April 2026), the clock sits at **3:30** (three minutes thirty to midnight) — the most optimistic reading in the show's history, after a two-episode swing from 1:15. That's a significant reversal from where we were a month ago, and it deserves the same skepticism we applied to peak alarm at the other end. Two episodes of dovish data points are not yet a trend, and we want to see whether the snapback holds before treating it as one. What changed in those two episodes: the Mythos disclosure pulled the Federal Reserve into AI infrastructure planning (a different category of capital than venture money), Paul Graham's log-scale chart reframed the comparison set against US railroads, and 40% of 2026 data center construction running behind schedule means the capex side of the worrying ratio is itself slowing. What hasn't changed: the underlying revenue/CAPEX gap is still wide, the [announcement economy](/glossary/announcement-economy/) still distorts headline numbers, Sora is still shut down, Oracle is still cutting jobs. The dovish reframing argues the bubble has more runway than we thought, not that it isn't a bubble.
 
 I want to be careful about what this does and doesn't mean. The clock reflects the balance of signals we're seeing, not a prediction about timing. Bubbles can run longer than anyone expects; [the dot-com bubble](https://en.wikipedia.org/wiki/Dot-com_bubble) had years of obvious overvaluation before the correction actually arrived. And the technology itself is real. AI coding tools genuinely save developers time. Enterprise AI usage is growing. The underlying capability isn't vaporware.
 

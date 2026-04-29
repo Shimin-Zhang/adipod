@@ -2,10 +2,10 @@
 title: "Cognitive Debt: The Hidden Cost of Letting AI Write Your Code"
 description: "Technical debt is code you wish you had written better. Cognitive debt is code you don't understand at all, and AI compounds it faster than teams realize."
 date: "2026-04-11"
-lastUpdated: "2026-04-12"
+lastUpdated: "2026-04-28"
 slug: "cognitive-debt-ai-development"
 keywords: "cognitive debt software, cognitive debt AI, AI code understanding, technical debt AI"
-episodes: ["14", "15", "20"]
+episodes: ["14", "15", "20", "22"]
 ---
 
 [Cognitive debt](/glossary/cognitive-debt/) is the gap between what your codebase does and what you understand about it. Unlike technical debt (code you shipped knowing it wasn't ideal), cognitive debt is invisible: you don't know what you don't know until something breaks. And AI-assisted development is compounding it faster than anything we've seen before.
@@ -36,6 +36,8 @@ Financial debt has four states: principal, interest, distressed debt, and defaul
 | **Interest** | Maintenance cost | Longer debugging, unexpected cascading breaks | Weeks 2-6 |
 | **Distressed debt** | Cannot service payments | Simple changes break things; more time debugging than building | Weeks 7-8 |
 | **Default (cognitive bankruptcy)** | Insolvency | Cannot trust codebase or tests; manual testing only | Weeks 8+ |
+
+A worked example of the failure landed on [Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/). Dan described missing a tight production deadline on a bug a pre-LLM colleague then fixed in roughly five minutes, and admitted on air that his instinct in the moment was to double down on tooling rather than slow down to build comprehension. That instinct is the under-recognized half of cognitive bankruptcy: when the debt is high, "I just need a better prompt" feels productive even though the actual remediation is reading code. The colleague's five-minute fix worked because they had hand-written some of the surrounding tooling pre-LLM and still held the mental model. Dan didn't, and no amount of agent-side prompting could synthesize what wasn't there.
 
 ## Why Cognitive Debt Is Not Technical Debt
 

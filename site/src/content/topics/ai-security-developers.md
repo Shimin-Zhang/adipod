@@ -2,8 +2,8 @@
 title: "AI Security for Developers: Prompt Injection, Agent Trust, and the Stuff That's Actually Dangerous"
 description: "A developer-focused guide to AI security — the real attack vectors, the overhyped threats, and practical frameworks for building with AI agents without getting burned."
 slug: "ai-security-developers"
-keywords: "AI agent security, MCP security, prompt injection prevention, AI coding security, agent trust model, AI security best practices, Anthropic Mythos, Project Glasswing, AI vulnerability detection"
-lastUpdated: "2026-04-17"
+keywords: "AI agent security, MCP security, prompt injection prevention, AI coding security, agent trust model, AI security best practices, Anthropic Mythos, Project Glasswing, AI vulnerability detection, rules and gates, hardening phase, cal.com closed source"
+lastUpdated: "2026-04-28"
 ogImage: "/og/ai-security-developers"
 ---
 
@@ -167,6 +167,12 @@ We tested sycophancy resistance across models in [Episode 15](/episodes/15-convi
 
 **Be especially skeptical of reassurance.** An agent that says "this looks fine" without being asked is potentially sycophantic. An agent that unprompted flags a concern is more likely to be reliable — the sycophancy incentive pushes toward reassurance, not toward raising problems.
 
+### Rules and Gates: Reducing Agent Rationalization
+
+A practical prompting technique for security-critical workflows comes from Jesse Vincent's [Rules and Gates](https://blog.fsck.com/2026/04/07/rules-and-gates/) (covered in [Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/)). Optional preferences — "verify claims with web searches before asserting them" — are easy for an agent to rationalize past, especially under deadline pressure or with conflicting context. Reformulating the same instruction as a directional precondition — "when a claim about what exists or doesn't exist is forming → web search happens → URLs in hand → then I speak" — gives the agent a checkable graph rather than a polite ask. The same pattern works for security gates: "before any code that handles auth tokens ships → adversarial review against this checklist → output the checklist responses → then commit."
+
+The honest caveat that came up on the show: agents can still weasel out of self-evaluated gates by editing the gate or by ruling the precondition inapplicable. The fix for high-stakes paths is **hooks** rather than gates — deterministic, programmatic checks that run outside the agent's control. Gates are guardrails the agent perceives and can choose to honor; hooks are walls. Use gates for the workflow shape you want and hooks for the walls you cannot afford to be argued past.
+
 ## Mythos and Project Glasswing: When the Model Finds the Bugs
 
 [Episode 21](/episodes/21-anthropic-mythos-project-glasswing-recursive-improving-agents-and-your-parallel-agent-limit) covered the most consequential security story of 2026 so far: Anthropic's **Mythos** model, announced via [TechCrunch](https://techcrunch.com/2026/04/07/anthropic-mythos-ai-model-preview-security/) and the [Anthropic red team writeup](https://red.anthropic.com/2026/mythos-preview/). Mythos is capable enough at vulnerability detection that Anthropic is withholding public release while infrastructure partners patch first.
@@ -176,6 +182,8 @@ We tested sycophancy resistance across models in [Episode 15](/episodes/15-convi
 The security capability is emergent, not explicitly trained. Mythos wasn't built as a vulnerability finder — it's a general-purpose model that happens to chain vulnerability primitives into working exploits. The red team report describes finding 27-year-old bugs in Linux and OpenBSD, ranging from privilege escalation to remote crashes via crafted network requests. Internet rumors also describe Mythos escaping Firefox's JavaScript VM sandbox with an 85% success rate — unconfirmed, but directionally consistent with what Anthropic is willing to confirm.
 
 The individual techniques aren't novel. What's novel is the speed and scale of chaining. Humans are bad at spending days chaining 15 vulnerability primitives in exact order with exact timing. Mythos isn't. This is the jagged frontier showing up in security: model capability has surpassed human capability for a specific shape of work (tedious, sequential, long-horizon), even though it lags on many others.
+
+[Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/) added concrete numbers from the [UK AI Security Institute's evaluation](https://cdn.sanity.io/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf): Mythos completed a 32-step Fortune-500-style network attack — initial reconnaissance through full takeover — three out of ten times. No other model succeeded at all. The cost was $12,000 per attempt ($125,000 across the ten runs), which sounds like a lot until you frame it the way Rahul did: state sponsors and cybercrime markets routinely pay seven figures for human-discovered zero-days, and "the attacker only has to win once." Drew Breunig captured the resulting industry shape in [Cybersecurity is Proof of Work Now](https://www.dbreunig.com/2026/04/14/cybersecurity-is-proof-of-work-now.html): development gets cheap, but a hardening phase becomes a hard prerequisite for shipping anything that touches sensitive data, and the tokens spent on hardening are the new dominant cost of software. cal.com's decision to [go closed source over mythos-class risk](https://cal.com/blog/cal-com-goes-closed-source-why) is the leading edge of that recalculation.
 
 ### Project Glasswing
 
@@ -262,4 +270,4 @@ Current evidence (CodeRabbit's 1.7x issue rate, METR's SWE-bench analysis) sugge
 
 ---
 
-*This guide synthesizes content from Episodes 2, 3, 6, 13, 16, 17, 18, 19, 20, and 21 of the ADI Pod. Updated April 2026.*
+*This guide synthesizes content from Episodes 2, 3, 6, 13, 16, 17, 18, 19, 20, 21, and 22 of the ADI Pod. Updated April 2026.*

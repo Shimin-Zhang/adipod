@@ -2,7 +2,7 @@
 term: "Cognitive Debt"
 definition: "The accumulated gap between what AI-generated code exists in a codebase and what the developers working on it actually understand -- the growing deficit of human comprehension that compounds over time, analogous to how financial debt accrues interest."
 slug: "cognitive-debt"
-episodes: ["14", "15", "20", "21"]
+episodes: ["14", "15", "20", "21", "22"]
 aliases: ["cognitive load debt", "comprehension debt"]
 ---
 
@@ -25,6 +25,8 @@ The manager-skill framing that surfaced in early-2026 discourse turns out to be 
 Unlike tech debt, cognitive debt is invisible on its way in and catastrophic on its way out. Every AI-generated diff that gets merged without deep human review adds a small increment to the balance. The code compiles, tests pass, features ship -- and the team's mental model of its own system falls further behind. Teams typically hit the wall around week 7-8 of heavy AI-assisted development, when the codebase has outgrown anyone's ability to reason about it.
 
 The financial metaphor is precise: cognitive debt accrues interest. Small gaps in understanding compound as new code builds on top of code nobody fully grasped. Debugging becomes archaeology. Refactoring becomes guesswork. Eventually, the interest payments exceed the team's capacity to pay, and the result is [cognitive bankruptcy](/glossary/cognitive-bankruptcy).
+
+The pattern shows up in the wild. In [Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena), Dan described missing a tight production deadline on a bug a pre-LLM colleague then fixed in five minutes — and noted that his instinct in the moment was to double down on tooling rather than slow down to build comprehension. That instinct is the failure mode: when cognitive debt is high, the felt-experience of "I just need a better prompt" reads as productive even though the actual remediation is reading code. Naming the instinct is the first defense against acting on it.
 
 ## Related Concepts
 

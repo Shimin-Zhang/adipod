@@ -2,10 +2,10 @@
 title: "Why AI Code Has 1.7x More Bugs (and What to Do About It)"
 description: "CodeRabbit's data shows AI-authored PRs have 1.7x more findings. The number alone misses the real story, so here's what it means for your team."
 date: "2026-04-11"
-lastUpdated: "2026-04-12"
+lastUpdated: "2026-04-28"
 slug: "ai-code-quality-bugs"
 keywords: "AI code quality, AI code bugs, AI-generated code review, CodeRabbit AI report"
-episodes: ["7", "12", "15"]
+episodes: ["7", "12", "15", "22"]
 ---
 
 AI-generated code has measurably more defects than human-written code. That's not hype, conjecture, or vibes; it's what the data says. The question worth asking isn't whether the number is real, but what it actually tells you about the failure mode and whether your team is set up to catch it.
@@ -82,7 +82,7 @@ The answer isn't to stop using AI for coding. The answer is to recognize that AI
 
 **Watch for [dark flow](/blog/dark-flow-vibe-coding/).** If you find yourself pulling the lever, regenerating, re-prompting, iterating without pausing to understand what changed, you're in dark flow. The slot machine metaphor isn't cute. It's describing a real cognitive pattern where the feeling of productivity substitutes for actual comprehension. When you notice it, stop. Read the diff. Build the mental model. The two minutes you spend understanding the code will save you twenty minutes debugging the logic error it introduced.
 
-**Don't treat the 1.7x number as permanent.** Models are improving. Tooling is improving. But the structural pattern (AI failing differently than humans, verification requiring active comprehension, review attention being a finite resource) is unlikely to change even as the specific numbers do. Build your processes around the pattern, not the point estimate.
+**Don't treat the 1.7x number as permanent.** Models are improving. Tooling is improving. But the structural pattern (AI failing differently than humans, verification requiring active comprehension, review attention being a finite resource) is unlikely to change even as the specific numbers do. Build your processes around the pattern, not the point estimate. And don't assume the more capable model is the lower-defect one for your task: in [Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/) we covered Simon Willison's pelican-on-a-bicycle benchmark breaking for the first time, with a much smaller open-weight model (Qwen 3.6 35B A3B) producing a better drawing than Claude Opus 4.7 — a small reminder that capability ranking does not automatically translate into per-task output quality.
 
 ## The Uncomfortable Middle Ground
 
