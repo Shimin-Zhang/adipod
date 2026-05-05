@@ -3,7 +3,7 @@ title: "AI's Impact on Developer Careers: Frameworks for Thinking About What Com
 description: "Economic models, hiring data, and practitioner perspectives on how AI is reshaping software engineering careers — from workflow automation convexity to the Jevons paradox for code."
 slug: "ai-developer-careers"
 keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age"
-lastUpdated: "2026-04-10"
+lastUpdated: "2026-05-04"
 ogImage: "/og/ai-developer-careers"
 ---
 
@@ -124,6 +124,26 @@ The entire "everyone is a staff engineer" framing implies that translating well-
 
 The traditional model of senior engineers mentoring juniors through code review is under pressure from two directions: agents generate too much code for manual review to scale, and automated review tools are improving. Episode 15 flagged "loss of mentoring through code review" as a significant risk identified by the ThoughtWorks retreat.
 
+## Hiring and Interviewing Software Engineers in the AI Age
+
+If AI changes how developers work, it also changes how developers should be hired. The current default — LeetCode-style algorithmic puzzles in a shared editor — was already a poor proxy for day-to-day work in 2024. In 2026, with agents writing the bulk of implementation code, it's actively misleading.
+
+ML engineer Nathan Lubchenco, on [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), made the case for a different approach. The high points:
+
+**Take-home tests over LeetCode.** Performance-anxiety-laden hour-long puzzles in front of a hostile interviewer have always been a noisy signal for what an engineer can actually do. Take-homes let candidates use the tools and workflow they're actually familiar with, then a follow-up discussion lets the interviewer probe whether the candidate understood what they produced and can navigate trade-offs. The conversation about the work, not the work itself, is where most of the signal lives.
+
+**Bring your own harness.** If your daily workflow is Claude Code with a customized superpowers/brainstorming skill, the ability to sketch a design plan, then iterate on an implementation plan — that's the workflow you should be evaluated using. Stripping it away to test you in a "neutral" Google Doc is the modern equivalent of handing someone a typewriter and asking them to write production code. Lubchenco's caveat (which deserves underlining): this raises an equity concern, since not everyone has had access to a $200/mo Claude Max subscription to develop a personal harness. The fix is for hiring companies to provide API keys so candidates can practice on the best models for at least a couple of weeks before the interview.
+
+**"Uninterested in AI tools" is a strong no — even for great engineers.** This was the most provocative claim, and Lubchenco wrote it before the broader industry started mandating AI usage. The reasoning is forward-looking: an engineer who is uninterested in agentic coding *today* may still be a fine engineer today, but the gap will compound over six months. Hiring is a multi-year bet, not a snapshot.
+
+**Cathedral builders vs. bazaar shopkeepers.** The personality split predicts adoption better than skill level. Engineers who fundamentally enjoy *the craft of writing code* (cathedral builders) tend to resist agents because the act of typing is part of the value they take from the work. Engineers who fundamentally enjoy *shipping value* (bazaar shopkeepers) tend to adopt agents because the agents reduce the gap between idea and shipped feature. Both are valid orientations, but the bazaar-shopkeeper personality is more compatible with the way the work is moving.
+
+**Show your prompts (sometimes).** A debate that surfaced in the same episode: should pull requests include the agent prompt and conversation history? Two camps are forming — one treats agent-assisted commits as "your" code and reviews them as such, the other includes the full transcript for transparency. For coworker review, Lubchenco was lukewarm on transcript inclusion (the calibration challenge is too hard — you can't tell if a verbose conversation reflects skill or struggle). For interviews, though, he saw real value in seeing how a candidate pushes back on the model. The interview question that most engineers are bad at, and that matters most: when did you tell the agent it was wrong, and why?
+
+**Code review as the current bottleneck.** Lubchenco's blunt take: agents are already better at code review than most engineers, because they catch higher-leverage bugs while humans get distracted by subjective preference issues. A teammate who is excellent at code review is currently the highest-value hire on most teams. But this may be a transitional bottleneck — by late 2026, the agents may close the gap on review too.
+
+The deeper claim Lubchenco made on the show: agents are now consistently better at coding than even senior ML engineers, by their own admission. His prediction: late-2026 may be when models cross the median software engineer. If that holds, hiring conversations need to stop treating AI tooling as an optional accessory and start treating it as the primary surface where engineering skill is exercised.
+
 ## New Roles and Career Structures
 
 ### The design engineer
@@ -202,4 +222,4 @@ Periodically do work without AI assistance. Not as a Luddite gesture — as deli
 
 ---
 
-*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, and 19 of the ADI Pod. Updated April 2026.*
+*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, and 23 of the ADI Pod. Updated May 2026.*

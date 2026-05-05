@@ -3,15 +3,15 @@ title: "AI Coding Agents Compared: Claude Code, Codex, Cursor, Pi Agent, and the
 description: "A practitioner's comparison of AI coding agents — what each tool actually does well, where they fall short, and why the moat might not be in the tooling."
 slug: "ai-coding-agents-compared"
 keywords: "Claude Code vs Cursor, AI coding agent comparison, best AI coding tool, Claude Code vs Codex, AI coding agent review 2026"
-lastUpdated: "2026-04-28"
+lastUpdated: "2026-05-04"
 ogImage: "/og/ai-coding-agents-compared"
 ---
 
-AI coding agents are tools that use large language models to write, edit, and execute code on behalf of developers. The major options in 2026 include Claude Code (Anthropic), Codex (OpenAI), Cursor, Pi Agent, Gemini CLI, and others — each with different interaction models, strengths, and trade-offs. This comparison is based on hands-on experience shipping code across 22 episodes of the ADI Pod, not benchmark scores.
+AI coding agents are tools that use large language models to write, edit, and execute code on behalf of developers. The major options in 2026 include Claude Code (Anthropic), Codex (OpenAI), Cursor, Pi Agent, Gemini CLI, and others — each with different interaction models, strengths, and trade-offs. This comparison is based on hands-on experience shipping code across 23 episodes of the ADI Pod, not benchmark scores.
 
 The AI coding agent market has a benchmarking problem: every tool claims SWE-bench superiority, every launch post uses the word "revolutionary," and the actual experience of using these tools day-to-day bears approximately zero resemblance to the marketing.
 
-We've used Claude Code, Codex, Cursor, Pi Agent, Gas Town, Open Code, Gemini CLI, and Kiro CLI across 22 episodes. Not as reviewers testing features for a week. As practitioners shipping code on real projects. The differences between these tools are real, but they're not the differences the comparison posts focus on.
+We've used Claude Code, Codex, Cursor, Pi Agent, Gas Town, Open Code, Gemini CLI, and Kiro CLI across 23 episodes. Not as reviewers testing features for a week. As practitioners shipping code on real projects. The differences between these tools are real, but they're not the differences the comparison posts focus on.
 
 Here's what actually matters when choosing an AI coding agent.
 
@@ -182,6 +182,23 @@ Here's the comparison table the marketing posts won't give you:
 | **Model lock-in** | Claude only | GPT only | Multi-model | Multi-model |
 | **Philosophy** | Feature-rich tooling | Structured harnesses | IDE integration | Minimal scaffolding |
 
+## Coding-Model Over-Editing: The Levenshtein Study
+
+A practical comparison axis that's underrepresented in benchmark coverage: how much of the codebase does each model rewrite when you ask it to do something small? In [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/) we covered a study (which made the Hacker News front page) that measured this directly using token-level Levenshtein distance on synthetic boolean-flip tasks — a clever setup, since the minimum-edit answer is just changing `true` to `false` and any extra rewriting is excess.
+
+The headline numbers across the models tested:
+
+- **Opus 4.6** had the lowest extraneous-edit distance — the cleanest, most minimal changes
+- **GPT-5.4** over-edited the most at 0.395 — by far the worst on this axis
+- Other models tested: Gemini 3.1 Pro, GLM5, Qwen 3, Kimi, DeepSeek R1, DeepSeek Chat 3, GPT-5
+- Reasoning models over-edited slightly more than non-reasoning equivalents, but the effect was modest
+
+The study also calculated cognitive complexity (nested loops, branching depth) of the edited functions — finding that over-editing tends to *increase* complexity, not just length. Worse for human readers; possibly worse for the next model that has to navigate the file too.
+
+**The practical takeaway is the most useful part:** explicit "minimum-edit" prompts close most of the gap, especially for GPT-5.4. If you find your agent rewriting comments, restructuring functions, and renaming variables when you asked for a one-line change, the fix is in your AGENTS.md / CLAUDE.md / system prompt: tell the model not to over-edit. Models follow this instruction.
+
+This connects back to a deeper point Nathan Lubchenco raised in the same episode: human-readable code may not be the same as model-readable code. We've assumed they correlate (and for current frontier models they roughly do), but the assumption is worth periodically re-testing as models improve. For now, "minimum-edit" is the right default for any agent that touches a non-trivial codebase.
+
 ## Token Efficiency: The Hidden Variable
 
 Martin Alderson's research (covered in [Episode 16](/episodes/16-pentagon-anthropic-drama-verified-spec-driven-development-and-interview-with-martin-alderson/)) tested 19 web frameworks for token efficiency when used by AI agents. The finding: minimal frameworks (Flask, Express) are significantly more token-efficient than larger frameworks (Rails, Next.js). The efficiency gap persists even on subsequent features.
@@ -226,4 +243,4 @@ We haven't covered Devin extensively because the hosts prefer interactive, termi
 
 ---
 
-*This comparison reflects our hands-on experience through late April 2026, including the Anthropic OAuth revocation covered in Episode 22. The AI coding agent market moves fast — check the most recent episodes for updates on tools released after this guide was written.*
+*This comparison reflects our hands-on experience through early May 2026, including the Anthropic OAuth revocation (Episode 22) and the Levenshtein over-editing study (Episode 23). The AI coding agent market moves fast — check the most recent episodes for updates on tools released after this guide was written.*

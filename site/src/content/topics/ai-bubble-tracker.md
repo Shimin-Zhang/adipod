@@ -3,7 +3,7 @@ title: "AI Bubble Tracker — Two Minutes to Midnight"
 description: "A living tracker of the AI investment bubble — CAPEX vs revenue data, company financials, bull and bear arguments, and our Doomsday Clock for when it pops."
 slug: "ai-bubble-tracker"
 keywords: "AI bubble 2026, will AI bubble burst, AI CAPEX vs revenue, AI investment bubble tracker, AI market analysis, Anthropic revenue accounting, OpenAI Anthropic run rate"
-lastUpdated: "2026-04-17"
+lastUpdated: "2026-05-04"
 ogImage: "/og/ai-bubble-tracker"
 ---
 
@@ -15,11 +15,11 @@ This page is the running record. Not predictions — data points, financial sign
 
 ## The Clock
 
-**Current position: 2 minutes 45 seconds to midnight** (as of [Episode 21](/episodes/21-anthropic-mythos-project-glasswing-recursive-improving-agents-and-your-parallel-agent-limit/), April 2026)
+**Current position: 4 minutes to midnight** (as of [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), early May 2026)
 
-The clock has moved back from its closest reading of 25 seconds to midnight (Episode 3, November 2025). The most recent move — back a full minute from 1:45 to 2:45 — was driven by [Anthropic's Mythos announcement and Project Glasswing](/topics/ai-security-developers/). The reasoning is expected-value, not probability: even at a ~25% chance that Mythos represents a genuine capability step change, the magnitude of that outcome outweighs the near-term urgency of the bubble thesis. If you can reshape Linux and banking infrastructure security in a quarter, the CAPEX gap looks different.
+The clock has moved back from its closest reading of 25 seconds to midnight (Episode 3, November 2025). The dovish swing has now run three episodes deep: 2:45 in [Episode 21](/episodes/21-anthropic-mythos-project-glasswing-recursive-improving-agents-and-your-parallel-agent-limit/) on the Mythos disclosure, 3:30 in [Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/) on Paul Graham's railroad-capex chart, and 4:00 in [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/) on guest Nathan Lubchenco's open-weight cybersecurity argument. Each move came from a different category of evidence — expected-value (Mythos as systemic capability), historical-comparison (railroad capex peaked at ~10% of GDP vs. AI's ~1%), and geopolitical-stakes (open-weight models will plausibly hit Mythos-class cyber capability inside 6 months, which makes AI too-big-to-fail rather than burst-soon).
 
-The broader read still holds: AI revenue models are lagging CAPEX, but the infrastructure being built has real long-term value and the Jevons paradox argument has gained weight. The bubble hasn't popped — but the urgency has shifted from "imminent correction" to "slow grind toward reckoning," with intermittent step-change signals that could reshape the expected value of either outcome.
+The broader read still holds: AI revenue models are lagging CAPEX (OpenAI missed internal revenue targets per CNBC's April 28 reporting, with Oracle down 5% in a day on the news), but the infrastructure being built has real long-term value and the Jevons paradox argument has gained weight. The bubble hasn't popped — but the urgency has shifted from "imminent correction" to "slow grind toward reckoning with national-security side rails," with intermittent step-change signals that could reshape the expected value of either outcome.
 
 A note on methodology: the clock position is vibes, not math. It's three practitioners reading the same financial reports and market signals as everyone else, filtered through the lens of "does this company's business model make sense?" The clock is a conversation starter, not a financial instrument.
 
@@ -44,7 +44,7 @@ Gary Marcus framed it cleanly: "A trillion dollars is a terrible thing to waste.
 
 ## Timeline of Market Signals
 
-A chronological record of the events we've tracked across 20 episodes, with links to every source we discussed.
+A chronological record of the events we've tracked across 23 episodes, with links to every source we discussed.
 
 ### Phase 1: Framing the Question (Nov 2025)
 
@@ -95,6 +95,14 @@ A chronological record of the events we've tracked across 20 episodes, with link
 **[Episode 20](/episodes/20-claude-code-source-leak-emotion-concepts-in-llms-and-surprising-facts-ais-know-about-us/) (Apr 10):** The Claude Code source leak dominates the episode. Copilot's terms classify it as "for entertainment purposes only." The gap between how AI tools are marketed and how they're legally positioned widens. No bubble segment this episode.
 
 **[Episode 21](/episodes/21-anthropic-mythos-project-glasswing-recursive-improving-agents-and-your-parallel-agent-limit/) (Apr 17):** The clock moves **back a full minute to 2:45**, driven by the Mythos/Glasswing possibility of a genuine capability step change. On the financial side: [the AI gold rush pulls private wealth into riskier, earlier bets](https://techcrunch.com/2026/04/07/the-ai-gold-rush-is-pulling-private-wealth-into-riskier-earlier-bets/) — investors treat not-having-AI-exposure as a bigger risk than bad deals, so capital flows earlier and lower-quality to stay in the market. A forcing function on risk tolerance, not a vote of confidence. Separately, [OpenAI's CRO tells staff Anthropic inflates its $30B run rate by $8B](https://www.implicator.ai/openai-cro-tells-staff-anthropic-inflates-run-rate-by-8-billion/) via gross-vs-net revenue recognition. Both accounting treatments are GAAP-valid; the signal is the timing. OpenAI's chief revenue officer publicly relitigating Anthropic's numbers is what happens when the enterprise race is close enough that even valid accounting differences feel worth disputing. [MiniMax demonstrates recursive self-improvement](https://firethering.com/minimax-m2-7-agentic-model/) with ~30% benchmark gains — if this generalizes, model improvement shifts from a labor bottleneck (hire PhDs) to a capital bottleneck (run more parallel experiments), which intensifies the CAPEX spiral rather than relieving it.
+
+### Phase 6: The Snapback (Apr-May 2026, Episodes 22-23)
+
+*The Mythos-driven swing extended through two more episodes on different lines of argument: historical-comparison (eps 22), then geopolitical-stakes (eps 23). The clock moved 2:45 → 3:30 → 4:00 — the most optimistic three-week stretch in the show's run.*
+
+**[Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/) (Apr 21):** Clock moved to **3:30**. Paul Graham's [log-scale tweet](https://x.com/paulg/status/2045120274551423142/photo/1) on US investment cycles became the load-bearing data point: AI capex sits at ~1% of GDP versus US railroad investment which peaked at ~10% of GDP, suggesting another ~9 points of GDP and roughly 40 years of headroom before the comparable railroad-bubble peak. Friction signals on the dovish side: Ars Technica's [satellite/drone analysis](https://arstechnica.com/ai/2026/04/construction-delays-hit-40-of-us-data-centers-planned-for-2026/) showed 40% of 2026 data center construction is delayed, and Epoch AI's [Stargate analysis](https://epochai.substack.com/p/openai-stargate-where-the-us-sites) reported 9 GW of planned capacity (roughly NYC peak demand) across nine sites running into 2028, with local opposition slowing several. Construction lag delays revenue but also delays capex — a self-cooling dynamic Phase 3's spending-vs-revenue framing didn't price in.
+
+**[Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/) (Apr 28):** Clock moved to **4:00** — the new most-optimistic reading — on guest Nathan Lubchenco's open-weight cybersecurity argument. The framing pivot: it's no longer "AI capex is small in comparison" but "AI has become geopolitically too-big-to-fail." Load-bearing data point: DeepSeek V4 (1.6T base / 49B active / 1M context) is only 3-6 months behind frontier. If open-weight models hit Mythos-class cyber capability by late 2026, national-security stakes pin the sector in place independent of revenue economics. Counterweight on the bearish ledger this episode: OpenAI missed internal revenue targets (CNBC, April 28) with Oracle down 5% in a day; Toby Ord pegged frontier-agent costs around $350/hr for O3-class runs at ~50% task success (a human professional rate at much higher reliability); and TechCrunch's "two college kids raise $5.1M pre-seed for an AI social network" became the canonical "putting the letters AI in iMessage" example of late-cycle VC behavior. The dovish read is "more runway than we thought," not "no bubble."
 
 ## Economic Frameworks for Understanding the AI Bubble
 
@@ -205,4 +213,4 @@ Three people (Shimin, Dan, Rahul) looking at the same data and arguing about wha
 
 ---
 
-*This tracker is updated with each new episode. Data points are sourced from publicly available financial reports, earnings calls, and industry analysis. Last updated April 2026.*
+*This tracker is updated with each new episode. Data points are sourced from publicly available financial reports, earnings calls, and industry analysis. Last updated May 2026.*
