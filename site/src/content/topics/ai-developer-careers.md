@@ -128,7 +128,7 @@ The traditional model of senior engineers mentoring juniors through code review 
 
 If AI changes how developers work, it also changes how developers should be hired. The current default — LeetCode-style algorithmic puzzles in a shared editor — was already a poor proxy for day-to-day work in 2024. In 2026, with agents writing the bulk of implementation code, it's actively misleading.
 
-ML engineer Nathan Lubchenco, on [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), made the case for a different approach. The high points:
+ML engineer [Nathan Lubchenco](https://nathanlubchenco.substack.com/), on [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), made the case for a different approach in ["Interviewing Software Engineers in the Age of AI"](https://nathanlubchenco.substack.com/p/interviewing-software-engineers-in). The high points:
 
 **Take-home tests over LeetCode.** Performance-anxiety-laden hour-long puzzles in front of a hostile interviewer have always been a noisy signal for what an engineer can actually do. Take-homes let candidates use the tools and workflow they're actually familiar with, then a follow-up discussion lets the interviewer probe whether the candidate understood what they produced and can navigate trade-offs. The conversation about the work, not the work itself, is where most of the signal lives.
 

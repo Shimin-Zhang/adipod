@@ -184,7 +184,7 @@ Here's the comparison table the marketing posts won't give you:
 
 ## Coding-Model Over-Editing: The Levenshtein Study
 
-A practical comparison axis that's underrepresented in benchmark coverage: how much of the codebase does each model rewrite when you ask it to do something small? In [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/) we covered a study (which made the Hacker News front page) that measured this directly using token-level Levenshtein distance on synthetic boolean-flip tasks — a clever setup, since the minimum-edit answer is just changing `true` to `false` and any extra rewriting is excess.
+A practical comparison axis that's underrepresented in benchmark coverage: how much of the codebase does each model rewrite when you ask it to do something small? In [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/) we covered ["Coding Models Are Doing Too Much"](https://nrehiew.github.io/blog/minimal_editing/) (Hacker News front page) that measured this directly using token-level Levenshtein distance on synthetic boolean-flip tasks — a clever setup, since the minimum-edit answer is just changing `true` to `false` and any extra rewriting is excess.
 
 The headline numbers across the models tested:
 
