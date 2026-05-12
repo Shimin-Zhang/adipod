@@ -3,7 +3,7 @@ title: "AI Security for Developers: Prompt Injection, Agent Trust, and the Stuff
 description: "A developer-focused guide to AI security — the real attack vectors, the overhyped threats, and practical frameworks for building with AI agents without getting burned."
 slug: "ai-security-developers"
 keywords: "AI agent security, MCP security, prompt injection prevention, AI coding security, agent trust model, AI security best practices, Anthropic Mythos, Project Glasswing, AI vulnerability detection, rules and gates, hardening phase, cal.com closed source"
-lastUpdated: "2026-04-28"
+lastUpdated: "2026-05-08"
 ogImage: "/og/ai-security-developers"
 ---
 
@@ -205,6 +205,10 @@ Whether this is a Manhattan Project moment or the most masterful viral marketing
 
 If you run infrastructure that depends on open-source components — which is to say, if you run infrastructure — assume the upstream patch cadence will be dense and material. Subscribe to security announcements for your core dependencies, automate dependency updates in lower environments so you can validate before production, and have an emergency patching playbook that doesn't require a committee meeting to activate. If you maintain open-source components, expect an uptick in reported vulnerabilities that you may not have budget or bandwidth to triage — plan for it now, not during the surge.
 
+## OpenAI Mirrors Anthropic's Gating: GPT-5.5 Cyber
+
+[Episode 24](/episodes/24-openais-goblin-problem-10-lessons-when-code-is-cheap-ai-addiction-loop/) closed a debate that ran from Episodes 21-22. OpenAI [restricted access to GPT-5.5 Cyber](https://techcrunch.com/2026/04/30/after-dissing-anthropic-for-limiting-mythos-openai-restricts-access-to-cyber-too/) — the exact playbook Sam Altman publicly mocked Anthropic for running with Mythos. He'd called the Mythos gating "fear-based marketing." Six months later, OpenAI did the same thing. The interpretation isn't that OpenAI was wrong then or right now; it's that multi-tier cyber-model access is now the de facto industry standard, not one lab's outlier choice. [Ars Technica's evaluation](https://arstechnica.com/ai/2026/05/amid-mythos-hyped-cybersecurity-prowess-researchers-find-gpt-5-5-is-just-as-good/) found GPT-5.5 reaches comparable cyber capability to Mythos, which means the gating is grounded in real capability rather than positioning theater. For defenders, the practical implication is the same as the Mythos disclosure: expect an accelerated patch cadence on infrastructure-relevant CVEs, driven by labs running closed previews with critical-infrastructure partners ahead of public release. Build an emergency-patch playbook that doesn't assume a single lab's disclosure timeline. Glasswing has more analogues coming.
+
 ## The Government and Supply Chain Dimension
 
 AI security isn't just about code. The Pentagon-Anthropic drama (covered in Episodes [16](/episodes/16-pentagon-anthropic-drama-verified-spec-driven-development-and-interview-with-martin-alderson/) and [17](/episodes/17-slop-garbage-collection-cleanroom-rewrites-and-will-claude-ruin-our-teams/)) exposed the geopolitical dimensions.
@@ -270,4 +274,4 @@ Current evidence (CodeRabbit's 1.7x issue rate, METR's SWE-bench analysis) sugge
 
 ---
 
-*This guide synthesizes content from Episodes 2, 3, 6, 13, 16, 17, 18, 19, 20, 21, and 22 of the ADI Pod. Updated April 2026.*
+*This guide synthesizes content from Episodes 2, 3, 6, 13, 16, 17, 18, 19, 20, 21, 22, and 24 of the ADI Pod. Updated May 2026.*

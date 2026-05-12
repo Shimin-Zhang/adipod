@@ -2,10 +2,10 @@
 title: "What Claude Code's Source Leak Actually Revealed"
 description: "When Claude Code's source code went public, it confirmed some suspicions and overturned others. Here is what the architecture looks like and what it means."
 date: "2026-04-11"
-lastUpdated: "2026-04-12"
+lastUpdated: "2026-05-08"
 slug: "claude-code-source-leak"
 keywords: "Claude Code source code, Claude Code architecture, Claude Code leak, Anthropic agentic tools"
-episodes: ["20"]
+episodes: ["20", "24"]
 ---
 
 On March 31, 2026, security researcher Chaofeng Shou noticed something that Anthropic almost certainly wished he had not: the entire Claude Code CLI source code was sitting in the open, exposed by a source map file that should never have shipped.
@@ -84,3 +84,7 @@ Anthropic prioritizes safety over speed in permission handling. They prioritize 
 For practitioners building on or competing with these tools, the leak is more useful as an architecture study than as a source of gossip. The specific feature flags will change. The design principles behind them (dual-track safety, [tiered inference costs](/blog/claude-context-loss-nickname-trick/), persistent memory as infrastructure) are likely to persist across the entire agentic coding space for the foreseeable future.
 
 The irony, of course, is that we learned all of this because of a bug in a JavaScript bundler. The most revealing window into the future of AI-assisted development was opened by the most pedestrian category of software defect imaginable.
+
+## The Codex CLI Goblin Leak: A Second Data Point
+
+A month after the Claude Code disclosure, [Episode 24](/episodes/24-openais-goblin-problem-10-lessons-when-code-is-cheap-ai-addiction-loop/) covered a different kind of leak from a different vendor. OpenAI's Codex CLI system prompt surfaced, and one of its directives was the now-meme-worthy line "[never talk about goblins, gremlins, raccoons, trolls, ogres, pigeons](https://arstechnica.com/ai/2026/04/openai-codex-system-prompt-includes-explicit-directive-to-never-talk-about-goblins/)." OpenAI's own post-mortem, [Where the Goblins Came From](https://openai.com/index/where-the-goblins-came-from/), is the artifact I find more interesting. A nerdy-persona reward signal during RLHF trained the model to mention goblins in 66.7% of nerdy responses, and the quirk propagated through subsequent SFT runs until users surfaced it via the leaked prompt. Two vendor leaks in six weeks. Different labs. Different bug class. Same underlying lesson, which reinforces this article's read: the *behavioral* layer of an agentic tool — system prompts, classifier integration points, RLHF artifacts — is increasingly where the substance lives, and increasingly where the leaks happen. Both labs' model weights stayed private. What got revealed was how each one is shaping behavior, and in OpenAI's case, what odd corner the shaping put the model in.
