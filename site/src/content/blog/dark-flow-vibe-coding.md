@@ -2,10 +2,10 @@
 title: "Dark Flow: Why Vibe Coding Feels Productive but Isn't"
 description: "Dark flow is the trance state where you keep pulling the lever despite losing. Vibe coding triggers the same loop — the cost is comprehension, not money."
 date: "2026-04-11"
-lastUpdated: "2026-04-12"
+lastUpdated: "2026-05-12"
 slug: "dark-flow-vibe-coding"
 keywords: "dark flow vibe coding, vibe coding productivity, vibe coding problems, AI coding psychology"
-episodes: ["12"]
+episodes: ["12", "25"]
 ---
 
 Gambling researchers have a term for the state where a slot machine player loses track of time, money, and intention. They call it [dark flow](/glossary/dark-flow/). It is the shadow twin of Mihaly Csikszentmihalyi's flow, that productive trance where challenge and skill are perfectly balanced and hours vanish into deep work. Dark flow feels identical from the inside. The difference is that regular flow produces something. Dark flow just keeps you pulling the lever.
@@ -51,6 +51,14 @@ Critically, AI-assisted developers who used a generation-then-comprehension appr
 The broader OpenClaw ecosystem illustrated the same pattern at community scale. A skill marketplace emerged where people were installing and running code they had not audited, because the iteration loop felt productive. The result was predictable: the ClawdBot crypto-stealing malware incident, where a malicious skill drained users' cryptocurrency. The community was in collective dark flow, so absorbed in the novelty of the tool that basic security hygiene was suspended.
 
 That is not a technology failure. It is a psychology failure, and specifically, a failure mode that gambling researchers have been documenting for decades.
+
+## The 2026 Recantations: When Skeptics and Proponents Land in the Same Place
+
+[Episode 25](/episodes/25-elon-vs-openai-trial-drama-billion-token-context-race-multi-agent-patterns-2026/) covered [Simon Willison's "Vibe coding and agentic engineering are getting closer than I'd like"](https://simonwillison.net/2026/May/6/vibe-coding-and-agentic-engineering/) — which is, in dark-flow terms, the most credible skeptic in the field describing his own normalization of deviance. Willison coined the term "agentic engineering" specifically to distinguish disciplined AI-assisted work from vibe coding. In this post, he admits the line has eroded for him too. He is now shipping code he has not read. He runs Claude Code with `--dangerously-skip-permissions` by default. He frames it as the same trust-in-APIs problem you have with any large team — but the frame itself is the tell. The slot machine got him; he just made peace with it.
+
+What makes this load-bearing is what happened on the other end of the spectrum the same week. At the AI Engineer Europe conference, Dexter Horthy — until then one of the loudest proponents of "dark factory" agentic engineering — publicly walked his position back. He said they tried it in earnest, the agentic approach still requires reading the spec and reviewing the PR at the end, and the productivity gains were not worth the loss of comprehension. Two credible people on opposite sides of the prior debate landed in roughly the same posture: the spell is real, the productivity feel is real, and the comprehension cost is real. The "review fatigue" Willison names is dark flow with a slightly different fingerprint — accumulated trust drift across thousands of reads that were never really reads, what he separately calls the [normalization of deviance](https://danluu.com/wat/) from the self-driving-car literature.
+
+The diagnostic in the next section still applies. Ask whether you could explain the underlying problem to a colleague, whether your output is outpacing your mental model, whether the next prompt revision is informed or just another lever pull. Willison's piece does not refute dark flow. It documents what it looks like when you live with it long enough to call it baseline.
 
 ## Four Symptoms of Dark Flow in Your Coding Sessions
 

@@ -2,10 +2,10 @@
 title: "Spec-Driven Development: Why Writing Specs Matters More When AI Writes the Code"
 description: "If AI generates code from prompts, the spec is the product. Here is how spec-driven development works, why it matters more than ever, and what a good spec actually looks like."
 date: "2026-04-11"
-lastUpdated: "2026-05-08"
+lastUpdated: "2026-05-12"
 slug: "spec-driven-development-ai"
 keywords: "spec-driven development, spec-driven development AI, verified spec-driven development, VSDD"
-episodes: ["5", "15", "16", "24"]
+episodes: ["5", "15", "16", "24", "25"]
 ---
 
 Spec-driven development is a software engineering practice where you write a detailed specification (defining what the code should do, why, and how to verify it) before asking an AI coding agent to implement anything. As AI agents handle more implementation work, the spec becomes the primary engineering artifact: the quality of your specification directly determines the quality of the generated code, with a directness that did not exist when humans translated intent into code themselves.
@@ -81,6 +81,8 @@ Based on the taxonomy from Bockeler, the VSDD framework, the ThoughtWorks retrea
 ## The Late-2026 Reframe: When Code Is Free As In Puppies
 
 [Episode 24](/episodes/24-openais-goblin-problem-10-lessons-when-code-is-cheap-ai-addiction-loop/) covered [Drew Brunig's *10 Lessons for Agentic Coding*](https://www.dbreunig.com/2026/05/04/10-lessons-for-agentic-coding.html), which reframes the entire spec-driven argument through one load-bearing metaphor: agent-written code is "free as in puppies." Cheap to acquire. Expensive to maintain. Three of Brunig's ten lessons land directly on the discipline this article is about — *document intent*, *keep specs in sync*, and *develop taste* — and they reinforce the central thesis from a different angle. When writing code was the bottleneck, the question was how to get more of it out the door. Now that an agent can produce a working implementation in minutes, the bottleneck is whether the spec, the intent docs, and the end-to-end tests are tight enough that you can tell whether the code should have been written in the first place. Brunig's "agents amplify experience" is, I think, the same observation that motivated Martin Alderson's CLAUDE.md hygiene recommendation. The spec artifact decides whether the amplification multiplies signal or noise. The puppy framing is also a useful reminder. Adopting spec-driven development without the maintenance discipline is a Pyrrhic win — you avoid the cost of writing the code, then absorb the cost of grooming whatever the agent dropped on your doorstep.
+
+[Episode 25](/episodes/25-elon-vs-openai-trial-drama-billion-token-context-race-multi-agent-patterns-2026/) added [James Shore's quantified version of the same argument](https://www.jamesshore.com/v2/blog/2026/you-need-ai-that-reduces-your-maintenance-costs): if codegen productivity doubles but the hours required to maintain your existing codebase stay constant, maintenance hits 50% of your total time within roughly 10-12 months. The math is mechanical — productivity gain on new code shifts the ratio between greenfield and brownfield work — and Shore's prescription is the inverse of Brunig's: agentic tooling has to *also* reduce maintenance hours by the same multiplier, or the velocity gain self-extinguishes inside a year. Spec-driven development is one of the few practices that plausibly does both. A current, machine-readable spec is what makes refactoring tractable for an agent; without it, the same long-running agent that can patch a supply-chain vulnerability cannot reliably restructure the code that surrounds it. Dan's example on the episode: an agent that confidently introduced a function-returning-a-function abstraction in his Home Assistant code with zero need for the indirection, then doubled down on the bad abstraction. The spec is the artifact that distinguishes maintenance the agent can do from maintenance only a human currently can.
 
 ## The Part That Should Worry Us
 

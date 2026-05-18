@@ -2,7 +2,7 @@
 term: "Dark Flow"
 definition: "A deceptive state of perceived productivity during vibe coding, where the feeling of progress masks a lack of genuine understanding -- analogous to slot machine 'losses disguised as wins.'"
 slug: "dark-flow"
-episodes: ["12"]
+episodes: ["12", "25"]
 aliases: ["dark flow state", "vibe coding flow"]
 ---
 
@@ -17,6 +17,10 @@ Where Csikszentmihalyi's "flow state" describes deep engagement with a task you 
 Dark flow names a real hazard that most vibe coding advice glosses over. The episode title frames it bluntly: vibe coding is "addictive like gambling." When each AI-generated change produces a visible result -- a new feature, a passing test, a working UI -- the feedback loop is compelling. But the developer's mental model of the codebase is not keeping pace. The gap between what the code does and what the developer understands about it grows silently.
 
 This matters because the bill comes due during debugging, refactoring, or any situation that requires genuine comprehension. An [Anthropic research study on how AI assistance impacts coding skills](https://www.anthropic.com/research/AI-assistance-coding-skills), discussed in the same episode, found that developers who heavily delegated to AI scored 39% on coding skill assessments -- the compounding effect of dark flow sessions where no real learning occurred.
+
+## Recent Data Points
+
+[Episode 25](/episodes/25-elon-vs-openai-trial-drama-billion-token-context-race-multi-agent-patterns-2026) added two confirming data points from opposite ends of the AI-tooling debate. Simon Willison's [admission that vibe coding and agentic engineering have converged for him personally](https://simonwillison.net/2026/May/6/vibe-coding-and-agentic-engineering/) — running `--dangerously-skip-permissions` by default, shipping unreviewed code, framing the resulting trust drift as the same problem you have depending on any large team — names the normalization-of-deviance variant of dark flow from the skeptic side. The same week, Dexter Horthy publicly walked back his "dark factory" agentic-engineering stance at AI Engineer Europe, arriving at roughly the same conclusion from the proponent side: the comprehension cost compounds in ways the velocity metrics do not capture.
 
 ## Related Concepts
 

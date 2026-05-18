@@ -3,15 +3,15 @@ title: "AI Coding Agents Compared: Claude Code, Codex, Cursor, Pi Agent, and the
 description: "A practitioner's comparison of AI coding agents — what each tool actually does well, where they fall short, and why the moat might not be in the tooling."
 slug: "ai-coding-agents-compared"
 keywords: "Claude Code vs Cursor, AI coding agent comparison, best AI coding tool, Claude Code vs Codex, AI coding agent review 2026"
-lastUpdated: "2026-05-04"
+lastUpdated: "2026-05-12"
 ogImage: "/og/ai-coding-agents-compared"
 ---
 
-AI coding agents are tools that use large language models to write, edit, and execute code on behalf of developers. The major options in 2026 include Claude Code (Anthropic), Codex (OpenAI), Cursor, Pi Agent, Gemini CLI, and others — each with different interaction models, strengths, and trade-offs. This comparison is based on hands-on experience shipping code across 23 episodes of the ADI Pod, not benchmark scores.
+AI coding agents are tools that use large language models to write, edit, and execute code on behalf of developers. The major options in 2026 include Claude Code (Anthropic), Codex (OpenAI), Cursor, Pi Agent, Gemini CLI, and others — each with different interaction models, strengths, and trade-offs. This comparison is based on hands-on experience shipping code across 25 episodes of the ADI Pod, not benchmark scores.
 
 The AI coding agent market has a benchmarking problem: every tool claims SWE-bench superiority, every launch post uses the word "revolutionary," and the actual experience of using these tools day-to-day bears approximately zero resemblance to the marketing.
 
-We've used Claude Code, Codex, Cursor, Pi Agent, Gas Town, Open Code, Gemini CLI, and Kiro CLI across 23 episodes. Not as reviewers testing features for a week. As practitioners shipping code on real projects. The differences between these tools are real, but they're not the differences the comparison posts focus on.
+We've used Claude Code, Codex, Cursor, Pi Agent, Gas Town, Open Code, Gemini CLI, and Kiro CLI across 25 episodes. Not as reviewers testing features for a week. As practitioners shipping code on real projects. The differences between these tools are real, but they're not the differences the comparison posts focus on.
 
 Here's what actually matters when choosing an AI coding agent.
 
@@ -199,6 +199,19 @@ The study also calculated cognitive complexity (nested loops, branching depth) o
 
 This connects back to a deeper point Nathan Lubchenco raised in the same episode: human-readable code may not be the same as model-readable code. We've assumed they correlate (and for current frontier models they roughly do), but the assumption is worth periodically re-testing as models improve. For now, "minimum-edit" is the right default for any agent that touches a non-trivial codebase.
 
+## The 2026 Sub-Agent Pattern Taxonomy
+
+In [Episode 25](/episodes/25-elon-vs-openai-trial-drama-billion-token-context-race-multi-agent-patterns-2026/) we covered Phil Schmid's [Sub-agent patterns for 2026](https://www.philschmid.de/subagent-patterns-2026). Schmid works at Google DeepMind, so the framing comes with a strong implementation bias toward Gemini's Enterprise Agent Platform, but the taxonomy itself is tool-agnostic and explains a lot of what we've been bumping into across these tools across the show's run.
+
+1. **Inline sub-agent (function call)** — what most Claude Code use looks like by default. The main agent dispatches a single sub-agent for a bounded task and merges the result. Low evaluation difficulty: you can test the dispatch behavior the way you test any function.
+2. **Fan-out (map-reduce)** — multiple sub-agents in parallel with a coordinator that aggregates. Claude Code's swarm mode and the Superpowers parallel-dispatch pattern both live here. Evaluation gets harder: you have to control for inter-agent independence.
+3. **Agent pool (persistent + coordinator)** — long-lived agents with state, a main agent that nudges and checks status. Gas Town's Mayor/PoleCat/Convoy architecture is the canonical example. At this layer, the system becomes meaningfully harder to evaluate because you're now controlling for state and coordination, not just outputs.
+4. **Agent teams (direct/mailbox comms)** — agents communicating directly without a central hub. This is the "dark factory" pattern. We haven't seen a polished open-source instance yet, but Claude Code's channels feature is the closest off-the-shelf primitive, and Shimin's been prototyping demos against it.
+
+The substance of Schmid's argument is that the patterns *ladder up in evaluation difficulty as state and dynamism grow* — which is the load-bearing observation we've been circling for episodes. Rahul reframed it neatly on the episode: agent patterns are reorgs without HR overhead, and the next layer up is a meta-agent that picks the pattern per task.
+
+The credibility counterweight worth naming: at the AI Engineer Europe conference (covered in the same episode), Dexter Horthy — previously a major proponent of agentic dark-factory orchestration — publicly recanted. His position: they tried it in earnest, the dark-factory approach still requires reading the specs and PRs at the end, and the velocity gains evaporate. It doesn't kill pattern 4; it does suggest patterns 1-3 are where the practical leverage is for at least the next 6-12 months.
+
 ## Token Efficiency: The Hidden Variable
 
 Martin Alderson's research (covered in [Episode 16](/episodes/16-pentagon-anthropic-drama-verified-spec-driven-development-and-interview-with-martin-alderson/)) tested 19 web frameworks for token efficiency when used by AI agents. The finding: minimal frameworks (Flask, Express) are significantly more token-efficient than larger frameworks (Rails, Next.js). The efficiency gap persists even on subsequent features.
@@ -207,7 +220,7 @@ This matters for tool selection because it reframes the question. It's not just 
 
 ## Why the AI Model Matters More Than the Coding Tool
 
-The most important insight from 20 episodes of agent comparison: **the moat is in the model, not the tooling**.
+The most important insight from 25 episodes of agent comparison: **the moat is in the model, not the tooling**.
 
 Claude Code's feature velocity is impressive. But competitors are converging on similar features. Codex feels like Claude Code now. Cursor is adding agentic capabilities. Everyone is building MCP support. The tooling layer is commoditizing.
 
