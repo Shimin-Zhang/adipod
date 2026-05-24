@@ -4,7 +4,7 @@ description: "Researchers found specific neurons that activate when LLMs halluci
 date: "2026-04-11"
 slug: "hallucination-neurons-llm"
 keywords: "hallucination neurons LLM, LLM hallucination fix, H-neurons paper, AI hallucination research"
-episodes: ["7"]
+episodes: ["7", "26"]
 ---
 
 Only 0.1% of the neurons in a large language model are associated with hallucination. That is the headline finding from a [Tsinghua University paper](https://arxiv.org/pdf/2512.01797) published in December 2025. While 0.1% sounds trivial, in a model with billions of parameters, you are still talking about millions of neurons. The researchers called them H-neurons. What they found about where these neurons come from, and what happens when you suppress them, is more instructive than the number itself.
@@ -52,6 +52,8 @@ Today, the state of the art for reducing hallucination in production is layered 
 Mechanistic interpretability offers, at least in theory, the possibility of internal intervention: modifying the model's behavior by directly adjusting the neural circuits responsible for specific failure modes. The H-neuron paper is an early proof of concept. It demonstrated that you can identify the relevant neurons, suppress them, and get measurable improvement. The tradeoff between hallucination reduction and general compliance is a real engineering constraint, not merely a theoretical objection.
 
 Whether this becomes a practical tool depends on scaling. The Tsinghua team worked with relatively small open-weight models. Identifying H-neurons in models with hundreds of billions of parameters, let alone mixture-of-experts architectures where different experts activate for different inputs, is a substantially harder problem. And even if you identify them, the suppression tradeoff means you need fine-grained control, not a binary switch. The dial needs more notches.
+
+A useful 2026 data point on the scaling question: in his guest interview on [Episode 26](/episodes/26-llm-neural-anatomy-with-david-noel-ng-forward-deployed-everybody-running-llms-at-home/), [Dr. David Noel Ng](https://dnhkng.github.io/) reported follow-up experiments on his ["LLM Neuroanatomy"](https://dnhkng.substack.com/) series showing the layer-duplication finding from Llama 2 generalizes to the Qwen 3.5 family and to mixture-of-experts architectures. Brute-forced beam search across cross-block combinations did not beat the simple "repeat one middle block 1-5 times" recipe — on Qwen 3.5, layer 33-35 wins, repeated once or twice. His PCA Explorer (post 3 of the series) shows clusters in early layers form along language lines, dissolve into semantic clusters in the middle, and re-form as language clusters at the top — direct visual evidence that the abstract "thinking" representation interpretability research is targeting really exists as a layer-band rather than a single neuron. The mic-drop from the interview, in Ng's own words: "If you're thinking, ah, it's a stochastic parrot, then you're in the wrong field."
 
 ## Why LLM Hallucination Cannot Be Fully Eliminated
 

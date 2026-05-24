@@ -3,7 +3,7 @@ title: "AI Coding Agents Compared: Claude Code, Codex, Cursor, Pi Agent, and the
 description: "A practitioner's comparison of AI coding agents — what each tool actually does well, where they fall short, and why the moat might not be in the tooling."
 slug: "ai-coding-agents-compared"
 keywords: "Claude Code vs Cursor, AI coding agent comparison, best AI coding tool, Claude Code vs Codex, AI coding agent review 2026"
-lastUpdated: "2026-05-12"
+lastUpdated: "2026-05-23"
 ogImage: "/og/ai-coding-agents-compared"
 ---
 
@@ -118,6 +118,10 @@ Pi lacks the polish, community, and integration ecosystem of Claude Code. No bui
 ### April 2026 update: OAuth revocation and the local-model fallback
 
 In mid-April 2026, Anthropic began revoking third-party OAuth access for Claude Code subscriptions, which broke Pi Agent's ability to drive Opus 4.x through a personal Max plan ([Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/)). Shimin's workaround was to repoint Pi at Alibaba's open-source [Qwen 3.6 35B A3B](https://qwen.ai/blog?id=qwen3.6-35b-a3b) — a 35B-parameter mixture-of-experts model with 3B active params — running locally via llama.cpp + Unsloth GGUF at 90–95 tok/sec, and to register Claude Code itself as a tool Pi can invoke when it needs Opus-level horsepower. The setup is a useful proof point for the Pi philosophy: when the harness is minimal, swapping the underlying model (or layering a stronger model in as a tool) is a configuration change, not a rewrite. Anthropic was rumored as of recording to be reversing the revocation, but the takeaway holds either way — a local-model fallback is now table stakes for any Pi-style setup.
+
+### May 2026 update: DeepSeek-V4 Flash at home on a Ryzen 395 Max
+
+Dan reported in [Episode 26](/episodes/26-llm-neural-anatomy-with-david-noel-ng-forward-deployed-everybody-running-llms-at-home/) on running Antires's specialized DeepSeek-V4-Flash-only fork of llama.cpp on a 128 GB Ryzen AI Max+ 395. The architecture trick that makes it tractable on consumer silicon: Q2 quantization on the MoE front-end only, full-precision experts in the back, and SSD-cached prefills so the agent's huge system prompt isn't re-crunched per session. Result: ~210-250K usable context, ~10 tokens/sec, output quality subjectively pegged at Sonnet-4.5 level. Plugged into Pi Agent the same way Shimin's Qwen 3.6 setup was — tool calling works, it's a drop-in for casual coding use. Two-data-point trend with the Qwen 3.6 35B setup: local frontier-class inference on ~$2K consumer hardware is now table stakes, and the practical bottleneck has moved from "can it run" to "is the tok/s tolerable for an agent loop."
 
 ## [GitHub Copilot](https://github.com/features/copilot)
 

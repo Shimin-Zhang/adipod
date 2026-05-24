@@ -3,7 +3,7 @@ title: "AI's Impact on Developer Careers: Frameworks for Thinking About What Com
 description: "Economic models, hiring data, and practitioner perspectives on how AI is reshaping software engineering careers — from workflow automation convexity to the Jevons paradox for code."
 slug: "ai-developer-careers"
 keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age"
-lastUpdated: "2026-05-04"
+lastUpdated: "2026-05-23"
 ogImage: "/og/ai-developer-careers"
 ---
 
@@ -42,6 +42,12 @@ David Ricardo's comparative advantage theory (yes, from 1817) is more relevant t
 Applied to AI and developers: even if AI becomes absolutely better than humans at writing code, humans may retain a comparative advantage in understanding business context, navigating organizational politics, making judgment calls under uncertainty, and building trust with stakeholders. Whether those comparative advantages are valuable enough to sustain current employment levels is a different question — but the framework prevents the fallacy of assuming that "AI can code better" automatically means "developers are unnecessary."
 
 We discussed this in [Episode 14](/episodes/14-crabby-rathbun-model-councils-why-you-want-more-tech-debt/).
+
+### The Pit Crew: Forward Deployed Everybody
+
+Scott Werner's ["Here Comes Forward Deployed Everybody"](https://worksonmymachine.ai/p/here-comes-forward-deployed-everybody) (covered in [Episode 26](/episodes/26-llm-neural-anatomy-with-david-noel-ng-forward-deployed-everybody-running-llms-at-home/)) names the new role the prior frameworks gestured at: as Salesforce moves to an API-only data model, every department needs a "pit crew" engineer who plugs the company's marketers, lawyers, and salespeople into the agent layer. Werner traces the title to Palantir — originally "delta," then "forward deployed engineer," now generalized — and Stripe is already shipping the role under "AI Forward Deployment Specialist."
+
+The Jevons-paradox argument splits cleanly here. Rahul reads it the agents-only way (per Jasmine Sun: more of the thing, but not necessarily more humans doing it) — pit-crew capacity scales via more agents, not more hires. Shimin reads it the humans-with-AI-glue way — marketers and lawyers still won't vibe-code their own UIs, so the bottleneck moves to people who understand both the domain and the MCP/agent layer. Either way, the SI ecosystem that grew around Salesforce admins for the last twenty years is the closest historical analog — and the warning embedded in the analog is real: bringing every integration in-house re-learns the lesson "this is why we paid a vendor" the hard way.
 
 ## What the Data Actually Shows
 
