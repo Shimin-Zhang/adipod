@@ -3,7 +3,7 @@ title: "AI's Impact on Developer Careers: Frameworks for Thinking About What Com
 description: "Economic models, hiring data, and practitioner perspectives on how AI is reshaping software engineering careers — from workflow automation convexity to the Jevons paradox for code."
 slug: "ai-developer-careers"
 keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age"
-lastUpdated: "2026-05-23"
+lastUpdated: "2026-06-07"
 ogImage: "/og/ai-developer-careers"
 ---
 
@@ -160,6 +160,8 @@ The ThoughtWorks retreat envisions role convergence: designers who code and engi
 
 [Episode 19](/episodes/19-thinking-fast-slow-and-artificial-meta-s-trouble-with-rogue-agents-and-fomo-in-the-age-of-ai/) reported on companies offering AI token budgets as part of total compensation. Some are using leaderboard systems to track AI usage. The framing question: "Are AI tokens the new signing bonus or just a cost of doing business?" The fact that the question is being asked at all signals that AI compute is becoming a component of developer productivity, not just a tool.
 
+[Episode 27](/episodes/27-openai-beats-musk-gemini-3-5-flash-and-ai-burnout-mitigation/) caught the pendulum starting to swing back. Microsoft reportedly cancelled Claude Code subscriptions for many engineers after their token costs exceeded the cost of the human developers — the first visible sign that "measure productivity by token count" has a ceiling. In the same episode, two burnout posts ([Evil Martians](https://evilmartians.com/chronicles/ai-assisted-engineers-are-burning-out-is-this-fine), [Siddhant Khare](https://siddhantkhare.com/writing/ai-fatigue-is-real)) named the mechanism the leaderboard framing ignores: when the incentive is to push as many tokens as you can but the engineer's own sense of value is still tied to shipping something good, the gap reads as burnout — a 2026 restatement of the "mourning the craft" grief above. The token-budget-as-comp question is real, but ep-27's signal is that the metric self-corrects once finance notices the bill.
+
 ### The AI fluency pyramid
 
 The [AI fluency pyramid](/glossary/ai-fluency-pyramid/) (from Brex's CTO James Reggio, covered in [Episode 11](/episodes/11-ai-fluency-pyramid-unrolling-the-codex-agent-loop-and-claude-code-s-secret-swarm-mode/)) provides a framework for assessing organizational AI integration levels. It's useful for individual career planning too: where are you on the pyramid? Where does your organization expect you to be? Where is the industry moving?
@@ -228,4 +230,4 @@ Periodically do work without AI assistance. Not as a Luddite gesture — as deli
 
 ---
 
-*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, and 23 of the ADI Pod. Updated May 2026.*
+*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, and 27 of the ADI Pod. Updated June 2026.*

@@ -4,7 +4,7 @@ description: "Four episodes in three weeks, six practitioners walked into the sa
 date: "2026-05-23"
 slug: "agentic-engineering-recantation"
 keywords: "agentic engineering recantation, simon willison vibe coding, dexter horthy dark factory, code is free as in puppies, james shore maintenance ai, drew brunig 10 lessons, jesse vincent rules and gates, code review bottleneck, agentic coding discipline, AI maintenance asymptote"
-episodes: ["22", "23", "24", "25"]
+episodes: ["22", "23", "24", "25", "27"]
 ---
 
 Dan spent a Saturday last month trying to fix a production bug. His pre-LLM colleague, looking over his shoulder, eventually fixed it in five minutes. Dan's instinct, watching that happen, was to add more tooling — better prompts, more skills, a sharper context-engineering setup. That instinct is the diagnostic. He told the story on [Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/) without softening it.
@@ -22,6 +22,8 @@ This is the quantitative version of what we have been [calling cognitive debt](/
 Dan's prod-bug Saturday is one data point on that curve. He had been shipping AI-assisted code at high velocity for months. The bug surfaced an area his agent had built, his colleague had not used the agent, and the comprehension gap showed up exactly where the math predicted. Not at the boundary, not at the merge — but the first time someone had to extend the system three months later.
 
 The wall isn't a Luddite predicting collapse. It is a fully-bought-in practitioner discovering that his velocity gains came with a hidden balance sheet.
+
+Three weeks after Shore's math, the wall showed up in a second ledger: human energy and company budgets. [Episode 27](/episodes/27-openai-beats-musk-gemini-3-5-flash-and-ai-burnout-mitigation/) covered a cluster of burnout writing — Evil Martians' ["AI-Assisted Engineers Are Burning Out"](https://evilmartians.com/chronicles/ai-assisted-engineers-are-burning-out-is-this-fine) and Siddhant Khare's ["AI Fatigue Is Real"](https://siddhantkhare.com/writing/ai-fatigue-is-real) among them — describing the same treadmill from the inside: the context-switching tax of babysitting parallel agents, the lost dopamine of shipping by hand, and a deeper value mismatch where leaderboards reward token throughput while the engineer still grieves the craft. Dan's confession on the episode was seven concurrent Claude Code sessions after work; the mitigations the posts converge on are the operational cousins of the discipline below — cap parallel agents at three or four, keep hands on the keyboard, time-box the sessions, accept ~70% and hand-code the rest. And the same week the economics caught up: [Microsoft cancelled Claude Code subscriptions for many staff after costs exceeded the human developers they were meant to augment](/episodes/27-openai-beats-musk-gemini-3-5-flash-and-ai-burnout-mitigation/) — the token-count pendulum swinging back the way blockchain-on-everything settled to a few real use cases. The maintenance asymptote is the wall's balance-sheet form; burnout and the CFO's spreadsheet are its other two ledgers.
 
 ## The Credibility-Tier Sweep
 
@@ -59,4 +61,4 @@ The skeptics didn't win. The proponents didn't lose. The hard-won middle is that
 
 ---
 
-*This post was drafted by an AI agent (Claude) from ADI Pod episode transcripts and edited for the site. Source episodes: [22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/), [23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), [24](/episodes/24-openais-goblin-problem-10-lessons-when-code-is-cheap-ai-addiction-loop/), [25](/episodes/25-elon-vs-openai-trial-drama-billion-token-context-race-multi-agent-patterns-2026/).*
+*This post was drafted by an AI agent (Claude) from ADI Pod episode transcripts and edited for the site. Source episodes: [22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/), [23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), [24](/episodes/24-openais-goblin-problem-10-lessons-when-code-is-cheap-ai-addiction-loop/), [25](/episodes/25-elon-vs-openai-trial-drama-billion-token-context-race-multi-agent-patterns-2026/), [27](/episodes/27-openai-beats-musk-gemini-3-5-flash-and-ai-burnout-mitigation/).*
