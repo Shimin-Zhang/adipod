@@ -94,6 +94,8 @@ The "8 Levels of Agentic Engineering" framework from [Episode 18](/episodes/18-8
 
 Most developers are somewhere between levels 2 and 4. The discomfort they feel is the transition from "I write code" to "I direct agents that write code." Whether that transition represents career growth or craft dissolution depends on your perspective — and, increasingly, on your employer's perspective.
 
+Jamie Hurst's "Is This Sustainable?" (covered in [Episode 28](/episodes/28-claude-opus-4-8-undocumented-claude-code-features-eval-harness-for-ai-skills-pope-on-ai/)) sharpens the senior-engineer version of this shift. Seniors absorbed AI's rising stakes years before juniors did; one senior plus an LLM now drives the technical direction a squad or two used to, with intent translated into prompts instead of people. The internal-sales step — write the RFC, make the slides, shop it around — collapses into "just build the damn thing" and let people play with it. The unsettling part Hurst names: AI depth is *perishable*, maybe irrelevant in 18 months, so the durable skills are taste and judgment — which, as a colleague put it, were always what you were hired for. That reframes the skill-atrophy worry below: the thing to protect isn't your knowledge of this month's model, it's the judgment that outlives it.
+
 ## Developer Skills That Are Gaining Value in the AI Age
 
 ### Domain expertise and product thinking
@@ -230,4 +232,4 @@ Periodically do work without AI assistance. Not as a Luddite gesture — as deli
 
 ---
 
-*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, and 27 of the ADI Pod. Updated June 2026.*
+*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, 27, and 28 of the ADI Pod. Updated June 2026.*

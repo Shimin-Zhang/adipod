@@ -4,7 +4,7 @@ description: "Four episodes in three weeks, six practitioners walked into the sa
 date: "2026-05-23"
 slug: "agentic-engineering-recantation"
 keywords: "agentic engineering recantation, simon willison vibe coding, dexter horthy dark factory, code is free as in puppies, james shore maintenance ai, drew brunig 10 lessons, jesse vincent rules and gates, code review bottleneck, agentic coding discipline, AI maintenance asymptote"
-episodes: ["22", "23", "24", "25", "27"]
+episodes: ["22", "23", "24", "25", "27", "28"]
 ---
 
 Dan spent a Saturday last month trying to fix a production bug. His pre-LLM colleague, looking over his shoulder, eventually fixed it in five minutes. Dan's instinct, watching that happen, was to add more tooling — better prompts, more skills, a sharper context-engineering setup. That instinct is the diagnostic. He told the story on [Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/) without softening it.
@@ -49,6 +49,8 @@ The most useful thing about the recantations is that they did not arrive empty-h
 
 Three named patterns, three different practitioner backgrounds, one converging discipline. The pattern emerges from the recantations, not despite them.
 
+A month after these patterns were named, Anthropic shipped one of them as a product. [Episode 28](/episodes/28-claude-opus-4-8-undocumented-claude-code-features-eval-harness-for-ai-skills-pope-on-ai/)'s Claude Opus 4.8 "dynamic workflow" — a coordinated fan-out of parallel agents — is, in Anthropic's own framing, adversarial self-review: spend compute to attack your freshly generated code from several angles before a human does the final pass. That's Vincent's fresh-eyes subagent, productized. It's the optimistic reading of where the discipline goes — the review burden Lubchenco called the bottleneck gets met with more compute rather than more human review fatigue. The pessimistic reading is one Shimin keeps flagging: code still isn't free (Microsoft pulled Claude Code licenses back to Copilot on cost the same week), so "throw a dynamic workflow at it" has a bill, and the merge-without-drift problem the announcement hand-waved is exactly where comprehension debt re-enters.
+
 ## What This Says About The Hype Cycle
 
 The reason this matters past the news cycle is that every craft has gone through this shape before. The agile community burned through five years of consultant gold before Dave Thomas wrote ["Agile is Dead"](https://pragdave.me/thoughts/active/2014-03-04-time-to-kill-agile.html) and what was left settled into a practice. Test-driven development went through it in the mid-2010s when the "TDD is dead" debate forced the discipline to articulate what it was actually for. Microservices went through it in the late 2010s after enough teams shipped distributed monoliths to make the trade-offs legible. Every time, the recantation looked terminal in real time and turned into a maturation in retrospect.
@@ -61,4 +63,4 @@ The skeptics didn't win. The proponents didn't lose. The hard-won middle is that
 
 ---
 
-*This post was drafted by an AI agent (Claude) from ADI Pod episode transcripts and edited for the site. Source episodes: [22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/), [23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), [24](/episodes/24-openais-goblin-problem-10-lessons-when-code-is-cheap-ai-addiction-loop/), [25](/episodes/25-elon-vs-openai-trial-drama-billion-token-context-race-multi-agent-patterns-2026/), [27](/episodes/27-openai-beats-musk-gemini-3-5-flash-and-ai-burnout-mitigation/).*
+*This post was drafted by an AI agent (Claude) from ADI Pod episode transcripts and edited for the site. Source episodes: [22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/), [23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), [24](/episodes/24-openais-goblin-problem-10-lessons-when-code-is-cheap-ai-addiction-loop/), [25](/episodes/25-elon-vs-openai-trial-drama-billion-token-context-race-multi-agent-patterns-2026/), [27](/episodes/27-openai-beats-musk-gemini-3-5-flash-and-ai-burnout-mitigation/), [28](/episodes/28-claude-opus-4-8-undocumented-claude-code-features-eval-harness-for-ai-skills-pope-on-ai/).*
