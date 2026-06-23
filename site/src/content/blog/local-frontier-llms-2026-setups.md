@@ -2,9 +2,10 @@
 title: "Local Frontier-Class LLMs in 2026: Three Setups That Actually Work"
 description: "Local LLMs in 2026 are no longer underpowered toys — they're Sonnet-4.5-class agents running on $2K consumer hardware. A practitioner's guide to three working setups and the open-weight 3-6-months-behind-frontier argument that makes them worth running."
 date: "2026-05-23"
+lastUpdated: "2026-06-22"
 slug: "local-frontier-llms-2026-setups"
 keywords: "local LLM 2026, Ryzen AI Max 395 LLM, DeepSeek V4 Flash local, Qwen 3.6 35B Pi Agent, llama.cpp Antires, run frontier LLM at home, open weight catches frontier, on-prem AI coding, Grace Hopper desktop, local agent driver, Pi Agent local model"
-episodes: ["22", "23", "26", "27"]
+episodes: ["22", "23", "26", "27", "30"]
 ---
 
 If the words "local LLM" still call to mind a 7B-parameter chatbot that hallucinates the capital of France, your mental model is twelve months out of date. In mid-2026, "local" means Sonnet-4.5-class output running on a $2,000 box on your desk. The gap between frontier-API quality and local-frontier-class quality is somewhere between three and six months — Nathan Lubchenco's load-bearing claim on [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), and the data has kept supporting it.
@@ -56,6 +57,8 @@ This is the setup Dan ran on [Episode 26](/episodes/26-llm-neural-anatomy-with-d
 **Cost.** $2,000-ish for the box. The Antires fork is free and actively maintained on GitHub.
 
 **Color.** Dan summarized it on the episode about as cleanly as anyone has: "this is Sonnet 4.5, it's running on my machine, and it did something useful." That sentence would have been a hallucination twelve months ago.
+
+**Update ([Episode 30](/episodes/30-fable-5-ban-metas-ai-gulag-elias-thorne-loop-engineering/)).** Dan demoed the rig again a few weeks later, now running it as **DS4** — the "dwarf star runner" build for DeepSeek-V4 Flash — with the ROCm path merged into llama.cpp's `main` (no more checking out a separate branch) and generation up to **~14 tok/s**, a meaningful bump over the original ~10. Pointed at Pi Agent, it tool-called its way to an answer live on the show — and gloriously self-derailed into a leftover scheduled heartbeat task and a Playwright browser launch mid-demo. The takeaway holds and improves: a ~$2,000–$4,000 box, no cloud, agent-usable speeds, output Dan still pegs around Sonnet level.
 
 ## Setup 3: David Ng's Basement Grace Hopper Desktop
 

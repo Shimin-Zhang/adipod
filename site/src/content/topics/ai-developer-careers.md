@@ -3,7 +3,7 @@ title: "AI's Impact on Developer Careers: Frameworks for Thinking About What Com
 description: "Economic models, hiring data, and practitioner perspectives on how AI is reshaping software engineering careers — from workflow automation convexity to the Jevons paradox for code."
 slug: "ai-developer-careers"
 keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age"
-lastUpdated: "2026-06-07"
+lastUpdated: "2026-06-22"
 ogImage: "/og/ai-developer-careers"
 ---
 
@@ -74,6 +74,8 @@ This matters because SWE-bench is the benchmark that AI coding companies use to 
 The Wharton paper ["Thinking, Fast, Slow, and Artificial"](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6097646) found a 12-percentage-point boost in user confidence when AI provides answers, regardless of accuracy. People treat AI outputs like authoritative reference material, even when the AI is wrong. From [Episode 19](/episodes/19-thinking-fast-slow-and-artificial-meta-s-trouble-with-rogue-agents-and-fomo-in-the-age-of-ai/).
 
 The career implication: the developers who thrive with AI assistance are the ones who maintain independent judgment. The ones who defer — who experience [cognitive surrender](/glossary/cognitive-surrender/) — will gradually lose the skills that make them valuable. The gap between the two groups widens over time.
+
+[Episode 30](/episodes/30-fable-5-ban-metas-ai-gulag-elias-thorne-loop-engineering/) extended this from a confidence bump into a full breakdown. Christopher Koch's paper ["Beyond the Steeper Curve"](https://arxiv.org/html/2603.29681) argues AI doesn't merely steepen Dunning-Kruger — it causes [metacognitive decoupling](/glossary/metacognitive-decoupling/): observable output and self-assessment shoot up together while actual understanding and calibration stall or decline. In one cited study, AI raised everyone's scores *and* everyone overrated themselves, flattening the curve. The career-management implication Koch draws — and the one most teams are getting wrong — is that AI-assisted *productivity* and genuine *competence development* are now separate outcomes that need separate tracking; optimizing the first does nothing for the second and may quietly erode it. It's the measurable version of the skill-atrophy worry in the FAQ below.
 
 ## How AI Is Changing the Developer Role
 
@@ -232,4 +234,4 @@ Periodically do work without AI assistance. Not as a Luddite gesture — as deli
 
 ---
 
-*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, 27, and 28 of the ADI Pod. Updated June 2026.*
+*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, 27, 28, and 30 of the ADI Pod. Updated June 2026.*

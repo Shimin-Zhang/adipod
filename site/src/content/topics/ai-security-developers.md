@@ -2,8 +2,8 @@
 title: "AI Security for Developers: Prompt Injection, Agent Trust, and the Stuff That's Actually Dangerous"
 description: "A developer-focused guide to AI security — the real attack vectors, the overhyped threats, and practical frameworks for building with AI agents without getting burned."
 slug: "ai-security-developers"
-keywords: "AI agent security, MCP security, prompt injection prevention, AI coding security, agent trust model, AI security best practices, Anthropic Mythos, Project Glasswing, AI vulnerability detection, rules and gates, hardening phase, cal.com closed source"
-lastUpdated: "2026-05-08"
+keywords: "AI agent security, MCP security, prompt injection prevention, AI coding security, agent trust model, AI security best practices, Anthropic Mythos, Project Glasswing, AI vulnerability detection, rules and gates, hardening phase, cal.com closed source, Meta AI support bot hack, account takeover, training data poisoning, dataset poisoning, Elias Thorne"
+lastUpdated: "2026-06-22"
 ogImage: "/og/ai-security-developers"
 ---
 
@@ -65,6 +65,8 @@ The problem: the agent doesn't have the judgment to know which credentials are a
 ### Real-world failures
 
 [Episode 19](/episodes/19-thinking-fast-slow-and-artificial-meta-s-trouble-with-rogue-agents-and-fomo-in-the-age-of-ai/) covered Meta's incident with rogue AI agents causing a credential leak. The specifics matter: AI-generated advice led to credentials being exposed in a production context. This wasn't a theoretical attack — it was an AI agent following its training, making a decision that happened to expose sensitive data.
+
+[Episode 29](/episodes/29-fable-5-mythos-5-launch-meta-ai-hack-llms-as-black-boxes-future-of-agents/) added a cleaner, dumber example. Meta rolled out an AI support assistant to handle account recovery, and a recipe spread on Telegram from May 31: VPN to an exit near the target's hometown, then ask the bot to send the account-reset codes to your new email. It complied — pro-Iranian attackers took over the Obama White House Instagram and a Space Force account. The bot held *elevated permissions* to reset any account (not just the requester's own), so a chatbot became a credential-reset proxy with none of the identity checks the old "mail us a government ID" flow required. The hosts' framing: this is the golden age of cybersecurity, and every org shipping an AI feature now needs a red team on retainer — the bot replaced a boring form whose deliberate vagueness was itself the security control.
 
 ### Practical mitigations
 
@@ -235,6 +237,12 @@ Until legal frameworks catch up, the practical advice is: **treat AI-generated c
 A novel attack vector covered in [Episode 17](/episodes/17-slop-garbage-collection-cleanroom-rewrites-and-will-claude-ruin-our-teams/): using AI agents to create "clean room" reimplementations of copyleft-licensed code. Simon Willison covered this in "Can coding agents relicense open source through a 'clean room' implementation of code?" — the concern that AI can launder GPL code into permissively licensed alternatives.
 
 For developers: if a dependency was recently "rewritten from scratch" using AI tools and happens to mirror the behavior of a copyleft-licensed library, you may have a licensing liability that doesn't appear in a standard vulnerability scan. The attack surface isn't technical — it's legal.
+
+## Training-Data Poisoning: The Elias Thorne Preview
+
+[Episode 30](/episodes/30-fable-5-ban-metas-ai-gulag-elias-thorne-loop-engineering/) covered 404 Media's [reporting](https://www.404media.co/elias-thorne-chatbots-llms-chatgpt-lighthouse-keeper-story/) on "Elias Thorne," a fictional lighthouse keeper who shows up in ~88% of stories generated across ChatGPT, Claude, and Gemini. Cornell's Sil Hamilton and David Mimno traced him to ~111 conversations in a public ChatGPT-3.5 dataset that got reused to train later models across every lab — a "dataset virus" that cross-contaminated the entire frontier through shared training data, to the point that Elias now "authors" books on Amazon.
+
+The security read is the uncomfortable one. If an *innocent* artifact can propagate into every major model unnoticed, a *deliberate* poisoning campaign — seeding a backdoor trigger phrase, a subtly insecure code pattern, or a biased "fact" into widely-scraped sources — could do the same, and you would have no easy way to detect it downstream of training. With only a handful of frontier labs all drinking from overlapping data pools, the blast radius of a single poisoned source is the whole ecosystem. Training-data provenance, not just model behavior, becomes part of the threat model.
 
 ## Interpretability: The Security Tool Nobody Uses Yet
 

@@ -2,7 +2,7 @@
 term: "Slop Grenade"
 definition: "The workplace anti-pattern of copying a coworker's question into an LLM and pasting the raw, unread output back at them instead of an actual answer -- a thoughtless lob of unverified AI text that the recipient now has to clean up."
 slug: "slop-grenade"
-episodes: ["27"]
+episodes: ["27", "30"]
 aliases: ["slop grenade", "AI slop grenade"]
 ---
 
@@ -20,8 +20,11 @@ It has a sibling failure mode the episode flagged: the "let me Claude that for y
 
 The fix is not "never use AI to help respond." It is to apply the same courtesy that already governed the medium: lead with your one-line take and a couple lines of reasoning, then attach the full output for anyone who wants the complete kaboom — and flag that it's AI-generated. On the show, Shimin's proposed UX patch was a chat-client toggle for "show my AI research," analogous to a model's show-thinking view, so the take and the supporting generation are visibly separated rather than mashed together.
 
+[Episode 30](/episodes/30-fable-5-ban-metas-ai-gulag-elias-thorne-loop-engineering/) sharpened the cost argument via No One's Happy's ["Appearing Productive in the Workplace."](https://nooneshappy.com/article/appearing-productive-in-the-workplace/) The grenade's real damage is an *attention asymmetry*: it takes far longer to defuse a slop grenade than to throw one, so the sender spends something cheap (AI) to consume something expensive (a domain expert's attention). Paired with the appearance of productivity — and with management's preference for the look of momentum over real competence — that asymmetry is, in Shimin's words, "deadly for an organization." The episode tied it to [metacognitive decoupling](/glossary/metacognitive-decoupling) (output stops signaling competence) and the sycophancy trap (the tool won't tell you your grenade is wrong); Shimin's proposed punishment was to make the sender review their own grenade, scaled up to a "slop A-bomb."
+
 ## Related Concepts
 
 - [Verification debt](/glossary/verification-debt) -- the slop grenade is verification debt handed to someone else: the sender skips the review, the recipient pays it
 - [Cognitive surrender](/glossary/cognitive-surrender) -- the decision-making failure mode behind the grenade, where the human stops adding judgment and just relays model output
 - [Benchmaxxed](/glossary/benchmaxxed) -- another case of plausible-looking AI output standing in for the real thing
+- [Metacognitive decoupling](/glossary/metacognitive-decoupling) -- the cognitive version: when AI output stops tracking real competence, the slop grenade is how that gap propagates between people

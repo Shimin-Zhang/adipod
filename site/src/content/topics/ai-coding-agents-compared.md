@@ -3,7 +3,7 @@ title: "AI Coding Agents Compared: Claude Code, Codex, Cursor, Pi Agent, and the
 description: "A practitioner's comparison of AI coding agents — what each tool actually does well, where they fall short, and why the moat might not be in the tooling."
 slug: "ai-coding-agents-compared"
 keywords: "Claude Code vs Cursor, AI coding agent comparison, best AI coding tool, Claude Code vs Codex, AI coding agent review 2026"
-lastUpdated: "2026-06-07"
+lastUpdated: "2026-06-22"
 ogImage: "/og/ai-coding-agents-compared"
 ---
 
@@ -218,6 +218,8 @@ The credibility counterweight worth naming: at the AI Engineer Europe conference
 
 **June 2026 update — fan-out goes first-class.** [Episode 28](/episodes/28-claude-opus-4-8-undocumented-claude-code-features-eval-harness-for-ai-skills-pope-on-ai/) covered [Claude Opus 4.8 and its new dynamic-workflow tool](https://techcrunch.com/2026/05/28/anthropic-releases-opus-4-8-with-new-dynamic-workflow-tool/) — high-thinking mode plus a large coordinated parallel-agent fan-out Dan summed up as "Gas Town, by Anthropic." It moves pattern 2 (fan-out / map-reduce) from something you assemble out of swarm mode into a first-class tool, with Anthropic's own pitch being adversarial self-review: spend compute to attack freshly generated code from several angles before a human reviews it. The open question is the one the taxonomy flags — how the coordinator merges all that parallel output without drift, which the announcement hand-waved. Two cautions from hands-on use: 4.8 (a 41-day fast-follow to 4.7, probably a Mythos distill) hallucinated file names that don't exist and burned a full token budget in 25 minutes. Same episode, a [Building Better read of the Claude Code source](https://buildingbetter.tech/p/i-read-the-claude-code-source-code) surfaced undocumented leverage: pre-tool-use hooks can rewrite a tool's input mid-flight (force `git push --dry-run`), return allow/deny with a UI-visible reason, and inject context; skill front-matter accepts `model` and `effort`.
 
+**June 2026 update — loop engineering names the harness.** [Episode 30](/episodes/30-fable-5-ban-metas-ai-gulag-elias-thorne-loop-engineering/) covered Addy Osmani's [Loop Engineering](https://addyosmani.com/blog/loop-engineering/): the six pieces (scheduled "heartbeat" automations, worktrees, skills, plugins/connectors, subagents, and memory) that turn a bare `/loop` into a dependable harness — with the load-bearing subagent move being to split the agent that *does* the work from the one that *reviews* it, the same worker/reviewer division Anthropic productized as the dynamic-workflow tool. By this lens both Codex and Claude Code are already full loop-engineering harnesses, and Shimin's progression frame — prompt engineering → spec-driven development → loop engineering — explains why the leverage keeps moving up: the loop amplifies whatever judgment you bake into your skills. See [loop engineering](/glossary/loop-engineering/).
+
 ## Token Efficiency: The Hidden Variable
 
 Martin Alderson's research (covered in [Episode 16](/episodes/16-pentagon-anthropic-drama-verified-spec-driven-development-and-interview-with-martin-alderson/)) tested 19 web frameworks for token efficiency when used by AI agents. The finding: minimal frameworks (Flask, Express) are significantly more token-efficient than larger frameworks (Rails, Next.js). The efficiency gap persists even on subsequent features.
@@ -233,6 +235,8 @@ Claude Code's feature velocity is impressive. But competitors are converging on 
 What isn't commoditizing — at least not yet — is model quality. Claude's reasoning capability is what makes Claude Code effective, not Claude Code's skill system or MCP integration. Pi Agent's success with radically minimal tooling proves this: when the model is good enough, you don't need elaborate scaffolding.
 
 The practical implication for tool selection: don't get too attached to any single tool's features. The features will converge. Pick the tool with the best underlying model for your use case, and build workflows that can survive a tool switch.
+
+[Episode 29](/episodes/29-fable-5-mythos-5-launch-meta-ai-hack-llms-as-black-boxes-future-of-agents/) and [Episode 30](/episodes/30-fable-5-ban-metas-ai-gulag-elias-thorne-loop-engineering/) underlined this twice. When Anthropic shipped Fable 5 and Mythos 5, the most novel feature wasn't a benchmark — it was that Fable 5's safety classifier silently answers blocked prompts with Opus 4.8, the first time the user doesn't control which model replies (the hosts read task-based model *routing* as the next default). And Shimin's clearest proof that the harness is disposable: when his Claude subscription stopped applying to Pi Agent, he had Claude Code read his Pi skills and regenerate them as Claude Code skills in a single prompt — "there is no AI moat." The flip side landed a week later, when the US government export-banned Fable 5 and Mythos 5 for all foreign nationals and Anthropic cut access in 90 minutes: the sharpest possible argument for building workflows that survive a model getting yanked, and for keeping a local fallback ready.
 
 ## Frequently Asked Questions
 
