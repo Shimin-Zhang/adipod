@@ -1,0 +1,14 @@
+/og/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/blog/*.md
+  X-Robots-Tag: noindex
+
+/episodes/*.md
+  X-Robots-Tag: noindex
+
+/glossary/*.md
+  X-Robots-Tag: noindex
+
+/topics/*.md
+  X-Robots-Tag: noindex

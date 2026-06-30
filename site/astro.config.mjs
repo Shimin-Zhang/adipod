@@ -3,6 +3,6 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://adipod.ai',
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.endsWith('.md') })],
   output: 'static',
 });
