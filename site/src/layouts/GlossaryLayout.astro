@@ -1,13 +1,17 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { episodesByNumbers, blogPostsMentioningGlossaryTerm } from '../lib/related-content';
 
 interface Props {
   term: string;
   definition: string;
   episodes?: string[];
+  slug: string;
 }
 
-const { term, definition, episodes } = Astro.props;
+const { term, definition, episodes, slug } = Astro.props;
+const relatedEpisodes = episodes && episodes.length > 0 ? await episodesByNumbers(episodes) : [];
+const featuredInBlog = await blogPostsMentioningGlossaryTerm(slug);
 
 const definedTermSchema = {
   '@context': 'https://schema.org',
@@ -30,11 +34,23 @@ const mdPath = Astro.url.pathname.replace(/\/$/, '') + '.md';
     <h1>{term}</h1>
     <p class="definition"><em>{definition}</em></p>
     <slot />
-    {episodes && episodes.length > 0 && (
-      <section>
+    {relatedEpisodes.length > 0 && (
+      <section class="related">
         <h2>Related Episodes</h2>
         <ul>
-          {episodes.map((ep) => <li>Episode {ep}</li>)}
+          {relatedEpisodes.map((ep) => (
+            <li><a href={`/episodes/${ep.slug}/`}>Episode {ep.number}: {ep.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+    {featuredInBlog.length > 0 && (
+      <section class="related">
+        <h2>Featured in</h2>
+        <ul>
+          {featuredInBlog.map((p) => (
+            <li><a href={`/blog/${p.slug}/`}>{p.title}</a></li>
+          ))}
         </ul>
       </section>
     )}
@@ -43,4 +59,8 @@ const mdPath = Astro.url.pathname.replace(/\/$/, '') + '.md';
 
 <style>
   .definition { font-size: 1.1rem; color: var(--color-text-secondary); margin-bottom: 1.5rem; }
+  .related { margin-top: 2rem; }
+  .related h2 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+  .related ul { padding-left: 1.25rem; }
+  .related li { margin: 0.35rem 0; }
 </style>

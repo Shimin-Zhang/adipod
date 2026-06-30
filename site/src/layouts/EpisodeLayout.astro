@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import ListenAnywhere from '../components/ListenAnywhere.astro';
+import { blogPostsForEpisode, glossaryTermsForEpisode } from '../lib/related-content';
 
 interface Props {
   episode: string;
@@ -18,6 +19,9 @@ interface Props {
 }
 
 const { episode, title, date, description, keywords, appleUrl, spotifyUrl, overcastUrl, pocketCastsUrl, amazonUrl, transistorId, youtubeId } = Astro.props;
+const relatedBlog = await blogPostsForEpisode(episode);
+const relatedGlossary = await glossaryTermsForEpisode(episode);
+relatedGlossary.sort((a, b) => a.term.localeCompare(b.term));
 
 const episodeSchema = {
   '@context': 'https://schema.org',
@@ -60,6 +64,26 @@ const mdPath = Astro.url.pathname.replace(/\/$/, '') + '.md';
       )}
     </header>
     <slot />
+    {relatedBlog.length > 0 && (
+      <section class="related">
+        <h2>Read more on the blog</h2>
+        <ul>
+          {relatedBlog.map((p) => (
+            <li><a href={`/blog/${p.slug}/`}>{p.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+    {relatedGlossary.length > 0 && (
+      <section class="related">
+        <h2>Glossary terms in this episode</h2>
+        <ul class="terms">
+          {relatedGlossary.map((t) => (
+            <li><a href={`/glossary/${t.slug}/`}>{t.term}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
   </article>
 </BaseLayout>
 
@@ -118,4 +142,10 @@ const mdPath = Astro.url.pathname.replace(/\/$/, '') + '.md';
     padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--color-border, #333);
   }
+  .related { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border, #333); }
+  .related h2 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+  .related ul { padding-left: 1.25rem; }
+  .related li { margin: 0.35rem 0; }
+  .related ul.terms { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; padding-left: 0; list-style: none; }
+  .related ul.terms li { margin: 0; }
 </style>
