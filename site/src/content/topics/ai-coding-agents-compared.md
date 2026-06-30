@@ -3,7 +3,7 @@ title: "AI Coding Agents Compared: Claude Code, Codex, Cursor, Pi Agent, and the
 description: "A practitioner's comparison of AI coding agents — what each tool actually does well, where they fall short, and why the moat might not be in the tooling."
 slug: "ai-coding-agents-compared"
 keywords: "Claude Code vs Cursor, AI coding agent comparison, best AI coding tool, Claude Code vs Codex, AI coding agent review 2026"
-lastUpdated: "2026-06-22"
+lastUpdated: "2026-06-23"
 ogImage: "/og/ai-coding-agents-compared"
 ---
 
@@ -122,6 +122,10 @@ In mid-April 2026, Anthropic began revoking third-party OAuth access for Claude 
 ### May 2026 update: DeepSeek-V4 Flash at home on a Ryzen 395 Max
 
 Dan reported in [Episode 26](/episodes/26-llm-neural-anatomy-with-david-noel-ng-forward-deployed-everybody-running-llms-at-home/) on running Antires's specialized DeepSeek-V4-Flash-only fork of llama.cpp on a 128 GB Ryzen AI Max+ 395. The architecture trick that makes it tractable on consumer silicon: Q2 quantization on the MoE front-end only, full-precision experts in the back, and SSD-cached prefills so the agent's huge system prompt isn't re-crunched per session. Result: ~210-250K usable context, ~10 tokens/sec, output quality subjectively pegged at Sonnet-4.5 level. Plugged into Pi Agent the same way Shimin's Qwen 3.6 setup was — tool calling works, it's a drop-in for casual coding use. Two-data-point trend with the Qwen 3.6 35B setup: local frontier-class inference on ~$2K consumer hardware is now table stakes, and the practical bottleneck has moved from "can it run" to "is the tok/s tolerable for an agent loop."
+
+### June 2026 update: Hermes Agent and the batteries-included counterpoint
+
+Where Pi argues for minimal scaffolding, [Episode 31](/episodes/31-grok-buys-cursor-midjourney-goes-hardware-hermes-agent-evaluation-driven-development/) gave the Tool Shed to the opposite philosophy: Nous Research's [Hermes Agent](https://hermes-agent.nousresearch.com/docs/), the harness Shimin had flagged a week earlier as overtaking OpenClaw in San Francisco. It ships everything in the box — built-in memory, a self-learning skill loop, cron scheduling, swappable external memory providers, and around 20 chat channels — where Pi ships read, write, bash, and skills. Dan's image for it was "parachuting in with sixteen crates of supplies and a film crew" instead of traveling light. The open question is the one the Pi section keeps raising: when the model is good enough, does all that bundled machinery save you setup or just become surface area you have to understand before you can trust it? Hermes and Pi now sit at the two poles of the harness-design argument.
 
 ## [GitHub Copilot](https://github.com/features/copilot)
 

@@ -2,7 +2,7 @@
 term: "Two Minutes to Midnight"
 definition: "A recurring ADI Pod segment where the hosts assess how close the AI industry is to an economic reckoning, using a Doomsday Clock metaphor to track investment sustainability, market signals, and bubble indicators."
 slug: "two-minutes-to-midnight"
-episodes: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+episodes: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
 aliases: ["2MTM", "doomsday clock segment", "AI bubble clock", "bubble watch"]
 ---
 
@@ -37,6 +37,8 @@ By [Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-
 [Episode 29](/episodes/29-fable-5-mythos-5-launch-meta-ai-hack-llms-as-black-boxes-future-of-agents/) ticked the clock to **5:20** — a small move toward midnight, half in honor of the $20M Founders Fund put into SpaceX in 2008 and half on the [S&P 500 refusing to waive its profitability rule](https://arstechnica.com/tech-policy/2026/06/sp-500-blocks-fast-spacex-entry-wont-waive-rule-for-unprofitable-ai-firms/) to fast-track SpaceX and OpenAI, which removes the passive-money backstop and makes any eventual burst uglier. The surrounding financing turned circular: [Google paying SpaceX $920M/month for xAI compute](https://www.cnbc.com/2026/06/05/google-to-pay-spacex-920-million-a-month-for-xai-compute-capacity.html) while already owning a chunk of SpaceX, plus [Alphabet's ~$84.75B equity raise](https://www.reuters.com/legal/transactional/alphabet-raise-8475-billion-upsized-equity-offering-fund-ai-ambitions-2026-06-03/).
 
 [Episode 30](/episodes/30-fable-5-ban-metas-ai-gulag-elias-thorne-loop-engineering/) moved the clock **back to 5:30** as the SpaceX IPO held (up ~25%) and the market kept shrugging off the warning flags. Two commoditization tells — a [Claude SDK running as an Apple Foundation Model](https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models) and the end of subsidized inference ([TechCrunch](https://techcrunch.com/2026/06/09/can-tech-companies-learn-to-love-cheaper-models/), Microsoft pulling Claude Code back to Copilot on cost) — plus an [NBER paper pricing real hyperscaler insolvency risk](https://www.nber.org/system/files/working_papers/w35290/w35290.pdf) (~3.4% of GDP effectively bet on the singularity) rounded out the segment.
+
+[Episode 31](/episodes/31-grok-buys-cursor-midjourney-goes-hardware-hermes-agent-evaluation-driven-development/) moved the clock **forward to 5:00**, resuming the move toward midnight on three real bearish signals: [ChatGPT's market share slipping below 50% for the first time](https://techcrunch.com/2026/06/16/chatgpts-market-share-slips-below-50-for-first-time/) (46.4%, with Gemini at 27.7% and Claude at 10.3%) against a ceiling of ~2B users and no 10x of growth left, [Nvidia raising over $25B in its first bond deal since 2021](https://arstechnica.com/ai/2026/06/chipmaker-nvidia-seeks-to-raise-over-25b-in-first-bond-deal-since-2021/), and Ed Zitron walking [OpenAI's FT-verified financials](https://www.wheresyoured.at/exclusive-openai-financials/) — a $38.5B loss in 2025, the first hard look at the flagship's actual numbers.
 
 ## Related concepts
 

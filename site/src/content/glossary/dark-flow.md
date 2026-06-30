@@ -2,7 +2,7 @@
 term: "Dark Flow"
 definition: "A deceptive state of perceived productivity during vibe coding, where the feeling of progress masks a lack of genuine understanding -- analogous to slot machine 'losses disguised as wins.'"
 slug: "dark-flow"
-episodes: ["12", "25"]
+episodes: ["12", "25", "31"]
 aliases: ["dark flow state", "vibe coding flow"]
 ---
 
@@ -21,6 +21,8 @@ This matters because the bill comes due during debugging, refactoring, or any si
 ## Recent Data Points
 
 [Episode 25](/episodes/25-elon-vs-openai-trial-drama-billion-token-context-race-multi-agent-patterns-2026) added two confirming data points from opposite ends of the AI-tooling debate. Simon Willison's [admission that vibe coding and agentic engineering have converged for him personally](https://simonwillison.net/2026/May/6/vibe-coding-and-agentic-engineering/) — running `--dangerously-skip-permissions` by default, shipping unreviewed code, framing the resulting trust drift as the same problem you have depending on any large team — names the normalization-of-deviance variant of dark flow from the skeptic side. The same week, Dexter Horthy publicly walked back his "dark factory" agentic-engineering stance at AI Engineer Europe, arriving at roughly the same conclusion from the proponent side: the comprehension cost compounds in ways the velocity metrics do not capture.
+
+[Episode 31](/episodes/31-grok-buys-cursor-midjourney-goes-hardware-hermes-agent-evaluation-driven-development/) sharpened the gambling analogy from a product angle. A [Provi.me piece arguing Claude Code is a video game](https://provi.me/cc-like-video-games) names the "one more prompt" loop — the variable-reward pull that keeps you running the agent three hours past bedtime — as the mechanism by which AI finally made B2B SaaS addictive. The hosts connected it straight back to dark flow: the engagement is real, but it is engagement with the slot-machine loop of prompting and accepting output, not with the system you are supposedly building. The episode's lighter artifact — an "agent dice" repo where rolling a natural 20 fires a stop hook that makes the agent reflect and write itself a skill — is the same gamification turned into a deliberate feature rather than an accidental trap.
 
 ## Related Concepts
 
