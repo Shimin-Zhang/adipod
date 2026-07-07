@@ -2,9 +2,10 @@
 title: "TPUs vs GPUs Explained: What Every AI Developer Should Actually Know"
 description: "You use AI models every day but probably cannot explain why Google built its own chips. Here is the hardware difference that shapes which models are fast, cheap, or neither."
 date: "2026-04-11"
+lastUpdated: "2026-07-06"
 slug: "tpu-vs-gpu-developers-guide"
-keywords: "TPU vs GPU explained, TPU vs GPU AI, Google TPU developer guide, AI hardware for developers"
-episodes: ["4"]
+keywords: "TPU vs GPU explained, TPU vs GPU AI, Google TPU developer guide, AI hardware for developers, OpenAI Broadcom jalapeno chip, inference ASIC, systolic array"
+episodes: ["4", "32"]
 ---
 
 TPUs (tensor processing units) are Google's custom-designed AI chips built exclusively for matrix multiplication, the core operation in neural network training and inference. GPUs (graphics processing units) are general-purpose parallel processors, originally designed for rendering graphics, that became the default AI hardware because their architecture happened to overlap with machine learning workloads. The key architectural difference: TPUs use systolic arrays that pass data directly between operations, while GPUs require memory round-trips between each step. This makes TPUs faster and more power-efficient for AI workloads, but less flexible and only available through Google Cloud.
@@ -84,6 +85,12 @@ CUDA's software ecosystem is genuinely massive. PyTorch, the most popular ML fra
 GPUs are also more flexible. Nvidia's latest architectures include tensor cores that implement many of the same optimizations TPUs use for matrix math, while retaining the general-purpose programmability that makes GPUs useful for a wider range of workloads. If you need to run inference, train a model, and also run some non-ML compute on the same hardware, GPUs handle that. TPUs do one thing, but they do it exceptionally well.
 
 And the market structure matters. Anyone can buy Nvidia GPUs. Amazon, Microsoft, Meta, and every major cloud provider offer GPU instances. TPU access requires Google Cloud. For organizations with multi-cloud strategies or existing infrastructure commitments, TPU adoption involves a level of vendor lock-in that many are not willing to accept.
+
+## July 2026 Update: OpenAI Joins the Systolic-Array Club
+
+The strongest confirmation yet of this post's thesis: [OpenAI and Broadcom's "jalapeno" inference chip](https://openai.com/index/openai-broadcom-jalapeno-inference-chip/), covered on [Episode 32](/episodes/32-glm-5-2-undercuts-opus-self-rewriting-harness-ai-out-persuades-humans-prompt-injection-as-role-confusion/). Technical details are scant — most of what's known comes from analysts reading the wafer photo in the press release — but the reads converge on exactly the architecture described above: a systolic-array ASIC, a die notably larger than other inference accelerators, one large compute chiplet ringed by six HBM stacks. When the company most locked into Nvidia designed its own inference silicon, it built a TPU-shaped chip.
+
+Three details worth holding onto. The claim — vague but pointed — is cost-per-watt "substantially beating" current hardware, the metric that matters at OpenAI's serving scale and the same structural-margin story this post told about Gemini. The design took roughly nine months with LLMs in the loop, against hardware timelines historically measured in years — if that compression is real, the custom-silicon race iterates much faster from here. And the choice of six HBM stacks over cheaper memory, mid-supply-crunch, is a bet that memory bandwidth stays the binding constraint — the same lesson the systolic array itself encodes. Dan's angle on the show: consistent latency for SLOs may matter as much as cost for enterprises building on the API. The chip is still the moat. Now everyone is digging one.
 
 ## What to Actually Do With This Information
 

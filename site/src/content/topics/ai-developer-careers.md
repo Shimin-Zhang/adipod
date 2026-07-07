@@ -2,8 +2,8 @@
 title: "AI's Impact on Developer Careers: Frameworks for Thinking About What Comes Next"
 description: "Economic models, hiring data, and practitioner perspectives on how AI is reshaping software engineering careers — from workflow automation convexity to the Jevons paradox for code."
 slug: "ai-developer-careers"
-keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age"
-lastUpdated: "2026-06-22"
+keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age, SignalFire engineering hiring, Ramp AI adoption headcount, entry-level engineering jobs AI"
+lastUpdated: "2026-07-06"
 ogImage: "/og/ai-developer-careers"
 ---
 
@@ -76,6 +76,12 @@ The Wharton paper ["Thinking, Fast, Slow, and Artificial"](https://papers.ssrn.c
 The career implication: the developers who thrive with AI assistance are the ones who maintain independent judgment. The ones who defer — who experience [cognitive surrender](/glossary/cognitive-surrender/) — will gradually lose the skills that make them valuable. The gap between the two groups widens over time.
 
 [Episode 30](/episodes/30-fable-5-ban-metas-ai-gulag-elias-thorne-loop-engineering/) extended this from a confidence bump into a full breakdown. Christopher Koch's paper ["Beyond the Steeper Curve"](https://arxiv.org/html/2603.29681) argues AI doesn't merely steepen Dunning-Kruger — it causes [metacognitive decoupling](/glossary/metacognitive-decoupling/): observable output and self-assessment shoot up together while actual understanding and calibration stall or decline. In one cited study, AI raised everyone's scores *and* everyone overrated themselves, flattening the curve. The career-management implication Koch draws — and the one most teams are getting wrong — is that AI-assisted *productivity* and genuine *competence development* are now separate outcomes that need separate tracking; optimizing the first does nothing for the second and may quietly erode it. It's the measurable version of the skill-atrophy worry in the FAQ below.
+
+### The Resilience Data
+
+[Episode 32](/episodes/32-glm-5-2-undercuts-opus-self-rewriting-harness-ai-out-persuades-humans-prompt-injection-as-role-confusion/) brought the first broad 2025 hiring datasets, and they push against the replacement narrative from two directions. [SignalFire's data (via TechCrunch)](https://techcrunch.com/2026/06/24/ai-was-supposed-to-kill-engineering-jobs-but-new-data-suggests-theyre-the-most-resilient/) found software engineering was the *most resilient* job function of 2025 — roughly 55% of new hires across the companies tracked — with large firms trimming while early-stage startups expanded engineering headcount. And [Ramp's payroll data](https://ramp.com/data/heavy-ai-adopters-hire-more) shows firms that adopt AI (top 30% of AI spend; concretely, ≥$30 per employee per month) grow headcount 10.2% over the following two years, with entry-level headcount growing 12% post-adoption. The catch is in the composition: entry-level *share* of hires falls from 50% among never-adopters to 34% among high-intensity adopters — hard numbers for the "senior engineers are more in demand, not less" thesis. Two caveats from the episode: the data doesn't split traditional software engineers from ML-infrastructure roles (though Rahul's live fact-check of Ramp's interactive breakdown found bachelor's degrees, not PhDs, dominating hires), and Shimin's Jevons-paradox hypothesis — engineering is merely the *first* function to see adoption-driven hiring, with design and product to follow as they go AI-first — is consistent with the data but not yet proven by it.
+
+The management corollary landed in the same episode's listener mail: ChainGuard CEO Dan Lorenc told employees engineering managers should rank around the 50th percentile of Claude Code usage — leaders well below it "are leading a transformation they haven't experienced themselves." AI fluency is becoming a management requirement, not just an IC skill.
 
 ## How AI Is Changing the Developer Role
 
@@ -234,4 +240,4 @@ Periodically do work without AI assistance. Not as a Luddite gesture — as deli
 
 ---
 
-*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, 27, 28, and 30 of the ADI Pod. Updated June 2026.*
+*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, 27, 28, 30, and 32 of the ADI Pod. Updated July 2026.*

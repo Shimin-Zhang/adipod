@@ -2,10 +2,10 @@
 title: "Local Frontier-Class LLMs in 2026: Three Setups That Actually Work"
 description: "Local LLMs in 2026 are no longer underpowered toys — they're Sonnet-4.5-class agents running on $2K consumer hardware. A practitioner's guide to three working setups and the open-weight 3-6-months-behind-frontier argument that makes them worth running."
 date: "2026-05-23"
-lastUpdated: "2026-06-22"
+lastUpdated: "2026-07-06"
 slug: "local-frontier-llms-2026-setups"
-keywords: "local LLM 2026, Ryzen AI Max 395 LLM, DeepSeek V4 Flash local, Qwen 3.6 35B Pi Agent, llama.cpp Antires, run frontier LLM at home, open weight catches frontier, on-prem AI coding, Grace Hopper desktop, local agent driver, Pi Agent local model"
-episodes: ["22", "23", "26", "27", "30"]
+keywords: "local LLM 2026, Ryzen AI Max 395 LLM, DeepSeek V4 Flash local, Qwen 3.6 35B Pi Agent, llama.cpp Antires, run frontier LLM at home, open weight catches frontier, on-prem AI coding, Grace Hopper desktop, local agent driver, Pi Agent local model, GLM 5.2 open weight"
+episodes: ["22", "23", "26", "27", "30", "32"]
 ---
 
 If the words "local LLM" still call to mind a 7B-parameter chatbot that hallucinates the capital of France, your mental model is twelve months out of date. In mid-2026, "local" means Sonnet-4.5-class output running on a $2,000 box on your desk. The gap between frontier-API quality and local-frontier-class quality is somewhere between three and six months — Nathan Lubchenco's load-bearing claim on [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), and the data has kept supporting it.
@@ -21,6 +21,8 @@ The first is Anthropic's April 2026 OAuth revocation. When Anthropic broke third
 The second is open-weight quality. Lubchenco's claim that frontier-tier capability arrives in open weights within 3-6 months has held up across the last year. DeepSeek V4 landed roughly 6 months after the frontier release it tracks. Qwen 3.6 35B with 3B active parameters runs locally at 90-95 tokens per second and was strong enough that Simon Willison's pelican-on-a-bicycle benchmark broke for the first time — [a smaller open-weight model drew a better pelican than Claude Opus 4.7](https://simonwillison.net/2026/Apr/16/qwen-beats-opus/). When the size-to-quality correlation breaks, the cost-vs-capability conversation breaks with it.
 
 The combined effect: if your agent setup is a thin harness around any frontier model, you can hot-swap the model when the supply changes — and you can do it onto a machine you control. Hardware is the new moat that isn't a moat. The architectures below are what makes that actually work.
+
+[Episode 32](/episodes/32-glm-5-2-undercuts-opus-self-rewriting-harness-ai-out-persuades-humans-prompt-injection-as-role-confusion/) added the strongest data point yet for the open-weight argument: Z.ai's GLM 5.2, an open-weight 750B-parameter MoE (40B active), landing between Sonnet and Opus on real-world tests. [A head-to-head platformer build against Opus](https://techstackups.com/comparisons/glm-5.2-vs-opus/) came in at $5 versus an estimated $20 (slower — 1h10m vs 33 minutes — and it can't see screenshots), and [Semgrep's benchmarks had raw GLM 5.2 beating raw Claude Code on security tasks](https://semgrep.dev/blog/2026/we-have-mythos-at-home-glm-52-beats-claude-in-our-cyber-benchmarks/). At 750B total parameters it sits beyond the consumer boxes below — this one is "local" in the institutional sense: roughly 15 providers serve the same weights on OpenRouter, so you shop pricing, catch quality games with evals, and switch providers without switching models. Shimin's framing names what this section has been circling: open versus closed weights is commodity versus monopoly economics, and the commodity side keeps catching up.
 
 ## Setup 1: Qwen 3.6 35B A3B on Pi Agent
 

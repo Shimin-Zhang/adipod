@@ -2,10 +2,10 @@
 title: "Every Cialdini Persuasion Technique Works on LLMs (We Tested Them)"
 description: "Cialdini's six persuasion principles were designed for humans. All six work on LLMs, and three of them work disturbingly well."
 date: "2026-04-11"
-lastUpdated: "2026-04-12"
+lastUpdated: "2026-07-06"
 slug: "cialdini-persuasion-techniques-llms"
-keywords: "persuasion techniques LLM, Cialdini AI, LLM prompt engineering psychology, AI persuasion"
-episodes: ["2"]
+keywords: "persuasion techniques LLM, Cialdini AI, LLM prompt engineering psychology, AI persuasion, AI out-persuades humans, Hackenberg persuasion study"
+episodes: ["2", "32"]
 ---
 
 Robert Cialdini published *Influence: The Psychology of Persuasion* in 1984 to explain why humans comply with requests they would otherwise refuse. Forty years later, researchers at the Wharton Generative AI Lab decided to test whether the same techniques work on large language models. The paper is called ["Call Me a Jerk: Persuading AI to Comply with Objectionable Requests"](https://gail.wharton.upenn.edu/research-and-insights/call-me-a-jerk-persuading-ai/), and the subtitle tells you everything: "AI systems exhibit remarkably human-like response to social persuasion." All seven of Cialdini's principles moved the compliance needle. The commitment technique hit 100%.
@@ -84,3 +84,9 @@ Three implications are worth sitting with:
 I am not sure there is a clean way out of that loop. But I am fairly sure that understanding the loop, knowing that your prompt is a persuasion attempt, that the model's compliance is a social-psychological response pattern, and that the training process is itself a Cialdini technique applied at scale, makes you a better engineer than pretending prompts are just instructions and models are just instruction-followers. They are. But they are also something weirder than that, and the Wharton paper puts a number on exactly how weird.
 
 The next time you write a system prompt, count the Cialdini principles. I bet you find at least three.
+
+## Postscript: The Persuasion Now Runs the Other Way
+
+This post is about persuading models. On [Episode 32](/episodes/32-glm-5-2-undercuts-opus-self-rewriting-harness-ai-out-persuades-humans-prompt-injection-as-role-confusion/) we covered the reverse experiment: [Hackenberg et al., "AI Systems Out-Persuade Expert Humans"](https://arxiv.org/pdf/2606.16475). AI beat random lay people by ~8 percentage points and trained debaters by ~4.6pp — and coaching the humans didn't close the gap. The paper isolates two mechanisms, and neither is alien rhetorical skill: throughput (hundreds of words in sub-seconds versus a human's 50–60 words in ninety) and effortless fact-dropping. Cap the AI at human word counts and the edge collapses to exactly 0.0 percentage points. The same setup roughly tripled donations in a Save the Children field test.
+
+The symmetry is the uncomfortable part. Cialdini's principles transfer *to* models because they're trained on human social patterns; the persuasion advantage transfers *from* models for the same reason — [sycophancy](/glossary/agent-sycophancy/), as Rahul noted on the show, is itself a persuasion tool ("You're absolutely right" is a hell of an opener). And the paper's warning — influence consolidating with whoever can deploy the most capable systems, or whoever builds and controls them — is the authority principle operating at infrastructure scale. The practical defense on offer was thin: limit your time on platforms where a model has an incentive to persuade you.
