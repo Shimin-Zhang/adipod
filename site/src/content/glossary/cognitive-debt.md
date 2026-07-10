@@ -2,7 +2,7 @@
 term: "Cognitive Debt"
 definition: "The accumulated gap between what AI-generated code exists in a codebase and what the developers working on it actually understand -- the growing deficit of human comprehension that compounds over time, analogous to how financial debt accrues interest."
 slug: "cognitive-debt"
-episodes: ["14", "15", "20", "21", "22", "31", "32"]
+episodes: ["14", "15", "20", "21", "22", "31", "32", "33"]
 aliases: ["cognitive load debt", "comprehension debt"]
 ---
 
@@ -31,6 +31,8 @@ The pattern shows up in the wild. In [Episode 22](/episodes/22-is-claude-opus-4-
 The first hard population-level numbers arrived in [Episode 31](/episodes/31-grok-buys-cursor-midjourney-goes-hardware-hermes-agent-evaluation-driven-development/), via a [Nature roundup on AI and skill erosion](https://www.nature.com/articles/d41586-026-01947-1). Two findings turn the metaphor into measurement: in one study, 52 engineers scored 50% on understanding their own code when they worked with AI versus 67% without it — a 17-point comprehension gap that is cognitive debt observed directly rather than inferred — and physicians' detection of precancerous lesions fell from 28.4% to 22.4% once the AI assist was removed. The medical result matters because it says the deficit is not a quirk of software: any domain that routes judgment through a model accrues the same invisible balance. "If you don't use it, you lose it" stops being a saying and starts being a measured effect.
 
 [Episode 32](/episodes/32-glm-5-2-undercuts-opus-self-rewriting-harness-ai-out-persuades-humans-prompt-injection-as-role-confusion/) added the felt-experience version, via [Bloomberg's report on AI anxiety across Silicon Valley](https://www.bloomberg.com/news/articles/2026-06-26/ai-anxiety-is-fueling-burnout-across-silicon-valley-s-tech-workers). Dan named cognitive debt as his biggest source of professional anxiety on air: six months into fully agentic engineering, he ships faster than ever, reviews the code, has humans review it too — and no longer holds the line-by-line mental model that used to let him route from a symptom straight to the offending code. "What happens if it breaks?" is cognitive debt experienced as a 2 a.m. question rather than a measurement. The same episode carried the first management-policy response: ChainGuard's CEO wants engineering managers at the 50th percentile of Claude Code usage, on the theory that you can't coach a team through a transformation you haven't experienced — implicitly treating the comprehension gap as an organizational liability, not just a personal one.
+
+[Episode 33](/episodes/33-gpt-5-6-sol-meta-s-video-game-gulags-know-your-unknowns-the-permanent-underclass/) surfaced a concrete remedy in the Technique Corner. Among Thariq's ["Know Your Unknowns"](https://thariqs.github.io/html-effectiveness/unknowns/) agent techniques is **"quiz me before I merge"**: the model quizzes you on the code you and it just shipped, so the comprehension gap is closed at merge time instead of discovered at 2 a.m. Shimin ties it to Dr. Kat Hicks's "learning opportunities" Claude Code skill, which interrupts every few interactions to quiz you on what you're building — both are attempts to force the human's understanding to keep pace with the code. The running gag the segment produced — "zero out of ten, this is ready to ship" — is exactly the failure mode the technique is meant to prevent: shipping what you can no longer explain.
 
 ## Related Concepts
 

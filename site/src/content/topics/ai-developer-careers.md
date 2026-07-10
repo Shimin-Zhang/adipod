@@ -2,8 +2,8 @@
 title: "AI's Impact on Developer Careers: Frameworks for Thinking About What Comes Next"
 description: "Economic models, hiring data, and practitioner perspectives on how AI is reshaping software engineering careers — from workflow automation convexity to the Jevons paradox for code."
 slug: "ai-developer-careers"
-keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age, SignalFire engineering hiring, Ramp AI adoption headcount, entry-level engineering jobs AI"
-lastUpdated: "2026-07-06"
+keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age, SignalFire engineering hiring, Ramp AI adoption headcount, entry-level engineering jobs AI, AI jobs wipeout, EY CEO survey headcount, Ford grey beard engineers, permanent underclass, Fernando Borretti, AI productivity paycheck, Humlum Vestergaard Denmark"
+lastUpdated: "2026-07-10"
 ogImage: "/og/ai-developer-careers"
 ---
 
@@ -82,6 +82,14 @@ The career implication: the developers who thrive with AI assistance are the one
 [Episode 32](/episodes/32-glm-5-2-undercuts-opus-self-rewriting-harness-ai-out-persuades-humans-prompt-injection-as-role-confusion/) brought the first broad 2025 hiring datasets, and they push against the replacement narrative from two directions. [SignalFire's data (via TechCrunch)](https://techcrunch.com/2026/06/24/ai-was-supposed-to-kill-engineering-jobs-but-new-data-suggests-theyre-the-most-resilient/) found software engineering was the *most resilient* job function of 2025 — roughly 55% of new hires across the companies tracked — with large firms trimming while early-stage startups expanded engineering headcount. And [Ramp's payroll data](https://ramp.com/data/heavy-ai-adopters-hire-more) shows firms that adopt AI (top 30% of AI spend; concretely, ≥$30 per employee per month) grow headcount 10.2% over the following two years, with entry-level headcount growing 12% post-adoption. The catch is in the composition: entry-level *share* of hires falls from 50% among never-adopters to 34% among high-intensity adopters — hard numbers for the "senior engineers are more in demand, not less" thesis. Two caveats from the episode: the data doesn't split traditional software engineers from ML-infrastructure roles (though Rahul's live fact-check of Ramp's interactive breakdown found bachelor's degrees, not PhDs, dominating hires), and Shimin's Jevons-paradox hypothesis — engineering is merely the *first* function to see adoption-driven hiring, with design and product to follow as they go AI-first — is consistent with the data but not yet proven by it.
 
 The management corollary landed in the same episode's listener mail: ChainGuard CEO Dan Lorenc told employees engineering managers should rank around the 50th percentile of Claude Code usage — leaders well below it "are leading a transformation they haven't experienced themselves." AI fluency is becoming a management requirement, not just an IC skill.
+
+### The Jobs Panic Reverses
+
+[Episode 33](/episodes/33-gpt-5-6-sol-meta-s-video-game-gulags-know-your-unknowns-the-permanent-underclass/) caught the replacement narrative reversing in the data. An [EY survey (via MSN/WSJ) found the share of CEOs who expect AI investment to significantly cut headcount fell from 46% in January 2025 to 20% by May 2026](https://www.msn.com/en-us/money/careersandeducation/big-tech-has-suddenly-flipped-on-the-ai-jobs-wipeout-scenario/ar-AA27hbnR) — Big Tech quietly walking back the wipeout thesis it spent a year selling. The concrete case in the same segment: Ford rehired the "grey beard" engineers it had automated away after the AI it put on QA kept failing — a P&L saving that reversed into a P&L cost. Shimin's read is that the CEOs are either waking up from AI psychosis or from an ordinary hype cycle; either way, the headline number moved the opposite direction from the panic, even as the underlying workflow changes keep accelerating.
+
+Post-Processing put the productivity side of the same question on firmer footing. An [Okane write-up](https://okaneland.com/study/ai-productivity-roi-at-work/) built on Humlum & Vestergaard's Denmark study — unusually granular national time-use data — found AI saves ~2.8% of working hours in AI-exposed industries, and almost none of it reaches the paycheck. The 2026 revision ("Still Waters, Rapid Currents") reframes the thesis: the real change is work being reorganized below the measurable surface. The career-capture takeaways: stack AI on repeated, high-volume tasks so small percentages compound into real hours; solo builders and strong salary-negotiators capture the 3–7% gain most directly (though solo builders also eat their own token bill); and, as Rahul put it, converting the speedup into money you can actually measure is itself the job. It's the practitioner-level version of [workflow automation convexity](/glossary/workflow-automation-convexity/) — the upside is real, but it accrues to whoever is positioned to capture it, not automatically to everyone who got faster.
+
+The doom-scenario bookend came via Rahul's long-awaited segment on Fernando Borretti's ["No One Escapes the Permanent Underclass"](https://borretti.me/article/no-one-escapes-the-permanent-underclass). The Valley's work-or-be-locked-out story assumes a [permanent overclass](/glossary/permanent-underclass/) of AI-company insiders sitting on top; Borretti's move is that if AI genuinely does everything, that overclass has no more function than a modern aristocrat — no military to fund, no officers to supply — and even perfect alignment doesn't save the pyramid. The hosts' read: the framing was always more anxiety-marketing than economics, and the career advice that falls out of it — grind infinitely or be discarded — is exactly backwards.
 
 ## How AI Is Changing the Developer Role
 
@@ -240,4 +248,4 @@ Periodically do work without AI assistance. Not as a Luddite gesture — as deli
 
 ---
 
-*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, 27, 28, 30, and 32 of the ADI Pod. Updated July 2026.*
+*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, 27, 28, 30, 32, and 33 of the ADI Pod. Updated July 2026.*

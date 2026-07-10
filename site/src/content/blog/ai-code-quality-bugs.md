@@ -2,10 +2,10 @@
 title: "Why AI Code Has 1.7x More Bugs (and What to Do About It)"
 description: "CodeRabbit's data shows AI-authored PRs have 1.7x more findings. The number alone misses the real story, so here's what it means for your team."
 date: "2026-04-11"
-lastUpdated: "2026-05-04"
+lastUpdated: "2026-07-10"
 slug: "ai-code-quality-bugs"
-keywords: "AI code quality, AI code bugs, AI-generated code review, CodeRabbit AI report"
-episodes: ["7", "12", "15", "22", "23"]
+keywords: "AI code quality, AI code bugs, AI-generated code review, CodeRabbit AI report, code cleanliness coding agents, SonarSource minimal pair study, does clean code matter to AI"
+episodes: ["7", "12", "15", "22", "23", "33"]
 ---
 
 AI-generated code has measurably more defects than human-written code. That's not hype, conjecture, or vibes; it's what the data says. The question worth asking isn't whether the number is real, but what it actually tells you about the failure mode and whether your team is set up to catch it.
@@ -87,6 +87,8 @@ The answer isn't to stop using AI for coding. The answer is to recognize that AI
 **Don't treat the 1.7x number as permanent.** Models are improving. Tooling is improving. But the structural pattern (AI failing differently than humans, verification requiring active comprehension, review attention being a finite resource) is unlikely to change even as the specific numbers do. Build your processes around the pattern, not the point estimate. And don't assume the more capable model is the lower-defect one for your task: in [Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/) we covered Simon Willison's pelican-on-a-bicycle benchmark breaking for the first time, with a much smaller open-weight model (Qwen 3.6 35B A3B) producing a better drawing than Claude Opus 4.7 — a small reminder that capability ranking does not automatically translate into per-task output quality.
 
 **Tell your agent not to over-edit.** A separate study, ["Coding Models Are Doing Too Much"](https://nrehiew.github.io/blog/minimal_editing/), covered in [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), measured token-level Levenshtein distance on synthetic boolean-flip tasks across nine frontier coding models. The headline finding wasn't that all models over-edit (they do, to varying degrees — GPT-5.4 worst at 0.395, Opus 4.6 best) but that explicit "minimum-edit" instructions in the prompt close most of the gap. Over-editing isn't a model limitation; it's a default. If your agent routinely rewrites comments, restructures functions, and renames unrelated variables when you asked for a one-line change, the fix is in your AGENTS.md / CLAUDE.md / system prompt: tell it not to. Models follow this instruction, and the cognitive complexity of edited functions drops measurably when they do — which means less surface area for the kind of plausible-but-wrong logic errors the CodeRabbit study found in the first place.
+
+**Keep the codebase clean — for the token bill, not the pass rate.** [Episode 33](/episodes/33-gpt-5-6-sol-meta-s-video-game-gulags-know-your-unknowns-the-permanent-underclass/) covered [SonarSource's controlled minimal-pair study](https://arxiv.org/pdf/2605.20049) on whether code cleanliness actually affects coding agents. They "vibe-cleaned" and deliberately "slopified" matched repos — singular-purpose functions, good names, and clean control flow versus duplicated helpers and accidental coupling — then ran the same agent (Claude Opus 4.6) across 30 handcrafted tasks. The result cuts against intuition in one direction and confirms it in another: cleanliness barely moved the pass rate, but clean repos cut input tokens ~7%, output ~8%, and reasoning tokens ~11%. Messy code costs the agent time and money, not correctness — the same tax it levies on a human reading unfamiliar code, which you can almost watch in the reasoning trace ("this file says that, but that file says that; let me re-read"). Shimin's caveats keep it honest: the open-source repos were probably already in Opus 4.6's training data, the sample is small, and a few slopified repos actually outperformed on individual tasks. Treat it as suggestive, not settled — but it reframes "clean code for the agents" as a cost optimization, not a reliability lever.
 
 ## The Uncomfortable Middle Ground
 

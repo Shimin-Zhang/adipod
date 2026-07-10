@@ -2,10 +2,10 @@
 title: "Local Frontier-Class LLMs in 2026: Three Setups That Actually Work"
 description: "Local LLMs in 2026 are no longer underpowered toys — they're Sonnet-4.5-class agents running on $2K consumer hardware. A practitioner's guide to three working setups and the open-weight 3-6-months-behind-frontier argument that makes them worth running."
 date: "2026-05-23"
-lastUpdated: "2026-07-06"
+lastUpdated: "2026-07-10"
 slug: "local-frontier-llms-2026-setups"
-keywords: "local LLM 2026, Ryzen AI Max 395 LLM, DeepSeek V4 Flash local, Qwen 3.6 35B Pi Agent, llama.cpp Antires, run frontier LLM at home, open weight catches frontier, on-prem AI coding, Grace Hopper desktop, local agent driver, Pi Agent local model, GLM 5.2 open weight"
-episodes: ["22", "23", "26", "27", "30", "32"]
+keywords: "local LLM 2026, Ryzen AI Max 395 LLM, DeepSeek V4 Flash local, Qwen 3.6 35B Pi Agent, llama.cpp Antires, run frontier LLM at home, open weight catches frontier, on-prem AI coding, Grace Hopper desktop, local agent driver, Pi Agent local model, GLM 5.2 open weight, AMD Ryzen AI Halo Developer Desktop, Ryzen AI Developer Center"
+episodes: ["22", "23", "26", "27", "30", "32", "33"]
 ---
 
 If the words "local LLM" still call to mind a 7B-parameter chatbot that hallucinates the capital of France, your mental model is twelve months out of date. In mid-2026, "local" means Sonnet-4.5-class output running on a $2,000 box on your desk. The gap between frontier-API quality and local-frontier-class quality is somewhere between three and six months — Nathan Lubchenco's load-bearing claim on [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), and the data has kept supporting it.
@@ -61,6 +61,8 @@ This is the setup Dan ran on [Episode 26](/episodes/26-llm-neural-anatomy-with-d
 **Color.** Dan summarized it on the episode about as cleanly as anyone has: "this is Sonnet 4.5, it's running on my machine, and it did something useful." That sentence would have been a hallucination twelve months ago.
 
 **Update ([Episode 30](/episodes/30-fable-5-ban-metas-ai-gulag-elias-thorne-loop-engineering/)).** Dan demoed the rig again a few weeks later, now running it as **DS4** — the "dwarf star runner" build for DeepSeek-V4 Flash — with the ROCm path merged into llama.cpp's `main` (no more checking out a separate branch) and generation up to **~14 tok/s**, a meaningful bump over the original ~10. Pointed at Pi Agent, it tool-called its way to an answer live on the show — and gloriously self-derailed into a leftover scheduled heartbeat task and a Playwright browser launch mid-demo. The takeaway holds and improves: a ~$2,000–$4,000 box, no cloud, agent-usable speeds, output Dan still pegs around Sonnet level.
+
+**Update ([Episode 33](/episodes/33-gpt-5-6-sol-meta-s-video-game-gulags-know-your-unknowns-the-permanent-underclass/)).** AMD shipped an official version of this exact chassis in the Hardware Hut: the [**AMD Ryzen AI Halo Developer Desktop**](https://www.pcmag.com/news/amd-ryzen-ai-halo-first-look-giant-local-ai-power-in-a-pint-sized-box), a Ryzen AI Max+ 395 box in AMD's own branding. The silicon is what you already know — big unified memory, Apple-style — but the differentiator is software: it ships with a preinstalled AMD Ryzen AI Developer Center that scripts the annoying parts, spinning up isolated PyTorch environments and dependency-update runbooks out of the gate. That matters because AMD's out-of-box story has always been rougher than CUDA's, and this is the first time the setup tax comes pre-paid. PCMag benched it (on Windows, to Dan's mild dismay) against the G1A: it won on the productivity suite but lost on GPU scores despite near-identical silicon — likely cooling or thermal throttling. The catch, as always, is availability — "you can buy it" is doing some work in that sentence — and, per the hosts' standing offer, we'd happily benchmark one running Linux instead of Windows if a box turns up at an AI Tinker night.
 
 ## Setup 3: David Ng's Basement Grace Hopper Desktop
 

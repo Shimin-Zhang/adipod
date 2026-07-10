@@ -2,8 +2,8 @@
 title: "The Complete Guide to Claude Code: Workflows, Tips, and the Stuff the Docs Don't Tell You"
 description: "Everything we've learned about Claude Code across 20 episodes — context management, CLAUDE.md, plan mode, multi-agent workflows, and the pitfalls nobody warns you about."
 slug: "claude-code-guide"
-keywords: "Claude Code best practices, Claude Code tips, Claude.md guide, Claude Code workflow, Claude Code context management, Claude Code plan mode"
-lastUpdated: "2026-04-10"
+keywords: "Claude Code best practices, Claude Code tips, Claude.md guide, Claude Code workflow, Claude Code context management, Claude Code plan mode, Claude Code agent techniques, know your unknowns, quiz me before I merge, blind spot pass, tweakable plan"
+lastUpdated: "2026-07-10"
 ogImage: "/og/claude-code-guide"
 ---
 
@@ -161,6 +161,26 @@ These are the patterns we've converged on after 20 episodes of daily Claude Code
 
 **Don't fight the permissions model.** The dual-track permission system exists for good reasons. If you find yourself wanting to bypass it, you're probably about to do something you should think about more carefully.
 
+## Know Your Unknowns: Agent Techniques Worth Stealing
+
+[Episode 33](/episodes/33-gpt-5-6-sol-meta-s-video-game-gulags-know-your-unknowns-the-permanent-underclass/) worked through ["Know Your Unknowns"](https://thariqs.github.io/html-effectiveness/unknowns/) by [Thariq](https://x.com/trq212/status/2073100352921215386), an Anthropic engineer on Claude Code who distilled the set from producing the Fable 5 release video. The organizing idea (borrowed from Rumsfeld's known/unknown quadrants) is that most of the value in agentic work is surfacing what you don't know you don't know. Eleven techniques, staged across the build:
+
+**Before you implement:**
+
+- **Blind-spot pass.** Point the agent at the repo and have it teach *you* — landmines, history, missing concepts. It fills its context with the codebase and hands the map back.
+- **Teach me the vocabulary.** Have the agent teach you the domain's terms of art (Thariq's was color grading — LUTs, contrast curves, vibrance) so you can write more precise prompts.
+- **Four design directions.** Ask for N concrete, non-overlapping implementations instead of one generalized sketch, so you can feel out the real solution space.
+- **Brainstorm the intervention.** Get the full option space grounded in the actual codebase before committing, ordered easiest-to-hardest (or by whatever axis helps you weigh trade-offs).
+- **The interview.** Have the agent interview you to strip out ambiguity before it writes anything. Dan's favorite — his three-stage version: prime the agent's context, state the task in two or three sentences, then ask "what am I missing?" Shimin and Rahul bounce off it, which is itself the tell that it's a technique to *practice*, not one everyone takes to.
+- **Reference implementation.** Give the agent a concrete example to diff against instead of an amorphous spec — even better, hand it three or four references and have it do a trade-off analysis you then hand-pick from.
+- **The tweakable plan.** Order the plan by the design decisions most likely to change (or by Amazon's one-way vs two-way doors), not sequentially — so the parts you'll revisit surface first.
+
+**During and after:**
+
+- **Implementation-notes file.** Have the agent keep a running note of what it did, where humans intervened, and where it deviated from the spec — a high-level artifact your reviewers can read instead of the raw diff.
+- **Buy-in docs.** An Amazon-style one-pager on what you built and why, to persuade the team ("why this pull request matters"). Rahul's aside: AI turns out to be more persuasive than the humans writing the PR, so let it make the case.
+- **Quiz me before I merge.** Have the model quiz you on the code you shipped together to pay down [comprehension debt](/glossary/cognitive-debt/). Shimin ties it to Dr. Kat Hicks's "learning opportunities" Claude Code skill; the running gag — "zero out of ten, this is ready to ship" — is exactly the failure it's meant to catch.
+
 ## Frequently Asked Questions
 
 ### How do I know when Claude Code has lost context?
@@ -193,4 +213,4 @@ Read every diff before approving it. If you don't understand a change, don't mer
 
 ---
 
-*This guide is a living document. We update it as new episodes cover Claude Code developments. Last updated April 2026 based on content through [Episode 20](/episodes/20-claude-code-source-leak-emotion-concepts-in-llms-and-surprising-facts-ais-know-about-us/).*
+*This guide is a living document. We update it as new episodes cover Claude Code developments. Last updated July 2026, with the "Know Your Unknowns" agent techniques from [Episode 33](/episodes/33-gpt-5-6-sol-meta-s-video-game-gulags-know-your-unknowns-the-permanent-underclass/).*
