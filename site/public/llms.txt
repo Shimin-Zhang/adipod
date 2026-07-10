@@ -26,7 +26,7 @@ ADI Pod is a weekly podcast for working software engineers navigating AI tooling
 
 - Shimin Zhang — Software Engineer, co-host. https://adipod.ai/about/shimin/
 - Dan Lasky — Software Engineer, co-host. https://adipod.ai/about/dan/
-- Rahul Yadav — Director of Engineering at Functionize, co-host. https://adipod.ai/about/rahul/
+- Rahul Yadav — Director of Engineering, co-host. https://adipod.ai/about/rahul/
 
 ## Original Concepts
 

@@ -4,7 +4,7 @@ title: "AI Acquisitions, Everyone's a Staff Engineer Now, and Building a Technic
 date: "2026-01-09"
 slug: "8-ai-acquisitions-everyone-s-a-staff-engineer-now-and-building-a-technical-writing-agent"
 description: "The podcast Artificial Developer Intelligence features hosts Shimin Zhang and guest co-host Rahul Yadav discussing the evolving landscape of AI in software engineering. They cover recent AI-related acquisitions, such as Nvidia's purchase of Groq and Meta's acquisition of Manus, and explore the implications of these moves. The conversation also delves into the challenges and opportunities presented by AI in the tech industry, including the role of AI in automation and the potential for AI to reshape job roles. The episode concludes with a discussion on the AI bubble and its impact on the economy, highlighting the balance between technological advancement and financial stability."
-keywords: "Nvidia Groq acquisition, LPU, Meta Manus, Andrej Karpathy, staff engineer, AI abstractions, MCP, agents, Functionize, Llama, Qwen, DeepSeek, AI agents, career ladders"
+keywords: "Nvidia Groq acquisition, LPU, Meta Manus, Andrej Karpathy, staff engineer, AI abstractions, MCP, agents, test automation, Llama, Qwen, DeepSeek, AI agents, career ladders"
 appleUrl: "https://podcasts.apple.com/podcast/artificial-developer-intelligence/id1857109105"
 spotifyUrl: "https://open.spotify.com/show/4eDLlGoktxMngPNq9aGqLX"
 overcastUrl: "https://overcast.fm/itunes1857109105"
@@ -70,12 +70,12 @@ That's it.
 Shimin (01:03)
 Perfect. I have a strange urge to eat some Skittles right now for some reason. On today's show, we've got our usual news threadmill where we're going to be talking about a couple of articles related to some acquisitions in the AI space, followed by post of the week where we have two articles, one titled, Everyone is a Staff Engineer Now, and another, a News End 2025 Letter.
 
-After that, we're going to go to VibeIntel, where Rahul is going to give us some hard-won experience with working on AI-enabled automation at his company. I should introduce him. Rahul is the director of engineering at Functionize. Welcome.
+After that, we're going to go to VibeIntel, where Rahul is going to give us some hard-won experience with working on AI-enabled automation at his company. I should introduce him. Rahul is a director of engineering. Welcome.
 
-Tell us a little bit about what functionalizes and what you do there.
+Tell us a little bit about what your company does and what you do there.
 
 Rahul Yadav (01:51)
-Yeah, yeah, all these thoughts my own don't represent functionizes. So anything I said before this and anything else I'm about to say for the rest of podcast, my own thoughts.
+Yeah, yeah, all these thoughts my own don't represent my employer's. So anything I said before this and anything else I'm about to say for the rest of podcast, my own thoughts.
 
 Shimin (02:03)
 After that,
@@ -524,12 +524,12 @@ Yeah, it will include Demis, Hasabe, Seymour, Altman, Jensen, maybe others.
 Shimin (42:05)
 Yes, in their robot forms.
 
-Well, let's do a little vibe and tell, speaking of where AI is currently. You've recently worked on a technical writing agent project at work. And we should mention you are, we already did, but you're the director of engineering, ⁓ Functionized.
+Well, let's do a little vibe and tell, speaking of where AI is currently. You've recently worked on a technical writing agent project at work. And we should mention you are, we already did, but you're the director of engineering.
 
 Rahul Yadav (42:16)
 Yep.
 
-Functionize is a test automation company. So what we do is we focus on
+We're a test automation company. So what we do is we focus on
 
 things that are manually tested today. And so you can think about, know, manual QA testers testing all sorts of different parts of an application that are complicated and cannot be automated easily. And we build our own models in-house. And so one of the things I like to talk about with candidates is...
 
