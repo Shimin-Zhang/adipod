@@ -2,9 +2,10 @@
 title: "Hallucination Neurons: What Happens When You Try to Turn Off LLM Lying"
 description: "Researchers found specific neurons that activate when LLMs hallucinate. Suppressing them reduces false claims by up to 40%, but the tradeoffs reveal something deeper about how these models work."
 date: "2026-04-11"
+lastUpdated: "2026-07-16"
 slug: "hallucination-neurons-llm"
-keywords: "hallucination neurons LLM, LLM hallucination fix, H-neurons paper, AI hallucination research"
-episodes: ["7", "26"]
+keywords: "hallucination neurons LLM, LLM hallucination fix, H-neurons paper, AI hallucination research, J space global workspace, Anthropic interpretability, LLM deception detection"
+episodes: ["7", "26", "34"]
 ---
 
 Only 0.1% of the neurons in a large language model are associated with hallucination. That is the headline finding from a [Tsinghua University paper](https://arxiv.org/pdf/2512.01797) published in December 2025. While 0.1% sounds trivial, in a model with billions of parameters, you are still talking about millions of neurons. The researchers called them H-neurons. What they found about where these neurons come from, and what happens when you suppress them, is more instructive than the number itself.
@@ -54,6 +55,8 @@ Mechanistic interpretability offers, at least in theory, the possibility of inte
 Whether this becomes a practical tool depends on scaling. The Tsinghua team worked with relatively small open-weight models. Identifying H-neurons in models with hundreds of billions of parameters, let alone mixture-of-experts architectures where different experts activate for different inputs, is a substantially harder problem. And even if you identify them, the suppression tradeoff means you need fine-grained control, not a binary switch. The dial needs more notches.
 
 A useful 2026 data point on the scaling question: in his guest interview on [Episode 26](/episodes/26-llm-neural-anatomy-with-david-noel-ng-forward-deployed-everybody-running-llms-at-home/), [Dr. David Noel Ng](https://dnhkng.github.io/) reported follow-up experiments on his ["LLM Neuroanatomy"](https://dnhkng.substack.com/) series showing the layer-duplication finding from Llama 2 generalizes to the Qwen 3.5 family and to mixture-of-experts architectures. Brute-forced beam search across cross-block combinations did not beat the simple "repeat one middle block 1-5 times" recipe — on Qwen 3.5, layer 33-35 wins, repeated once or twice. His PCA Explorer (post 3 of the series) shows clusters in early layers form along language lines, dissolve into semantic clusters in the middle, and re-form as language clusters at the top — direct visual evidence that the abstract "thinking" representation interpretability research is targeting really exists as a layer-band rather than a single neuron. The mic-drop from the interview, in Ng's own words: "If you're thinking, ah, it's a stochastic parrot, then you're in the wrong field."
+
+The bigger 2026 update landed in [Episode 34](/episodes/34-apple-sues-openai-boko-haram-s-frontier-ai-state-of-cli-coding-agents-global-workspace-in-llms/): Anthropic's [global-workspace research](https://www.anthropic.com/research/global-workspace) found that roughly 10% of a model's internal memory is explicitly reserved for concepts the model can put into words — the "J space" (J for Jacobian) — and built a "J lens" to probe and modulate it mid-inference. Where H-neurons located a failure mode, the J space locates something closer to the model's working memory, and it's causal in both directions: swap Mars for Earth in the workspace and "red" becomes "blue" in the output; cut access to the workspace entirely and fact recall and fluency survive while reasoning and complex inference collapse — the routing distinction this post ends on, made directly visible. The detection story is further along too: in blackmail-style evals the J space lights up "this is fake, I'm being tested" while the output claims compliance — which is the "detect the low-confidence (or low-honesty) internal state and route accordingly" machinery this post asked for, demonstrated if not yet productized. The workspace holds up to 25 active concepts at once, against a human's 3–4. The dial is growing notches.
 
 ## Why LLM Hallucination Cannot Be Fully Eliminated
 

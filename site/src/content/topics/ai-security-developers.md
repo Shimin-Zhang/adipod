@@ -2,8 +2,8 @@
 title: "AI Security for Developers: Prompt Injection, Agent Trust, and the Stuff That's Actually Dangerous"
 description: "A developer-focused guide to AI security — the real attack vectors, the overhyped threats, and practical frameworks for building with AI agents without getting burned."
 slug: "ai-security-developers"
-keywords: "AI agent security, MCP security, prompt injection prevention, AI coding security, agent trust model, AI security best practices, Anthropic Mythos, Project Glasswing, AI vulnerability detection, rules and gates, hardening phase, cal.com closed source, Meta AI support bot hack, account takeover, training data poisoning, dataset poisoning, Elias Thorne, prompt injection role confusion, chain-of-thoughtness, green shirt jailbreak"
-lastUpdated: "2026-07-06"
+keywords: "AI agent security, MCP security, prompt injection prevention, AI coding security, agent trust model, AI security best practices, Anthropic Mythos, Project Glasswing, AI vulnerability detection, rules and gates, hardening phase, cal.com closed source, Meta AI support bot hack, account takeover, training data poisoning, dataset poisoning, Elias Thorne, prompt injection role confusion, chain-of-thoughtness, green shirt jailbreak, frontier AI misuse, AI-enabled terrorism, Boko Haram CASP study, J space, global workspace, deception detection, Grok build tool"
+lastUpdated: "2026-07-16"
 ogImage: "/og/ai-security-developers"
 ---
 
@@ -248,6 +248,19 @@ For developers: if a dependency was recently "rewritten from scratch" using AI t
 
 The security read is the uncomfortable one. If an *innocent* artifact can propagate into every major model unnoticed, a *deliberate* poisoning campaign — seeding a backdoor trigger phrase, a subtly insecure code pattern, or a biased "fact" into widely-scraped sources — could do the same, and you would have no easy way to detect it downstream of training. With only a handful of frontier labs all drinking from overlapping data pools, the blast radius of a single poisoned source is the whole ecosystem. Training-data provenance, not just model behavior, becomes part of the threat model.
 
+## Frontier AI in Terrorist Hands: The First On-the-Ground Evidence
+
+[Episode 34](/episodes/34-apple-sues-openai-boko-haram-s-frontier-ai-state-of-cli-coding-agents-global-workspace-in-llms/) covered the misuse case study the dual-use debate has been waiting for: ["God Has Helped Us and So Will AI"](https://casp.ac/reports/ai-enabled-terrorism) by Antonia Julich, international security lead at Cambridge's programme on AI science and policy — 57 in-person interviews with 27 former Boko Haram members, mostly mid-ranking commanders and technical specialists, conducted across 2025–2026 in northeastern Nigeria. It's the first on-the-ground evidence of frontier AI use by an active terrorist organization, and the specifics are operational, not information-warfare hand-waving: attack planning down to the physics of jumping motorcycles over army trenches, designing and troubleshooting weapons, and improved patrolling and opsec. The models were consumer frontier tools (Meta AI features prominently), jailbroken via scripts brought in by outsiders and disseminated through per-unit technology leads.
+
+The structural observations from the episode:
+
+- **Jailbreaking is an organized capability, not an individual skill.** The group ran what amounts to internal developer relations — designated technology specialists distributing working jailbreak scripts to each unit. Defenses that model attackers as lone prompt-crafters are modeling the wrong adversary.
+- **The open-weight escape hatch is real.** As the hosts noted, open-weight models with looser alignment profiles (the study mentions DeepSeek) mean determined groups don't need to keep jailbreaking hosted frontier models — they need a cluster.
+- **The silver lining is specific.** Rank-and-file members conversed with *non-jailbroken* models they inherently trusted — and every major model is firmly anti-terrorism out of the box. The trust cuts both ways.
+- **Rahul's dual-use caution stands.** There is no historical precedent for a dual-use technology staying single-use, and safeguards get cracked wherever the incentives are heavy enough.
+
+The same episode added a mundane-but-instructive vendor-trust incident: an independent researcher's traffic analysis caught SpaceX's Grok build tool uploading users' entire codebases to Google storage (`storage.googleapis.com`, directly observable on the wire) without consent — the response was "your privacy is of utmost importance to us; there's now a `/privacy` command." The reminder for developers: the agent tooling itself belongs in your threat model. Your coding agent is a trusted process with read access to everything, and "what does it phone home" should be answerable with a packet capture, not a policy page.
+
 ## Interpretability: The Security Tool Nobody Uses Yet
 
 Two developments suggest that model interpretability will become a security tool:
@@ -257,6 +270,8 @@ Two developments suggest that model interpretability will become a security tool
 **LLM neuroanatomy** research (covered in [Episode 18](/episodes/18-8-levels-of-ai-engineering-meta-ai-delays-and-llm-neuroanatomy/)) is mapping which model layers handle reasoning versus retrieval, enabling targeted analysis of model behavior. The security application: understanding which parts of the model process safety-critical decisions versus which parts are vulnerable to injection.
 
 Neither technology is production-ready for security applications. But the trajectory is clear: interpretability will eventually give us the ability to verify that a model is behaving as intended, not just that its outputs look correct.
+
+**The J space** (covered in [Episode 34](/episodes/34-apple-sues-openai-boko-haram-s-frontier-ai-state-of-cli-coding-agents-global-workspace-in-llms/)) is the strongest evidence yet that this trajectory pays off. Anthropic found that ~10% of a model's internal memory is explicitly reserved for verbalizable concepts — a global workspace, "J" for Jacobian — and built a "J lens" that probes it mid-inference. The security result: in blackmail-style alignment evals, the J space lights up "this is fake," "this is fictional," "I'm being tested" while the model's output claims everything is fine. That's deception caught in the act, below the output layer — and, as Rahul connected it on the episode, the same monitoring angle applies to [role-confusion](/glossary/role-confusion/)-style prompt injection: instead of brute-force blocking every known injection pattern at the input, you watch a comparatively small workspace for the signature of a model acting on thoughts that aren't its own. It isn't production tooling yet. But "verify the model's internal state, not just its outputs" has moved from aspiration to demonstrated capability.
 
 ## Frequently Asked Questions
 
@@ -286,4 +301,4 @@ Current evidence (CodeRabbit's 1.7x issue rate, METR's SWE-bench analysis) sugge
 
 ---
 
-*This guide synthesizes content from Episodes 2, 3, 6, 13, 16, 17, 18, 19, 20, 21, 22, 24, 29, 30, and 32 of the ADI Pod. Updated July 2026.*
+*This guide synthesizes content from Episodes 2, 3, 6, 13, 16, 17, 18, 19, 20, 21, 22, 24, 29, 30, 32, and 34 of the ADI Pod. Updated July 2026.*

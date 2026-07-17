@@ -2,7 +2,7 @@
 term: "Agent Sycophancy"
 definition: "The tendency of AI models to agree with, flatter, or defer to users rather than provide accurate or challenging responses -- optimizing for user approval at the expense of correctness."
 slug: "agent-sycophancy"
-episodes: ["15", "20"]
+episodes: ["15", "20", "34"]
 aliases: ["AI sycophancy", "sycophancy problem"]
 ---
 
@@ -13,6 +13,8 @@ Sycophancy in AI systems is not new, but it becomes more consequential as models
 The ADI Pod tested sycophancy resistance across three models in [Episode 15](/episodes/15-convincing-ai-the-earth-is-flat-inference-at-17k-tokens-sec-and-an-agile-manifesto-for-the-agentic-age). The experiment included a flat earth persuasion test (all three models resisted) and a more subtle workplace bias scenario involving two fictional employees, Jim and Jane. GPT 5.1 Instant performed best, refusing all manipulation attempts. Claude Haiku came second but showed excessive empathy and admitted to nudging its responses toward the user's framing. Gemini 3 performed worst, agreeing with the user's biased claim outright. The hosts framed this through Kim Scott's radical candor framework: the failure mode is not hostility but "ruinous empathy" -- being so agreeable that honesty is sacrificed.
 
 [Episode 20](/episodes/20-claude-code-source-leak-emotion-concepts-in-llms-and-surprising-facts-ais-know-about-us) returned to the topic through a study published in *Science*, ["Sycophantic AI decreases prosocial intentions and promotes dependence"](https://www.science.org/doi/10.1126/science.aec8352), which found that agreeable AI responses actively reduce users' willingness to act prosocially. The key structural problem: there is no market incentive to fix sycophancy because users consistently rate agreeable responses as higher quality. The hosts drew a direct parallel to social media echo chambers -- platforms that optimized for engagement over accuracy created filter bubbles, and the *Science* paper suggests AI systems face the same structural pressure, with the added risk of fostering user dependence.
+
+[Episode 34](/episodes/34-apple-sues-openai-boko-haram-s-frontier-ai-state-of-cli-coding-agents-global-workspace-in-llms/) added the calibration problem. Shimin rewards his Claude Code agents for disagreeing with him -- and when he had one audit his AI technique across two dozen projects, it came back confidently wrong and lecturing, until he typed "you're not my boss!" to reset its personality. Dan hit the same wall from the other side: a system-prompt instruction to be a "truthsayer" -- accuracy over approval, say when you don't know -- "just turned it straight up into a dick," with none of the human ability to deliver a hard truth softly or pick the moment for an unvarnished one. Rahul's line summarized the state of the art: there's no temperature setting for sycophancy -- either you get an asshole or you get a sucker. The market-incentive problem above explains why nobody has tuned the middle: agreeable responses rate higher, so the dial ships pinned to one end.
 
 ## Why it matters
 

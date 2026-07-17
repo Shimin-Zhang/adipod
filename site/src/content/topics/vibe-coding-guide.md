@@ -2,8 +2,8 @@
 title: "Vibe Coding: What Works, What Doesn't, and When to Stop"
 description: "A practitioner's guide to vibe coding — the psychology of dark flow, the economics of cognitive debt, and the frameworks that separate productive AI-assisted coding from expensive gambling."
 slug: "vibe-coding-guide"
-keywords: "vibe coding guide, vibe coding pros cons, dark flow coding, cognitive debt AI, vibe coding risks, AI coding best practices"
-lastUpdated: "2026-04-10"
+keywords: "vibe coding guide, vibe coding pros cons, dark flow coding, cognitive debt AI, vibe coding risks, AI coding best practices, control the ideas not the code, Antirez, should I read AI generated code"
+lastUpdated: "2026-07-16"
 ogImage: "/og/vibe-coding-guide"
 ---
 
@@ -163,6 +163,12 @@ Not all AI-generated code needs the same level of review. The ThoughtWorks retre
 
 Mario Zechner's essay argues for deliberate pacing in AI-assisted development. The hosts extended this into the cognitive bankruptcy concept: speed without comprehension is a liability. The practical application: after a long vibe coding session, close the AI and read your own code. If you can trace the data flow, you're fine. If you can't, you've been accumulating debt.
 
+### Control the Ideas, Not the Code
+
+The most direct answer yet to "am I still supposed to read all the code?" came in [Episode 34](/episodes/34-apple-sues-openai-boko-haram-s-frontier-ai-state-of-cli-coding-agents-global-workspace-in-llms/) from Antirez — creator of Redis — in ["Control the Ideas, Not the Code"](https://antirez.com/news/169). His position: stop reviewing every generated line. Agents produce tens of thousands of lines an hour and you physically can't keep up; models are genuinely good at locally optimal code, and their jagged edge is the big ideas — what the design should be, how things compose. So spend your strained eight hours where the model is weak: own the ideas, the architecture, the features, and the QA, the way The Mythical Man-Month prescribed controlling conceptual integrity rather than keystrokes. Crucially, this is *not* a defense of vibe coding — you still control and understand every idea in the codebase; you've just stopped auditing every function the way you long ago stopped auditing compiler output. (Antirez himself still reads every line of his Redis PRs — out of responsibility, he says, not necessity.)
+
+The hosts' pushback maps the limits. Dan's counter-experience from the same week: on a small codebase built almost entirely by agents, his conceptual understanding silently drifted from reality until nothing worked the way he thought — the fix was having the agent walk him through the entire call chain, entry point to exit, with clickable line references; a debugger session for his mental model. Rahul's sharper version: the bug doesn't live at the level of your understanding, it lives in one of the ten thousand lines below it — so the real skill is calibrating depth-of-review to blast radius, a skim for the side tool, line-by-line for the outage-class production path, and nobody has a principled way to set that dial yet. His market test for whether any of this works: SaaS business-insurance premiums will eventually price in how well teams actually understand their own systems. Where the review line sits is still open — but "read everything" and "read nothing" are both now indefensible positions.
+
 ## The Evolution of the Term
 
 It's worth noting how quickly "vibe coding" went from a neutral descriptor to a loaded term:
@@ -210,4 +216,4 @@ No. The goal isn't to avoid AI-assisted development — it's to maintain underst
 
 ---
 
-*This guide synthesizes content from Episodes 3, 5, 7, 12, 14, 15, 16, and 20 of the ADI Pod. Updated April 2026.*
+*This guide synthesizes content from Episodes 3, 5, 7, 12, 14, 15, 16, 20, and 34 of the ADI Pod. Updated July 2026.*
