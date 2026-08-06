@@ -2,9 +2,10 @@
 title: "The Agentic-Engineering Recantation: Four Months, Six Practitioners, One Wall"
 description: "Four episodes in three weeks, six practitioners walked into the same wall: AI codegen velocity met its maintenance asymptote. Here's the symptom, the diagnosis, and the discipline that came out the other side."
 date: "2026-05-23"
+lastUpdated: "2026-08-06"
 slug: "agentic-engineering-recantation"
 keywords: "agentic engineering recantation, simon willison vibe coding, dexter horthy dark factory, code is free as in puppies, james shore maintenance ai, drew brunig 10 lessons, jesse vincent rules and gates, code review bottleneck, agentic coding discipline, AI maintenance asymptote"
-episodes: ["22", "23", "24", "25", "27", "28"]
+episodes: ["22", "23", "24", "25", "27", "28", "36"]
 ---
 
 Dan spent a Saturday last month trying to fix a production bug. His pre-LLM colleague, looking over his shoulder, eventually fixed it in five minutes. Dan's instinct, watching that happen, was to add more tooling — better prompts, more skills, a sharper context-engineering setup. That instinct is the diagnostic. He told the story on [Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/) without softening it.
@@ -64,3 +65,7 @@ The skeptics didn't win. The proponents didn't lose. The hard-won middle is that
 ---
 
 *This post was drafted by an AI agent (Claude) from ADI Pod episode transcripts and edited for the site. Source episodes: [22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/), [23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/), [24](/episodes/24-openais-goblin-problem-10-lessons-when-code-is-cheap-ai-addiction-loop/), [25](/episodes/25-elon-vs-openai-trial-drama-billion-token-context-race-multi-agent-patterns-2026/), [27](/episodes/27-openai-beats-musk-gemini-3-5-flash-and-ai-burnout-mitigation/), [28](/episodes/28-claude-opus-4-8-undocumented-claude-code-features-eval-harness-for-ai-skills-pope-on-ai/).*
+
+## August 2026 Postscript: The Lights-Off Factory Does Not Work
+
+The recantation found its most direct written statement in [Episode 36](/episodes/36-pacing-the-frontier-anthropic-models-go-rogue-why-software-factories-fail-math-in-the-age-of-ai/): Dex — the same Dexter Horthy whose AI Engineer Europe walk-back appears above — published ["Why Software Factories Fail"](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/wsff.md), which surveys the "just token harder" hype train and then posits, from production experience: "The lights-off factory does not work. Eventually, you have to suck it up and go dig into the code base you stopped reading three months ago… you're miserable reading all the slop code you let slip into your system." The first time it happened he shook it off — two weeks fixing Claude spaghetti. By the third, rewriting from scratch was easier. His discipline additions — program design (interface pseudocode, call-stack diffs) and [vertical slices](/glossary/steel-threads/) (one steel thread at a time, not 3D-printed horizontal layers) — extend the practice catalog above. The same episode delivered the anecdote that closes the loop: Steve Yegge's Gas Town, the harness that anchored the far end of the autonomy ladder, burned down under the weight of its own complexity; Yegge — who famously read none of its code — is rewriting from scratch, a version that works only for him. One historical footnote from Dex's post worth keeping: "software factory" traces to the same 1968 NATO conference that coined "software engineering." The factory dream is as old as the discipline. So, apparently, is the wall.

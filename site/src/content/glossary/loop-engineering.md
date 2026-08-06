@@ -2,7 +2,7 @@
 term: "Loop Engineering"
 definition: "Building out the supporting infrastructure around a bare agent loop -- scheduled automations, worktrees, skills, plugins, subagents, and memory -- so that a simple 'run until the goal is reached' loop becomes a dependable, self-correcting coding harness."
 slug: "loop-engineering"
-episodes: ["30"]
+episodes: ["30", "36"]
 aliases: ["loop engineering", "agent loop engineering"]
 ---
 
@@ -24,6 +24,8 @@ By this definition, both the Codex app and Claude Code are already full loop-eng
 Shimin's framing on the show traces a progression in how developers direct agents: prompt engineering (tell the agent what to do) → [spec-driven development](/blog/spec-driven-development-ai/) (define the end goal precisely) → loop engineering (keep the goal looser, but bake your judgment into reusable skills and tools). Because the loop turns out so much more code, it *amplifies* whatever judgment you implant: the metaphor on the episode ran handsaw → table saw ("watch your fingers") → tree-harvesting heavy machinery, where a mistake risks far more.
 
 The drawbacks Osmani names are the ones the show keeps returning to: verification still falls on the developer (skip it and the output drifts), and [cognitive debt](/glossary/cognitive-debt) bites hardest when a self-running loop breaks at 3am and no one understands the repo anymore.
+
+[Episode 36](/episodes/36-pacing-the-frontier-anthropic-models-go-rogue-why-software-factories-fail-math-in-the-age-of-ai/) recorded the strongest published pushback: [Dex of HumanLayer's "Why Software Factories Fail"](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/wsff.md) files loop engineering under the "just token harder" hype train and argues the lights-off loop fails at the maintenance boundary — eventually you dig into the codebase you stopped reading three months ago. The same episode reported that Gas Town — whose multi-repo-copy approach this page's worktree note references — burned down under its own complexity, Steve Yegge rewriting from scratch. Neither kills the loop; both say the judgment you bake in has to include [program design and vertical slices](/glossary/steel-threads/), not just skills and memory.
 
 ## Related Concepts
 

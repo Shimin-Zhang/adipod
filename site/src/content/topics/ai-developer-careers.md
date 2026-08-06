@@ -2,8 +2,8 @@
 title: "AI's Impact on Developer Careers: Frameworks for Thinking About What Comes Next"
 description: "Economic models, hiring data, and practitioner perspectives on how AI is reshaping software engineering careers — from workflow automation convexity to the Jevons paradox for code."
 slug: "ai-developer-careers"
-keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age, SignalFire engineering hiring, Ramp AI adoption headcount, entry-level engineering jobs AI, AI jobs wipeout, EY CEO survey headcount, Ford grey beard engineers, permanent underclass, Fernando Borretti, AI productivity paycheck, Humlum Vestergaard Denmark"
-lastUpdated: "2026-07-10"
+keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age, SignalFire engineering hiring, Ramp AI adoption headcount, entry-level engineering jobs AI, AI jobs wipeout, EY CEO survey headcount, Ford grey beard engineers, permanent underclass, Fernando Borretti, AI productivity paycheck, Humlum Vestergaard Denmark, Seattle Tech Week hiring survey, AI hiring interviews 2026, whiteboard interviews return, vibe-coded take-home"
+lastUpdated: "2026-08-06"
 ogImage: "/og/ai-developer-careers"
 ---
 
@@ -168,6 +168,10 @@ ML engineer [Nathan Lubchenco](https://nathanlubchenco.substack.com/), on [Episo
 
 The deeper claim Lubchenco made on the show: agents are now consistently better at coding than even senior ML engineers, by their own admission. His prediction: late-2026 may be when models cross the median software engineer. If that holds, hiring conversations need to stop treating AI tooling as an optional accessory and start treating it as the primary surface where engineering skill is exercised.
 
+### Field Notes from Seattle Tech Week: How Startups Actually Hire Now
+
+[Episode 36](/episodes/36-pacing-the-frontier-anthropic-models-go-rogue-why-software-factories-fail-math-in-the-age-of-ai/) added primary data to Lubchenco's framework: Shimin spent Seattle Tech Week surveying founders, hiring managers, and engineers about their actual workflows (startup-heavy, not an unbiased sample — his caveat). Ranked as hiring managers ranked them: technical skill still leads, but it has moved from LeetCode to architecture and system design — ideally with scar tissue, a story about a technically-correct-but-practically-flawed decision that burned you. Product and customer obsession second; AI fluency ("being AI-pilled") third; mission alignment and soft skills round it out, with one founder specifically wanting candidates who had already built something in the product space. The cautionary tale: a founder hired a principal engineer off a take-home the candidate had vibe-coded, and fired them inside two months — costly and embarrassing — which is part of why in-person whiteboarding is coming back (Shimin's happy about it; the two-way design conversation is the point). Larger companies still run LeetCode-ish processes with AI-enabled design questions bolted on, which surfaces a problem nobody has standardized: who grades how well you use AI, when "are you using AI like I am" is the new tabs-versus-spaces? And despite the equity argument for take-homes with provided API keys having reached a few companies, almost nobody reviews a candidate's actual AI interaction history — everyone still grades outputs. One CTO ran the exception: a continuously updated process benchmarked against candidate batches to keep a live distribution of how devs actually perform. HackerRank as a hiring philosophy — but at least an honest one.
+
 ## New Roles and Career Structures
 
 ### The design engineer
@@ -248,4 +252,4 @@ Periodically do work without AI assistance. Not as a Luddite gesture — as deli
 
 ---
 
-*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, 27, 28, 30, 32, and 33 of the ADI Pod. Updated July 2026.*
+*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, 27, 28, 30, 32, 33, and 36 of the ADI Pod. Updated August 2026.*

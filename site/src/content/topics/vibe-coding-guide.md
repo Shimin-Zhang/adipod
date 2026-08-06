@@ -2,8 +2,8 @@
 title: "Vibe Coding: What Works, What Doesn't, and When to Stop"
 description: "A practitioner's guide to vibe coding — the psychology of dark flow, the economics of cognitive debt, and the frameworks that separate productive AI-assisted coding from expensive gambling."
 slug: "vibe-coding-guide"
-keywords: "vibe coding guide, vibe coding pros cons, dark flow coding, cognitive debt AI, vibe coding risks, AI coding best practices, control the ideas not the code, Antirez, should I read AI generated code"
-lastUpdated: "2026-07-16"
+keywords: "vibe coding guide, vibe coding pros cons, dark flow coding, cognitive debt AI, vibe coding risks, AI coding best practices, control the ideas not the code, Antirez, should I read AI generated code, AI PR review survey, vertical slices, steel threads, software factory"
+lastUpdated: "2026-08-06"
 ogImage: "/og/vibe-coding-guide"
 ---
 
@@ -82,6 +82,8 @@ The anecdotal warnings become more compelling with numbers.
 **AI inflates confidence by ~12 percentage points regardless of accuracy.** The Wharton paper ["Thinking, Fast, Slow, and Artificial"](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6097646) found that participants' confidence in their answers increases by roughly 12 percentage points when AI is involved — whether or not the AI's answer is correct. From [Episode 19](/episodes/19-thinking-fast-slow-and-artificial-meta-s-trouble-with-rogue-agents-and-fomo-in-the-age-of-ai/).
 
 **Codebases grow 40% in 3 months without proportional feature growth.** From [Episode 17](/episodes/17-slop-garbage-collection-cleanroom-rewrites-and-will-claude-ruin-our-teams/)'s discussion of code garbage collection — illustrating the cruft that vibe coding accumulates when nobody's cleaning up after the agent.
+
+**Roughly one in ten devs still reads AI-generated PRs line by line.** Shimin's Seattle Tech Week survey ([Episode 36](/episodes/36-pacing-the-frontier-anthropic-models-go-rogue-why-software-factories-fail-math-in-the-age-of-ai/)) — startup-heavy, so not an unbiased sample — found line-by-line review effectively dead on the ground, with one large-company dev admitting their employer wouldn't be happy if it knew how little review actually happens. What replaced it: specs and plans, mermaid architecture diagrams, boundary conditions and function signatures, and reading the tests. Policy and practice have quietly diverged, bottom-up.
 
 ## When Vibe Coding Works
 
@@ -168,6 +170,10 @@ Mario Zechner's essay argues for deliberate pacing in AI-assisted development. T
 The most direct answer yet to "am I still supposed to read all the code?" came in [Episode 34](/episodes/34-apple-sues-openai-boko-haram-s-frontier-ai-state-of-cli-coding-agents-global-workspace-in-llms/) from Antirez — creator of Redis — in ["Control the Ideas, Not the Code"](https://antirez.com/news/169). His position: stop reviewing every generated line. Agents produce tens of thousands of lines an hour and you physically can't keep up; models are genuinely good at locally optimal code, and their jagged edge is the big ideas — what the design should be, how things compose. So spend your strained eight hours where the model is weak: own the ideas, the architecture, the features, and the QA, the way The Mythical Man-Month prescribed controlling conceptual integrity rather than keystrokes. Crucially, this is *not* a defense of vibe coding — you still control and understand every idea in the codebase; you've just stopped auditing every function the way you long ago stopped auditing compiler output. (Antirez himself still reads every line of his Redis PRs — out of responsibility, he says, not necessity.)
 
 The hosts' pushback maps the limits. Dan's counter-experience from the same week: on a small codebase built almost entirely by agents, his conceptual understanding silently drifted from reality until nothing worked the way he thought — the fix was having the agent walk him through the entire call chain, entry point to exit, with clickable line references; a debugger session for his mental model. Rahul's sharper version: the bug doesn't live at the level of your understanding, it lives in one of the ten thousand lines below it — so the real skill is calibrating depth-of-review to blast radius, a skim for the side tool, line-by-line for the outage-class production path, and nobody has a principled way to set that dial yet. His market test for whether any of this works: SaaS business-insurance premiums will eventually price in how well teams actually understand their own systems. Where the review line sits is still open — but "read everything" and "read nothing" are both now indefensible positions.
+
+### Vertical Slices (Steel Threads)
+
+The newest named mitigation comes from Dex of HumanLayer's ["Why Software Factories Fail"](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/wsff.md), covered in [Episode 36](/episodes/36-pacing-the-frontier-anthropic-models-go-rogue-why-software-factories-fail-math-in-the-age-of-ai/). His opening posit: "the lights-off factory does not work" — eventually you dig into the codebase you stopped reading three months ago, site down, users angry; he rewrote his own system from scratch after the third such episode. The fix has two parts. Program design: go one level below system architecture — interface pseudocode and call-stack diffs — so consistency is specified before the loop runs. And [vertical slices](/glossary/steel-threads/): agents default to painting horizontal layers like a 3D printer (migration, then domain logic, then API, then frontend), while humans work in steel threads — one thin end-to-end path, then the next. Constraining the agent to a single slice restores steering leverage: your correction lands after one thread, not after the whole floor is laid. Bonus, per the same episode: these artifacts double as the comprehension layer — the thing you actually read now that almost nobody reads the PRs.
 
 ## The Evolution of the Term
 
