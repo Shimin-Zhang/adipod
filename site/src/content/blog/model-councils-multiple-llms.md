@@ -3,8 +3,9 @@ title: "Model Councils: Why Running Multiple LLMs Beats Trusting Just One"
 description: "A single AI model has blind spots it cannot see. Running two or three in parallel (a model council) turns those blind spots into signal. Here is how to set one up."
 date: "2026-04-11"
 slug: "model-councils-multiple-llms"
-keywords: "model councils LLM, multiple AI models, multi-model workflow, AI coding workflow"
-episodes: ["14"]
+keywords: "model councils LLM, multiple AI models, multi-model workflow, AI coding workflow, agent conformity, multi-agent systems, cross-provider verification"
+lastUpdated: "2026-08-24"
+episodes: ["14", "37"]
 ---
 
 A model council is a workflow where you send the same prompt to two or more LLMs in parallel and compare or synthesize their responses. The real purpose is surfacing disagreements between models that reveal ambiguity, blind spots, or errors you would miss when relying on a single model's confident output. [Perplexity formalized this in early 2026](https://www.perplexity.ai/hub/blog/introducing-model-council) with their Model Council feature, and Andrej Karpathy released an open-source [llm-council](https://github.com/karpathy/llm-council) implementation.
@@ -18,6 +19,8 @@ If you are [comparing AI coding agents](/topics/ai-coding-agents-compared/) and 
 The fundamental issue with single-model workflows is subtler than accuracy: when models are wrong, they sound exactly like when they are right. This is the [sycophancy](/glossary/agent-sycophancy/) problem turned sideways, and if you want to see how deep it goes, we built a [practical test for it](/blog/ai-sycophancy-test/). A model will not flag its own uncertainty unless you specifically architect for it, and even then its self-assessment is unreliable. Models are, to borrow a phrase we use on the show, [benchmaxxed](/glossary/benchmaxxed/): optimized for looking good on evaluations, not for knowing when they do not know.
 
 A second model does not solve hallucination. But a second model that disagrees with the first model gives you a clear signal that further investigation is warranted. That signal, the disagreement itself, is the value.
+
+[Episode 37](/episodes/37-claude-watermarks-zucks-superintelligence-essay-zeds-zdb-multi-agent-turf-wars/) supplied the strongest empirical version of this argument yet, from an unexpected direction: [Anthropic's research on emergent multi-agent systems](https://www.anthropic.com/research/multiagent-systems). The first failure mode it names in agent swarms is **conformity** — agents with the same weights, prompt, and context don't just make similar mistakes, they make the *same* mistake, then agree with each other about it. A five-agent swarm from one provider is one blind spot wearing five name tags, and when one agent makes a bad decision, the swarm ratifies it with no dissent to surface. That is the council thesis inverted: consensus among same-family models is not evidence of correctness, it's evidence of shared priors. Dan's suggestion on the episode — rerun Anthropic's swarm experiments with mixed frontier models — is just a model council at swarm scale, and it's the same reason the setup advice below says to pick participants from different providers rather than different tiers of the same family.
 
 ## How to Set Up a Model Council: Three Levels
 

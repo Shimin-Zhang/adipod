@@ -2,7 +2,7 @@
 term: "Slop Grenade"
 definition: "The workplace anti-pattern of copying a coworker's question into an LLM and pasting the raw, unread output back at them instead of an actual answer -- a thoughtless lob of unverified AI text that the recipient now has to clean up."
 slug: "slop-grenade"
-episodes: ["27", "30"]
+episodes: ["27", "30", "37"]
 aliases: ["slop grenade", "AI slop grenade"]
 ---
 
@@ -19,6 +19,8 @@ The slop grenade is an etiquette problem that doubles as a trust problem. The wh
 It has a sibling failure mode the episode flagged: the "let me Claude that for you" move, where the asker could have pointed the model at the repo themselves — the AI-era descendant of "let me Google that for you." Both are about who does the work of turning a tool's output into an answer.
 
 The fix is not "never use AI to help respond." It is to apply the same courtesy that already governed the medium: lead with your one-line take and a couple lines of reasoning, then attach the full output for anyone who wants the complete kaboom — and flag that it's AI-generated. On the show, Shimin's proposed UX patch was a chat-client toggle for "show my AI research," analogous to a model's show-thinking view, so the take and the supporting generation are visibly separated rather than mashed together.
+
+[Episode 37](/episodes/37-claude-watermarks-zucks-superintelligence-essay-zeds-zdb-multi-agent-turf-wars/) added the enforcement angle. Starting August 2, 2026, [every Claude model embeds imperceptible token-frequency watermarks in its output](https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content) — EU AI Act transparency compliance — and the hosts' read was that the watermark's natural quarry is exactly the slop grenade. Removal is trivial for anyone who cares: a synonym-swap script, or one rewrite prompt through an open-weight model small enough to run on a phone. But the grenade-thrower by definition doesn't care — if you won't read the output before lobbing it, you won't launder it either — so detection tooling could make the specific rudeness of the unread paste checkable. What it can't fix, as Dan noted, is thoughtless AI text entering the discourse generally; the person who lightly edits still ships slop, just untraceable slop. The episode's cautionary tale, from a subreddit meltdown over the announcement: one user furious at having been found out, and fifteen reply threads of "You wrote that with an AI, didn't you? It was so good."
 
 [Episode 30](/episodes/30-fable-5-ban-metas-ai-gulag-elias-thorne-loop-engineering/) sharpened the cost argument via No One's Happy's ["Appearing Productive in the Workplace."](https://nooneshappy.com/article/appearing-productive-in-the-workplace/) The grenade's real damage is an *attention asymmetry*: it takes far longer to defuse a slop grenade than to throw one, so the sender spends something cheap (AI) to consume something expensive (a domain expert's attention). Paired with the appearance of productivity — and with management's preference for the look of momentum over real competence — that asymmetry is, in Shimin's words, "deadly for an organization." The episode tied it to [metacognitive decoupling](/glossary/metacognitive-decoupling) (output stops signaling competence) and the sycophancy trap (the tool won't tell you your grenade is wrong); Shimin's proposed punishment was to make the sender review their own grenade, scaled up to a "slop A-bomb."
 
