@@ -3,8 +3,9 @@ title: "AI Didn't Steepen the Dunning-Kruger Curve. It Shattered It."
 description: "The popular take is that AI puts Dunning-Kruger on steroids. A 2026 paper argues something stranger and worse: AI cuts the wiring between how good your work looks and how good you actually are."
 date: "2026-06-22"
 slug: "ai-dunning-kruger-shattered"
-keywords: "AI Dunning-Kruger, metacognitive decoupling, AI competence vs productivity, AI self-assessment, appearing productive AI, AI skill calibration"
-episodes: ["30"]
+keywords: "AI Dunning-Kruger, metacognitive decoupling, AI competence vs productivity, AI self-assessment, appearing productive AI, AI skill calibration, Gaokao AI homework study, AI skill atrophy, AI-augmented students"
+episodes: ["30", "38"]
+lastUpdated: "2026-08-31"
 ---
 
 The comforting version of the AI-and-competence story goes like this: AI puts the Dunning-Kruger effect on steroids. Hand a beginner a model that writes confident code, and they feel like a staff engineer while shipping junior mistakes. It's a tidy story, and the tidiest part is that it leaves the famous curve intact: same shape, just steeper.
@@ -37,6 +38,10 @@ But a confidence bump is a one-time tax. You can warn people about it, and a suf
 And the obvious correction is offline. The tool that produced the work is optimized to be agreeable, so it isn't going to volunteer that you've stopped understanding what it hands you. That's [agent sycophancy](/glossary/agent-sycophancy/) doing exactly what it's incentivized to do: there's no market reward for a model that tells a paying customer they've been coasting.
 
 It's worth separating this from the two failure modes it rhymes with. [Cognitive debt](/glossary/cognitive-debt/) is shipping code you don't understand. Cognitive surrender is trusting a specific wrong output in the moment. Metacognitive decoupling is the layer above both: you've lost the instrument that would have told you either one was happening. My co-host Dan put the failure mode better than the paper's abstract did, riffing on the inflated sense of reach: "I can write my own database engine now. I don't need Postgres, I'm just gonna write dangres." The joke works because you can't always tell when you're the one saying it.
+
+## The classroom version: 26,000 students, one number
+
+When we first covered metacognitive decoupling it rested on lab studies. [Episode 38](/episodes/38-ai-homework-atrophy-github-commits-double-nick-muy-sit-down-ai-sandbagging/) brought field data at scale: an [SSRN study of 26,000 Chinese students](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6868618) found six-plus months of AI homework help cut Gao Kao scores 18–24% — roughly the difference between a top-tier university and a local community college. The decoupling signature is exact: homework time fell from 64 to 45 minutes, the homework got *better*, and the students got worse. Output quality rising while understanding decays is this post's thesis, measured on a national exam. The control condition matters just as much: "AI-augmented" students who used the tools but kept spending the same time showed no penalty at all. The damage tracked the reinvested hours, not the tool — which is the actionable version of everything above. The exam is the recalibration instrument students have and professionals lack; as Dan put it on the episode, our version still exists, it's just unscheduled: the 2am sev, when everything's on fire and the question is whether you know how the code works.
 
 ## The organizational version: productivity stops signaling competence
 

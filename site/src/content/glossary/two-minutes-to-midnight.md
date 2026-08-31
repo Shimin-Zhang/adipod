@@ -2,7 +2,7 @@
 term: "Two Minutes to Midnight"
 definition: "A recurring ADI Pod segment where the hosts assess how close the AI industry is to an economic reckoning, using a Doomsday Clock metaphor to track investment sustainability, market signals, and bubble indicators."
 slug: "two-minutes-to-midnight"
-episodes: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "36"]
+episodes: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "36", "38"]
 aliases: ["2MTM", "doomsday clock segment", "AI bubble clock", "bubble watch"]
 ---
 
