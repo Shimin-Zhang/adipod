@@ -2,8 +2,8 @@
 title: "AI Coding Agents Compared: Claude Code, Codex, Cursor, Pi Agent, and the Rest"
 description: "A practitioner's comparison of AI coding agents — what each tool actually does well, where they fall short, and why the moat might not be in the tooling."
 slug: "ai-coding-agents-compared"
-keywords: "Claude Code vs Cursor, AI coding agent comparison, best AI coding tool, Claude Code vs Codex, AI coding agent review 2026, On-My-Pi, OMP, Pi-based coding agent, hash-anchored patches, ast-grep, Databricks coding agent benchmark, GLM 5.2, agent ops"
-lastUpdated: "2026-07-16"
+keywords: "Claude Code vs Cursor, AI coding agent comparison, best AI coding tool, Claude Code vs Codex, AI coding agent review 2026, On-My-Pi, OMP, Pi-based coding agent, hash-anchored patches, ast-grep, Databricks coding agent benchmark, GLM 5.2, agent ops, OpenAI pulls models from Cursor, SpaceX Cursor acquisition, model access risk"
+lastUpdated: "2026-09-03"
 ogImage: "/og/ai-coding-agents-compared"
 ---
 
@@ -82,6 +82,8 @@ Cursor is the most prominent IDE-based agent and the one most people encounter f
 ### Weaknesses
 
 **Funding concerns.** In [Episode 1](/episodes/1-ai-benchmarks-tech-radar-and-limits-of-current-llm-architectures/), the question was raised: "But will Cursor having no funding to do that?" — questioning Cursor's ability to compete with well-funded model providers like Anthropic and OpenAI who can bundle their own agents.
+
+**Model access risk — realized.** [Episode 39](/episodes/39-metas-ai-backfires-glm-5-3-flash-openais-jalapeno-chip-the-end-of-programming/) covered the other shoe dropping: after SpaceX acquired Cursor for ~$60B, [OpenAI announced it will pull its models from Cursor by November 12](https://openai.com/index/our-decision-on-cursor-following-its-acquisition-by-spacex/), citing terms-of-service history — with distillation as the unstated subtext. Episode 1's funding question got answered by acquisition; the new question is what an IDE agent's moat is when frontier labs can revoke its models at will. If you're choosing Cursor today, price in that its model menu is subject to inter-lab politics in a way Claude Code's and Codex's are not.
 
 **IDE lock-in.** Terminal agents are editor-agnostic. Cursor ties you to their fork of VS Code. If you work across multiple editors or prefer Vim/Emacs/terminal workflows, Cursor doesn't fit.
 

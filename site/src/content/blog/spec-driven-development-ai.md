@@ -2,10 +2,10 @@
 title: "Spec-Driven Development: Why Writing Specs Matters More When AI Writes the Code"
 description: "If AI generates code from prompts, the spec is the product. Here is how spec-driven development works, why it matters more than ever, and what a good spec actually looks like."
 date: "2026-04-11"
-lastUpdated: "2026-08-06"
+lastUpdated: "2026-09-03"
 slug: "spec-driven-development-ai"
-keywords: "spec-driven development, spec-driven development AI, verified spec-driven development, VSDD"
-episodes: ["5", "15", "16", "24", "25", "36"]
+keywords: "spec-driven development, spec-driven development AI, verified spec-driven development, VSDD, Bun rewrite Rust, port migration AI, executable spec"
+episodes: ["5", "15", "16", "24", "25", "36", "39"]
 ---
 
 Spec-driven development is a software engineering practice where you write a detailed specification (defining what the code should do, why, and how to verify it) before asking an AI coding agent to implement anything. As AI agents handle more implementation work, the spec becomes the primary engineering artifact: the quality of your specification directly determines the quality of the generated code, with a directness that did not exist when humans translated intent into code themselves.
@@ -87,6 +87,10 @@ Based on the taxonomy from Bockeler, the VSDD framework, the ThoughtWorks retrea
 ## The August 2026 Field Check: The Spec Is What People Read Now
 
 [Episode 36](/episodes/36-pacing-the-frontier-anthropic-models-go-rogue-why-software-factories-fail-math-in-the-age-of-ai/) supplied the field data for this article's central claim. Shimin surveyed founders and engineers at Seattle Tech Week: roughly one in ten still reads AI-generated PRs line by line — and when he asked what they *do* read, the answers were this post's table of contents. Specs and plans. Architecture diagrams, usually mermaid. Boundary conditions and function signatures — don't let the agents blur the layers. Tests, on the theory that good tests say more than the code (with the caveat that someone has to check the tests aren't one passing function in a loop dwarfing the failures). The rigor didn't vanish when people stopped reading the diffs; it moved to exactly the artifacts the ThoughtWorks retreat predicted. The same episode added a vocabulary word for the next layer down: [Dex of HumanLayer's "Why Software Factories Fail"](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/wsff.md) argues for **program design** between system architecture and code — interface pseudocode you write (or negotiate with the agent) up front, plus call-stack diffs: have the agent model how the call stack changes for a given activity before it writes anything. It's a spec one level more concrete than most teams write, and it exists for the same reason all of this does — your steering leverage is highest before the layer gets laid down, and your comprehension has to live somewhere other than the 14,000-line PR.
+
+## The September 2026 Data Point: The Spec Was the Old Codebase
+
+[Episode 39](/episodes/39-metas-ai-backfires-glm-5-3-flash-openais-jalapeno-chip-the-end-of-programming/) supplied the cleanest large-scale evidence yet for this article's thesis, from the opposite direction. The Bun 1.4 rewrite — one developer, Fable V, a million-plus lines of Zig ported to Rust, ~7,000 commits in 11 days, ~$165K in API costs, discussed via [Paul Dix's "The End of Programming"](https://pauldix.com/the-end-of-programming) — succeeded because a port is the limiting case of spec-driven development: the spec already exists, in executable form, as the old implementation and its test suite. The acceptance criteria could not be tighter. Contrast the hosts' running experience with greenfield front-end work, where fuzzy acceptance criteria still produce fuzzy results, and the pattern closes: AI-written code is gated by spec quality, and the highest-quality spec on earth is a working system you're allowed to diff against. The rewrite still took two months of agentic refinement after the 11 days — the spec tells the agent what to build; refinement is still how it ships.
 
 ## The Part That Should Worry Us
 

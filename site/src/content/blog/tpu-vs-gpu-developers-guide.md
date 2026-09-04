@@ -2,10 +2,10 @@
 title: "TPUs vs GPUs Explained: What Every AI Developer Should Actually Know"
 description: "You use AI models every day but probably cannot explain why Google built its own chips. Here is the hardware difference that shapes which models are fast, cheap, or neither."
 date: "2026-04-11"
-lastUpdated: "2026-07-06"
+lastUpdated: "2026-09-03"
 slug: "tpu-vs-gpu-developers-guide"
-keywords: "TPU vs GPU explained, TPU vs GPU AI, Google TPU developer guide, AI hardware for developers, OpenAI Broadcom jalapeno chip, inference ASIC, systolic array"
-episodes: ["4", "32"]
+keywords: "TPU vs GPU explained, TPU vs GPU AI, Google TPU developer guide, AI hardware for developers, OpenAI Broadcom jalapeno chip, inference ASIC, systolic array, tokens per kilowatt, Jalapeno first results, GPT Astra chip optimization"
+episodes: ["4", "32", "39"]
 ---
 
 TPUs (tensor processing units) are Google's custom-designed AI chips built exclusively for matrix multiplication, the core operation in neural network training and inference. GPUs (graphics processing units) are general-purpose parallel processors, originally designed for rendering graphics, that became the default AI hardware because their architecture happened to overlap with machine learning workloads. The key architectural difference: TPUs use systolic arrays that pass data directly between operations, while GPUs require memory round-trips between each step. This makes TPUs faster and more power-efficient for AI workloads, but less flexible and only available through Google Cloud.
@@ -91,6 +91,10 @@ And the market structure matters. Anyone can buy Nvidia GPUs. Amazon, Microsoft,
 The strongest confirmation yet of this post's thesis: [OpenAI and Broadcom's "jalapeno" inference chip](https://openai.com/index/openai-broadcom-jalapeno-inference-chip/), covered on [Episode 32](/episodes/32-glm-5-2-undercuts-opus-self-rewriting-harness-ai-out-persuades-humans-prompt-injection-as-role-confusion/). Technical details are scant — most of what's known comes from analysts reading the wafer photo in the press release — but the reads converge on exactly the architecture described above: a systolic-array ASIC, a die notably larger than other inference accelerators, one large compute chiplet ringed by six HBM stacks. When the company most locked into Nvidia designed its own inference silicon, it built a TPU-shaped chip.
 
 Three details worth holding onto. The claim — vague but pointed — is cost-per-watt "substantially beating" current hardware, the metric that matters at OpenAI's serving scale and the same structural-margin story this post told about Gemini. The design took roughly nine months with LLMs in the loop, against hardware timelines historically measured in years — if that compression is real, the custom-silicon race iterates much faster from here. And the choice of six HBM stacks over cheaper memory, mid-supply-crunch, is a bet that memory bandwidth stays the binding constraint — the same lesson the systolic array itself encodes. Dan's angle on the show: consistent latency for SLOs may matter as much as cost for enterprises building on the API. The chip is still the moat. Now everyone is digging one.
+
+## September 2026 Update: Jalapeño's First Numbers
+
+The July section above was written off analysts reading a wafer photo. [Episode 39](/episodes/39-metas-ai-backfires-glm-5-3-flash-openais-jalapeno-chip-the-end-of-programming/) covered [OpenAI's first published results](https://openai.com/index/jalapeno-first-results/), and the thesis holds. The headline: 22,000 tokens per second per kilowatt serving a 538B-parameter open-weights model, against 427 for the same model on NVIDIA's GB200 — a comparison OpenAI keeps in the appendix. The architectural explanation matches this post's memory-bandwidth argument exactly: the KV cache never leaves the die, and idle chip sections power-gate off. R&D to tape-out took under nine months and gen 2 is already in tape-out — the LLM-in-the-loop timeline compression the July section flagged as an "if" is now a cadence. And the detail worth the price of admission: an unreleased model, GPT Astra, has spent 60+ days optimizing the chip's inference stack. The feedback loop is now the product — the model optimizes the chip that serves the model.
 
 ## What to Actually Do With This Information
 
