@@ -2,10 +2,10 @@
 title: "Cognitive Debt: The Hidden Cost of Letting AI Write Your Code"
 description: "Technical debt is code you wish you had written better. Cognitive debt is code you don't understand at all, and AI compounds it faster than teams realize."
 date: "2026-04-11"
-lastUpdated: "2026-08-06"
+lastUpdated: "2026-10-01"
 slug: "cognitive-debt-ai-development"
 keywords: "cognitive debt software, cognitive debt AI, AI code understanding, technical debt AI"
-episodes: ["14", "15", "20", "22", "31", "36"]
+episodes: ["14", "15", "20", "22", "31", "36", "40"]
 ---
 
 [Cognitive debt](/glossary/cognitive-debt/) is the gap between what your codebase does and what you understand about it. Unlike technical debt (code you shipped knowing it wasn't ideal), cognitive debt is invisible: you don't know what you don't know until something breaks. And AI-assisted development is compounding it faster than anything we've seen before.
@@ -94,6 +94,8 @@ Here's what I think a more complete strategy looks like, borrowing from the fina
 **Run regular audits.** Rahul pointed out that modern agents and IDEs have excellent search and summarization capabilities. You can ask your agent to give you a high-level overview of any module, trace a feature across files, explain the flow. This is a real tool for fighting cognitive debt; you can regularly generate summaries of what's going on and keep your mental model updated. But treat it as an approximation, not a substitute. The agent's summary is a map. Walking the territory yourself, reading the actual code, tracing the actual paths, is what builds the understanding that prevents cognitive bankruptcy.
 
 **Allocate understanding time.** Storey's first principle is that at least one person on every team needs to know the codebase inside out. Usually the senior developers. That sounds obvious until you realize that "knowing the codebase" now means actively studying code you didn't write, which means blocking out time for reading that produces no visible output. Managers who track velocity will see this as idle time. It's the opposite. It's the only thing preventing the codebase from becoming a black box that nobody can safely touch.
+
+**Interrupt the generation.** The audit above is a team ritual; this is the personal one. On [episode 40](/episodes/40-the-psychology-of-software-teams-with-dr-cat-hicks/), Dr. Cat Hicks described her own cadence: roughly 45 minutes of agentic coding, then 10–15 minutes with her [learning-opportunities](https://github.com/DrCatHicks/learning-opportunities) skill, which builds a short exercise out of the files you're working in so you have to produce a mental model and test it. It's a small, regular payment on the balance instead of one big audit after the wall. Her case for why ten minutes is enough: "it does something to the way that you think. It doesn't have to be like five hours."
 
 **Tier your risk.** The ThoughtWorks retreat framework applies here too. Not all cognitive debt is equally dangerous. Code that runs an internal dashboard and touches nothing critical can carry a higher cognitive debt load. If it breaks, you can investigate then. Code that handles production data, financial transactions, or security boundaries needs active understanding from at least one team member at all times. Match your comprehension investment to the blast radius of misunderstanding.
 

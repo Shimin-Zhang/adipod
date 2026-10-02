@@ -3,7 +3,7 @@ title: "The Complete Guide to Claude Code: Workflows, Tips, and the Stuff the Do
 description: "Everything we've learned about Claude Code across 20 episodes — context management, CLAUDE.md, plan mode, multi-agent workflows, and the pitfalls nobody warns you about."
 slug: "claude-code-guide"
 keywords: "Claude Code best practices, Claude Code tips, Claude.md guide, Claude Code workflow, Claude Code context management, Claude Code plan mode, Claude Code agent techniques, know your unknowns, quiz me before I merge, blind spot pass, tweakable plan, AI technique nudge, Claude Code hooks"
-lastUpdated: "2026-07-16"
+lastUpdated: "2026-10-01"
 ogImage: "/og/claude-code-guide"
 ---
 
@@ -179,7 +179,7 @@ These are the patterns we've converged on after 20 episodes of daily Claude Code
 
 - **Implementation-notes file.** Have the agent keep a running note of what it did, where humans intervened, and where it deviated from the spec — a high-level artifact your reviewers can read instead of the raw diff.
 - **Buy-in docs.** An Amazon-style one-pager on what you built and why, to persuade the team ("why this pull request matters"). Rahul's aside: AI turns out to be more persuasive than the humans writing the PR, so let it make the case.
-- **Quiz me before I merge.** Have the model quiz you on the code you shipped together to pay down [comprehension debt](/glossary/cognitive-debt/). Shimin ties it to Dr. Kat Hicks's "learning opportunities" Claude Code skill; the running gag — "zero out of ten, this is ready to ship" — is exactly the failure it's meant to catch.
+- **Quiz me before I merge.** Have the model quiz you on the code you shipped together to pay down [comprehension debt](/glossary/cognitive-debt/). Shimin ties it to Dr. Cat Hicks's ["learning opportunities"](https://github.com/DrCatHicks/learning-opportunities) Claude Code skill (she talks about building it on [Episode 40](/episodes/40-the-psychology-of-software-teams-with-dr-cat-hicks/)); the running gag — "zero out of ten, this is ready to ship" — is exactly the failure it's meant to catch.
 
 **July 2026 follow-up — turning the techniques into a hook.** In [Episode 34](/episodes/34-apple-sues-openai-boko-haram-s-frontier-ai-state-of-cli-coding-agents-global-workspace-in-llms/)'s Vibe & Tell, Shimin operationalized the list above: he had the agent read his memory files and a couple dozen Claude Code projects, discuss where his actual workflow falls short of these techniques, and generate [a Claude Code hook](https://github.com/Shimin-Zhang/AI-Technique-Nudge) that wakes every ~3 hours, checks the state of the current session, and nudges one technique when it applies — clear the session at 200K tokens instead of waiting for compaction, list your assumptions, switch to interview mode, predict the answer before the agent gives it. It fired mid-week and caught a 200K-token session in the act. The instructive side effect: Shimin rewards his agents for disagreeing with him, and the auditing agent came out the other side confidently wrong and lecturing — he ended up typing "you're not my boss!" to reset its personality. (Rahul's summary of the calibration problem: there's no temperature setting for sycophancy — you get an asshole or a sucker.) The meta-point is the useful part: the techniques on this page only pay off once they're habits, and a periodic hook nudging you toward them is a cheap way to close the gap between knowing and doing.
 

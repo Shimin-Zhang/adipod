@@ -2,8 +2,8 @@
 title: "AI's Impact on Developer Careers: Frameworks for Thinking About What Comes Next"
 description: "Economic models, hiring data, and practitioner perspectives on how AI is reshaping software engineering careers — from workflow automation convexity to the Jevons paradox for code."
 slug: "ai-developer-careers"
-keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age, SignalFire engineering hiring, Ramp AI adoption headcount, entry-level engineering jobs AI, AI jobs wipeout, EY CEO survey headcount, Ford grey beard engineers, permanent underclass, Fernando Borretti, AI productivity paycheck, Humlum Vestergaard Denmark, Seattle Tech Week hiring survey, AI hiring interviews 2026, whiteboard interviews return, vibe-coded take-home, tech industry sadness, workism, bullshit jobs, developer autonomy, tech disillusionment, goat farm escape fantasy, agent orchestration middle management, AI middle manager, senior IC delegation, first-time manager training, end of programming, Paul Dix, Bun rewrite Rust, Fable V, refinement durable skill, Meta Project OT, AI-native reorg backfire, cancelled layoffs"
-lastUpdated: "2026-09-03"
+keywords: "AI replace developers, future of software engineering AI, AI developer jobs, AI coding career impact, developer skills AI age, SignalFire engineering hiring, Ramp AI adoption headcount, entry-level engineering jobs AI, AI jobs wipeout, EY CEO survey headcount, Ford grey beard engineers, permanent underclass, Fernando Borretti, AI productivity paycheck, Humlum Vestergaard Denmark, Seattle Tech Week hiring survey, AI hiring interviews 2026, whiteboard interviews return, vibe-coded take-home, tech industry sadness, workism, bullshit jobs, developer autonomy, tech disillusionment, goat farm escape fantasy, agent orchestration middle management, AI middle manager, senior IC delegation, first-time manager training, end of programming, Paul Dix, Bun rewrite Rust, Fable V, refinement durable skill, Meta Project OT, AI-native reorg backfire, cancelled layoffs, Cat Hicks, psychology of software teams, effortful learning, learning opportunities skill, metacognition, developer skill assessment, brains in jars, 10x engineer myth"
+lastUpdated: "2026-10-01"
 ogImage: "/og/ai-developer-careers"
 ---
 
@@ -222,6 +222,17 @@ Even if AI is better at everything in absolute terms, humans retain relative adv
 
 [IBM is hiring juniors](https://www.thoughtworks.com/content/dam/thoughtworks/documents/report/tw_future%20_of_software_development_retreat_%20key_takeaways.pdf) (noted in Episode 15, via the ThoughtWorks retreat findings). This pushes back against the narrative that only senior engineers survive the AI transition. The argument: juniors who grow up using AI natively may be better adapted to the new workflow than seniors who learned to code without it.
 
+### Learning on Purpose: The Psychologist's Version
+
+[Episode 40](/episodes/40-the-psychology-of-software-teams-with-dr-cat-hicks/) handed the skill-atrophy question to someone who studies it for a living: Dr. Cat Hicks, author of [*The Psychology of Software Teams*](https://www.routledge.com/The-Psychology-of-Software-Teams/Hicks/p/book/9781032963389). Her starting point is pushback against what she calls the deficit mindset ("we will just lose all our skills, our brains will melt"). She doesn't think the answer is that no one can learn anymore, but she also doesn't think today's AI tools are built to help developers learn; they're built for production. So she built [learning-opportunities](https://github.com/DrCatHicks/learning-opportunities), a Claude/Codex skill that turns the files you're already in into a 10–15 minute deliberate-practice exercise. The career-relevant parts of the conversation:
+
+- **Effortful learning is where careers get made.** Shimin's own read of his career: the best work came from going deep and struggling with a problem. Cat's addition is that we're bad at telling what helps us learn. Fluent output feels like progress, so we skip the strategies that work: quizzing ourselves, sketching the architecture before implementing it.
+- **Metacognition is the trainable skill.** Working memory and creativity are hard to change. Metacognitive strategy (calibrating what you actually know) isn't, and it predicts life success. It's the cheapest defense against the [decoupling](/glossary/metacognitive-decoupling/) the confidence-inflation data above describes.
+- **Nobody can measure their own skills.** There are assessment inventories for CS students and almost nothing for working professionals. Cat, a former assessment scientist, wants to build tools developers could use on themselves over time. Dan's aside: that might fix interviewing too.
+- **The lone genius was never the model.** Cat's "brains in jars" organization values developers as fungible cognition while stripping out the social problem-solving that actually produces good software. The 10x-engineer myth sticks because grinding alone pays off for individuals in unfair circumstances, but the healthier ways of working "win out evolutionarily speaking across groups of people."
+
+The hosts' answers to her question back ("what are you actually learning right now?") make a decent short list for anyone: Shimin is learning to spot when the AI is being sycophantic and where an output went off the rails, and Dan is learning to manage [cognitive debt](/glossary/cognitive-debt/) on codebases he only understands through a mental model shared with the chat.
+
 ## What to Actually Do
 
 The frameworks are useful for understanding the landscape. Here's what they suggest for individual career decisions:
@@ -262,8 +273,8 @@ Both. For people who enjoy systems thinking, architectural decisions, and direct
 
 ### How do I avoid skill atrophy?
 
-Periodically do work without AI assistance. Not as a Luddite gesture — as deliberate practice. The 39% assessment score from Anthropic's research shows what happens to skills you don't exercise. Close Claude Code, open a blank file, and implement something from scratch. If it feels hard, that's the signal that you've been accumulating [cognitive debt](/glossary/cognitive-debt/) and the exercise is exactly what you need.
+Periodically do work without AI assistance. Not as a Luddite gesture — as deliberate practice. The 39% assessment score from Anthropic's research shows what happens to skills you don't exercise. Close Claude Code, open a blank file, and implement something from scratch. If it feels hard, that's the signal that you've been accumulating [cognitive debt](/glossary/cognitive-debt/) and the exercise is exactly what you need. You don't need to go fully unplugged, either: Dr. Cat Hicks's rhythm from [Episode 40](/episodes/40-the-psychology-of-software-teams-with-dr-cat-hicks/) is about 45 minutes of agentic coding, then a 10–15 minute [learning-opportunities](https://github.com/DrCatHicks/learning-opportunities) exercise built from the files you're working in. In her words, "it doesn't have to be like five hours."
 
 ---
 
-*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, 27, 28, 30, 32, 33, 36, 37, 38, and 39 of the ADI Pod. Updated September 2026.*
+*This guide synthesizes content from Episodes 8, 11, 12, 13, 14, 15, 16, 18, 19, 23, 26, 27, 28, 30, 32, 33, 36, 37, 38, 39, and 40 of the ADI Pod. Updated October 2026.*

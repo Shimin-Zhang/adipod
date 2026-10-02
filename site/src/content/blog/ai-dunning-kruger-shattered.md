@@ -4,8 +4,8 @@ description: "The popular take is that AI puts Dunning-Kruger on steroids. A 202
 date: "2026-06-22"
 slug: "ai-dunning-kruger-shattered"
 keywords: "AI Dunning-Kruger, metacognitive decoupling, AI competence vs productivity, AI self-assessment, appearing productive AI, AI skill calibration, Gaokao AI homework study, AI skill atrophy, AI-augmented students"
-episodes: ["30", "38"]
-lastUpdated: "2026-08-31"
+episodes: ["30", "38", "40"]
+lastUpdated: "2026-10-01"
 ---
 
 The comforting version of the AI-and-competence story goes like this: AI puts the Dunning-Kruger effect on steroids. Hand a beginner a model that writes confident code, and they feel like a staff engineer while shipping junior mistakes. It's a tidy story, and the tidiest part is that it leaves the famous curve intact: same shape, just steeper.
@@ -43,6 +43,12 @@ It's worth separating this from the two failure modes it rhymes with. [Cognitive
 
 When we first covered metacognitive decoupling it rested on lab studies. [Episode 38](/episodes/38-ai-homework-atrophy-github-commits-double-nick-muy-sit-down-ai-sandbagging/) brought field data at scale: an [SSRN study of 26,000 Chinese students](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6868618) found six-plus months of AI homework help cut Gao Kao scores 18–24% — roughly the difference between a top-tier university and a local community college. The decoupling signature is exact: homework time fell from 64 to 45 minutes, the homework got *better*, and the students got worse. Output quality rising while understanding decays is this post's thesis, measured on a national exam. The control condition matters just as much: "AI-augmented" students who used the tools but kept spending the same time showed no penalty at all. The damage tracked the reinvested hours, not the tool — which is the actionable version of everything above. The exam is the recalibration instrument students have and professionals lack; as Dan put it on the episode, our version still exists, it's just unscheduled: the 2am sev, when everything's on fire and the question is whether you know how the code works.
 
+## The psychologist's read: scary, but tractable
+
+On [episode 40](/episodes/40-the-psychology-of-software-teams-with-dr-cat-hicks/) I finally got to ask an actual psychologist about this. Dr. Cat Hicks's take was more optimistic than mine. Decoupling, as she puts it, just means "you're not getting good feedback about what you actually understand." That sounds scary, but she thinks it's tractable. She was also refreshingly deflationary about the scary lab studies, the ones where people who solved math problems with AI couldn't remember what they'd done fifteen minutes earlier. Her response: "do you ever remember things you just copy-paste?" Of course not. The finding isn't that AI melts your brain. It's that copy-paste was never learning, and AI makes copy-paste the default.
+
+The hopeful part is about which variable you can move. Working memory is hard to change. So is creativity. Metacognitive strategy, meaning how well you calibrate what you know, isn't hard to change, and it predicts life success. Of Koch's four wires, calibration is the one you can actually retrain.
+
 ## The organizational version: productivity stops signaling competence
 
 The personal version is uncomfortable. The organizational version is expensive, and it's where I'd spend most of a manager's attention.
@@ -70,7 +76,8 @@ The decoupling is structural, so the fixes are about reintroducing the friction 
 1. **Score productivity and competence on separate cards.** Whether you're managing yourself or a team, stop letting throughput stand in for skill. "How much did we ship" and "how much do we understand of what we shipped" are now different questions with different answers, and only one of them shows up on the dashboard.
 2. **Schedule calibration reps.** Close the model and implement something from scratch on a regular cadence — not as a Luddite gesture, as deliberate practice. If it feels harder than you expected, that gap *is* the measurement. It's the only cheap instrument you have for catching [cognitive debt](/glossary/cognitive-debt/) before production does it for you. (More on the career version of this in the [developer careers guide](/topics/ai-developer-careers/).)
 3. **Keep one reviewer who won't flatter you.** The model won't tell you the architecture diagram is wrong; a sycophancy-free human will. That person is now the most valuable reviewer on the team, precisely because they supply the feedback the tools structurally can't.
-4. **Write the things where the writing is the thinking, by hand.** The design doc, the postmortem, the one-pager. If a document exists to prove you reasoned through something, generating it defeats its only purpose. Run the prose through a model afterward for polish if you want — but do the reasoning yourself, while it still counts.
+4. **Interrupt the generation on a schedule.** Cat's own rhythm is about 45 minutes of agentic coding, then 10–15 minutes of her [learning-opportunities](https://github.com/DrCatHicks/learning-opportunities) skill: an exercise built from the files you're in, where you produce a mental model and test it. That's a calibration rep that doesn't require closing the model, which makes it far more likely to actually happen.
+5. **Write the things where the writing is the thinking, by hand.** The design doc, the postmortem, the one-pager. If a document exists to prove you reasoned through something, generating it defeats its only purpose. Run the prose through a model afterward for polish if you want — but do the reasoning yourself, while it still counts.
 
 The reassuring frame and the alarming frame are the same fact seen from two angles. AI raised the floor on what everyone can produce, which is real and good. It also detached that floor from what anyone actually knows, which is the part nobody put in the launch post. The curve told us, for a century, roughly how much to trust our own sense of how good we are. That instrument is reading garbage now. Until someone rebuilds it, the only honest move is to assume your confidence is overstated and go check.
 
