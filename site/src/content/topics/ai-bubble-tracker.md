@@ -2,8 +2,8 @@
 title: "AI Bubble Tracker — Two Minutes to Midnight"
 description: "A living tracker of the AI investment bubble — CAPEX vs revenue data, company financials, bull and bear arguments, and our Doomsday Clock for when it pops."
 slug: "ai-bubble-tracker"
-keywords: "AI bubble 2026, will AI bubble burst, AI CAPEX vs revenue, AI investment bubble tracker, AI market analysis, Anthropic revenue accounting, OpenAI Anthropic run rate, AI shadow debt, off-balance-sheet AI debt, Nikkei hidden debts, Situational Awareness fund collapse, Zuckerberg superintelligence essay, ad-funded AI, data center jobs, trickle-down tokenomics, Stripe OpenRouter acquisition, singularity memo, model routing layer, Anthropic IPO, Fable 5 usage, NVIDIA Q2 earnings 2026, NVIDIA memory cost margin squeeze, NVIDIA market cap vs Amazon, Anthropic $65B annualized revenue, revenue per employee"
-lastUpdated: "2026-09-03"
+keywords: "AI bubble 2026, will AI bubble burst, AI CAPEX vs revenue, AI investment bubble tracker, AI market analysis, Anthropic revenue accounting, OpenAI Anthropic run rate, AI shadow debt, off-balance-sheet AI debt, Nikkei hidden debts, Situational Awareness fund collapse, Zuckerberg superintelligence essay, ad-funded AI, data center jobs, trickle-down tokenomics, Stripe OpenRouter acquisition, singularity memo, model routing layer, Anthropic IPO, Fable 5 usage, NVIDIA Q2 earnings 2026, NVIDIA memory cost margin squeeze, NVIDIA market cap vs Amazon, Anthropic $65B annualized revenue, revenue per employee, NVIDIA central bank of AI, NVIDIA startup investments, neocloud borrowing costs, CoreWeave debt, Oracle force majeure, Project Jupiter, Blue Owl, AMD World Labs acquisition"
+lastUpdated: "2026-10-01"
 ogImage: "/og/ai-bubble-tracker"
 ---
 
@@ -15,7 +15,7 @@ This page is the running record. Not predictions — data points, financial sign
 
 ## The Clock
 
-**Current position: 4 minutes to midnight** ([Episode 36](/episodes/36-pacing-the-frontier-anthropic-models-go-rogue-why-software-factories-fail-math-in-the-age-of-ai/), early August 2026 — moved forward 15 seconds)
+**Current position: 4 minutes 15 seconds to midnight** ([Episode 39](/episodes/39-metas-ai-backfires-glm-5-3-flash-openais-jalapeno-chip-the-end-of-programming/), early September 2026 — moved back 15 seconds; held in [Episode 41](/episodes/41-meta-muses-0-day-dhhs-rails-world-keynote-gpt-6-astra-the-llmentalist-effect/), October 2026)
 
 The clock has moved back from its closest reading of 25 seconds to midnight (Episode 3, November 2025). The dovish swing has now run three episodes deep: 2:45 in [Episode 21](/episodes/21-anthropic-mythos-project-glasswing-recursive-improving-agents-and-your-parallel-agent-limit/) on the Mythos disclosure, 3:30 in [Episode 22](/episodes/22-is-claude-opus-4-7-mythos-distilled-running-qwen-3-6-locally-and-the-ai-on-ai-arena/) on Paul Graham's railroad-capex chart, and 4:00 in [Episode 23](/episodes/23-why-models-over-edit-your-code-meta-keystroke-surveillance-interviewing-engineers-in-the-ai-age/) on guest Nathan Lubchenco's open-weight cybersecurity argument. Each move came from a different category of evidence — expected-value (Mythos as systemic capability), historical-comparison (railroad capex peaked at ~10% of GDP vs. AI's ~1%), and geopolitical-stakes (open-weight models will plausibly hit Mythos-class cyber capability inside 6 months, which makes AI too-big-to-fail rather than burst-soon).
 
@@ -134,6 +134,8 @@ A chronological record of the events we've tracked across 33 episodes, with link
 
 **[Episode 39](/episodes/39-metas-ai-backfires-glm-5-3-flash-openais-jalapeno-chip-the-end-of-programming/) (Sep 4):** Clock **eases back to 4:15** — the first move away from midnight in a month. [NVIDIA posted a $96.2B quarter](https://archive.ph/qX0JT) and forecast 70% growth, with the caveat living in the margins: memory costs are squeezing them. The skeet of the week ([via Bluesky](https://bsky.app/profile/sungkim.bsky.social/post/3muakuku3gc2j)): NVIDIA has half of Amazon's revenue and twice its market cap. And [Anthropic hit $65B annualized revenue](https://techcrunch.com/2026/08/17/anthropics-annualized-revenue-surges-to-65b/) — roughly $13M per employee — with the IPO expected this fall. Revenue you can audit, at real scale, is the dovish read; the hands ease off accordingly.
 
+**[Episode 41](/episodes/41-meta-muses-0-day-dhhs-rails-world-keynote-gpt-6-astra-the-llmentalist-effect/) (Oct 2):** Clock **holds at 4:15** after a two-week break ([Episode 40](/episodes/40-the-psychology-of-software-teams-with-dr-cat-hicks/) was a standalone interview with no clock). [The Economist calls NVIDIA the central bank of AI](https://archive.ph/JmvB9): it made about 90 startup investments last year, nearly double two years earlier, and has agreed to roughly 60 more this year, while guaranteeing its chips' value and narrowing the borrowing gap between neoclouds and hyperscalers (CoreWeave borrowed $2.6B at almost double the 5.7% Alphabet paid on its 50-year bonds). Two assumptions hold the web together, as the article puts it: NVIDIA's chips keep their value, and compute demand keeps growing fast. "Neither is assured." Dan's additions: the article ignores networking, where NVIDIA has close to no competition, and the pressure on chip pricing comes from Jalapeño-style custom silicon and AMD catching up on CUDA. [Oracle invoked force majeure on Project Jupiter](https://www.reuters.com/business/oracle-cites-force-majeure-shield-itself-controversial-data-center-bloomberg-2026-09-24/), its Stargate data center in New Mexico with Blue Owl, claiming it can't get enough power, and the stock fell about 12% in five business days. And [AMD paid $8.2B for World Labs](https://arstechnica.com/ai/2026/09/amd-acquires-world-labs-ai-pioneer-fei-fei-lis-world-models-startup/), about 36x what it had raised, for a company with no reported revenue. Oracle was the only item pushing toward midnight; the buying spree says there's still money in the tank. Dan's view: nothing moves until the IPOs land and the hyperscalers' data-center bills come due.
+
 ## Economic Frameworks for Understanding the AI Bubble
 
 ### The Benefits of Bubbles (Bull)
@@ -184,9 +186,13 @@ Jensen Huang's $1 trillion demand projection is either the most bullish signal i
 
 The Groq acquisition (Episode 8) hedges against one risk: alternative inference hardware. By acquiring Groq's LPU technology, NVIDIA controls a potential competitor. Whether LPUs represent a genuine threat or a hedge depends on how inference costs evolve.
 
+By [Episode 41](/episodes/41-meta-muses-0-day-dhhs-rails-world-keynote-gpt-6-astra-the-llmentalist-effect/), The Economist was calling NVIDIA [the central bank of AI](https://archive.ph/JmvB9): equity stakes in roughly 150 startups since the start of last year, chip-value guarantees, and financing that lowers neoclouds' borrowing costs. "NVIDIA is walking a fine line between enabling demand and creating it." Morgan Stanley puts NVIDIA's all-in obligations at $53B early next year and $200B by the start of 2029 as its guarantees kick in, against $99B in cash and securities today. That's survivable, but it ties NVIDIA's balance sheet to the bubble it's financing.
+
 ### Oracle
 
 Oracle's trajectory is the clearest canary signal. Planning $45-50B in debt/equity for AI data centers (Episode 13), then cutting thousands of jobs as those data center costs mount (Episode 17). Oracle isn't a frontier AI lab — it's an infrastructure provider making a massive bet on AI demand. When the infrastructure providers are bleeding, the bubble's physics become apparent regardless of what the model providers report.
+
+[Episode 41](/episodes/41-meta-muses-0-day-dhhs-rails-world-keynote-gpt-6-astra-the-llmentalist-effect/) added the next symptom: Oracle [invoked force majeure](https://www.reuters.com/business/oracle-cites-force-majeure-shield-itself-controversial-data-center-bloomberg-2026-09-24/) on Project Jupiter, its debt-heavy Stargate site in New Mexico with Blue Owl, saying it can't get enough power and so payments are delayed. Rahul pictured the courtroom version: "But judge, act of God, come on." It probably won't hold up, but it may damage both Blue Owl and Oracle on the way.
 
 ### Block
 
@@ -243,4 +249,4 @@ Three people (Shimin, Dan, Rahul) looking at the same data and arguing about wha
 
 ---
 
-*This tracker is updated with each new episode. Data points are sourced from publicly available financial reports, earnings calls, and industry analysis. Last updated August 2026.*
+*This tracker is updated with each new episode. Data points are sourced from publicly available financial reports, earnings calls, and industry analysis. Last updated October 2026.*

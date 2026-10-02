@@ -3,7 +3,7 @@ title: "AI Coding Agents Compared: Claude Code, Codex, Cursor, Pi Agent, and the
 description: "A practitioner's comparison of AI coding agents — what each tool actually does well, where they fall short, and why the moat might not be in the tooling."
 slug: "ai-coding-agents-compared"
 keywords: "Claude Code vs Cursor, AI coding agent comparison, best AI coding tool, Claude Code vs Codex, AI coding agent review 2026, On-My-Pi, OMP, Pi-based coding agent, hash-anchored patches, ast-grep, Databricks coding agent benchmark, GLM 5.2, agent ops, OpenAI pulls models from Cursor, SpaceX Cursor acquisition, model access risk"
-lastUpdated: "2026-09-03"
+lastUpdated: "2026-10-01"
 ogImage: "/og/ai-coding-agents-compared"
 ---
 
@@ -128,6 +128,10 @@ Dan reported in [Episode 26](/episodes/26-llm-neural-anatomy-with-david-noel-ng-
 ### June 2026 update: Hermes Agent and the batteries-included counterpoint
 
 Where Pi argues for minimal scaffolding, [Episode 31](/episodes/31-grok-buys-cursor-midjourney-goes-hardware-hermes-agent-evaluation-driven-development/) gave the Tool Shed to the opposite philosophy: Nous Research's [Hermes Agent](https://hermes-agent.nousresearch.com/docs/), the harness Shimin had flagged a week earlier as overtaking OpenClaw in San Francisco. It ships everything in the box — built-in memory, a self-learning skill loop, cron scheduling, swappable external memory providers, and around 20 chat channels — where Pi ships read, write, bash, and skills. Dan's image for it was "parachuting in with sixteen crates of supplies and a film crew" instead of traveling light. The open question is the one the Pi section keeps raising: when the model is good enough, does all that bundled machinery save you setup or just become surface area you have to understand before you can trust it? Hermes and Pi now sit at the two poles of the harness-design argument.
+
+### October 2026 update: Hermes dreams up its own skill
+
+On [Episode 41](/episodes/41-meta-muses-0-day-dhhs-rails-world-keynote-gpt-6-astra-the-llmentalist-effect/), Dan reported back after running Hermes for a while. He has it hooked up to Telegram with a stealthy browser setup Claude helped build, and no access to his accounts. Mostly it watches products for announcements, releases, and price changes, and it's been good at that. His verdict is that Hermes leans more toward a Claude Code-style coding harness than a general assistant. The surprise was its "dreaming." After one product search, it reviewed what they'd done and wrote itself a `product update` skill in the background. The next time Dan asked it to watch something, it invoked a skill he didn't remember making. That's one useful self-written skill so far, which is a small sample, but it's the self-learning loop from the feature list actually working. Hooking it up to a local model is the next step, and Dan wants it a lot smarter before it gets anywhere near a credit card.
 
 ### July 2026 update: On-My-Pi (OMP) and the state of the CLI field
 

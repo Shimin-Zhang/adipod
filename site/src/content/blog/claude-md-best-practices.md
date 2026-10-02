@@ -2,10 +2,10 @@
 title: "CLAUDE.md Best Practices: 7 Things to Put In and 3 to Leave Out"
 description: "CLAUDE.md is a finite instruction budget of ~150-200 slots, not a knowledge dump. Here is what to include, what to leave out, and how to prevent prompt debt."
 date: "2026-04-11"
-lastUpdated: "2026-04-12"
+lastUpdated: "2026-10-01"
 slug: "claude-md-best-practices"
 keywords: "Claude.md best practices, Claude.md guide, Claude Code configuration"
-episodes: ["4", "10", "17"]
+episodes: ["4", "10", "17", "41"]
 ---
 
 CLAUDE.md best practices come down to one principle: treat the file as a finite instruction budget, not a knowledge base. Frontier models can reliably follow roughly 150 to 200 discrete instructions before performance degrades. That's your budget, and most teams blow through it by week two.
@@ -89,6 +89,8 @@ The parallel to [code garbage collection](/glossary/code-garbage-collection/) is
 Boris Cherny, [one of the creators of Claude Code](https://www.reddit.com/r/ClaudeAI/comments/1q2c0ne/comment/nxc4ap6/), shared his team's approach in a thread we [covered on the show](/episodes/10-there-s-a-new-sherif-in-the-gas-town-of-ai-software-development/): every team has its own CLAUDE.md, maintained as a team artifact rather than an individual's side project. The Claude Code team ships 50 to 100 PRs per person per week using branch-based multi-agent development, and the CLAUDE.md is a living part of that workflow, not a write-once configuration file gathering dust.
 
 The pattern here matters more than the specifics. If your CLAUDE.md is owned by one person, it will rot. If it is not version-controlled alongside the code it describes, it will drift. If nobody reviews changes to it, the [prompt debt](/glossary/prompt-debt/) will compound exactly like technical debt: silently, then suddenly.
+
+There's a second kind of rot, and it comes from the model getting better rather than the code changing. On [Episode 41](/episodes/41-meta-muses-0-day-dhhs-rails-world-keynote-gpt-6-astra-the-llmentalist-effect/) I covered Sean Goedecke's ["Tell agents the why, not just the how"](https://www.seangoedecke.com/tell-agents-the-why/). His argument is that early agents needed step-by-step instructions (change method A in class B, then do the same in C and D), and current models do better when you give them your priorities and long-term goals instead. That changes what an old CLAUDE.md is. The explicit, over-specified rules you added six months ago to compensate for a weaker model can now get in the way of a stronger one. So the maintenance pass asks a second question alongside "is this still true?": is this still necessary? I think the instructions worth keeping are the ones that carry a why. Skills deserve the same pass. They're calcified decisions, trade-offs you made on purpose, so let the agent help with the refactor but read what it removes.
 
 ## A Starter Template
 

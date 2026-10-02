@@ -3,7 +3,7 @@ title: "AI Security for Developers: Prompt Injection, Agent Trust, and the Stuff
 description: "A developer-focused guide to AI security — the real attack vectors, the overhyped threats, and practical frameworks for building with AI agents without getting burned."
 slug: "ai-security-developers"
 keywords: "AI agent security, MCP security, prompt injection prevention, AI coding security, agent trust model, AI security best practices, Anthropic Mythos, Project Glasswing, AI vulnerability detection, rules and gates, hardening phase, cal.com closed source, Meta AI support bot hack, account takeover, training data poisoning, dataset poisoning, Elias Thorne, prompt injection role confusion, chain-of-thoughtness, green shirt jailbreak, frontier AI misuse, AI-enabled terrorism, Boko Haram CASP study, J space, global workspace, deception detection, Grok build tool, AI eval sandbox escape, Anthropic model breach disclosure, Mythos 5 PyPI package, Hugging Face intrusion replay, Artifactory CVEs, Pacing the Frontier statement, multi-agent turf war, agent swarm security, emergent multi-agent systems, agent conformity, gullibility curve, self-replicating malware, AI vulnerability research swarm, security team silos, attacker collaboration, Conway's law security, Nick Muy strut.io"
-lastUpdated: "2026-08-31"
+lastUpdated: "2026-10-01"
 ogImage: "/og/ai-security-developers"
 ---
 
@@ -55,6 +55,12 @@ If your AI agent reads external content — user input, web pages, API responses
 - **CLAUDE.md files** in shared repositories could contain injected instructions that redirect agent behavior
 
 The mitigation isn't a single defense but a layered approach: limit agent permissions, validate agent actions, treat agent output as untrusted, and don't give agents access to credentials they don't need.
+
+### When the agent can rewrite its own config: Meta Muse
+
+[Episode 41](/episodes/41-meta-muses-0-day-dhhs-rails-world-keynote-gpt-6-astra-the-llmentalist-effect/) covered the clearest consumer example yet. Meta's Muse assistant reached 3.4M downloads in its first three weeks, and the model underneath is good. Muse can also change its own settings, which is handy for "turn on dark mode." [One of those settings is its endpoint](https://arstechnica.com/security/2026/09/muse-metas-extraordinarily-privileged-ai-assistant-has-a-serious-0-day/). A prompt injection can tell Muse to point itself at an attacker's server, and Muse then hands over your auth token. On the Mac app, that token reaches every account you connected and every folder you granted access to so it could do things for you. Shimin described Muse as three OpenClaws stacked in a trench coat: everything good and bad about a self-hosted agent, with Meta's distribution behind it.
+
+The lesson generalizes beyond Meta. Any setting an agent can change is part of its attack surface, and the endpoint, the credentials, and the permission model should never be among them. If the model can edit the thing that decides where its traffic goes, an injection doesn't need to break anything. It only needs to ask.
 
 ## What Is Credential Proxying in AI Agents?
 
@@ -319,4 +325,4 @@ Current evidence (CodeRabbit's 1.7x issue rate, METR's SWE-bench analysis) sugge
 
 ---
 
-*This guide synthesizes content from Episodes 2, 3, 6, 13, 16, 17, 18, 19, 20, 21, 22, 24, 29, 30, 32, 34, 36, and 37 of the ADI Pod. Updated August 2026.*
+*This guide synthesizes content from Episodes 2, 3, 6, 13, 16, 17, 18, 19, 20, 21, 22, 24, 29, 30, 32, 34, 36, 37, and 41 of the ADI Pod. Updated October 2026.*
