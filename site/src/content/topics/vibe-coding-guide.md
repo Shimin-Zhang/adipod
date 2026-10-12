@@ -2,8 +2,8 @@
 title: "Vibe Coding: What Works, What Doesn't, and When to Stop"
 description: "A practitioner's guide to vibe coding — the psychology of dark flow, the economics of cognitive debt, and the frameworks that separate productive AI-assisted coding from expensive gambling."
 slug: "vibe-coding-guide"
-keywords: "vibe coding guide, vibe coding pros cons, dark flow coding, cognitive debt AI, vibe coding risks, AI coding best practices, control the ideas not the code, Antirez, should I read AI generated code, AI PR review survey, vertical slices, steel threads, software factory"
-lastUpdated: "2026-08-06"
+keywords: "vibe coding guide, vibe coding pros cons, dark flow coding, cognitive debt AI, vibe coding risks, AI coding best practices, control the ideas not the code, Antirez, should I read AI generated code, AI PR review survey, vertical slices, steel threads, software factory, brain sandwich, same-model code review, vibe coding hardware projects"
+lastUpdated: "2026-10-11"
 ogImage: "/og/vibe-coding-guide"
 ---
 
@@ -97,6 +97,8 @@ Disposable code is the cleanest use case. The [ThoughtWorks Future of Software E
 
 Dan's vibe-coded vector memory CLI tool (covered in [Episode 19](/episodes/19-thinking-fast-slow-and-artificial-meta-s-trouble-with-rogue-agents-and-fomo-in-the-age-of-ai/)) is a good example. It's a personal tool where cognitive debt has low consequences. If it breaks, the blast radius is one person.
 
+Dan's radar-tracking Halloween eyes, his Vibe and Tell in [Episode 42](/episodes/42-ai-safetys-conflict-of-interest-gemini-4-argon-the-brain-sandwich-agent-trading/), are a cleaner example. Claude picked the microcontrollers and wrote all the code, and Dan never wanted to look at it: "cool, it works." The bug that stopped him wasn't in the code at all. The eyes misbehaved until he read the millimeter-wave radar's datasheet and found he'd mounted it 90 degrees off. On a hardware side project the blast radius is a front porch, and the thinking that matters is about the physical world the model never sees.
+
 ### Exploration and domain learning
 
 Using AI to explore unfamiliar domains or prototype ideas — where the goal is understanding, not production code — is a productive application. The code is a byproduct of learning, not an artifact you're maintaining.
@@ -171,6 +173,10 @@ The most direct answer yet to "am I still supposed to read all the code?" came i
 
 The hosts' pushback maps the limits. Dan's counter-experience from the same week: on a small codebase built almost entirely by agents, his conceptual understanding silently drifted from reality until nothing worked the way he thought — the fix was having the agent walk him through the entire call chain, entry point to exit, with clickable line references; a debugger session for his mental model. Rahul's sharper version: the bug doesn't live at the level of your understanding, it lives in one of the ten thousand lines below it — so the real skill is calibrating depth-of-review to blast radius, a skim for the side tool, line-by-line for the outage-class production path, and nobody has a principled way to set that dial yet. His market test for whether any of this works: SaaS business-insurance premiums will eventually price in how well teams actually understand their own systems. Where the review line sits is still open — but "read everything" and "read nothing" are both now indefensible positions.
 
+### The Brain Sandwich
+
+The simplest rule on this list came from [Episode 42](/episodes/42-ai-safetys-conflict-of-interest-gemini-4-argon-the-brain-sandwich-agent-trading/)'s Technique Corner. Matheus Lima's [brain sandwich](/glossary/brain-sandwich) is brain, then AI, then brain: get a rough idea of where you're going before you prompt, delegate the build, then make sure you can explain what changed and why before anyone else sees it. Vibe coding is the sandwich with no bread. Shimin's refinement is a lasagna, with human thinking layered throughout and the harness as the sauce. Dan's warning applies to anyone who swaps the bottom slice for an AI reviewer: a model reviewing its own code shares its blind spots, so use a different provider's model, or at least a fresh context. Even then, a wrong assumption the writer and reviewer share only gets caught by the human who thought about the problem first.
+
 ### Vertical Slices (Steel Threads)
 
 The newest named mitigation comes from Dex of HumanLayer's ["Why Software Factories Fail"](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/wsff.md), covered in [Episode 36](/episodes/36-pacing-the-frontier-anthropic-models-go-rogue-why-software-factories-fail-math-in-the-age-of-ai/). His opening posit: "the lights-off factory does not work" — eventually you dig into the codebase you stopped reading three months ago, site down, users angry; he rewrote his own system from scratch after the third such episode. The fix has two parts. Program design: go one level below system architecture — interface pseudocode and call-stack diffs — so consistency is specified before the loop runs. And [vertical slices](/glossary/steel-threads/): agents default to painting horizontal layers like a 3D printer (migration, then domain logic, then API, then frontend), while humans work in steel threads — one thin end-to-end path, then the next. Constraining the agent to a single slice restores steering leverage: your correction lands after one thread, not after the whole floor is laid. Bonus, per the same episode: these artifacts double as the comprehension layer — the thing you actually read now that almost nobody reads the PRs.
@@ -222,4 +228,4 @@ No. The goal isn't to avoid AI-assisted development — it's to maintain underst
 
 ---
 
-*This guide synthesizes content from Episodes 3, 5, 7, 12, 14, 15, 16, 20, and 34 of the ADI Pod. Updated July 2026.*
+*This guide synthesizes content from Episodes 3, 5, 7, 12, 14, 15, 16, 20, 34, 36, and 42 of the ADI Pod. Updated October 2026.*

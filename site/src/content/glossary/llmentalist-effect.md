@@ -2,7 +2,7 @@
 term: "LLMentalist Effect"
 definition: "Baldur Bjarnason's name for the way chat-based LLMs reproduce the mechanics of a psychic's cold reading (a self-selected audience, priming, vague statements the listener personalizes, and a validation loop) so that users come away convinced the model understands them."
 slug: "llmentalist-effect"
-episodes: ["41"]
+episodes: ["41", "42"]
 aliases: ["LLMentalist", "LLM mentalist effect", "chatbot cold reading", "AI cold reading"]
 ---
 
@@ -17,6 +17,8 @@ The LLM version maps step by step. Skeptics are less likely to use chatbots. The
 The hosts don't accept the essay's premise that there's no reasoning behind the output. Shimin's line was that a statistical illusion that solves a Millennium Prize problem is a very powerful statistical illusion. But the mechanics don't depend on that question. Shimin's framing is to hold two true things at once: these are matrix multiplications, and they are trained to behave like humans, so expect human-like effects on the people using them. Rahul's version: AlphaFold has roughly similar architecture and nobody thinks it knows them, because it isn't trained to talk to us.
 
 That's why the effect matters for developers and not only for horoscope fans. It's the user-side half of [agent sycophancy](/glossary/agent-sycophancy): the model is tuned toward answers that please, and we're wired to remember the ones that land. Dan connected it to [Episode 32](/episodes/32-glm-5-2-undercuts-opus-self-rewriting-harness-ai-out-persuades-humans-prompt-injection-as-role-confusion/)'s finding that AI out-persuades expert humans, and to political rhetoric where fragments of thought get read however the listener wants. Shimin's worry is that the technology only gets cheaper as a way to mass-propagandize a population.
+
+[Episode 42](/episodes/42-ai-safetys-conflict-of-interest-gemini-4-argon-the-brain-sandwich-agent-trading/) brought a design-side response. Glyph's [list of what a serious AI product would look like](https://blog.glyph.im/2026/09/serious-ai-product.html) includes dropping the first-person voice and the apologies. Rahul's objection follows the con's own logic: the simulated empathy is there for engagement, and a model that says sorry isn't going to learn from the mistake, so the ritual only makes it feel more human. Shimin would love a chatbot with no first person, though he admits that's like asking a cigarette company for cigarettes without nicotine.
 
 ## Example
 

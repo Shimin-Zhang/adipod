@@ -2,9 +2,10 @@
 title: "Build As If Tokens Were 1000x Cheaper: What the Plunging Price of AI Means for Developers"
 description: "Epoch AI finds the cost of a fixed level of AI performance falling about 13x a year, faster than compute, batteries, or electricity ever fell. Here's what three years of that curve, and a year of podcast arguments about it, suggest you should build, learn, and stop worrying about."
 date: "2026-10-02"
+lastUpdated: "2026-10-11"
 slug: "plunging-price-of-ai-tokens"
-keywords: "AI inference cost falling, cost of AI tokens 2026, LLM price trend, price of intelligence, Epoch AI plunging price of thought, AI cost per task, cheap LLM tokens, Jevons paradox AI, good enough AI models, theory of constraints AI, verifiable vs unverifiable work, taste and judgment developers, AI token budget, inference subsidy, GLM 5.3 Flash price, Fable 5 usage share, build for future models, developer career AI cost"
-episodes: ["5", "13", "14", "15", "24", "26", "27", "28", "29", "30", "33", "38", "39", "41"]
+keywords: "AI inference cost falling, cost of AI tokens 2026, LLM price trend, price of intelligence, Epoch AI plunging price of thought, AI cost per task, cheap LLM tokens, Jevons paradox AI, good enough AI models, theory of constraints AI, verifiable vs unverifiable work, taste and judgment developers, AI token budget, inference subsidy, GLM 5.3 Flash price, Fable 5 usage share, build for future models, developer career AI cost, Gemini 4 Argon pricing, AI price war"
+episodes: ["5", "13", "14", "15", "24", "26", "27", "28", "29", "30", "33", "38", "39", "41", "42"]
 ---
 
 Whatever you're building with AI right now, you're probably pricing it wrong. The tokens will cost about a tenth as much next year, and a hundredth the year after.
@@ -73,6 +74,8 @@ I'd be overselling this if I stopped here. The archive has plenty of evidence th
 - **Power is a hard floor.** Power keeps showing up in our Two Minutes to Midnight segment, most recently with Oracle invoking force majeure on a data center it can't get enough electricity to.
 
 None of this contradicts Epoch. The cost of a *fixed* level of performance falls. But the frontier keeps moving, and most of us want the frontier. I think the honest synthesis is that last year's frontier gets very cheap, very fast, and this year's frontier stays expensive. So the strategic question becomes which of your workloads actually need this year's frontier. Per the FT data, the market's answer so far is "about 11% of them."
+
+A week after this post went up, [Episode 42](/episodes/42-ai-safetys-conflict-of-interest-gemini-4-argon-the-brain-sandwich-agent-trading/) complicated the "this year's frontier stays expensive" half. Google's [Gemini 4 Argon](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/) tops Astra, Fable 5.1, and Opus 5.5 on most of Google's own benchmarks (it trails on agentic coding), and it launched at $2/$10 per million tokens against Astra's $10/$50. That's a fifth of the price, though it's a promo: it rises to $4/$20 after an introductory period, still well under Astra. Shimin and Dan suspect TPUs let Google win a cost war. Rahul's field report fits the good-enough thesis: Gemini's agent rarely hits his limits on a $20 plan, and most of his tasks don't need a cutting-edge model anyway. Two caveats: the benchmarks are self-reported, and Argon is Ultra and Enterprise API only for now. But if the frontier itself starts competing on price, this year's frontier gets cheap faster too.
 
 ## How to Build As If Tokens Were 1000x Cheaper
 

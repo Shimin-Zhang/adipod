@@ -2,7 +2,7 @@
 term: "Slop Grenade"
 definition: "The workplace anti-pattern of copying a coworker's question into an LLM and pasting the raw, unread output back at them instead of an actual answer -- a thoughtless lob of unverified AI text that the recipient now has to clean up."
 slug: "slop-grenade"
-episodes: ["27", "30", "37", "40"]
+episodes: ["27", "30", "37", "40", "42"]
 aliases: ["slop grenade", "AI slop grenade"]
 ---
 
@@ -26,8 +26,11 @@ The fix is not "never use AI to help respond." It is to apply the same courtesy 
 
 [Episode 40](/episodes/40-the-psychology-of-software-teams-with-dr-cat-hicks/) scaled the grenade up to its team-level form. Dr. Cat Hicks calls it the *slop mountain*: a leader locks themselves in a room with their three favorite engineers, generates a mountain of code with no plan or strategy, and hands it to the rest of the team to deal with. Her diagnosis is that "that's what you are communicating there is actually not a technical decision" — it says the other people's experience, and the quality of their problem solving, don't matter. Receiving one turns you into "the rigor police" and "the cleanup police," which Dan pointed out can also be lonely if you're the only one doing it. Cat's fix moves from etiquette to team design: build a shared team mental model of where understanding is supposed to be developed, decide explicitly how the team will use AI for the next month, then stop and test whether it worked. In her experience, teams that lowered the overproduction pressure to make room for that were afraid of losing their edge, and ended up roughly eighteen months ahead.
 
+[Episode 42](/episodes/42-ai-safetys-conflict-of-interest-gemini-4-argon-the-brain-sandwich-agent-trading/) named the habit that prevents it. Matheus Lima's [brain sandwich](/glossary/brain-sandwich) (brain, then AI, then brain) puts the fix in the last slice: if you can't explain what changed and why, it isn't ready for someone else to read. Shimin's list of what that slice stops was the slop grenade and its code-review cousin, the 40,000-line PR sent without a human note or a human read. Rahul supplied the recipient's side in one title, Colin Breck's ["I Don't Want to Read What You Didn't Write."](https://blog.colinbreck.com/i-dont-want-to-read-what-you-didnt-write/) Shimin's version is about professional duty: if the AI wrote the code and you didn't bother to understand it, what are you there for?
+
 ## Related Concepts
 
+- [Brain sandwich](/glossary/brain-sandwich) -- the habit that prevents the grenade: think before the prompt, then read and understand the output before you send it
 - [Verification debt](/glossary/verification-debt) -- the slop grenade is verification debt handed to someone else: the sender skips the review, the recipient pays it
 - [Cognitive surrender](/glossary/cognitive-surrender) -- the decision-making failure mode behind the grenade, where the human stops adding judgment and just relays model output
 - [Benchmaxxed](/glossary/benchmaxxed) -- another case of plausible-looking AI output standing in for the real thing
