@@ -2,10 +2,10 @@
 title: "TPUs vs GPUs Explained: What Every AI Developer Should Actually Know"
 description: "You use AI models every day but probably cannot explain why Google built its own chips. Here is the hardware difference that shapes which models are fast, cheap, or neither."
 date: "2026-04-11"
-lastUpdated: "2026-10-11"
+lastUpdated: "2026-09-03"
 slug: "tpu-vs-gpu-developers-guide"
-keywords: "TPU vs GPU explained, TPU vs GPU AI, Google TPU developer guide, AI hardware for developers, OpenAI Broadcom jalapeno chip, inference ASIC, systolic array, tokens per kilowatt, Jalapeno first results, GPT Astra chip optimization, Gemini 4 Argon pricing, TPU inference cost advantage"
-episodes: ["4", "32", "39", "42"]
+keywords: "TPU vs GPU explained, TPU vs GPU AI, Google TPU developer guide, AI hardware for developers, OpenAI Broadcom jalapeno chip, inference ASIC, systolic array, tokens per kilowatt, Jalapeno first results, GPT Astra chip optimization"
+episodes: ["4", "32", "39"]
 ---
 
 TPUs (tensor processing units) are Google's custom-designed AI chips built exclusively for matrix multiplication, the core operation in neural network training and inference. GPUs (graphics processing units) are general-purpose parallel processors, originally designed for rendering graphics, that became the default AI hardware because their architecture happened to overlap with machine learning workloads. The key architectural difference: TPUs use systolic arrays that pass data directly between operations, while GPUs require memory round-trips between each step. This makes TPUs faster and more power-efficient for AI workloads, but less flexible and only available through Google Cloud.
@@ -95,10 +95,6 @@ Three details worth holding onto. The claim — vague but pointed — is cost-pe
 ## September 2026 Update: Jalapeño's First Numbers
 
 The July section above was written off analysts reading a wafer photo. [Episode 39](/episodes/39-metas-ai-backfires-glm-5-3-flash-openais-jalapeno-chip-the-end-of-programming/) covered [OpenAI's first published results](https://openai.com/index/jalapeno-first-results/), and the thesis holds. The headline: 22,000 tokens per second per kilowatt serving a 538B-parameter open-weights model, against 427 for the same model on NVIDIA's GB200 — a comparison OpenAI keeps in the appendix. The architectural explanation matches this post's memory-bandwidth argument exactly: the KV cache never leaves the die, and idle chip sections power-gate off. R&D to tape-out took under nine months and gen 2 is already in tape-out — the LLM-in-the-loop timeline compression the July section flagged as an "if" is now a cadence. And the detail worth the price of admission: an unreleased model, GPT Astra, has spent 60+ days optimizing the chip's inference stack. The feedback loop is now the product — the model optimizes the chip that serves the model.
-
-## October 2026 Update: The Price War Starts on TPUs
-
-[Episode 42](/episodes/42-ai-safetys-conflict-of-interest-gemini-4-argon-the-brain-sandwich-agent-trading/) brought the first frontier price cut that looks like this post's thesis paying off. Google's [Gemini 4 Argon](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/) launched at $2/$10 per million tokens (a promo; $4/$20 after) against $10/$50 for OpenAI's Astra and Anthropic's Fable 5.1, while topping most of Google's self-reported benchmarks. Google hasn't said why it can price that low, and it may simply be buying share. But Shimin and Dan's read is the one this post would predict: in the current generation of inference, the company that owns its serving stack down to the silicon is best placed to win a cost war against the other frontier labs. Dan's caveat points back at the sections above. Custom silicon like Jalapeño is coming for that edge, but even with LLM-compressed design cycles, the bottleneck is manufacturing at scale, the same wafer supply that limits NVIDIA today.
 
 ## What to Actually Do With This Information
 
