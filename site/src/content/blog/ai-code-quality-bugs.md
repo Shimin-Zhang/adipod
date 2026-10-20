@@ -2,10 +2,10 @@
 title: "Why AI Code Has 1.7x More Bugs (and What to Do About It)"
 description: "CodeRabbit's data shows AI-authored PRs have 1.7x more findings. The number alone misses the real story, so here's what it means for your team."
 date: "2026-04-11"
-lastUpdated: "2026-07-10"
+lastUpdated: "2026-10-19"
 slug: "ai-code-quality-bugs"
-keywords: "AI code quality, AI code bugs, AI-generated code review, CodeRabbit AI report, code cleanliness coding agents, SonarSource minimal pair study, does clean code matter to AI"
-episodes: ["7", "12", "15", "22", "23", "33"]
+keywords: "AI code quality, AI code bugs, AI-generated code review, CodeRabbit AI report, code cleanliness coding agents, SonarSource minimal pair study, does clean code matter to AI, code review bottleneck, Jellyfish study, AI coding agents productivity"
+episodes: ["7", "12", "15", "22", "23", "33", "43"]
 ---
 
 AI-generated code has measurably more defects than human-written code. That's not hype, conjecture, or vibes; it's what the data says. The question worth asking isn't whether the number is real, but what it actually tells you about the failure mode and whether your team is set up to catch it.
@@ -61,6 +61,8 @@ The interaction between these findings is what makes the problem structural. AI 
 ## The Review Bottleneck
 
 If writing code is no longer the constraint, then code review becomes the bottleneck. [Chris Roth's "Building An Elite AI Engineering Culture" article](https://www.cjroth.com/blog/2026-02-18-building-an-elite-engineering-culture) named this the productivity paradox: the bottleneck always moves. Automate the writing, and now your team spends all day reviewing. As Rahul Yadav observed on [episode 15](/episodes/15-convincing-ai-the-earth-is-flat-inference-at-17k-tokens-sec-and-an-agile-manifesto-for-the-agentic-age/): you can use AI agents for code review too, but the question becomes one of risk profiling.
+
+[Episode 43](/episodes/43-openai-fires-its-safety-researchers-agentic-primitives-more-code-not-more-software/) put numbers on that paradox. Fiona Chen and James Stratton (Harvard) [studied Jellyfish data from 718 firms](https://fion.ac/jellyfish.pdf): after adopting coding agents, firms produced 30% more lines of code, 20% more commits, and 23% more pull requests, while Jira issues resolved per worker rose about 3%, not a statistically significant change. The work moved to review. Review time rose 49%, comments per PR rose 35%, and reviewers' change requests climbed the longer a firm had used agents. [Per Ars Technica](https://arstechnica.com/ai/2026/10/ai-coding-agents-generate-more-code-but-not-more-software/), 80% of the firms use AI code review, yet AI writes only 23% of the review comments. So far, the bottleneck moved to review and stayed there.
 
 The ThoughtWorks retreat arrived at a framework for this that I find genuinely useful: risk tiering. Not all code deserves the same review scrutiny. An internal tool that touches nothing critical can get a lighter pass. Production code that handles financial transactions needs the full rigor. The key insight is that this isn't about cutting corners; it's about allocating a finite resource (your attention and judgment) to where the consequences of failure are highest.
 

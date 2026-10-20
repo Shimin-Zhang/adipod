@@ -2,7 +2,7 @@
 term: "Verification Debt"
 definition: "The accumulated cost of shipping AI-generated code without adequate human review, where unverified assumptions compound over time and become harder to unwind than traditional tech debt."
 slug: "verification-debt"
-episodes: ["6"]
+episodes: ["6", "43"]
 aliases: ["verification gap"]
 ---
 
@@ -15,6 +15,8 @@ The term emerged on [Episode 6](/episodes/6-gpt-5-2-claude-skills-and-hacker-hal
 Traditional tech debt accrues when developers make conscious trade-offs: ship now, refactor later. Verification debt is more insidious because there is no conscious trade-off being made. The developer approves a PR they skimmed, merges AI-generated code they half-understood, and moves on. Each unverified merge is a small bet that the AI got it right. Those bets compound -- a [CodeRabbit report on AI vs. human code quality](https://www.coderabbit.ai/blog/state-of-ai-vs-human-code-generation-report) found that AI-generated code creates 1.7x more downstream issues than human-written code, suggesting the house edge on those bets is worse than most teams assume.
 
 The danger is that verification debt is invisible until it is not. Unverified AI output can be syntactically clean, well-structured, and completely wrong in ways that only surface in production. By then, the developer who approved it has no mental model of what the code does, making debugging dramatically harder. Anthropic's own research on [how AI assistance impacts coding skills](https://www.anthropic.com/research/AI-assistance-coding-skills) suggests that heavy AI reliance can atrophy the very skills needed to catch these failures. Organizations are starting to respond: [Amazon now requires senior engineers to sign off on AI-assisted changes](https://arstechnica.com/ai/2026/03/after-outages-amazon-to-make-senior-engineers-sign-off-on-ai-assisted-changes/) -- an explicit acknowledgment that the verification gap had grown too wide.
+
+[Episode 43](/episodes/43-openai-fires-its-safety-researchers-agentic-primitives-more-code-not-more-software/) showed what paying the debt down costs. In Fiona Chen and James Stratton's [Jellyfish data from 718 firms](https://fion.ac/jellyfish.pdf), coding agents raised pull requests 23% and review time 49%, while issues resolved per worker barely moved. Verification is now the expensive step in shipping, which is exactly the pressure that tempts a team to skim.
 
 ## Example
 
