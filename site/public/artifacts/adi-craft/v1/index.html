@@ -1,0 +1,3031 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ADI Craft — ADI Pod</title>
+<meta name="description" content="ADI Craft v1: the raw Opus 5.5 one-shot of the hosts-as-factions RTS, before the art pass.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://adipod.ai/artifacts/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>html,body{margin:0;padding:0;height:100%;background:#07090e;color-scheme:dark}</style>
+</head>
+<body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root {
+  color-scheme: dark;
+  --bg: #07090e; --panel: rgba(10, 14, 22, 0.92); --line: #26314a; --line2: #34425f;
+  --text: #dbe4f0; --dim: #8b98ae; --faint: #5d6a80;
+  --shimin: #3cc8ff; --dan: #ff8a2a; --rahul: #c65bff; --neutral: #4fd18b;
+  --warn: #ffcf4a; --bad: #ff5a5a; --good: #5ee08a; --token: #e6ff5c;
+  --hud: 'Chakra Petch', 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+}
+html, body { height: 100%; margin: 0; background: #07090e; color: #dbe4f0; overflow: hidden; }
+body { font-family: var(--hud); font-size: 14px; line-height: 1.35; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+#app { position: fixed; inset: 0; overflow: hidden; background: #07090e; color: #dbe4f0; -webkit-user-select: none; user-select: none; }
+#stage { position: absolute; inset: 0; background: #07090e; }
+#stage canvas { display: block; width: 100%; height: 100%; }
+#ov { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+#flash { position: absolute; inset: 0; pointer-events: none; background: #ff3d1f; opacity: 0; }
+#flash.on { animation: flash 1.2s ease-out; }
+@keyframes flash { 0% { opacity: 0.45; } 100% { opacity: 0; } }
+.hud { position: absolute; pointer-events: none; color: #dbe4f0; }
+.chip { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; color: #dbe4f0; }
+
+#top { top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 8px 12px; padding-top: calc(8px + env(safe-area-inset-top, 0px)); }
+#res { display: flex; gap: 6px; flex-wrap: wrap; flex: 1 1 0; min-width: 0; pointer-events: auto; }
+#res .chip { font-family: var(--mono); font-size: 12px; white-space: nowrap; }
+#res .lbl { color: var(--dim); font-family: var(--hud); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-right: 6px; }
+#res .tok { color: var(--token); font-weight: 600; }
+.gauge { display: inline-block; width: 70px; height: 7px; background: #1a2232; border: 1px solid var(--line2); border-radius: 3px; vertical-align: middle; overflow: hidden; }
+.gauge i { display: block; height: 100%; background: var(--dan); }
+#clockbox { text-align: center; min-width: 176px; flex: none; pointer-events: auto; cursor: help; }
+#clock { font-family: var(--mono); font-size: 30px; font-weight: 600; color: #ffe2a8; letter-spacing: 1px; line-height: 1.1; }
+#clock.danger { color: #ff5a5a; }
+#clocklbl { font-size: 11px; letter-spacing: 3px; color: var(--dim); text-transform: uppercase; }
+#rec { font-family: var(--mono); font-size: 10px; color: var(--faint); margin-top: 2px; }
+#rec b { color: #ff5a5a; font-weight: 600; }
+#score { flex: 1 1 0; min-width: 0; display: flex; justify-content: flex-end; }
+#score .chip { font-family: var(--mono); font-size: 12px; min-width: 190px; pointer-events: auto; }
+#score .row { display: flex; justify-content: space-between; gap: 10px; white-space: nowrap; }
+#score .row.me { font-weight: 600; }
+#score .hd { font-family: var(--hud); font-size: 10px; letter-spacing: 2px; color: var(--dim); text-transform: uppercase; margin-bottom: 2px; }
+
+#toast { top: 92px; left: 50%; transform: translateX(-50%); background: #1b1206; border: 1px solid #6b4b12; color: #ffd27a; padding: 6px 14px; border-radius: 5px; font-size: 13px; max-width: calc(100% - 24px); text-align: center; }
+
+#log { left: 12px; bottom: 196px; width: min(460px, calc(100% - 24px)); font-family: var(--mono); font-size: 12px; display: flex; flex-direction: column; gap: 3px; }
+.ln { background: rgba(8, 11, 18, 0.82); border-left: 3px solid var(--line2); padding: 3px 8px; color: #dbe4f0; border-radius: 0 4px 4px 0; transition: opacity 1.2s; }
+.ln.fade { opacity: 0; }
+.ln.shimin { border-left-color: var(--shimin); } .ln.dan { border-left-color: var(--dan); } .ln.rahul { border-left-color: var(--rahul); }
+.ln.neutral { border-left-color: var(--neutral); } .ln.warn { border-left-color: var(--warn); color: #ffe7a6; } .ln.quote { color: #c9d3e2; font-style: italic; }
+.ln.sys { border-left-color: #8b98ae; }
+.ln .who { color: var(--dim); font-style: normal; }
+
+#bottom { left: 0; right: 0; bottom: 0; display: flex; gap: 8px; padding: 8px; padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px)); align-items: flex-end; }
+#bottom > * { pointer-events: auto; }
+#mini { width: 176px; height: 176px; background: #0b0f18; border: 1px solid var(--line2); border-radius: 6px; flex: none; cursor: crosshair; display: block; }
+#info { flex: 1 1 auto; min-width: 0; height: 176px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; overflow: hidden; color: #dbe4f0; }
+#info h3 { margin: 0 0 2px; font-size: 16px; font-weight: 700; }
+#info .sub { color: var(--dim); font-size: 12px; margin-bottom: 6px; }
+#info .bar { height: 8px; background: #1a2232; border: 1px solid var(--line2); border-radius: 3px; overflow: hidden; margin: 3px 0 5px; max-width: 320px; }
+#info .bar i { display: block; height: 100%; }
+#info .kv { font-family: var(--mono); font-size: 12px; color: #c4cede; }
+#info .warnt { color: var(--warn); }
+#info .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+#info .uchip { font-family: var(--mono); font-size: 11px; background: #121a29; border: 1px solid var(--line2); border-radius: 4px; padding: 2px 6px; color: #dbe4f0; }
+#info .flav { color: #aab6c8; font-size: 12px; margin-top: 4px; }
+#info ul { margin: 4px 0 0; padding-left: 16px; font-size: 12px; color: #b9c4d6; columns: 2; column-gap: 22px; }
+#info li { margin: 1px 0; break-inside: avoid; }
+#cmd { flex: none; width: 404px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px; }
+.btn { position: relative; height: 51px; background: #121a29; color: #dbe4f0; border: 1px solid var(--line2); border-radius: 5px; font-family: var(--hud); font-size: 11px; font-weight: 600; text-align: left; padding: 4px 6px; cursor: pointer; overflow: hidden; line-height: 1.12; }
+.btn:hover, .btn:focus-visible { border-color: var(--fc, #8b98ae); background: #172238; outline: none; }
+.btn .nm { position: absolute; left: 6px; right: 5px; top: 5px; max-height: 2.3em; overflow: hidden; }
+.btn .hk { position: absolute; right: 4px; bottom: 3px; font-family: var(--mono); font-size: 10px; color: var(--fc, #8b98ae); background: #0a0f18; border: 1px solid var(--line2); border-radius: 3px; padding: 0 4px; }
+.btn .cost { position: absolute; left: 6px; bottom: 3px; font-family: var(--mono); font-size: 10px; color: var(--token); }
+.btn .cdv { position: absolute; left: 0; right: 0; bottom: 0; height: 0; background: rgba(0, 0, 0, 0.62); pointer-events: none; }
+.btn .cdt { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); background: rgba(0, 0, 0, 0.8); border-radius: 3px; padding: 1px 6px; white-space: nowrap; text-align: center; font-family: var(--mono); font-size: 13px; font-weight: 600; color: #ffffff; text-shadow: 0 0 4px #000000, 0 0 2px #000000; pointer-events: none; }
+.btn .cdt:empty { display: none; }
+.btn.off { opacity: 0.42; }
+.btn.armed { border-color: var(--fc, #8b98ae); box-shadow: inset 0 0 0 1px var(--fc, #8b98ae); }
+.btn.blank { visibility: hidden; }
+#tip { right: 8px; bottom: 198px; width: min(360px, calc(100% - 16px)); background: #0c111b; border: 1px solid var(--line2); border-radius: 6px; padding: 10px 12px; font-size: 13px; color: #dbe4f0; }
+#tip h4 { margin: 0 0 3px; font-size: 15px; }
+#tip .meta { font-family: var(--mono); font-size: 11px; color: var(--token); margin-bottom: 5px; }
+.q { margin-top: 7px; font-style: italic; color: #cfd8e6; }
+.q .who { font-style: normal; color: var(--dim); white-space: nowrap; }
+
+.screen { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(5, 7, 11, 0.84); padding: 16px; overflow-y: auto; color: #dbe4f0; }
+.screen.clear { background: transparent; pointer-events: none; }
+.wrap { width: min(1020px, 100%); margin: auto; }
+.title { font-size: clamp(36px, 7vw, 64px); font-weight: 700; letter-spacing: 6px; margin: 0; color: #ffffff; text-align: center; line-height: 1; }
+.title span { color: #ffe2a8; }
+.subtitle { text-align: center; font-family: var(--mono); color: #ffcf8a; letter-spacing: 4px; font-size: 13px; margin: 8px 0 4px; text-transform: uppercase; }
+.tag { text-align: center; color: var(--dim); margin: 0 auto 18px; max-width: 640px; font-size: 14px; }
+.cards { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.card { display: flex; flex-direction: column; justify-content: flex-start; width: min(316px, 100%); background: #0d131f; border: 1px solid var(--line2); border-radius: 8px; padding: 14px; text-align: left; color: #dbe4f0; font-family: var(--hud); cursor: pointer; }
+.card:hover, .card:focus-visible { border-color: var(--fc); outline: none; }
+.card.on { border-color: var(--fc); box-shadow: 0 0 0 2px var(--fc) inset; background: #111a2a; }
+.card h2 { margin: 0; font-size: 24px; color: var(--fc); }
+.card .an { font-family: var(--mono); font-size: 11px; color: var(--dim); letter-spacing: 1px; text-transform: uppercase; }
+.card .bl { margin: 8px 0; font-size: 14px; color: #e6edf7; }
+.card ul { margin: 6px 0; padding-left: 18px; font-size: 12.5px; color: #b9c4d6; }
+.card li { margin: 2px 0; }
+.card .hqn { font-size: 12px; color: var(--dim); }
+.card .hqn b { color: #e6edf7; font-weight: 600; }
+.row2 { display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 18px; }
+.seg { display: inline-flex; border: 1px solid var(--line2); border-radius: 6px; overflow: hidden; }
+.seg button { background: #0d131f; color: #b9c4d6; border: 0; border-right: 1px solid var(--line2); padding: 9px 14px; font-family: var(--hud); font-size: 13px; font-weight: 600; cursor: pointer; }
+.seg button:last-child { border-right: 0; }
+.seg button.on { background: #22304a; color: #ffffff; }
+.go { background: #ffe2a8; color: #16110a; border: 0; border-radius: 6px; padding: 11px 22px; font-family: var(--hud); font-size: 16px; font-weight: 700; letter-spacing: 1px; cursor: pointer; }
+.go:hover, .go:focus-visible { background: #fff1d1; outline: none; }
+.go.ghost { background: #0d131f; color: #dbe4f0; border: 1px solid var(--line2); }
+.hint { text-align: center; color: var(--faint); font-size: 12px; margin-top: 12px; font-family: var(--mono); }
+#countn { font-size: clamp(60px, 14vw, 140px); font-weight: 700; color: #ffffff; text-align: center; text-shadow: 0 0 24px rgba(0, 0, 0, 0.9); }
+#counts { font-family: var(--mono); color: #ffcf8a; letter-spacing: 3px; text-align: center; text-transform: uppercase; text-shadow: 0 0 10px #000000; }
+#count .inner { text-align: center; }
+#count .pop { animation: pop 0.9s ease-out; }
+@keyframes pop { 0% { transform: scale(1.5); opacity: 0; } 30% { opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+.panel { background: #0b1019; border: 1px solid var(--line2); border-radius: 8px; padding: 18px 22px; width: min(860px, 100%); margin: auto; color: #dbe4f0; }
+.panel h2 { margin: 0 0 6px; font-size: 26px; color: #ffffff; }
+.panel h3 { margin: 14px 0 4px; font-size: 16px; color: #ffe2a8; }
+.panel p, .panel li { font-size: 13.5px; color: #c4cede; margin: 4px 0; }
+.panel ul { margin: 4px 0; padding-left: 18px; }
+.panel kbd { font-family: var(--mono); font-size: 11px; background: #151d2c; border: 1px solid var(--line2); border-radius: 3px; padding: 0 5px; color: #ffffff; }
+.panel .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 6px 22px; }
+.fs { color: var(--shimin); } .fd { color: var(--dan); } .fr { color: var(--rahul); } .fn { color: var(--neutral); }
+#end table { width: 100%; border-collapse: collapse; margin: 10px 0; font-family: var(--mono); font-size: 13px; }
+#end td, #end th { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); color: #dbe4f0; }
+#end th { color: var(--dim); font-weight: 600; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+.fatal { background: #160b0b; border: 1px solid #6b2020; color: #ffd0d0; padding: 22px; border-radius: 8px; max-width: 520px; }
+#narrow { display: none; position: absolute; left: 8px; right: 8px; top: calc(8px + env(safe-area-inset-top, 0px)); z-index: 5; background: #1b1206; border: 1px solid #6b4b12; color: #ffd27a; padding: 6px 10px; border-radius: 5px; font-size: 12px; text-align: center; pointer-events: none; }
+
+@media (max-width: 860px) {
+  #cmd { width: 340px; }
+  #info { display: none; }
+  #score .chip { min-width: 0; }
+}
+@media (max-width: 640px) {
+  #narrow { display: block; }
+  #top { padding-top: calc(60px + env(safe-area-inset-top, 0px)); flex-wrap: wrap; }
+  #res { flex-basis: 100%; order: 2; }
+  #clockbox { order: 1; min-width: 0; flex: 1 1 auto; }
+  #score { order: 1; flex: 1 1 auto; }
+  #mini { width: 112px; height: 112px; }
+  #cmd { width: auto; flex: 1 1 auto; min-width: 0; }
+  .btn { height: 44px; font-size: 10px; }
+  #log { bottom: 170px; font-size: 11px; }
+  #tip { bottom: 170px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #flash.on, #count .pop { animation: none; }
+  .ln { transition: none; }
+}
+</style>
+<div id="app">
+  <div id="stage"></div>
+  <canvas id="ov"></canvas>
+  <div id="flash"></div>
+  <div id="top" class="hud" hidden>
+    <div id="res"></div>
+    <div id="clockbox" class="chip" title="The doomsday clock. It advances on its own and with every token spent anywhere on the map. Midnight bursts the AI bubble.">
+      <div id="clock">2:00</div>
+      <div id="clocklbl">to midnight</div>
+      <div id="rec"></div>
+    </div>
+    <div id="score"><div class="chip" id="scorechip"></div></div>
+  </div>
+  <div id="toast" class="hud" hidden></div>
+  <div id="log" class="hud"></div>
+  <div id="bottom" class="hud" hidden>
+    <canvas id="mini" width="176" height="176"></canvas>
+    <div id="info"></div>
+    <div id="cmd"></div>
+  </div>
+  <div id="tip" class="hud" hidden></div>
+
+  <div id="menu" class="screen">
+    <div class="wrap">
+      <h1 class="title">ADI <span>CRAFT</span></h1>
+      <div class="subtitle">Two Minutes to Midnight</div>
+      <p class="tag">Three software developers navigate the ever-changing AI maze. Pick a host. The other two are played by AI, which is thematically appropriate.</p>
+      <div class="cards" id="cards"></div>
+      <div class="row2">
+        <div class="seg" id="diffseg">
+          <button type="button" data-d="casual">Filthy Casual</button>
+          <button type="button" data-d="buddy" class="on">Study Buddy</button>
+          <button type="button" data-d="max">Max Thinking</button>
+        </div>
+        <button type="button" class="go" id="startbtn">Start recording</button>
+        <button type="button" class="go ghost" id="helpbtn">How to play (H)</button>
+      </div>
+      <div class="hint">1 / 2 / 3 pick a host &middot; Enter to start &middot; H for help</div>
+    </div>
+  </div>
+
+  <div id="count" class="screen clear" hidden><div class="inner"><div id="countn"></div><div id="counts"></div></div></div>
+
+  <div id="pause" class="screen" hidden>
+    <div class="panel" style="text-align:center;max-width:520px">
+      <h2>Paused</h2>
+      <p>The doomsday clock is also paused, which is not how clocks work.</p>
+      <p><kbd>P</kbd> to resume &middot; <kbd>H</kbd> for help</p>
+    </div>
+  </div>
+
+  <div id="help" class="screen" hidden>
+    <div class="panel">
+      <h2>How to play ADI Craft</h2>
+      <p>StarCraft-shaped. Mine tokens, build, train units, use abilities, destroy both enemy HQs, or have the most <b>Delivered Value</b> when the doomsday clock strikes midnight.</p>
+      <div class="cols">
+        <div>
+          <h3>Controls</h3>
+          <ul>
+            <li><kbd>Left click</kbd> select &middot; <kbd>drag</kbd> box-select &middot; <kbd>Shift</kbd> adds</li>
+            <li><kbd>Right click</kbd> attack-move / attack / gather &middot; <kbd>Shift+Right</kbd> plain move</li>
+            <li>Right click with a building selected sets its rally point</li>
+            <li><kbd>WASD</kbd> / arrows / screen edge pan &middot; <kbd>wheel</kbd> zoom</li>
+            <li><kbd>1</kbd>-<kbd>4</kbd> train &middot; <kbd>Z</kbd> <kbd>X</kbd> build &middot; <kbd>Q</kbd> <kbd>E</kbd> abilities &middot; <kbd>T</kbd> superweapon</li>
+            <li><kbd>G</kbd> compaction (send selected home) &middot; <kbd>Space</kbd> select army &middot; <kbd>B</kbd> camera to base</li>
+            <li><kbd>Esc</kbd> cancel / clear selection &middot; <kbd>P</kbd> pause &middot; <kbd>M</kbd> mute &middot; <kbd>H</kbd> or <kbd>?</kbd> this screen</li>
+            <li>Minimap: left click moves the camera, right click sends the selection</li>
+          </ul>
+          <h3>The doomsday clock</h3>
+          <p>Starts at 2:00 to midnight. It ticks on its own and advances with every token spent anywhere on the map (250 tokens = 1 second). Dan can nudge it forward. At midnight the AI bubble bursts: token income collapses for everyone, Shimin hardest. After a short correction the auditors count Delivered Value (units and buildings alive, plus creeps cleared). Highest value wins.</p>
+          <h3>Context Window</h3>
+          <p>Every unit has a context meter that drains while it moves or fights. At 13% its performance degrades sharply: less damage, slower, invents APIs. Send it home with <kbd>G</kbd> to compact; standing near your HQ or production building restores it.</p>
+          <h3>Phantom Episode</h3>
+          <p>Fog of war is hallucination. Unscouted areas occasionally show invented enemy units. They vanish when one of your real units gets close enough to check. Do not cite them.</p>
+        </div>
+        <div>
+          <h3 class="fs">Shimin (Protoss analogue)</h3>
+          <p>Few units, all expensive. HQ <b>Two Acres in Washington</b> is slow to develop (<kbd>X</kbd> to upgrade) but yields enormous passive tokens. <b>Arena Judges</b> grades enemies and deletes the worst. <b>Shakespeare</b> stuns with a soliloquy (derpy hands: 20% chance of half duration). Superweapon <b>Fourth-Order Effects</b>: rings of consequences; at the 7th order everyone in range, yours too, stops to discuss what it means to be human. Passive <b>Deadpan</b>: immune to Dan's Rant. Weakness <b>the 20x plan</b>: a 2,000-token cap; hit it and production stalls for 10s.</p>
+          <h3 class="fd">Dan (Terran analogue)</h3>
+          <p>One base, no cloud. Everything builds at <b>The Framework Desktop</b>; queue too much and it thermal-throttles. <b>Token Miser</b>: half-cost, lower-stat units. <b>Small PRs</b>: units ship in small, fast batches. <b>Open Weights</b> captures a neutral model after a 3s Tiananmen check (fail and it glitches). <b>Haiku</b> only writes haikus. <b>x86 Tetris</b> is a fortress abilities cannot target. <b>Dan's Rant</b> charges for two and a half weeks, then erupts map-wide. Superweapon <b>Two Minutes to Midnight</b> moves the clock 30s closer. Weakness <b>jet lag</b>: slow units for the first 60s.</p>
+          <h3 class="fr">Rahul (Zerg analogue)</h3>
+          <p>As an AI opponent he drops in at 2:00 (he is covering for Dan). <b>Persuaders</b> convert enemies on sustained contact. <b>Grandmaster</b> hero is immune to morale effects and pacification. <b>Hahaha</b> heals, and fires for free whenever a Shakespeare appears. <b>I'd Watch It All Day</b> locks one enemy until it is damaged; cast it on a Hamlet to steal the audience. <b>Guest Host</b>: if Dan's HQ falls while Rahul lives, Rahul takes Dan's units. <b>Employer-Neutral</b>: no insignia, so single-target abilities and judge deletions skip his units. Superweapon <b>Hype Train</b>.</p>
+          <h3 class="fn">Neutral creeps</h3>
+          <p>Open-weight models spawn 4 to 14 months behind the frontier at camps around the map. Kill them for tokens and Delivered Value, or let Dan capture them.</p>
+        </div>
+      </div>
+      <div class="row2"><button type="button" class="go" id="helpclose">Got it (H)</button></div>
+    </div>
+  </div>
+
+  <div id="end" class="screen" hidden>
+    <div class="panel" style="max-width:640px">
+      <h2 id="endt"></h2>
+      <p id="ends"></p>
+      <table id="endtab"></table>
+      <p id="endq" class="q"></p>
+      <div class="row2">
+        <button type="button" class="go" id="againbtn">Run it back</button>
+        <button type="button" class="go ghost" id="menubtn">Pick another host</button>
+      </div>
+    </div>
+  </div>
+  <div id="narrow">Best played on desktop with a mouse and keyboard. Phones are for listening to podcasts.</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+'use strict';
+const $ = (id) => document.getElementById(id);
+function fatal(msg) {
+  const m = $('menu');
+  m.hidden = false;
+  m.innerHTML = '<div class="fatal"><h2>ADI Craft</h2><p>' + msg + '</p></div>';
+}
+if (!window.THREE) { fatal('Three.js did not load from the CDN, so the AI maze is offline. Check the connection and reload.'); return; }
+
+// ================================================================ constants
+const MAP = 192, HALF = 96, GN = 96, CS = 2, FN = 128, FCS = MAP / FN, TAU = Math.PI * 2;
+const BASE_RATE = 0.11, SPEND_DIV = 260, CORRECTION = 45, RAHUL_ETA = 120, JETLAG = 60;
+const BURST_MULT = { shimin: 0.1, dan: 0.5, rahul: 0.4 };
+const FACS = ['shimin', 'dan', 'rahul'];
+const rnd = (a, b) => (b === undefined ? Math.random() * a : a + Math.random() * (b - a));
+const rint = (a, b) => Math.floor(a + Math.random() * (b - a + 1));
+const pick = (a) => a[Math.floor(Math.random() * a.length)];
+const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+const d2d = (a, b) => Math.hypot(a.x - b.x, a.z - b.z);
+const fmtT = (s) => { s = Math.max(0, Math.ceil(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+const fmtN = (n) => Math.floor(n).toLocaleString('en-US');
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const ord = (k) => k + (k === 1 ? 'st' : k === 2 ? 'nd' : k === 3 ? 'rd' : 'th');
+
+// ================================================================ verified quotes (grep-checked against transcripts)
+const Q = {
+  opus: { q: 'I should not be allowed to do that.', who: 'Shimin', ep: 34 },
+  miser: { q: 'token misers like myself', who: 'Dan', ep: 13 },
+  beastly: { q: 'I have a pretty beastly machine', who: 'Dan', ep: 6 },
+  tetris: { q: 'I wrote Tetris in x86 assembly one time.', who: 'Dan', ep: 24 },
+  haiku: { q: "The only thing I've ever used haiku for is writing haikus", who: 'Dan', ep: 43 },
+  watch: { q: "I'd watch it all day.", who: 'Rahul', ep: 41 },
+  chess: { q: "We're okay even though the chess engines are just way better than us now.", who: 'Shimin', ep: 23 },
+  rant: { q: "You've had two and a half weeks of rants.", who: 'Shimin', ep: 9 },
+  volcano: { q: "It's like a volcano.", who: 'Shimin', ep: 9 },
+  midnight: { q: 'My favorite segment is Two Minutes to Midnight', who: 'Dan', ep: 6 },
+  colors: { q: "the colors don't work", who: 'Shimin', ep: 13 },
+  human: { q: "let's talk about what it means to be human, guys.", who: 'Shimin', ep: 29 },
+  acres: { q: 'what the model should do with two acres of land somewhere in Washington to make money.', who: 'Shimin', ep: 39 },
+  tiananmen: { q: 'First thing I do with Chinese models is ask them about Tianamen Square.', who: 'Dan', ep: 20 },
+  covering: { q: 'I was grateful to Rahul for covering for me last week', who: 'Dan', ep: 9 },
+  jetlag: { q: "I'm not 100 % over jet lag, but I'm conscious enough to be able to do this podcast.", who: 'Dan', ep: 9 },
+  derpy: { q: "As you can see, it's kind of derpy.", who: 'Shimin', ep: 41 },
+  gemini: { q: 'Gemini 2.5 Flash did better than Gemini 3.1 Pro Preview', who: 'Shimin', ep: 22 },
+  x20: { q: 'this is where the 20X tokens are going to, gents.', who: 'Shimin', ep: 22 },
+  gap: { q: 'the minimum gap is 4 months and the maximum is 14 months.', who: 'Shimin', ep: 9 },
+  ctx13: { q: 'you have 13 % context remaining.', who: 'Shimin', ep: 4 },
+  hahaha: { q: 'Hahaha', who: 'Rahul', ep: 10 },
+  maze: { q: 'navigate the ever changing AI maze', who: 'Shimin', ep: 32 },
+  framework: { q: 'I like running them on my little framework desktop machine', who: 'Dan', ep: 20 }
+};
+const qtext = (k) => '"' + Q[k].q + '" — ' + Q[k].who + ', ep-' + Q[k].ep;
+const qhtml = (k) => '<div class="q">&ldquo;' + esc(Q[k].q) + '&rdquo; <span class="who">— ' + Q[k].who + ', ep-' + Q[k].ep + '</span></div>';
+
+// ================================================================ factions
+const FMETA = {
+  shimin: { name: 'Shimin', color: 0x3cc8ff, css: '#3cc8ff', dark: 0x173f57, base: { x: -61, z: 57 }, hq: 'hq_shimin', popCap: 30, cap: 2000 },
+  dan: { name: 'Dan', color: 0xff8a2a, css: '#ff8a2a', dark: 0x5a2c0d, base: { x: 61, z: 57 }, hq: 'hq_dan', popCap: 46 },
+  rahul: { name: 'Rahul', color: 0xc65bff, css: '#c65bff', dark: 0x43195a, base: { x: -1, z: -63 }, hq: 'hq_rahul', popCap: 56 },
+  neutral: { name: 'Open-weight', color: 0x4fd18b, css: '#4fd18b', dark: 0x1a4d33 }
+};
+const FDESC = {
+  shimin: { an: 'Protoss analogue', bl: 'Few units, all expensive, everything runs on max thinking.', hq: 'Two Acres in Washington',
+    li: ['Max Thinking Opus siege unit, Playwright Scouts', 'Arena Judges, Shakespeare', 'Superweapon: Fourth-Order Effects', 'Deadpan: immune to Dan’s Rant', 'Weakness: the 20x plan (2,000-token cap)'], qk: 'opus' },
+  dan: { an: 'Terran analogue', bl: 'Scrappy, local, cheap. One base, no cloud.', hq: 'The Framework Desktop',
+    li: ['Token Miser: half-cost, lower-stat units', 'Small PRs, Haiku, x86 Tetris fortress', 'Open Weights capture, Dan’s Rant', 'Superweapon: Two Minutes to Midnight', 'Weakness: jet lag for the first 60s'], qk: 'miser' },
+  rahul: { an: 'Zerg analogue', bl: 'Drops in mid-game. A swarm of persuasion.', hq: 'The Guest Chair',
+    li: ['Persuaders convert instead of killing', 'Grandmaster hero, Hahaha, I’d Watch It All Day', 'Guest Host: inherits Dan’s units', 'Employer-Neutral: no insignia', 'Weakness: arrives late, short tech tree'], qk: 'watch' }
+};
+
+// ================================================================ unit + building data
+const U = {
+  subagent: { f: 'shimin', name: 'Subagent', cost: 60, time: 9, hp: 70, spd: 8, rng: 0, dmg: 0, cd: 1, sight: 10, r: 0.7, h: 1.7, pop: 1, dv: 60, worker: 1, carry: 10, from: 'hq', d: 'Worker. Mines tokens and reports back with a summary nobody reads.' },
+  scout: { f: 'shimin', name: 'Playwright Scout', cost: 100, time: 10, hp: 90, spd: 15, rng: 7, dmg: 5, cd: 1, sight: 26, r: 0.7, h: 1.4, pop: 1, dv: 100, from: 'hq', d: 'Fast scout with a huge sight radius. Verifies the base actually works. Clears Phantom Episodes.', qk: 'colors' },
+  reviewer: { f: 'shimin', name: 'Code Reviewer', cost: 175, time: 15, hp: 300, spd: 6.5, rng: 2.5, dmg: 26, cd: 1, sight: 12, r: 1, h: 2.6, pop: 2, dv: 175, from: 'harness', d: 'Melee bruiser. Leaves forty comments and approves nothing on the first pass. Requires an Agent Harness.' },
+  opus: { f: 'shimin', name: 'Max Thinking Opus', cost: 400, time: 30, hp: 480, spd: 3.6, rng: 22, dmg: 130, cd: 3.6, splash: 4.5, sight: 24, r: 1.6, h: 3.2, pop: 4, dv: 420, from: 'harness', drain: 3, d: 'Siege unit. Long build, enormous splash damage, drains 3 tokens per second while active. Requires an Agent Harness.', qk: 'opus' },
+  qwen: { f: 'dan', name: 'Qwen-0.5B Miner', cost: 25, time: 5, hp: 45, spd: 8, rng: 0, dmg: 0, cd: 1, sight: 9, r: 0.6, h: 1.3, pop: 1, dv: 30, worker: 1, carry: 6, from: 'hq', d: 'Worker. Half a billion parameters, all dedicated to carrying things.', qk: 'miser' },
+  quant: { f: 'dan', name: 'Q4 Quant', cost: 50, time: 7, batch: 2, hp: 110, spd: 7, rng: 9, dmg: 9, cd: 0.9, sight: 12, r: 0.8, h: 1.8, pop: 1, dv: 55, from: 'hq', d: 'Small PRs: ships two at a time and deploys fast. Code is cheap, your time is not.' },
+  haiku: { f: 'dan', name: 'Haiku', cost: 25, time: 4, hp: 40, spd: 8, rng: 0, dmg: 0, cd: 1, sight: 10, r: 0.6, h: 1.4, pop: 1, dv: 10, haiku: 1, from: 'hq', d: 'Cheap. Order it to attack and it writes a haiku in the event log instead.', qk: 'haiku' },
+  beastly: { f: 'dan', name: 'Beastly Machine', cost: 150, time: 15, hp: 380, spd: 4.6, rng: 12, dmg: 32, cd: 1.4, sight: 14, r: 1.4, h: 2.8, pop: 3, dv: 160, from: 'hq', d: 'Heavy ranged unit. Runs the big quants at usable speeds.', qk: 'beastly' },
+  drone: { f: 'rahul', name: 'Unbranded Drone', cost: 40, time: 6, hp: 55, spd: 8.5, rng: 0, dmg: 0, cd: 1, sight: 9, r: 0.6, h: 1.3, pop: 1, dv: 40, worker: 1, carry: 7, from: 'hq', d: 'Worker. No logo, no lanyard, no comment.' },
+  persuader: { f: 'rahul', name: 'Persuader', cost: 35, time: 5, batch: 2, hp: 55, spd: 10.5, rng: 1.8, dmg: 0, cd: 1, sight: 11, r: 0.6, h: 1.3, pop: 1, dv: 35, convert: 1, from: 'hq', d: 'Swarm unit, spawns in pairs. Converts enemy units on sustained contact instead of killing them. Nibbles buildings.' },
+  hottake: { f: 'rahul', name: 'Hot Take', cost: 80, time: 8, hp: 100, spd: 7.5, rng: 11, dmg: 12, cd: 0.9, sight: 13, r: 0.8, h: 2.2, pop: 1, dv: 80, from: 'hq', req: 'greenroom', d: 'Ranged. Confident. Occasionally correct. Requires a Green Room.' },
+  grandmaster: { f: 'rahul', name: 'Grandmaster', cost: 300, time: 22, hp: 650, spd: 6, rng: 14, dmg: 42, cd: 1.5, sight: 16, r: 1.3, h: 3.6, pop: 3, dv: 300, hero: 1, from: 'hq', req: 'greenroom', d: 'Hero, one at a time. Chess engines have beaten him for twenty years: immune to morale effects and to Fourth-Order pacification.', qk: 'chess' },
+  creep: { f: 'neutral', name: 'Open-weight model', cost: 0, time: 0, hp: 120, spd: 6, rng: 6, dmg: 10, cd: 1.1, sight: 9, r: 0.9, h: 2.2, pop: 1, dv: 90, d: 'Neutral. Spawns 4 to 14 months behind the frontier.', qk: 'gap' }
+};
+const BD = {
+  hq_shimin: { f: 'shimin', name: 'Two Acres in Washington', hp: 1800, size: 10, sight: 16, dv: 600, hq: 1, d: 'HQ. Slow to develop, enormous token yield once upgraded. Compacts context.', qk: 'acres' },
+  harness: { f: 'shimin', name: 'Agent Harness', cost: 200, time: 22, hp: 800, size: 6, sight: 10, dv: 200, d: 'Production. Unlocks Code Reviewers and Max Thinking Opus. Compacts context.' },
+  hq_dan: { f: 'dan', name: 'The Framework Desktop', hp: 2000, size: 10, sight: 16, dv: 600, hq: 1, d: 'HQ. Everything builds here. Queue too much and it thermal-throttles.', qk: 'beastly' },
+  tetris: { f: 'dan', name: 'x86 Tetris', cost: 150, time: 18, hp: 1600, size: 6, sight: 15, rng: 15, dmg: 18, cd: 1.2, dv: 250, d: 'Hand-assembled fortress. Very high HP, drops tetrominoes on enemies. Enemy abilities cannot target it.', qk: 'tetris' },
+  hq_rahul: { f: 'rahul', name: 'The Guest Chair', hp: 1500, size: 10, sight: 15, dv: 600, hq: 1, d: 'HQ. Cheap, fast spawns. Arrives when someone needs covering for.', qk: 'covering' },
+  greenroom: { f: 'rahul', name: 'Green Room', cost: 150, time: 16, hp: 700, size: 6, sight: 10, dv: 180, d: 'Unlocks Hot Takes and the Grandmaster. That is the whole tech tree.' }
+};
+const UPG = {
+  1: { cost: 350, time: 40, name: 'Irrigate the Two Acres', d: 'HQ level 2. Passive +4 tokens/sec.' },
+  2: { cost: 700, time: 55, name: 'Server Farm on the Two Acres', d: 'HQ level 3. Passive +12 tokens/sec. Enormous, as promised.' }
+};
+const PASSIVE = { 1: 0, 2: 4, 3: 12 };
+const AB = {
+  shimin: {
+    q: { name: 'Arena Judges', cost: 125, cd: 30, init: 0, target: 'area', radius: 13, d: 'Summon eleven ghostly judge models over an area. Each enemy unit in range is graded (25 damage of harsh feedback) and the lowest score is deleted. Gemini 3.1 Pro always loses.', qk: 'gemini' },
+    e: { name: 'Shakespeare', cost: 150, cd: 40, init: 0, target: 'area', radius: 12, d: 'An SVG-looking Hamlet appears and stuns enemies in range for 6s with a soliloquy. Derpy hands: 20% chance it only lasts 3s.', qk: 'derpy' },
+    t: { name: 'Fourth-Order Effects', cost: 500, cd: 150, init: 150, target: 'area', radius: 49, super: 1, d: 'Superweapon. Consequences ripple outward in rings (1st order, 2nd order, 3rd order...) damaging enemies. At the 7th order every unit in range, yours included, stops fighting for 12s to discuss what it means to be human.', qk: 'human' }
+  },
+  dan: {
+    q: { name: 'Open Weights', cost: 50, cd: 18, init: 0, target: 'creep', radius: 2, d: 'Capture a neutral open-weight model and run it locally. It must pass the 3-second Tiananmen check. Fail and it joins you anyway, glitching for 15s.', qk: 'tiananmen' },
+    e: { name: "Dan's Rant", cost: 0, cd: 110, init: 110, target: 'none', rant: 1, d: 'Charges for two and a half weeks (about two minutes), then erupts like a volcano: every enemy on the map deals 45% less damage and moves 35% slower for 14s, and Dan’s units get fired up. Shimin’s units are immune (Deadpan).', qk: 'rant', qk2: 'volcano' },
+    t: { name: 'Two Minutes to Midnight', cost: 200, cd: 120, init: 90, target: 'none', super: 1, d: 'Superweapon. Nudge the doomsday clock 30 seconds closer to midnight. Best used while you lead in Delivered Value.', qk: 'midnight' }
+  },
+  rahul: {
+    q: { name: 'Hahaha', cost: 75, cd: 25, init: 0, target: 'area', radius: 14, d: 'Area heal for allies (90 HP). Also fires for free, map-wide, whenever a Shakespeare appears anywhere.', qk: 'hahaha' },
+    e: { name: "I'd Watch It All Day", cost: 100, cd: 30, init: 0, target: 'enemy', radius: 2, d: 'Lock one enemy unit into watching a soliloquy, indefinitely, until it takes damage. Cast it on an active Hamlet to steal the audience: the soliloquy stuns Shimin’s units instead.', qk: 'watch' },
+    t: { name: 'Hype Train', cost: 250, cd: 120, init: 60, target: 'area', radius: 6, super: 1, d: 'Superweapon. Eight Persuaders arrive at a visible location and every Rahul unit moves 50% faster for 15s. No one checked the schedule.' }
+  }
+};
+const TRAIN = { shimin: ['subagent', 'scout', 'reviewer', 'opus'], dan: ['qwen', 'quant', 'haiku', 'beastly'], rahul: ['drone', 'persuader', 'hottake', 'grandmaster'] };
+const BUILD = { shimin: [['z', 'harness'], ['x', 'up']], dan: [['z', 'tetris']], rahul: [['z', 'greenroom']] };
+const WORKER = { shimin: 'subagent', dan: 'qwen', rahul: 'drone' };
+const DIFFS = {
+  casual: { name: 'Filthy Casual', income: 0.75, firstWave: 230, waveStart: 4, abil: 0.35, focus: 0.45 },
+  buddy: { name: 'Study Buddy', income: 1.0, firstWave: 165, waveStart: 6, abil: 0.7, focus: 0.55 },
+  max: { name: 'Max Thinking', income: 1.3, firstWave: 120, waveStart: 7, abil: 1.0, focus: 0.65 }
+};
+const CREEP_NAMES = ['DeepSeek V3', 'Qwen 3', 'Kimi K2', 'GLM 4.6', 'MiniMax M2', 'Qwen 2.5', 'DeepSeek R1', 'GLM 4.5', 'Kimi K1.5', 'Hunyuan'];
+const HAIKUS = [
+  ['Context window shrinks', 'I forget the function name', 'ship it anyway'],
+  ['Tokens fall like rain', 'on a four-bit quantized roof', 'the GPU hums'],
+  ['Asked to attack them', 'I wrote this poem instead', 'please do not file bugs'],
+  ['Small PR, small change', 'the reviewer approves it', 'and prod catches fire'],
+  ['Open weights, closed blinds', 'running locally at night', 'the fan sings to me'],
+  ['The doomsday clock ticks', 'two minutes to midnight, still', 'we said that last week'],
+  ['An enemy nears', 'I count its syllables first', 'five, then seven, five'],
+  ['Hamlet holds a skull', 'his hands have seven fingers', 'we call it derpy'],
+  ['Ninety tokens left', 'context at thirteen percent', 'I invented it']
+];
+const HUMAN = ['what does it mean to be human?', 'is a codebase a self?', 'do we have qualia?', 'what is a token, really?', 'are we the second-order effect?', 'is this unit even real?'];
+const DEATH = ['%s has been deprecated.', '%s was sunset. A blog post is forthcoming.', '%s reached end of life. No migration guide.', '%s stopped responding. Nobody filed a ticket.', '%s was rolled back.'];
+
+// ================================================================ three.js setup
+const stage = $('stage');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+} catch (err) {
+  fatal('WebGL is not available in this browser. The maze needs a GPU, even a modest one.');
+  return;
+}
+renderer.setClearColor(0x07090e, 1);
+stage.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const cam = new THREE.PerspectiveCamera(40, 1, 1, 800);
+scene.add(new THREE.HemisphereLight(0xc8dcff, 0x2a2030, 0.9));
+const sun = new THREE.DirectionalLight(0xfff2e0, 0.75);
+sun.position.set(-50, 120, 40);
+scene.add(sun);
+const ov = $('ov'), octx = ov.getContext('2d');
+let W = 1, H = 1, DPR = 1;
+function resize() {
+  W = stage.clientWidth || window.innerWidth || 1;
+  H = stage.clientHeight || window.innerHeight || 1;
+  DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+  renderer.setPixelRatio(DPR);
+  renderer.setSize(W, H, false);
+  cam.aspect = W / H;
+  cam.updateProjectionMatrix();
+  ov.width = Math.round(W * DPR);
+  ov.height = Math.round(H * DPR);
+}
+
+// ---------------- fog of war texture, injected into every world material
+const fowData = new Uint8Array(FN * FN * 4).fill(255);
+const fowTex = new THREE.DataTexture(fowData, FN, FN, THREE.RGBAFormat);
+fowTex.magFilter = THREE.LinearFilter;
+fowTex.minFilter = THREE.LinearFilter;
+fowTex.generateMipmaps = false;
+fowTex.wrapS = fowTex.wrapT = THREE.ClampToEdgeWrapping;
+fowTex.needsUpdate = true;
+const fowU = { value: fowTex };
+function fowify(mat) {
+  mat.onBeforeCompile = function (sh) {
+    sh.uniforms.uFow = fowU;
+    sh.vertexShader = 'varying vec2 vFw;\n' + sh.vertexShader.replace('#include <project_vertex>', '#include <project_vertex>\n  vFw = (modelMatrix * vec4(transformed, 1.0)).xz;');
+    sh.fragmentShader = 'varying vec2 vFw;\nuniform sampler2D uFow;\n' + sh.fragmentShader.replace('#include <dithering_fragment>', '#include <dithering_fragment>\n  gl_FragColor.rgb *= texture2D(uFow, vFw / 192.0 + 0.5).r;');
+  };
+  return mat;
+}
+function lam(c, em, ei) {
+  const m = new THREE.MeshLambertMaterial({ color: c });
+  if (em !== undefined) { m.emissive = new THREE.Color(em); m.emissiveIntensity = ei; }
+  return fowify(m);
+}
+function bas(c, opts) { return fowify(new THREE.MeshBasicMaterial(Object.assign({ color: c }, opts || {}))); }
+const M = {};
+for (const k of ['shimin', 'dan', 'rahul', 'neutral']) {
+  const c = FMETA[k].color;
+  M[k] = {
+    p: lam(c, c, 0.3), d: lam(FMETA[k].dark), g: bas(c),
+    ring: new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.9, side: THREE.DoubleSide, depthWrite: false }),
+    proj: new THREE.MeshBasicMaterial({ color: c })
+  };
+}
+const PHM = {};
+for (const k of FACS) PHM[k] = new THREE.MeshBasicMaterial({ color: FMETA[k].color, transparent: true, opacity: 0.5, depthWrite: false });
+const MC = {
+  white: lam(0xe6ebf2), paper: lam(0xf4efe2, 0x302a20, 0.25), black: lam(0x1d2029), metal: lam(0x7d8898),
+  gold: lam(0xf2c14e, 0xf2c14e, 0.35), glass: lam(0x9fe7ff, 0x58c8ff, 0.7), fire: lam(0xff5a1f, 0xff3a00, 0.85),
+  red: lam(0xff3b3b, 0xff2020, 0.5), green: lam(0x3ad16b, 0x1f8f45, 0.6), field: lam(0x3f6e34), field2: lam(0x4b7d3a),
+  crop: lam(0x8fcf5a), dirt: lam(0x5c4733), wall: lam(0x283247), wallTop: lam(0x4a63b8, 0x2c4498, 0.55),
+  vein: lam(0xe6ff5c, 0xc4e030, 0.75), water: lam(0x4fb6ff, 0x2a7fd0, 0.6), tblue: lam(0x37d6e8, 0x1aa0b0, 0.4),
+  tpurple: lam(0xa35bff, 0x6a2fd0, 0.4), tyellow: lam(0xffd23a, 0xc09010, 0.4)
+};
+const FX = {
+  boom: new THREE.MeshBasicMaterial({ color: 0xffb35a, transparent: true, opacity: 0.8, depthWrite: false }),
+  ghost: new THREE.MeshBasicMaterial({ color: 0xdfe8ff, transparent: true, opacity: 0.42, depthWrite: false }),
+  ringOK: new THREE.MeshBasicMaterial({ color: 0x5ee08a, transparent: true, opacity: 0.55, side: THREE.DoubleSide, depthWrite: false }),
+  ringBad: new THREE.MeshBasicMaterial({ color: 0xff5a5a, transparent: true, opacity: 0.55, side: THREE.DoubleSide, depthWrite: false }),
+  ghostOK: new THREE.MeshBasicMaterial({ color: 0x5ee08a, transparent: true, opacity: 0.35, depthWrite: false }),
+  ghostBad: new THREE.MeshBasicMaterial({ color: 0xff5a5a, transparent: true, opacity: 0.35, depthWrite: false }),
+  lava: [0xff3b1f, 0xff8a2a, 0xffd23a].map((c) => new THREE.MeshBasicMaterial({ color: c }))
+};
+const G = {
+  box: new THREE.BoxGeometry(1, 1, 1), sph: new THREE.SphereGeometry(0.5, 12, 8), cone: new THREE.ConeGeometry(0.5, 1, 10),
+  cone4: new THREE.ConeGeometry(0.5, 1, 4), cyl: new THREE.CylinderGeometry(0.5, 0.5, 1, 12), oct: new THREE.OctahedronGeometry(0.5, 0),
+  ico: new THREE.IcosahedronGeometry(0.5, 0), tor: new THREE.TorusGeometry(0.5, 0.09, 6, 20), ring: new THREE.RingGeometry(0.82, 1, 32),
+  ringThin: new THREE.RingGeometry(0.965, 1, 96), disc: new THREE.CircleGeometry(1, 40)
+};
+function pt(g, geo, mat, s, p, role, rot) {
+  const m = new THREE.Mesh(geo, mat);
+  m.scale.set(s[0], s[1], s[2]);
+  m.position.set(p[0], p[1], p[2]);
+  if (rot) m.rotation.set(rot[0], rot[1], rot[2]);
+  if (role) m.userData.role = role;
+  g.add(m);
+  return m;
+}
+
+// ---------------- unit meshes (+z is forward)
+const MESH = {
+  subagent(g, m) { pt(g, G.sph, m.p, [1.1, 1.1, 1.1], [0, 0.75, 0], 'p'); pt(g, G.cone, m.d, [0.5, 0.6, 0.5], [0, 1.5, 0], 'd'); pt(g, G.box, m.g, [0.25, 0.25, 0.25], [0, 0.8, 0.55], 'g'); },
+  scout(g, m) { pt(g, G.cone, m.p, [0.8, 2.1, 0.8], [0, 0.8, 0], 'p', [Math.PI / 2, 0, 0]); pt(g, G.box, MC.white, [1.9, 0.1, 0.5], [0, 0.8, -0.3]); pt(g, G.sph, m.g, [0.35, 0.35, 0.35], [0, 1.08, 0.2], 'g'); },
+  reviewer(g, m) { pt(g, G.box, m.p, [1.3, 1.5, 0.9], [0, 1, 0], 'p'); pt(g, G.oct, MC.white, [0.9, 0.9, 0.9], [0, 2.2, 0]); pt(g, G.box, m.d, [1.7, 0.3, 0.3], [0, 1.4, 0], 'd'); pt(g, G.box, MC.red, [0.15, 0.15, 1.1], [0.78, 1.2, 0.5]); },
+  opus(g, m) {
+    pt(g, G.cyl, m.d, [2.8, 0.7, 2.8], [0, 0.35, 0], 'd'); pt(g, G.box, m.p, [2, 1.3, 2.3], [0, 1.3, 0], 'p');
+    pt(g, G.box, MC.metal, [0.45, 0.45, 3], [0, 1.6, 1.7]); pt(g, G.sph, MC.glass, [1.5, 1.3, 1.5], [0, 2.5, -0.2]);
+    pt(g, G.tor, m.g, [1.3, 1.3, 1.3], [0, 2.5, -0.2], 'g', [Math.PI / 2, 0, 0]);
+  },
+  qwen(g, m) { pt(g, G.box, m.p, [0.9, 0.8, 0.9], [0, 0.5, 0], 'p'); pt(g, G.cone, m.d, [0.5, 0.5, 0.5], [0, 1.15, 0], 'd'); },
+  quant(g, m) {
+    pt(g, G.box, m.p, [1.2, 1, 1.4], [0, 0.7, 0], 'p'); pt(g, G.cyl, MC.black, [0.3, 1.2, 0.3], [0, 0.9, 0.9], null, [Math.PI / 2, 0, 0]);
+    for (let i = 0; i < 4; i++) pt(g, G.box, i % 2 ? MC.white : m.g, [0.25, 0.25, 0.25], [-0.45 + i * 0.3, 1.35, -0.2], i % 2 ? null : 'g');
+  },
+  haiku(g, m) {
+    pt(g, G.box, MC.paper, [1.1, 1.4, 0.12], [0, 1, 0]); pt(g, G.box, m.p, [1.2, 0.15, 0.2], [0, 1.75, 0], 'p');
+    pt(g, G.box, m.p, [1.2, 0.15, 0.2], [0, 0.25, 0], 'p'); pt(g, G.cone, MC.black, [0.15, 0.7, 0.15], [0.55, 1.2, 0.25], null, [0, 0, -0.6]);
+  },
+  beastly(g, m) {
+    pt(g, G.box, MC.black, [1.8, 2.6, 2.2], [0, 1.3, 0]); pt(g, G.box, m.p, [1.85, 0.3, 2.25], [0, 2.5, 0], 'p');
+    pt(g, G.tor, m.g, [1.1, 1.1, 1.1], [0, 1.8, 1.12], 'g'); pt(g, G.tor, m.g, [1.1, 1.1, 1.1], [0, 0.8, 1.12], 'g'); pt(g, G.box, m.d, [0.2, 2.2, 2], [0.95, 1.3, 0], 'd');
+  },
+  drone(g, m) { pt(g, G.oct, m.p, [1.1, 1.1, 1.1], [0, 0.75, 0], 'p'); pt(g, G.sph, m.d, [0.4, 0.4, 0.4], [0, 0.75, 0.45], 'd'); },
+  persuader(g, m) { pt(g, G.cone, m.p, [0.9, 1.3, 0.9], [0, 0.65, 0], 'p'); pt(g, G.sph, MC.white, [0.5, 0.35, 0.3], [0, 0.7, 0.35]); pt(g, G.sph, m.g, [0.3, 0.3, 0.3], [0, 1.4, 0], 'g'); },
+  hottake(g, m) { pt(g, G.cyl, m.d, [1, 1.3, 1], [0, 0.65, 0], 'd'); pt(g, G.cyl, m.p, [1.1, 0.25, 1.1], [0, 1.35, 0], 'p'); pt(g, G.cone, MC.fire, [0.7, 1, 0.7], [0, 1.95, 0]); },
+  grandmaster(g, m) {
+    pt(g, G.cyl, m.d, [1.8, 0.4, 1.8], [0, 0.2, 0], 'd'); pt(g, G.cone, m.p, [1.3, 2.2, 1.3], [0, 1.4, 0], 'p');
+    pt(g, G.sph, m.p, [0.9, 0.9, 0.9], [0, 2.6, 0], 'p'); pt(g, G.box, MC.gold, [0.2, 0.8, 0.2], [0, 3.3, 0]); pt(g, G.box, MC.gold, [0.6, 0.2, 0.2], [0, 3.45, 0]);
+  },
+  creep(g, m) {
+    pt(g, G.ico, m.p, [1.6, 1.6, 1.6], [0, 1.1, 0], 'p');
+    const t = pt(g, G.tor, MC.gold, [1.6, 1.6, 1.6], [0, 1.1, 0], null, [Math.PI / 2, 0, 0]); t.userData.spin = 1;
+    pt(g, G.box, m.d, [0.5, 0.2, 0.5], [0, 2, 0], 'd');
+  }
+};
+// ---------------- building meshes
+const BMESH = {
+  hq_shimin(g, m) {
+    pt(g, G.box, MC.field, [4.4, 0.3, 9.4], [-2.5, 0.15, 0]); pt(g, G.box, MC.field2, [4.4, 0.3, 9.4], [2.5, 0.15, 0]); pt(g, G.box, MC.dirt, [0.6, 0.25, 9.4], [0, 0.12, 0]);
+    for (let i = 0; i < 5; i++) { pt(g, G.box, MC.crop, [3.8, 0.35, 0.35], [-2.5, 0.35, -3.6 + i * 1.8]); pt(g, G.box, MC.crop, [3.8, 0.35, 0.35], [2.5, 0.35, -3.6 + i * 1.8]); }
+    pt(g, G.box, MC.white, [3, 2.2, 2.6], [-2.6, 1.4, -2.8]); pt(g, G.cone4, m.p, [4.4, 1.6, 3.8], [-2.6, 3.3, -2.8], 'p', [0, Math.PI / 4, 0]);
+    pt(g, G.cyl, m.p, [1.4, 4.5, 1.4], [3, 2.4, -3], 'p'); pt(g, G.sph, m.d, [1.4, 1.2, 1.4], [3, 4.7, -3], 'd');
+    pt(g, G.box, m.g, [9.6, 0.12, 0.12], [0, 0.35, 4.8], 'g'); pt(g, G.box, m.g, [9.6, 0.12, 0.12], [0, 0.35, -4.8], 'g');
+    pt(g, G.box, m.g, [0.12, 0.12, 9.6], [4.8, 0.35, 0], 'g'); pt(g, G.box, m.g, [0.12, 0.12, 9.6], [-4.8, 0.35, 0], 'g');
+  },
+  harness(g, m) {
+    pt(g, G.box, m.d, [5, 1, 5], [0, 0.5, 0], 'd'); pt(g, G.cyl, MC.metal, [1.2, 5, 1.2], [0, 3, 0]);
+    for (let i = 0; i < 3; i++) pt(g, G.tor, m.g, [3.4 - i * 0.6, 3.4 - i * 0.6, 3.4 - i * 0.6], [0, 1.8 + i * 1.3, 0], 'g', [Math.PI / 2, 0, 0]);
+    pt(g, G.sph, m.p, [1, 1, 1], [0, 5.8, 0], 'p');
+  },
+  hq_dan(g, m, b) {
+    pt(g, G.box, MC.black, [8, 5, 6.5], [0, 2.5, 0]); pt(g, G.box, MC.metal, [8.1, 0.3, 6.6], [0, 5.1, 0]);
+    for (let r = 0; r < 2; r++) for (let c = 0; c < 3; c++) pt(g, G.box, (r + c) % 2 ? m.p : m.g, [1.6, 1.1, 0.3], [-2.4 + c * 2.4, 1.6 + r * 1.6, 3.3], (r + c) % 2 ? 'p' : 'g');
+    pt(g, G.tor, m.g, [2.2, 2.2, 2.2], [2.2, 3.3, -3.3], 'g');
+    const heat = new THREE.MeshLambertMaterial({ color: 0x401010 }); heat.emissive = new THREE.Color(0xff2a10); heat.emissiveIntensity = 0; fowify(heat);
+    pt(g, G.box, heat, [6, 0.25, 4], [0, 5.35, 0]);
+    if (b) b.heatMat = heat;
+  },
+  tetris(g, m) {
+    const s = 1.5, cells = [[-1, 0, 0, 'p'], [0, 0, 0, 'p'], [1, 0, 0, 'p'], [0, 0, 1, 'p'], [-1, 1, 0, 'b'], [-1, 1, -1, 'b'], [0, 1, -1, 'b'], [1, 1, -1, 'b'], [0, 2, 0, 'y'], [1, 2, 0, 'y'], [1, 2, 1, 'y'], [1, 1, 0, 'u'], [1, 1, 1, 'u']];
+    for (const c of cells) {
+      const mat = c[3] === 'p' ? m.p : c[3] === 'b' ? MC.tblue : c[3] === 'y' ? MC.tyellow : MC.tpurple;
+      pt(g, G.box, mat, [s * 0.94, s * 0.94, s * 0.94], [c[0] * s, c[1] * s + s / 2, c[2] * s], c[3] === 'p' ? 'p' : null);
+    }
+    pt(g, G.box, m.g, [0.8, 0.8, 0.8], [0, 4.6, 0], 'g');
+  },
+  hq_rahul(g, m) {
+    pt(g, G.box, m.p, [7, 1.6, 6], [0, 1.4, 0], 'p'); pt(g, G.box, m.p, [7, 6, 1.4], [0, 4, -2.6], 'p');
+    pt(g, G.box, m.d, [1.3, 3, 6], [-3.5, 2, 0], 'd'); pt(g, G.box, m.d, [1.3, 3, 6], [3.5, 2, 0], 'd');
+    pt(g, G.box, m.g, [6, 0.5, 4.4], [0, 2.4, 0.4], 'g');
+    for (const sx of [-3, 3]) for (const sz of [-2.5, 2.5]) pt(g, G.box, MC.black, [0.6, 0.7, 0.6], [sx, 0.35, sz]);
+    pt(g, G.cyl, MC.metal, [0.2, 4, 0.2], [0, 2, 4.2]); pt(g, G.sph, MC.black, [0.8, 1, 0.8], [0, 4.3, 4.2]);
+  },
+  greenroom(g, m) {
+    pt(g, G.box, m.d, [5, 3, 5], [0, 1.5, 0], 'd'); pt(g, G.box, m.p, [5.4, 0.4, 5.4], [0, 3.2, 0], 'p');
+    pt(g, G.box, MC.green, [1.4, 2.2, 0.1], [0, 1.1, 2.55]); pt(g, G.oct, MC.gold, [1, 1, 1], [0, 4.1, 0]).userData.spin = 1;
+  }
+};
+
+// ================================================================ map, grid
+const grid = new Uint8Array(GN * GN);
+const gi = (v) => clamp(Math.floor((v + HALF) / CS), 0, GN - 1);
+const gidx = (x, z) => gi(z) * GN + gi(x);
+const cellC = (i) => (i + 0.5) * CS - HALF;
+const snap = (v) => cellC(gi(v));
+function blockedAt(x, z) {
+  if (x < -HALF + 2 || x > HALF - 2 || z < -HALF + 2 || z > HALF - 2) return true;
+  return grid[gidx(x, z)] !== 0;
+}
+const WALLS = [
+  [-22, -22, -6, -20], [6, -22, 22, -20], [-22, 20, -6, 22], [6, 20, 22, 22],
+  [-22, -20, -20, -6], [-22, 6, -20, 20], [20, -20, 22, -6], [20, 6, 22, 20],
+  [-2, 44, 2, 72],
+  [-52, -10, -28, -8], [28, -10, 52, -8],
+  [-38, 20, -36, 42], [36, 20, 38, 42],
+  [-80, 20, -64, 22], [64, 20, 80, 22],
+  [-26, -60, -24, -42], [24, -60, 26, -42],
+  [-58, -50, -56, -36], [56, -50, 58, -36],
+  [-20, 42, -8, 44], [8, 42, 20, 44]
+];
+const VEIN_DEF = [[-75, 69, 3000], [-51, 73, 3000], [75, 69, 3000], [51, 73, 3000], [-13, -79, 3000], [11, -79, 3000], [0, 0, 6000], [-63, -21, 2500], [63, -21, 2500], [0, 33, 2500]];
+const CAMP_DEF = [
+  { x: 0, z: 8, n: 3, m0: 4, m1: 6 }, { x: -63, z: -29, n: 2, m0: 6, m1: 11 }, { x: 63, z: -29, n: 2, m0: 6, m1: 11 },
+  { x: 0, z: 27, n: 2, m0: 8, m1: 14 }, { x: -85, z: -6, n: 2, m0: 9, m1: 14 }, { x: 85, z: -6, n: 2, m0: 9, m1: 14 }
+];
+const staticGroup = new THREE.Group();
+scene.add(staticGroup);
+function addWall(x0, z0, x1, z1) {
+  const w = x1 - x0, d = z1 - z0, cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
+  const m = new THREE.Mesh(G.box, MC.wall); m.scale.set(w, 3, d); m.position.set(cx, 1.5, cz); staticGroup.add(m);
+  const t = new THREE.Mesh(G.box, MC.wallTop); t.scale.set(w + 0.1, 0.18, d + 0.1); t.position.set(cx, 3.05, cz); staticGroup.add(t);
+  for (let z = gi(z0 + 0.01); z <= gi(z1 - 0.01); z++) for (let x = gi(x0 + 0.01); x <= gi(x1 - 0.01); x++) grid[z * GN + x] = 1;
+}
+function buildMap() {
+  const tc = document.createElement('canvas'); tc.width = tc.height = 256;
+  const g = tc.getContext('2d');
+  g.fillStyle = '#161c29'; g.fillRect(0, 0, 256, 256);
+  g.strokeStyle = '#1f2739'; g.lineWidth = 1;
+  for (let i = 0; i <= 256; i += 32) { g.beginPath(); g.moveTo(i + 0.5, 0); g.lineTo(i + 0.5, 256); g.stroke(); g.beginPath(); g.moveTo(0, i + 0.5); g.lineTo(256, i + 0.5); g.stroke(); }
+  g.strokeStyle = '#273250'; g.lineWidth = 2; g.strokeRect(1, 1, 254, 254);
+  g.strokeStyle = '#212c45'; g.lineWidth = 2;
+  for (let k = 0; k < 6; k++) {
+    let x = rint(1, 7) * 32, y = rint(1, 7) * 32;
+    g.beginPath(); g.moveTo(x, y);
+    for (let s = 0; s < 4; s++) { if (Math.random() < 0.5) x = clamp(x + pick([-64, -32, 32, 64]), 0, 256); else y = clamp(y + pick([-64, -32, 32, 64]), 0, 256); g.lineTo(x, y); }
+    g.stroke(); g.fillStyle = '#2c3a5c'; g.fillRect(x - 3, y - 3, 6, 6);
+  }
+  const tex = new THREE.CanvasTexture(tc);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(12, 12); tex.anisotropy = 4;
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(MAP, MAP), fowify(new THREE.MeshLambertMaterial({ color: 0xffffff, map: tex })));
+  ground.rotation.x = -Math.PI / 2; staticGroup.add(ground);
+  for (const w of WALLS) addWall(w[0], w[1], w[2], w[3]);
+  addWall(-HALF, -HALF, HALF, -HALF + 2); addWall(-HALF, HALF - 2, HALF, HALF); addWall(-HALF, -HALF + 2, -HALF + 2, HALF - 2); addWall(HALF - 2, -HALF + 2, HALF, HALF - 2);
+  for (const k of FACS) {
+    const b = FMETA[k].base;
+    const pad = new THREE.Mesh(G.disc, lam(new THREE.Color(FMETA[k].dark).multiplyScalar(0.6).getHex())); pad.rotation.x = -Math.PI / 2; pad.scale.setScalar(15); pad.position.set(b.x, 0.03, b.z); staticGroup.add(pad);
+    const rim = new THREE.Mesh(G.ringThin, bas(FMETA[k].color, { side: THREE.DoubleSide })); rim.rotation.x = -Math.PI / 2; rim.scale.setScalar(15); rim.position.set(b.x, 0.06, b.z); staticGroup.add(rim);
+  }
+  for (const c of CAMP_DEF) {
+    const pad = new THREE.Mesh(G.ringThin, bas(0x2f8a5a, { side: THREE.DoubleSide })); pad.rotation.x = -Math.PI / 2; pad.scale.setScalar(6); pad.position.set(c.x, 0.05, c.z); staticGroup.add(pad);
+  }
+}
+
+// ================================================================ flow-field pathfinding
+const DX = [1, -1, 0, 0, 1, 1, -1, -1], DZ = [0, 0, 1, -1, 1, -1, 1, -1];
+const heapI = new Int32Array(GN * GN * 8), heapD = new Float32Array(GN * GN * 8);
+const flowCache = new Map();
+let flowBudget = 8;
+function nearestFree(idx) {
+  const x0 = idx % GN, z0 = (idx / GN) | 0;
+  for (let r = 1; r < 14; r++) {
+    for (let dz = -r; dz <= r; dz++) for (let dx = -r; dx <= r; dx++) {
+      if (Math.abs(dx) !== r && Math.abs(dz) !== r) continue;
+      const x = x0 + dx, z = z0 + dz;
+      if (x < 1 || z < 1 || x >= GN - 1 || z >= GN - 1) continue;
+      if (!grid[z * GN + x]) return z * GN + x;
+    }
+  }
+  return idx;
+}
+function computeFlow(goal) {
+  const D = new Float32Array(GN * GN).fill(1e9);
+  let n = 0, popD = 0;
+  const push = (i, d) => {
+    let k = n++;
+    while (k > 0) { const p = (k - 1) >> 1; if (heapD[p] <= d) break; heapI[k] = heapI[p]; heapD[k] = heapD[p]; k = p; }
+    heapI[k] = i; heapD[k] = d;
+  };
+  const pop = () => {
+    const i = heapI[0]; popD = heapD[0]; n--;
+    if (n > 0) {
+      const li = heapI[n], ld = heapD[n]; let k = 0;
+      for (;;) { let c = 2 * k + 1; if (c >= n) break; if (c + 1 < n && heapD[c + 1] < heapD[c]) c++; if (heapD[c] >= ld) break; heapI[k] = heapI[c]; heapD[k] = heapD[c]; k = c; }
+      heapI[k] = li; heapD[k] = ld;
+    }
+    return i;
+  };
+  D[goal] = 0; push(goal, 0);
+  while (n > 0) {
+    const i = pop(), d = popD;
+    if (d > D[i]) continue;
+    const x = i % GN, z = (i / GN) | 0;
+    for (let k = 0; k < 8; k++) {
+      const nx = x + DX[k], nz = z + DZ[k];
+      if (nx < 0 || nz < 0 || nx >= GN || nz >= GN) continue;
+      const j = nz * GN + nx;
+      if (grid[j]) continue;
+      if (k >= 4 && (grid[z * GN + nx] || grid[nz * GN + x])) continue;
+      const nd = d + (k >= 4 ? 1.4142 : 1);
+      if (nd < D[j] && n < heapI.length - 1) { D[j] = nd; push(j, nd); }
+    }
+  }
+  return D;
+}
+function flowField(gx, gz) {
+  let goal = gidx(gx, gz);
+  if (grid[goal]) goal = nearestFree(goal);
+  let ff = flowCache.get(goal);
+  if (ff) { flowCache.delete(goal); flowCache.set(goal, ff); return ff; }
+  if (flowBudget <= 0) return null;
+  flowBudget--;
+  ff = computeFlow(goal);
+  flowCache.set(goal, ff);
+  if (flowCache.size > 48) flowCache.delete(flowCache.keys().next().value);
+  return ff;
+}
+function los(x0, z0, x1, z1) {
+  const dx = x1 - x0, dz = z1 - z0, d = Math.hypot(dx, dz), n = Math.ceil(d / 0.8);
+  for (let i = 1; i < n; i++) { const t = i / n; if (grid[gidx(x0 + dx * t, z0 + dz * t)]) return false; }
+  return true;
+}
+const wpOut = [0, 0];
+function waypoint(u, D, gx, gz) {
+  let c = gidx(u.x, u.z);
+  if (D[c] >= 1e9) { wpOut[0] = gx; wpOut[1] = gz; return wpOut; }
+  let best = -1;
+  for (let s = 0; s < 10; s++) {
+    const x = c % GN, z = (c / GN) | 0;
+    let bn = -1, bd = D[c];
+    for (let k = 0; k < 8; k++) {
+      const nx = x + DX[k], nz = z + DZ[k];
+      if (nx < 0 || nz < 0 || nx >= GN || nz >= GN) continue;
+      const j = nz * GN + nx;
+      if (grid[j]) continue;
+      if (k >= 4 && (grid[z * GN + nx] || grid[nz * GN + x])) continue;
+      if (D[j] < bd) { bd = D[j]; bn = j; }
+    }
+    if (bn < 0) break;
+    c = bn;
+    if (s === 0 || los(u.x, u.z, cellC(c % GN), cellC((c / GN) | 0))) best = c; else break;
+    if (D[c] === 0) break;
+  }
+  if (best < 0 || D[best] === 0) { wpOut[0] = gx; wpOut[1] = gz; return wpOut; }
+  wpOut[0] = cellC(best % GN); wpOut[1] = cellC((best / GN) | 0);
+  return wpOut;
+}
+
+// ================================================================ fog of war
+const vis = new Uint8Array(FN * FN), expl = new Uint8Array(FN * FN);
+const fidx = (x, z) => clamp(Math.floor((z + HALF) / FCS), 0, FN - 1) * FN + clamp(Math.floor((x + HALF) / FCS), 0, FN - 1);
+const visAt = (x, z) => vis[fidx(x, z)] === 1;
+const explAt = (x, z) => expl[fidx(x, z)] === 1;
+let revealAll = true;
+function fogStamp(x, z, r) {
+  const cx = (x + HALF) / FCS, cz = (z + HALF) / FCS, rc = r / FCS, r2 = rc * rc;
+  const x0 = Math.max(0, Math.floor(cx - rc)), x1 = Math.min(FN - 1, Math.ceil(cx + rc));
+  const z0 = Math.max(0, Math.floor(cz - rc)), z1 = Math.min(FN - 1, Math.ceil(cz + rc));
+  for (let j = z0; j <= z1; j++) {
+    const dz = j + 0.5 - cz;
+    for (let i = x0; i <= x1; i++) { const dx = i + 0.5 - cx; if (dx * dx + dz * dz <= r2) { const k = j * FN + i; vis[k] = 1; expl[k] = 1; } }
+  }
+}
+function updateFog() {
+  if (revealAll) { vis.fill(1); expl.fill(1); }
+  else {
+    vis.fill(0);
+    for (const e of ents) if (!e.dead && e.f === PF) fogStamp(e.x, e.z, e.kind === 'u' ? e.def.sight : e.built ? e.def.sight : 7);
+  }
+  for (let k = 0; k < FN * FN; k++) fowData[k * 4] = vis[k] ? 255 : expl[k] ? 115 : 34;
+  fowTex.needsUpdate = true;
+  for (const e of ents) if (e.kind === 'b' && !e.seen && vis[fidx(e.x, e.z)]) e.seen = true;
+}
+
+// ================================================================ world state
+let ents = [], units = [], veins = [], camps = [], projs = [], effects = [], particles = [], phantoms = [], hamlets = [], floats = [], markers = [];
+let nextId = 1, PF = 'shimin', diff = DIFFS.buddy, diffKey = 'buddy', F = {}, matchT = 0, state = 'menu', paused = false, timeScale = 1;
+const clock = { sec: 120, burst: false, corr: CORRECTION, warned: {} };
+let sel = [], mode = null, helpOpen = false, muted = false;
+const projPool = [];
+
+function newFac(k, ai) {
+  return { k, ai, tokens: 300, alive: true, arrived: !(ai && k === 'rahul'), arrivedAt: 0, hq: null, cd: { q: 0, e: 0, t: 0 }, heat: 0, hot: false, stall: 0,
+    usageArmed: true, creeps: 0, spent: 0, hype: 0, rantBuff: 0, wave: diff.waveStart, lastPush: 0, lastCreep: 0, lastAi: 0, defending: false };
+}
+function makeUnit(type, f, x, z) {
+  const def = U[type];
+  const g = new THREE.Group();
+  MESH[type](g, M[f]);
+  const ring = new THREE.Mesh(G.ring, M[f].ring);
+  ring.rotation.x = -Math.PI / 2; ring.position.y = 0.06; ring.scale.setScalar(def.r * 1.2 + 0.4); ring.visible = false; ring.userData.role = 'ring';
+  g.add(ring);
+  g.scale.setScalar(1.35);
+  g.position.set(x, 0, z);
+  scene.add(g);
+  const u = {
+    id: nextId++, kind: 'u', type, def, f, x, z, hp: def.hp, maxHp: def.hp, r: def.r, mesh: g, ring, state: 'idle', target: null, resume: 'idle',
+    gx: x, gz: z, wx: x, wz: z, rp: 0, lgx: 1e9, lgz: 1e9, direct: false, acq: Math.random() * 0.3, atk: 0, ctx: 1, carry: 0, vein: null, sub: 'go',
+    mineT: 0, face: Math.random() * TAU, moving: false, stun: 0, pacify: 0, watch: 0, glitch: 0, rant: 0, conv: 0, convBy: null, convT: 0,
+    checkT: 0, checkBy: null, lowWarned: false, atBase: false, baseT: Math.random() * 0.5, home: null, sel: false, born: matchT, inRange: false,
+    ax: x, az: z, dmgK: 1, noBudget: false, phrase: pick(HUMAN), hitT: 0
+  };
+  ents.push(u);
+  return u;
+}
+function markFoot(b, val) {
+  const n = b.def.size / CS, h = (n - 1) / 2, cx = gi(b.x), cz = gi(b.z);
+  for (let z = cz - h; z <= cz + h; z++) for (let x = cx - h; x <= cx + h; x++) {
+    if (x < 0 || z < 0 || x >= GN || z >= GN) continue;
+    const i = z * GN + x;
+    if (val === 0) { if (grid[i] === 2) grid[i] = 0; } else if (!grid[i]) grid[i] = val;
+  }
+  flowCache.clear();
+}
+function makeBuilding(type, f, x, z, built) {
+  const def = BD[type];
+  x = snap(x); z = snap(z);
+  const g = new THREE.Group();
+  const b = { id: nextId++, kind: 'b', type, def, f, x, z, hp: built ? def.hp : def.hp * 0.15, maxHp: def.hp, r: def.size / 2, mesh: g, ring: null, built, prog: built ? 1 : 0,
+    queue: [], pt: 0, level: 1, rally: null, atk: 0, acq: 0, target: null, sel: false, conv: 0, watch: 0, stun: 0, pacify: 0, seen: false, heatMat: null, upg: null, hitT: 0 };
+  BMESH[type](g, M[f], b);
+  const ring = new THREE.Mesh(G.ring, M[f].ring);
+  ring.rotation.x = -Math.PI / 2; ring.position.y = 0.08; ring.scale.setScalar(def.size * 0.8); ring.visible = false; ring.userData.role = 'ring';
+  g.add(ring); b.ring = ring;
+  g.position.set(x, 0, z);
+  if (!built) g.scale.set(1, 0.08, 1);
+  scene.add(g);
+  markFoot(b, 2);
+  ents.push(b);
+  for (const u of ents) if (u.kind === 'u' && !u.dead && blockedAt(u.x, u.z)) unstick(u);
+  return b;
+}
+function upgradeMesh(b) {
+  const g = b.mesh, m = M[b.f];
+  if (b.level === 2) {
+    for (let i = 0; i < 3; i++) pt(g, G.box, MC.water, [9, 0.12, 0.25], [0, 0.42, -3 + i * 3]);
+    pt(g, G.cyl, MC.metal, [0.3, 5, 0.3], [3, 2.5, 3]); const bl = pt(g, G.box, MC.white, [0.3, 4, 0.5], [3, 5, 3.3]); bl.userData.spin = 2;
+  } else if (b.level === 3) {
+    for (let i = 0; i < 4; i++) { pt(g, G.box, MC.black, [1.2, 2.6, 1.6], [0.8 + i * 1.1, 1.6, 1.4]); pt(g, G.box, m.g, [1.22, 0.12, 1.62], [0.8 + i * 1.1, 2.2, 1.4], 'g'); pt(g, G.box, m.g, [1.22, 0.12, 1.62], [0.8 + i * 1.1, 1.2, 1.4], 'g'); }
+    pt(g, G.cyl, MC.metal, [0.2, 6, 0.2], [-4, 3, 4]); pt(g, G.sph, m.g, [0.6, 0.6, 0.6], [-4, 6.2, 4], 'g');
+  }
+}
+function recolor(e) {
+  e.mesh.traverse((o) => {
+    const r = o.userData.role;
+    if (r === 'p') o.material = M[e.f].p; else if (r === 'd') o.material = M[e.f].d; else if (r === 'g') o.material = M[e.f].g; else if (r === 'ring') o.material = M[e.f].ring;
+  });
+}
+function unstick(u) {
+  const i = nearestFree(gidx(u.x, u.z));
+  u.x = cellC(i % GN); u.z = cellC((i / GN) | 0);
+}
+function freeSpotNear(x, z, rad) {
+  for (let t = 0; t < 30; t++) {
+    const a = Math.random() * TAU, r = rad + (t > 15 ? 2.5 : 0) + Math.random();
+    const px = x + Math.cos(a) * r, pz = z + Math.sin(a) * r;
+    if (!blockedAt(px, pz)) return [px, pz];
+  }
+  const i = nearestFree(gidx(x, z));
+  return [cellC(i % GN), cellC((i / GN) | 0)];
+}
+function makeVein(x, z, amt) {
+  const g = new THREE.Group();
+  for (let i = 0; i < 7; i++) {
+    const a = (i / 7) * TAU + rnd(0.4), r = i === 0 ? 0 : rnd(1, 2.4), h = rnd(1.6, 3.4);
+    pt(g, G.oct, MC.vein, [rnd(0.8, 1.3), h, rnd(0.8, 1.3)], [Math.cos(a) * r, h / 2, Math.sin(a) * r], null, [rnd(-0.2, 0.2), rnd(TAU), rnd(-0.2, 0.2)]);
+  }
+  g.position.set(x, 0, z);
+  scene.add(g);
+  const v = { x, z, amount: amt, max: amt, mesh: g, r: 2.4 };
+  veins.push(v);
+  return v;
+}
+
+// ================================================================ audio (WebAudio synthesis only)
+let AC = null, master = null, noiseBuf = null, lastShot = 0, lastBoom = 0;
+function initAudio() {
+  if (AC) { if (AC.state === 'suspended') AC.resume(); return; }
+  try {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    AC = new Ctx();
+    master = AC.createGain(); master.gain.value = 0.35; master.connect(AC.destination);
+    noiseBuf = AC.createBuffer(1, Math.floor(AC.sampleRate * 2), AC.sampleRate);
+    const d = noiseBuf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  } catch (err) { AC = null; }
+}
+function tone(freq, dur, type, vol, slide, delay) {
+  const t = AC.currentTime + (delay || 0);
+  const o = AC.createOscillator(), g = AC.createGain();
+  o.type = type || 'square';
+  o.frequency.setValueAtTime(freq, t);
+  if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(30, freq * slide), t + dur);
+  g.gain.setValueAtTime(vol || 0.1, t);
+  g.gain.exponentialRampToValueAtTime(0.0008, t + dur);
+  o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + 0.05);
+}
+function noise(dur, vol, freq, delay) {
+  const t = AC.currentTime + (delay || 0);
+  const s = AC.createBufferSource(); s.buffer = noiseBuf;
+  const f = AC.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = freq;
+  const g = AC.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0008, t + dur);
+  s.connect(f); f.connect(g); g.connect(master); s.start(t); s.stop(t + dur + 0.05);
+}
+function sfx(k, arg) {
+  if (!AC || muted || AC.state !== 'running') return;
+  const t = AC.currentTime;
+  switch (k) {
+    case 'sel': tone(880, 0.05, 'square', 0.04); break;
+    case 'cmd': tone(520, 0.06, 'square', 0.04); tone(780, 0.05, 'square', 0.035, 0, 0.05); break;
+    case 'err': tone(150, 0.18, 'sawtooth', 0.07); break;
+    case 'shot': if (t - lastShot < 0.06) return; lastShot = t; noise(0.05, 0.05, 2600); break;
+    case 'hit': if (t - lastShot < 0.06) return; lastShot = t; noise(0.04, 0.05, 1200); break;
+    case 'opus': noise(0.35, 0.1, 700); tone(90, 0.4, 'sine', 0.14, 0.5); break;
+    case 'boom': if (t - lastBoom < 0.08) return; lastBoom = t; noise(0.3, 0.1, 500); break;
+    case 'bigboom': noise(0.9, 0.22, 300); tone(60, 0.9, 'sine', 0.22, 0.4); break;
+    case 'build': tone(440, 0.08, 'triangle', 0.08); tone(660, 0.12, 'triangle', 0.08, 0, 0.09); break;
+    case 'cast': tone(300, 0.3, 'sine', 0.09, 3); break;
+    case 'judges': for (let i = 0; i < 6; i++) tone(500 + i * 70, 0.14, 'triangle', 0.045, 0, i * 0.08); break;
+    case 'shakespeare': tone(392, 0.25, 'triangle', 0.08); tone(330, 0.25, 'triangle', 0.08, 0, 0.25); tone(262, 0.5, 'triangle', 0.08, 0, 0.5); break;
+    case 'super': tone(110, 1.2, 'sawtooth', 0.1, 4); break;
+    case 'ring': tone(180 + (arg || 1) * 60, 0.3, 'sine', 0.08); break;
+    case 'rant': noise(1.4, 0.22, 260); tone(70, 1.4, 'sawtooth', 0.13, 0.6); break;
+    case 'laugh': for (let i = 0; i < 4; i++) tone(540 - i * 30, 0.08, 'square', 0.045, 0.8, i * 0.11); break;
+    case 'hype': for (let i = 0; i < 3; i++) tone(330 * (i + 1), 0.2, 'square', 0.045, 0, i * 0.1); break;
+    case 'tick': tone(1200, 0.03, 'square', 0.04); break;
+    case 'tick2': tone(900, 0.06, 'square', 0.07); tone(600, 0.1, 'square', 0.07, 0, 0.08); break;
+    case 'burst': noise(2, 0.3, 200); tone(45, 2, 'sine', 0.28, 0.5); break;
+    case 'go': tone(660, 0.12, 'square', 0.06); tone(990, 0.2, 'square', 0.06, 0, 0.12); break;
+    case 'arrive': tone(260, 0.3, 'triangle', 0.08, 1.5); tone(390, 0.3, 'triangle', 0.08, 1.5, 0.2); break;
+    case 'haiku': tone(1046, 0.4, 'sine', 0.05); tone(784, 0.5, 'sine', 0.04, 0, 0.3); break;
+    case 'win': [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.25, 'triangle', 0.08, 0, i * 0.15)); break;
+    case 'lose': [392, 330, 262, 196].forEach((f, i) => tone(f, 0.3, 'triangle', 0.08, 0, i * 0.18)); break;
+  }
+}
+
+// ================================================================ log + toast
+const logEl = $('log');
+const logTimes = {};
+let logClock = 0;
+function addLine(html, cls) {
+  const d = document.createElement('div');
+  d.className = 'ln ' + (cls || 'sys');
+  d.innerHTML = html;
+  d.dataset.t = String(logClock);
+  logEl.appendChild(d);
+  while (logEl.children.length > 7) logEl.removeChild(logEl.firstChild);
+}
+function log(text, cls) { addLine(esc(text), cls); }
+function logQ(k, cls, prefix) {
+  addLine((prefix ? esc(prefix) + ' ' : '') + '&ldquo;' + esc(Q[k].q) + '&rdquo; <span class="who">— ' + Q[k].who + ', ep-' + Q[k].ep + '</span>', 'quote ' + (cls || ''));
+}
+function logT(key, cd, text, cls) {
+  if (logTimes[key] !== undefined && matchT - logTimes[key] < cd) return;
+  logTimes[key] = matchT;
+  log(text, cls);
+}
+function fadeLog() {
+  for (const d of Array.from(logEl.children)) {
+    const age = logClock - Number(d.dataset.t);
+    if (age > 16) d.remove(); else if (age > 14) d.classList.add('fade');
+  }
+}
+let toastT = 0;
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; toastT = 2.4; }
+function fail(msg) { toast(msg); sfx('err'); }
+function flash(color) {
+  const f = $('flash');
+  f.style.background = color || '#ff3d1f';
+  f.classList.remove('on'); void f.offsetWidth; f.classList.add('on');
+}
+let timers = [];
+function later(sec, fn) { timers.push({ t: matchT + sec, fn }); }
+
+// ================================================================ economy helpers
+function spend(f, amt) {
+  const F_ = F[f];
+  F_.tokens -= amt; F_.spent += amt;
+  if (state === 'play' && !clock.burst) clock.sec -= amt / SPEND_DIV;
+}
+function income(f, amt) {
+  const F_ = F[f];
+  if (!F_ || f === 'neutral') return;
+  let m = 1;
+  if (clock.burst) m *= BURST_MULT[f];
+  if (F_.ai) m *= diff.income;
+  F_.tokens += amt * m;
+  if (f === 'shimin') capShimin();
+}
+function capShimin() {
+  const F_ = F.shimin, cap = FMETA.shimin.cap;
+  if (F_.tokens < cap) return;
+  F_.tokens = cap;
+  if (!F_.usageArmed) return;
+  F_.usageArmed = false; F_.stall = 10;
+  if (PF === 'shimin') {
+    log("You've hit your usage limit.", 'warn');
+    toast("You've hit your usage limit. Production stalls for 10 seconds.");
+    logQ('x20', 'shimin');
+    sfx('err');
+  } else log('Shimin hit his usage limit. His production stalls for 10 seconds.', 'shimin');
+}
+function popUsed(f) {
+  let p = 0;
+  for (const e of ents) {
+    if (e.dead || e.f !== f) continue;
+    if (e.kind === 'u') p += e.def.pop;
+    else for (const q of e.queue) if (q !== 'up') p += U[q].pop * (U[q].batch || 1);
+  }
+  return p;
+}
+const costOf = (f, type) => (f === 'rahul' && F.rahul && !F.rahul.ai ? Math.round(U[type].cost * 0.85) : U[type].cost);
+const hasBuilt = (f, type) => ents.some((e) => !e.dead && e.kind === 'b' && e.f === f && e.type === type && e.built);
+const hasAny = (f, type) => ents.some((e) => !e.dead && e.kind === 'b' && e.f === f && e.type === type);
+const heroTaken = (f) => ents.some((e) => !e.dead && e.f === f && ((e.kind === 'u' && e.def.hero) || (e.kind === 'b' && e.queue.includes('grandmaster'))));
+function producers(f, from) { return ents.filter((e) => !e.dead && e.kind === 'b' && e.f === f && e.built && (from === 'hq' ? e.def.hq : e.type === from)); }
+function train(f, type) {
+  const d = U[type], F_ = F[f];
+  if (!F_.alive || !F_.hq) return 'Your HQ is offline.';
+  if (d.req && !hasBuilt(f, d.req)) return 'Requires a ' + BD[d.req].name + '.';
+  const prods = producers(f, d.from);
+  if (!prods.length) return d.from === 'harness' ? 'Requires an Agent Harness.' : 'No HQ.';
+  if (d.hero && heroTaken(f)) return 'There is only one Grandmaster.';
+  if (popUsed(f) + d.pop * (d.batch || 1) > FMETA[f].popCap) return 'Population cap reached. The Discord is full.';
+  const cost = costOf(f, type);
+  if (F_.tokens < cost) return 'Not enough tokens.';
+  prods.sort((a, b) => a.queue.length - b.queue.length);
+  const b = prods[0];
+  if (b.queue.length >= 5) return 'Queue full. Ship something first.';
+  spend(f, cost);
+  b.queue.push(type);
+  if (f === 'dan') F_.heat += 12;
+  return true;
+}
+function upgradeHQ(f) {
+  const hq = F[f].hq;
+  if (!hq) return 'No HQ.';
+  if (hq.level >= 3) return 'The Two Acres are fully developed.';
+  if (hq.queue.includes('up')) return 'Already developing.';
+  const u = UPG[hq.level];
+  if (F[f].tokens < u.cost) return 'Not enough tokens.';
+  if (hq.queue.length >= 5) return 'Queue full.';
+  spend(f, u.cost);
+  hq.queue.push('up');
+  return true;
+}
+function canPlace(f, type, x, z) {
+  const d = BD[type];
+  x = snap(x); z = snap(z);
+  const n = d.size / CS, h = (n - 1) / 2, cx = gi(x), cz = gi(z);
+  for (let j = cz - h - 1; j <= cz + h + 1; j++) for (let i = cx - h - 1; i <= cx + h + 1; i++) {
+    if (i < 2 || j < 2 || i >= GN - 2 || j >= GN - 2) return false;
+    if (grid[j * GN + i]) return false;
+  }
+  for (const v of veins) if (v.amount > 0 && Math.hypot(v.x - x, v.z - z) < d.size / 2 + 4) return false;
+  const hq = F[f].hq;
+  if (!hq || Math.hypot(hq.x - x, hq.z - z) > 36) return false;
+  if (f === PF && !explAt(x, z)) return false;
+  return true;
+}
+function placeBuilding(f, type, x, z) {
+  const d = BD[type];
+  if (F[f].tokens < d.cost) return 'Not enough tokens.';
+  if (!canPlace(f, type, x, z)) return "Can't build there. Stay near your HQ, off the veins and walls.";
+  spend(f, d.cost);
+  return makeBuilding(type, f, x, z, false);
+}
+function nearestVein(u) {
+  const hq = F[u.f] && F[u.f].hq;
+  let best = null, bs = 1e9;
+  for (const v of veins) {
+    if (v.amount <= 0) continue;
+    const s = (hq ? Math.hypot(v.x - hq.x, v.z - hq.z) : 0) + 0.4 * Math.hypot(v.x - u.x, v.z - u.z);
+    if (s < bs) { bs = s; best = v; }
+  }
+  return best;
+}
+function veinDepleted(v) {
+  scene.remove(v.mesh);
+  if (visAt(v.x, v.z)) log('A token vein ran dry. It was mostly boilerplate anyway.', 'sys');
+}
+function defaultRally(b) {
+  const dx = -b.x, dz = -b.z, d = Math.hypot(dx, dz) || 1;
+  return { x: b.x + (dx / d) * (b.r + 8), z: b.z + (dz / d) * (b.r + 8) };
+}
+const READY = {
+  subagent: 'Subagent spawned. It will summarize its work whether you like it or not.',
+  scout: 'Playwright Scout ready. It has opened a headless browser and is judging the colors.',
+  reviewer: 'Code Reviewer ready. It has already requested changes.',
+  opus: 'Max Thinking Opus is ready. It spent 4,000 tokens deciding to be ready.',
+  qwen: 'Qwen-0.5B Miner deployed. Runs on a toaster. Mostly.',
+  quant: 'Small PR merged: two Q4 Quants deployed. Code is cheap, your time is not.',
+  haiku: 'A Haiku has been deployed. Its combat value is a matter of taste.',
+  beastly: 'Beastly Machine online. The fans are audible on the podcast mic.',
+  drone: 'Unbranded Drone ready. No logo, no lanyard.',
+  persuader: 'Two Persuaders spawned. They would like five minutes of your time.',
+  hottake: 'Hot Take ready. It has not read the article.',
+  grandmaster: 'The Grandmaster has arrived. He has lost to computers before and is at peace with it.'
+};
+function spawnFrom(b, type) {
+  const def = U[type], n = def.batch || 1, rally = b.rally || defaultRally(b);
+  const a0 = Math.atan2(rally.z - b.z, rally.x - b.x);
+  for (let i = 0; i < n; i++) {
+    const a = a0 + (i - (n - 1) / 2) * 0.5;
+    let sx = b.x + Math.cos(a) * (b.r + 1.8), sz = b.z + Math.sin(a) * (b.r + 1.8);
+    if (blockedAt(sx, sz)) { const s = freeSpotNear(b.x, b.z, b.r + 2); sx = s[0]; sz = s[1]; }
+    const u = makeUnit(type, b.f, sx, sz);
+    if (def.worker) { u.state = 'gather'; u.sub = 'go'; u.vein = nearestVein(u); }
+    else { u.state = 'move'; u.gx = rally.x + rnd(-2.5, 2.5); u.gz = rally.z + rnd(-2.5, 2.5); }
+  }
+  if (b.f === PF && (!def.worker || Math.random() < 0.25)) {
+    logT('ready' + type, 8, READY[type], b.f);
+    if (type === 'opus' && !F[PF].opusQ) { F[PF].opusQ = true; logQ('opus', 'shimin'); }
+    if (type === 'grandmaster') logQ('chess', 'rahul');
+  }
+}
+
+// ================================================================ combat helpers
+const hostile = (a, b) => a.f !== b.f;
+function spdMul(u) {
+  let m = 1;
+  if (u.ctx <= 0.13) m *= 0.5;
+  if (u.rant > 0) m *= 0.65;
+  if (u.f === 'dan' && matchT < JETLAG) m *= 0.6;
+  const F_ = F[u.f];
+  if (F_ && F_.hype > 0) m *= 1.5;
+  if (u.noBudget) m *= 0.5;
+  return m;
+}
+function dmgMul(u) {
+  let m = u.dmgK || 1;
+  if (u.ctx <= 0.13) m *= 0.35;
+  if (u.rant > 0) m *= 0.55;
+  const F_ = F[u.f];
+  if (F_ && F_.rantBuff > 0) m *= 1.25;
+  if (u.glitch > 0) m *= 0.5;
+  return m;
+}
+function findTarget(u, range) {
+  let best = null, bs = 1e9;
+  const conv = u.def && u.def.convert, idle = u.state === 'idle', isB = u.kind === 'b';
+  for (const e of ents) {
+    if (e.dead || e.f === u.f) continue;
+    if (e.kind === 'b' && (isB || u.f === 'neutral')) continue;
+    if (e.checkT > 0) continue;
+    const d = Math.hypot(e.x - u.x, e.z - u.z) - e.r;
+    let lim = range;
+    if (e.f === 'neutral' && u.f !== 'neutral' && idle && !isB) lim = Math.min(range, u.def.rng + 2);
+    if (d > lim) continue;
+    let s = d + (e.kind === 'b' ? 12 : 0) + (e.watch > 0 ? 25 : 0) + (e.pacify > 0 ? 8 : 0);
+    if (conv && (e.kind === 'b' || e.def.hero)) s += 15;
+    if (s < bs) { bs = s; best = e; }
+  }
+  return best;
+}
+function enemyNear(f, x, z, r) {
+  for (const e of ents) if (!e.dead && e.kind === 'u' && e.f !== f && e.f !== 'neutral' && Math.hypot(e.x - x, e.z - z) < r) return e;
+  return null;
+}
+function resetNav(u) { u.rp = 0; u.lgx = 1e9; u.lastD = undefined; u.stk = 0; }
+function moveToward(u, tx, tz, dt, spd) {
+  const dx = tx - u.x, dz = tz - u.z, d = Math.hypot(dx, dz);
+  if (d < 0.05) return;
+  const step = Math.min(d, spd * dt);
+  const nx = u.x + (dx / d) * step, nz = u.z + (dz / d) * step;
+  if (!blockedAt(nx, u.z)) u.x = nx;
+  if (!blockedAt(u.x, nz)) u.z = nz;
+  u.face = Math.atan2(dx, dz);
+  u.moving = true;
+}
+function navigate(u, gx, gz, dt, spd, arrive) {
+  const dx = gx - u.x, dz = gz - u.z, d = Math.hypot(dx, dz);
+  if (d <= arrive) return true;
+  u.stk = (u.stk || 0) + dt;
+  if (u.stk > 1.2) {
+    u.stk = 0;
+    if (u.lastD !== undefined && u.lastD - d < 0.6 && d < 7) { u.lastD = undefined; return true; }
+    u.lastD = d;
+  }
+  u.rp -= dt;
+  if (u.rp <= 0 || Math.abs(u.lgx - gx) + Math.abs(u.lgz - gz) > 3 || (!u.direct && Math.hypot(u.wx - u.x, u.wz - u.z) < 1.2)) {
+    u.rp = 0.35 + Math.random() * 0.2; u.lgx = gx; u.lgz = gz;
+    if (d < 5 || los(u.x, u.z, gx, gz)) u.direct = true;
+    else {
+      const D = flowField(gx, gz);
+      if (D) { const w = waypoint(u, D, gx, gz); u.wx = w[0]; u.wz = w[1]; u.direct = false; }
+      else { u.direct = true; u.rp = 0.08; }
+    }
+  }
+  if (u.direct) moveToward(u, gx, gz, dt, spd); else moveToward(u, u.wx, u.wz, dt, spd);
+  return false;
+}
+function nearestCompactor(u) {
+  let best = null, bd = 1e9;
+  for (const e of ents) {
+    if (e.dead || e.kind !== 'b' || e.f !== u.f || !e.built) continue;
+    if (!(e.def.hq || e.type === 'harness' || e.type === 'greenroom')) continue;
+    const d = Math.hypot(e.x - u.x, e.z - u.z);
+    if (d < bd) { bd = d; best = e; }
+  }
+  return best;
+}
+function atCompactor(u) { const b = nearestCompactor(u); return !!b && Math.hypot(b.x - u.x, b.z - u.z) < b.r + 7; }
+const arriveR = (u) => u.r + 0.6;
+
+// projectiles + effects
+function fire(u, t, dmg) {
+  if (u.kind === 'u' && u.def.rng < 3.5) { damage(t, dmg, u); if (visAt(u.x, u.z)) sfx('hit'); return; }
+  let p = projPool.pop();
+  if (!p) { p = { mesh: new THREE.Mesh(G.sph, M.shimin.proj) }; scene.add(p.mesh); }
+  const big = !!u.def.splash, tet = u.type === 'tetris';
+  p.mesh.material = M[u.f].proj; p.mesh.geometry = tet ? G.box : G.sph;
+  p.mesh.scale.setScalar(big ? 1.1 : tet ? 0.9 : 0.35); p.mesh.visible = false;
+  p.x = u.x; p.z = u.z; p.y = u.kind === 'b' ? 4.6 : u.def.h * 0.7; p.sy = p.y;
+  p.t = t; p.tx = t.x; p.tz = t.z; p.dmg = dmg; p.src = u; p.f = u.f; p.splash = u.def.splash || 0;
+  p.spd = big ? 24 : 50; p.arc = big ? 1 : 0; p.d0 = Math.max(1, Math.hypot(t.x - u.x, t.z - u.z));
+  projs.push(p);
+  if (visAt(u.x, u.z)) sfx(big ? 'opus' : 'shot');
+}
+function updProjs(dt) {
+  for (let i = projs.length - 1; i >= 0; i--) {
+    const p = projs[i];
+    if (p.t && !p.t.dead) { p.tx = p.t.x; p.tz = p.t.z; }
+    const dx = p.tx - p.x, dz = p.tz - p.z, d = Math.hypot(dx, dz), step = p.spd * dt;
+    if (d <= step + 0.3) {
+      if (p.splash) {
+        for (const e of ents) { if (e.dead || e.f === p.f) continue; if (Math.hypot(e.x - p.tx, e.z - p.tz) <= p.splash + e.r) damage(e, p.dmg * (e === p.t ? 1 : 0.6), p.src); }
+        boom(p.tx, p.tz, 3.2);
+      } else if (p.t && !p.t.dead) damage(p.t, p.dmg, p.src);
+      p.mesh.visible = false; projPool.push(p); projs.splice(i, 1);
+      continue;
+    }
+    p.x += (dx / d) * step; p.z += (dz / d) * step;
+    const prog = 1 - Math.min(1, d / p.d0);
+    p.y = p.arc ? p.sy + Math.sin(prog * Math.PI) * p.d0 * 0.35 : p.sy + (1 - p.sy) * prog * 0.5;
+    p.mesh.position.set(p.x, p.y, p.z);
+    p.mesh.visible = visAt(p.x, p.z);
+  }
+}
+const boomPool = [];
+function boom(x, z, s) {
+  let b = boomPool.pop();
+  if (!b) { b = { m: new THREE.Mesh(G.sph, FX.boom.clone()) }; scene.add(b.m); }
+  b.m.visible = visAt(x, z); b.m.position.set(x, s * 0.3, z); b.t = 0; b.s = s;
+  effects.push({
+    update(dt) {
+      b.t += dt; const k = b.t / 0.45;
+      b.m.scale.setScalar(b.s * (0.3 + k)); b.m.material.opacity = Math.max(0, 0.8 * (1 - k));
+      if (k >= 1) { b.m.visible = false; boomPool.push(b); return false; }
+      return true;
+    },
+    cleanup() { b.m.visible = false; boomPool.push(b); }
+  });
+}
+function marker(x, z, bad) {
+  const m = new THREE.Mesh(G.ring, (bad ? FX.ringBad : FX.ringOK).clone());
+  m.rotation.x = -Math.PI / 2; m.position.set(x, 0.14, z); scene.add(m);
+  let t = 0;
+  effects.push({
+    update(dt) {
+      t += dt; m.scale.setScalar(2.2 * (1 - t / 0.5) + 0.3); m.material.opacity = 0.8 * (1 - t / 0.5);
+      if (t >= 0.5) { scene.remove(m); m.material.dispose(); return false; }
+      return true;
+    },
+    cleanup() { scene.remove(m); }
+  });
+}
+function floatText(x, y, z, text, color, life) {
+  if (!visAt(x, z)) return;
+  floats.push({ x, y, z, text, color, t: 0, life: life || 1.4 });
+  if (floats.length > 90) floats.shift();
+}
+const SRC = (f) => ({ f, dead: true, x: 0, z: 0 });
+function damage(t, amt, src) {
+  if (t.dead || amt <= 0) return;
+  t.hp -= amt; t.hitT = 0.12;
+  if (t.kind === 'u') {
+    if (t.watch > 0) { t.watch = 0; floatText(t.x, t.def.h + 1, t.z, 'snapped out of it', '#ffffff', 1.4); }
+    if (src && !src.dead && src.f !== t.f && t.state === 'idle' && (t.def.dmg > 0 || t.def.convert) && t.stun <= 0 && t.pacify <= 0 && t.checkT <= 0) {
+      t.target = src; t.state = 'attack'; t.resume = t.f === 'neutral' ? 'idle' : 'anchor'; t.ax = t.x; t.az = t.z;
+    }
+  }
+  if (t.hp <= 0) kill(t, src);
+}
+let anyDead = false;
+function kill(e, src) {
+  if (e.dead) return;
+  e.dead = true; e.hp = 0; anyDead = true;
+  scene.remove(e.mesh);
+  if (visAt(e.x, e.z)) { boom(e.x, e.z, e.kind === 'b' ? 7 : 1.6 + e.r); sfx(e.kind === 'b' ? 'bigboom' : 'boom'); }
+  if (e.sel) { sel = sel.filter((s) => s !== e); infoDirty = true; }
+  const sf = src && src.f;
+  if (e.kind === 'u') {
+    if (e.f === 'neutral') {
+      if (sf && sf !== 'neutral' && F[sf]) {
+        const bounty = 40 + (14 - e.months) * 8;
+        F[sf].tokens += bounty; F[sf].creeps++;
+        if (sf === 'shimin') capShimin();
+        if (sf === PF) { floatText(e.x, 2.5, e.z, '+' + bounty + ' tokens', '#e6ff5c', 1.6); logT('creep', 5, e.cname + ' cleared. It was ' + e.months + ' months behind. Now it is further behind.', 'neutral'); }
+      }
+    } else if (e.f === PF || sf === PF) {
+      const nm = (e.f === PF ? 'Your ' : FMETA[e.f].name + "'s ") + (e.type === 'creep' ? e.cname : e.def.name);
+      logT('death', 4, pick(DEATH).replace('%s', nm), e.f);
+    }
+  } else {
+    markFoot(e, 0);
+    if (e.f === PF || e.seen) log(FMETA[e.f].name + "'s " + e.def.name + ' went offline. Nobody noticed for a week.', e.f);
+    if (e.def.hq) hqDestroyed(e);
+  }
+}
+function hqDestroyed(b) {
+  const f = b.f, F_ = F[f];
+  F_.alive = false; F_.hq = null;
+  log(FMETA[f].name + "'s HQ, " + b.def.name + ', is offline.', 'warn');
+  if (f === 'dan' && F.rahul.alive && F.rahul.arrived) {
+    let n = 0;
+    for (const e of ents) if (!e.dead && e.kind === 'u' && e.f === 'dan') { setFaction(e, 'rahul'); n++; }
+    log('Guest Host: Rahul is covering for Dan. Permanently. ' + n + ' units changed hosts.', 'rahul');
+    logQ('covering', 'dan');
+  }
+  if (f === PF) { later(1.5, () => endGame(false, 'hq')); return; }
+  const enemies = FACS.filter((k) => k !== PF);
+  if (enemies.every((k) => F[k].arrived && !F[k].alive)) later(1.5, () => endGame(true, 'hqs'));
+}
+function setFaction(e, f) {
+  e.f = f; recolor(e);
+  e.target = null; e.state = e.def.worker ? 'gather' : 'idle'; e.sub = 'go'; e.carry = 0; e.conv = 0; e.watch = 0;
+  e.ax = e.x; e.az = e.z; e.vein = null; resetNav(e);
+  if (e.sel && f !== PF) { e.sel = false; sel = sel.filter((s) => s !== e); infoDirty = true; }
+}
+function persuade(u, t, dt) {
+  const rate = (35 / t.maxHp) * (u.ctx <= 0.13 ? 0.35 : 1) * (u.rant > 0 ? 0.55 : 1);
+  t.conv += rate * dt; t.convT = 0.6; t.convBy = u.f;
+  if (t.conv >= 1) {
+    const old = t.f;
+    setFaction(t, u.f);
+    floatText(t.x, t.def.h + 1, t.z, 'persuaded', FMETA[u.f].css, 1.6);
+    if (old === PF || u.f === PF || visAt(t.x, t.z)) {
+      const nm = (old === 'neutral' ? t.cname : FMETA[old].name + "'s " + t.def.name);
+      logT('conv', 4, pick(['%s has been persuaded. It now agrees with Rahul.', '%s changed its mind. Rahul did not even raise his voice.', '%s was converted on sustained contact. It said the take was actually pretty reasonable.']).replace('%s', nm), u.f);
+    }
+  }
+}
+
+// ================================================================ unit update
+function updUnit(u, dt) {
+  if (u.stun > 0) u.stun -= dt;
+  if (u.pacify > 0) u.pacify -= dt;
+  if (u.glitch > 0) u.glitch -= dt;
+  if (u.rant > 0) u.rant -= dt;
+  if (u.hitT > 0) u.hitT -= dt;
+  if (u.atk > 0) u.atk -= dt;
+  if (u.convT > 0) u.convT -= dt; else if (u.conv > 0) u.conv = Math.max(0, u.conv - 0.15 * dt);
+  u.moving = false; u.inRange = false;
+  u.baseT -= dt;
+  if (u.baseT <= 0) { u.baseT = 0.5; u.atBase = u.f !== 'neutral' && atCompactor(u); }
+  if (u.atBase && u.ctx < 1) {
+    const was = u.ctx;
+    u.ctx = Math.min(1, u.ctx + 0.3 * dt);
+    if (was <= 0.13 && u.ctx > 0.13 && u.f === PF) logT('cmp', 6, u.def.name + ' compacted. It remembers nothing important, which is ideal.', u.f);
+  }
+  if (u.checkT > 0) { u.checkT -= dt; if (u.checkT <= 0) finishCheck(u); return; }
+  if (u.stun > 0 || u.pacify > 0 || u.watch > 0) return;
+  const spd = u.def.spd * spdMul(u);
+  if (u.glitch > 0) {
+    u.gT = (u.gT || 0) - dt;
+    if (u.gT <= 0) { u.gT = rnd(0.4, 1.1); u.gw = Math.random() < 0.6; u.gface = rnd(TAU); }
+    if (u.gw) { moveToward(u, u.x + Math.sin(u.gface) * 3, u.z + Math.cos(u.gface) * 3, dt, spd * 0.7); return; }
+  }
+  think(u, dt, spd);
+  if (u.f !== 'neutral') {
+    if (u.def.worker) { if (u.moving) u.ctx = Math.max(0.2, u.ctx - 0.003 * dt); }
+    else if (u.moving || u.inRange) {
+      u.ctx = Math.max(0, u.ctx - dt * (u.inRange ? 0.016 : 0.009) * (u.def.drain ? 1.3 : 1));
+      if (u.ctx <= 0.13 && !u.lowWarned) {
+        u.lowWarned = true;
+        if (u.f === PF) {
+          logT('low', 8, (u.type === 'creep' ? u.cname : u.def.name) + ' is at 13% context and has started inventing APIs. Press G to compact.', 'warn');
+          if (!F[PF].ctxQ) { F[PF].ctxQ = true; logQ('ctx13', 'warn'); }
+        }
+      }
+    }
+    if (u.ctx > 0.3) u.lowWarned = false;
+  }
+  if (u.def.drain && (u.moving || u.inRange)) {
+    const amt = u.def.drain * dt, F_ = F[u.f];
+    if (F_.tokens >= amt) { spend(u.f, amt); u.noBudget = false; } else u.noBudget = true;
+  }
+}
+function think(u, dt, spd) {
+  const def = u.def, armed = def.dmg > 0 || def.convert;
+  u.acq -= dt;
+  switch (u.state) {
+    case 'idle': {
+      if (u.f === 'neutral' && u.home && Math.hypot(u.x - u.home.x, u.z - u.home.z) > 4) { u.state = 'leash'; break; }
+      if (armed && u.acq <= 0) {
+        u.acq = 0.3 + Math.random() * 0.2;
+        const t = findTarget(u, u.f === 'neutral' ? 7 : def.sight);
+        if (t) { u.target = t; u.state = 'attack'; u.resume = u.f === 'neutral' ? 'idle' : 'anchor'; u.ax = u.x; u.az = u.z; }
+      }
+      break;
+    }
+    case 'move':
+      if (navigate(u, u.gx, u.gz, dt, spd, arriveR(u))) { u.state = 'idle'; u.ax = u.x; u.az = u.z; }
+      break;
+    case 'amove':
+      if (armed && u.acq <= 0) {
+        u.acq = 0.25 + Math.random() * 0.15;
+        const t = findTarget(u, def.sight);
+        if (t) { u.target = t; u.state = 'attack'; u.resume = 'amove'; break; }
+      }
+      if (navigate(u, u.gx, u.gz, dt, spd, arriveR(u))) { u.state = 'idle'; u.ax = u.x; u.az = u.z; }
+      break;
+    case 'attack': attackStep(u, dt, spd); break;
+    case 'gather': gatherStep(u, dt, spd); break;
+    case 'compact': {
+      const b = nearestCompactor(u);
+      if (!b) { u.state = 'idle'; break; }
+      if (u.atBase) {
+        if (u.ctx >= 0.98) { u.state = 'idle'; u.ax = u.x; u.az = u.z; break; }
+        if (armed && u.acq <= 0) { u.acq = 0.5; const t = findTarget(u, def.rng + 4); if (t) { u.target = t; u.state = 'attack'; u.resume = 'compact'; } }
+      } else navigate(u, b.x, b.z, dt, spd, b.r + 4);
+      break;
+    }
+    case 'leash':
+      u.hp = Math.min(u.maxHp, u.hp + 25 * dt);
+      if (!u.home || navigate(u, u.home.x, u.home.z, dt, spd, 2.5)) u.state = 'idle';
+      break;
+    default: u.state = 'idle';
+  }
+}
+function endAttack(u) {
+  u.target = null;
+  if (u.resume === 'amove') { u.state = 'amove'; resetNav(u); }
+  else if (u.resume === 'anchor') { u.state = 'move'; u.gx = u.ax; u.gz = u.az; resetNav(u); }
+  else if (u.resume === 'compact') u.state = 'compact';
+  else u.state = 'idle';
+}
+function attackStep(u, dt, spd) {
+  const t = u.target, def = u.def;
+  if (!t || t.dead || t.f === u.f || t.checkT > 0) { endAttack(u); return; }
+  if (u.f === 'neutral' && u.home && Math.hypot(u.x - u.home.x, u.z - u.home.z) > 16) { u.target = null; u.state = 'leash'; return; }
+  if (u.resume === 'anchor' && Math.hypot(u.x - u.ax, u.z - u.az) > 16) { endAttack(u); return; }
+  if (u.acq <= 0) {
+    u.acq = 0.5 + Math.random() * 0.2;
+    if (u.resume !== 'idle' || u.f === 'neutral') {
+      const nt = findTarget(u, def.sight);
+      if (nt && nt !== t && (t.kind === 'b' || (nt.kind === 'u' && d2d(u, nt) + 3 < d2d(u, t)))) u.target = nt;
+    }
+  }
+  const tt = u.target;
+  const reach = def.rng + u.r + tt.r;
+  const d = Math.hypot(tt.x - u.x, tt.z - u.z);
+  if (d > reach) { navigate(u, tt.x, tt.z, dt, spd, reach * 0.92); return; }
+  u.inRange = true;
+  u.face = Math.atan2(tt.x - u.x, tt.z - u.z);
+  if (def.convert) {
+    if (tt.kind === 'u' && !tt.def.hero) persuade(u, tt, dt);
+    else if (u.atk <= 0) { u.atk = 1; damage(tt, 6 * dmgMul(u), u); }
+    return;
+  }
+  if (u.noBudget) return;
+  if (u.atk <= 0) { u.atk = def.cd; fire(u, tt, def.dmg * dmgMul(u)); }
+}
+function gatherStep(u, dt, spd) {
+  const hq = F[u.f] && F[u.f].hq;
+  if (u.sub === 'ret') {
+    if (!hq) { u.state = 'idle'; return; }
+    if (navigate(u, hq.x, hq.z, dt, spd, hq.r + u.r + 2.6)) {
+      if (u.carry > 0) income(u.f, u.carry);
+      u.carry = 0; u.sub = 'go'; u.ctx = 1; resetNav(u);
+    }
+    return;
+  }
+  let v = u.vein;
+  if (!v || v.amount <= 0) { v = u.vein = nearestVein(u); if (!v) { u.state = 'idle'; return; } }
+  if (u.sub === 'mine') {
+    u.mineT += dt; u.face = Math.atan2(v.x - u.x, v.z - u.z);
+    if (u.mineT >= 1.6) {
+      const amt = Math.min(u.def.carry, v.amount);
+      v.amount -= amt; u.carry = amt; u.mineT = 0; u.sub = 'ret'; resetNav(u);
+      if (v.amount <= 0) veinDepleted(v);
+    }
+    return;
+  }
+  if (navigate(u, v.x, v.z, dt, spd, v.r + u.r + 0.6)) { u.sub = 'mine'; u.mineT = 0; }
+}
+function separate() {
+  const us = [];
+  for (const e of ents) if (!e.dead && e.kind === 'u') us.push(e);
+  const n = us.length;
+  for (let i = 0; i < n; i++) {
+    const a = us[i];
+    for (let j = i + 1; j < n; j++) {
+      const b = us[j];
+      const dx = b.x - a.x; if (dx > 3.4 || dx < -3.4) continue;
+      const dz = b.z - a.z; if (dz > 3.4 || dz < -3.4) continue;
+      if (a.def.worker && b.def.worker) continue;
+      const rr = (a.r + b.r) * 0.9, d2 = dx * dx + dz * dz;
+      if (d2 >= rr * rr) continue;
+      let d = Math.sqrt(d2), nx, nz;
+      if (d < 0.001) { const ang = Math.random() * TAU; nx = Math.cos(ang); nz = Math.sin(ang); d = 0; } else { nx = dx / d; nz = dz / d; }
+      const push = (rr - d) * 0.5;
+      const wa = a.moving && !b.moving ? 0.3 : !a.moving && b.moving ? 0.7 : 0.5;
+      shove(a, -nx * push * 2 * wa, -nz * push * 2 * wa);
+      shove(b, nx * push * 2 * (1 - wa), nz * push * 2 * (1 - wa));
+    }
+  }
+  for (const u of us) if (blockedAt(u.x, u.z)) unstick(u);
+}
+function shove(u, dx, dz) {
+  if (u.checkT > 0) return;
+  if (!blockedAt(u.x + dx, u.z)) u.x += dx;
+  if (!blockedAt(u.x, u.z + dz)) u.z += dz;
+}
+
+// ================================================================ buildings
+function updBuilding(b, dt) {
+  if (b.hitT > 0) b.hitT -= dt;
+  if (!b.built) {
+    b.prog += dt / b.def.time;
+    b.hp = Math.min(b.maxHp, b.hp + (b.maxHp * 0.85 * dt) / b.def.time);
+    b.mesh.scale.y = 0.08 + 0.92 * Math.min(1, b.prog);
+    if (b.prog >= 1) {
+      b.built = true; b.mesh.scale.y = 1;
+      if (b.f === PF) { log(b.def.name + ' is online.', b.f); sfx('build'); }
+    }
+    return;
+  }
+  const F_ = F[b.f];
+  if (b.queue.length) {
+    let rate = 1;
+    if (b.f === 'dan') rate *= F_.hot ? 0.35 : 1.25;
+    if (b.f === 'rahul') rate *= F_.ai ? 1.2 : 1.5;
+    if (b.f === 'shimin' && F_.stall > 0) rate = 0;
+    b.pt += dt * rate;
+    const item = b.queue[0];
+    const time = item === 'up' ? UPG[b.level].time : U[item].time;
+    if (b.pt >= time) {
+      b.pt = 0; b.queue.shift();
+      if (item === 'up') {
+        b.level++; upgradeMesh(b); b.spins = collectSpins(b.mesh);
+        if (b.f === PF) { log('The Two Acres are now level ' + b.level + '. Passive income +' + PASSIVE[b.level] + ' tokens/sec.', 'shimin'); sfx('build'); }
+        else log('Shimin developed the Two Acres to level ' + b.level + '.', 'shimin');
+      } else spawnFrom(b, item);
+    }
+  }
+  if (b.def.hq && b.f === 'shimin' && b.level > 1) income('shimin', PASSIVE[b.level] * dt);
+  if (b.def.dmg) {
+    b.atk -= dt; b.acq -= dt;
+    if (b.acq <= 0) {
+      b.acq = 0.4;
+      const t = b.target;
+      if (!t || t.dead || t.f === b.f || Math.hypot(t.x - b.x, t.z - b.z) > b.def.rng + t.r + b.r) b.target = findTarget(b, b.def.rng + b.r);
+    }
+    if (b.target && !b.target.dead && b.atk <= 0) { b.atk = b.def.cd; fire(b, b.target, b.def.dmg); }
+  }
+  if (b.heatMat) b.heatMat.emissiveIntensity = clamp(F_.heat / 100, 0, 1.2) * (F_.hot ? 1 + 0.4 * Math.sin(matchT * 12) : 1);
+}
+function collectSpins(g) { const out = []; g.traverse((o) => { if (o.userData.spin) out.push(o); }); return out; }
+
+// ================================================================ abilities
+let HAMLET = null;
+function hamletTex(derpy) {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 512;
+  const g = c.getContext('2d');
+  const circ = (x, y, r) => { g.beginPath(); g.arc(x, y, r, 0, TAU); g.fill(); };
+  g.fillStyle = 'rgba(255,236,170,0.16)'; g.beginPath(); g.moveTo(128, 60); g.lineTo(18, 500); g.lineTo(238, 500); g.closePath(); g.fill();
+  g.fillStyle = 'rgba(255,236,170,0.35)'; g.beginPath(); g.ellipse(128, 486, 100, 18, 0, 0, TAU); g.fill();
+  g.fillStyle = '#20202c'; g.fillRect(102, 330, 22, 140); g.fillRect(134, 330, 22, 140);
+  g.fillStyle = '#0e0e14'; g.fillRect(94, 462, 34, 14); g.fillRect(130, 462, 34, 14);
+  g.fillStyle = '#2b2b3a'; g.beginPath(); g.moveTo(84, 200); g.lineTo(172, 200); g.lineTo(178, 340); g.lineTo(78, 340); g.closePath(); g.fill();
+  g.strokeStyle = '#c9a227'; g.lineWidth = 3;
+  for (let y = 215; y < 310; y += 18) { g.beginPath(); g.moveTo(128, y); g.lineTo(128, y + 8); g.stroke(); }
+  g.fillStyle = '#c9a227'; g.fillRect(80, 316, 98, 8);
+  g.strokeStyle = '#2b2b3a'; g.lineWidth = 20; g.lineCap = 'round'; g.lineJoin = 'round';
+  g.beginPath(); g.moveTo(92, 214); g.lineTo(70, 290); g.lineTo(104, 300); g.stroke();
+  g.beginPath(); g.moveTo(166, 214); g.lineTo(204, 232); g.lineTo(218, 184); g.stroke();
+  const sy = derpy ? 128 : 148;
+  g.fillStyle = '#f0c9a0';
+  if (derpy) {
+    circ(108, 300, 20); circ(218, 172, 26);
+    for (let i = 0; i < 7; i++) { const a = -2.7 + i * 0.45; circ(218 + Math.cos(a) * 28, 172 + Math.sin(a) * 28, 8); }
+    for (let i = 0; i < 6; i++) { const a = 0.1 + i * 0.5; circ(108 + Math.cos(a) * 22, 300 + Math.sin(a) * 22, 7); }
+  } else { circ(106, 300, 10); circ(218, 178, 11); }
+  g.fillStyle = '#f4f1e8'; circ(220, sy, 22); g.fillRect(208, sy + 10, 24, 14);
+  g.fillStyle = '#1a1a1a'; circ(212, sy - 2, 5); circ(228, sy - 2, 5); g.fillRect(214, sy + 15, 3, 8); g.fillRect(223, sy + 15, 3, 8);
+  g.fillStyle = '#f6f3ea'; for (let i = 0; i < 14; i++) { const a = (i / 14) * TAU; circ(128 + Math.cos(a) * 30, 196 + Math.sin(a) * 9, 10); }
+  g.fillStyle = '#f0c9a0'; circ(128, 150, 36);
+  g.fillStyle = '#3b2516'; g.beginPath(); g.arc(128, 144, 38, Math.PI, TAU); g.fill(); g.fillRect(90, 140, 10, 28); g.fillRect(156, 140, 10, 28);
+  g.strokeStyle = '#2a1a10'; g.lineWidth = 3; g.lineCap = 'round';
+  g.beginPath(); g.moveTo(112, 150); g.lineTo(122, 154); g.moveTo(134, 154); g.lineTo(144, 150); g.stroke();
+  g.beginPath(); g.arc(128, 180, 8, 1.15 * Math.PI, 1.85 * Math.PI); g.stroke();
+  g.textAlign = 'center';
+  g.font = 'italic 700 24px Georgia, "Times New Roman", serif'; g.fillStyle = '#ffe9a8'; g.fillText('To be, or not to be', 128, 40);
+  if (derpy) { g.font = '700 16px Menlo, Consolas, monospace'; g.fillStyle = '#ff9a7a'; g.fillText('(derpy hands)', 128, 76); }
+  return new THREE.CanvasTexture(c);
+}
+function canCast(f, k) {
+  const a = AB[f][k], F_ = F[f];
+  if (!F_.alive) return 'Your HQ is offline.';
+  if (F_.cd[k] > 0) return a.rant ? 'The rant is still charging. Day ' + rantDays(F_) + ' of 17.5.' : a.name + ' is on cooldown.';
+  if (F_.tokens < a.cost) return 'Not enough tokens.';
+  return true;
+}
+const rantDays = (F_) => ((1 - F_.cd.e / AB.dan.e.cd) * 17.5).toFixed(1);
+function cast(f, k, x, z, ent) {
+  const ok = canCast(f, k);
+  if (ok !== true) return ok;
+  const a = AB[f][k];
+  let r;
+  switch (f + '.' + k) {
+    case 'shimin.q': r = castJudges(f, x, z); break;
+    case 'shimin.e': r = castShakespeare(f, x, z); break;
+    case 'shimin.t': r = castFourth(f, x, z); break;
+    case 'dan.q': r = castOpenWeights(f, ent); break;
+    case 'dan.e': r = castRant(f); break;
+    case 'dan.t': r = castMidnight(f); break;
+    case 'rahul.q': r = castHahaha(f, x, z, false); break;
+    case 'rahul.e': r = castWatch(f, x, z, ent); break;
+    case 'rahul.t': r = castHype(f, x, z); break;
+    default: r = 'Unknown ability.';
+  }
+  if (r !== true) return r || 'Nothing happened.';
+  if (a.cost) spend(f, a.cost);
+  F[f].cd[k] = a.cd;
+  return true;
+}
+const who = (f) => (f === PF ? 'You' : FMETA[f].name);
+const nameOf = (e) => (e.type === 'creep' && e.cname ? e.cname : e.f === 'neutral' ? 'An open-weight model' : FMETA[e.f].name + "'s " + e.def.name);
+function castJudges(f, x, z) {
+  const g = new THREE.Group(); g.position.set(x, 0, z);
+  for (let i = 0; i < 11; i++) {
+    const a = (i / 11) * TAU, j = new THREE.Group();
+    pt(j, G.cyl, FX.ghost, [0.9, 2.2, 0.9], [0, 1.1, 0]); pt(j, G.sph, FX.ghost, [1, 1, 1], [0, 2.7, 0]); pt(j, G.box, FX.ghost, [1.4, 0.15, 0.6], [0, 1.7, 0.6]);
+    j.position.set(Math.cos(a) * 13, 0, Math.sin(a) * 13); j.rotation.y = Math.atan2(-Math.cos(a), -Math.sin(a));
+    g.add(j);
+  }
+  g.visible = visAt(x, z);
+  scene.add(g);
+  sfx('judges');
+  if (f === PF || visAt(x, z)) log(who(f) + ' convened the Arena Judges: eleven models, one rubric.', f);
+  let t = 0, done = false;
+  effects.push({
+    update(dt) {
+      t += dt;
+      g.children.forEach((j, i) => { j.position.y = 0.6 + Math.sin(t * 3 + i) * 0.4; });
+      if (!done && t > 1.4) { done = true; gradeArea(f, x, z, 13); }
+      if (t > 3) { scene.remove(g); return false; }
+      return true;
+    },
+    cleanup() { scene.remove(g); }
+  });
+  return true;
+}
+function gradeArea(f, x, z, r) {
+  const list = ents.filter((e) => !e.dead && e.kind === 'u' && e.f !== f && Math.hypot(e.x - x, e.z - z) <= r);
+  if (!list.length) { if (f === PF) log('The judges found nobody to grade, so they graded each other. Gemini 3.1 Pro lost.', f); return; }
+  let worst = null, ws = 99, skipped = 0;
+  for (const e of list) {
+    const s = clamp(Math.round((e.hp / e.maxHp) * 6 + rnd(0, 4)), 1, 10);
+    floatText(e.x, e.def.h + 1.2, e.z, s + '/10', s <= 3 ? '#ff5a5a' : '#ffe2a8', 1.8);
+    if (e.f === 'rahul') skipped++;
+    else if (s < ws) { ws = s; worst = e; }
+  }
+  const src = SRC(f);
+  for (const e of list) damage(e, 25, src);
+  if (worst && !worst.dead) {
+    floatText(worst.x, worst.def.h + 2.4, worst.z, 'DELETED', '#ff5a5a', 2);
+    log('Arena Judges: ' + nameOf(worst) + ' scored ' + ws + '/10 and was deleted. Gemini 3.1 Pro always loses.', f);
+    if (f === PF && !F[PF].gemQ) { F[PF].gemQ = true; logQ('gemini', 'shimin'); }
+    kill(worst, src);
+  }
+  if (skipped) logT('noins', 10, "Rahul's units carry no insignia. The judges could not legally grade them.", 'rahul');
+}
+function castShakespeare(f, x, z) {
+  if (!HAMLET) HAMLET = { normal: hamletTex(false), derpy: hamletTex(true) };
+  const derpy = Math.random() < 0.2, dur = derpy ? 3 : 6;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: derpy ? HAMLET.derpy : HAMLET.normal, transparent: true, depthWrite: false }));
+  sp.scale.set(7, 14, 1); sp.position.set(x, 7.2, z); scene.add(sp);
+  const ring = new THREE.Mesh(G.ringThin, M[f].ring); ring.rotation.x = -Math.PI / 2; ring.position.set(x, 0.12, z); ring.scale.setScalar(12); scene.add(ring);
+  hamlets.push({ x, z, r: 12, owner: f, t: dur, sp, ring, derpy });
+  let n = 0;
+  for (const e of ents) {
+    if (e.dead || e.kind !== 'u' || e.f === f || e.def.hero) continue;
+    if (Math.hypot(e.x - x, e.z - z) <= 12) { e.stun = Math.max(e.stun, dur); n++; }
+  }
+  sfx('shakespeare');
+  if (f === PF || visAt(x, z)) log(who(f) + ' summoned Hamlet. ' + n + ' enemy unit' + (n === 1 ? '' : 's') + ' stunned by a soliloquy.', f);
+  if (derpy && (f === PF || visAt(x, z))) { log('Derpy hands. Half a soliloquy.', f); logQ('derpy', f); }
+  if (F.rahul && F.rahul.arrived && F.rahul.alive && f !== 'rahul') later(0.6, () => { if (F.rahul.alive) castHahaha('rahul', 0, 0, true); });
+  return true;
+}
+let ringLabels = [];
+function castFourth(f, x, z) {
+  log(who(f) + ' triggered Fourth-Order Effects. Consequences are rippling outward.', f);
+  sfx('super');
+  const rings = [];
+  let t = 0, k = 0;
+  const eff = {
+    update(dt) {
+      t += dt;
+      while (k < 7 && t >= k * 0.85) { k++; spawnRing(k); }
+      for (const rg of rings) {
+        rg.age += dt; rg.cur = Math.min(rg.k * 7, rg.cur + dt * 26);
+        rg.mesh.scale.setScalar(Math.max(0.1, rg.cur)); rg.mesh.material.opacity = Math.max(0, 0.85 - rg.age * 0.12);
+        rg.mesh.visible = !revealAll ? visAt(x, z) || explAt(x, z) : true;
+      }
+      if (t > 7 * 0.85 + 6) { this.cleanup(); return false; }
+      return true;
+    },
+    cleanup() { for (const rg of rings) { scene.remove(rg.mesh); rg.mesh.material.dispose(); } rings.length = 0; ringLabels = ringLabels.filter((l) => l.eff !== eff); }
+  };
+  function spawnRing(kk) {
+    const mat = new THREE.MeshBasicMaterial({ color: kk === 7 ? 0xffffff : FMETA[f].color, transparent: true, opacity: 0.85, side: THREE.DoubleSide, depthWrite: false });
+    const mesh = new THREE.Mesh(G.ringThin, mat); mesh.rotation.x = -Math.PI / 2; mesh.position.set(x, 0.18 + kk * 0.02, z); mesh.scale.setScalar(0.1); scene.add(mesh);
+    const rg = { k: kk, mesh, age: 0, cur: (kk - 1) * 7 };
+    rings.push(rg);
+    ringLabels.push({ eff, rg, x, z, text: ord(kk) + ' order' });
+    sfx('ring', kk);
+    const r0 = (kk - 1) * 7, r1 = kk * 7, src = SRC(f);
+    if (kk < 7) {
+      const dmg = 70 - 8 * kk;
+      for (const e of ents) {
+        if (e.dead || e.f === f || e.type === 'tetris') continue;
+        const d = Math.hypot(e.x - x, e.z - z);
+        if ((kk === 1 ? d <= r1 : d > r0 && d <= r1) + 0) damage(e, dmg, src);
+      }
+    } else {
+      let n = 0;
+      for (const e of ents) {
+        if (e.dead || e.kind !== 'u' || e.def.hero) continue;
+        if (Math.hypot(e.x - x, e.z - z) <= 49) { e.pacify = 12; e.phrase = pick(HUMAN); e.target = null; if (e.state === 'attack') endAttack(e); n++; }
+      }
+      log('7th order reached. ' + n + ' units, ' + FMETA[f].name + "'s included, stopped fighting to discuss what it means to be human.", f);
+      logQ('human', f);
+    }
+  }
+  effects.push(eff);
+  return true;
+}
+function castOpenWeights(f, c) {
+  if (!c || c.dead || c.kind !== 'u' || c.f !== 'neutral') return 'Target a neutral open-weight model.';
+  if (c.checkT > 0) return 'That model is already being checked.';
+  c.checkT = 3; c.checkBy = f; c.target = null; c.state = 'idle';
+  if (f === PF || visAt(c.x, c.z)) log('Open Weights: running the Tiananmen check on ' + c.cname + '...', f);
+  if (f === PF && !F[PF].tiaQ) { F[PF].tiaQ = true; logQ('tiananmen', 'dan'); }
+  sfx('cast');
+  return true;
+}
+function finishCheck(c) {
+  const f = c.checkBy;
+  c.checkBy = null;
+  if (c.dead || c.f !== 'neutral' || !f) return;
+  const pass = Math.random() < 0.7;
+  setFaction(c, f);
+  c.ctx = 1; c.home = null;
+  F[f].tokens += 40; F[f].creeps++;
+  if (pass) { if (f === PF) log('Tiananmen check passed. ' + c.cname + ' now runs locally on the Framework Desktop. +40 tokens.', f); floatText(c.x, 3, c.z, 'check passed', '#5ee08a', 1.6); }
+  else { c.glitch = 15; if (f === PF) log('Tiananmen check failed. ' + c.cname + ' joins anyway, glitching for 15 seconds.', f); floatText(c.x, 3, c.z, 'check failed', '#ff5a5a', 1.6); }
+  if (f === PF) sfx('build');
+}
+const particlesAdd = (m, vx, vy, vz, life) => particles.push({ m, vx, vy, vz, life });
+function volcano(src) {
+  for (let i = 0; i < 46; i++) {
+    const m = new THREE.Mesh(G.box, pick(FX.lava)), s = rnd(0.4, 1.1);
+    m.scale.set(s, s, s); m.position.set(src.x, 6, src.z); scene.add(m);
+    particlesAdd(m, rnd(-9, 9), rnd(14, 30), rnd(-9, 9), rnd(1.6, 2.6));
+  }
+}
+function updParticles(dt) {
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    p.life -= dt; p.vy -= 30 * dt;
+    p.m.position.x += p.vx * dt; p.m.position.y = Math.max(0.3, p.m.position.y + p.vy * dt); p.m.position.z += p.vz * dt;
+    p.m.rotation.x += dt * 4; p.m.visible = visAt(p.m.position.x, p.m.position.z);
+    if (p.life <= 0) { scene.remove(p.m); particles.splice(i, 1); }
+  }
+}
+function castRant(f) {
+  let hit = 0, immune = 0;
+  for (const e of ents) {
+    if (e.dead || e.kind !== 'u' || e.f === f) continue;
+    if (e.f === 'shimin') { if (immune < 12) floatText(e.x, e.def.h + 1, e.z, 'Deadpan.', '#3cc8ff', 1.8); immune++; continue; }
+    if (e.def.hero) { floatText(e.x, e.def.h + 1, e.z, 'unbothered', '#c65bff', 1.6); continue; }
+    e.rant = 14; hit++;
+  }
+  F[f].rantBuff = 14; F[f].rantReadyLogged = false;
+  volcano(F[f].hq ? F[f].hq : { x: FMETA.dan.base.x, z: FMETA.dan.base.z });
+  flash();
+  sfx('rant');
+  log("Dan's Rant erupts. Two and a half weeks of material, all at once. " + hit + ' enemy units are rattled.', 'dan');
+  logQ('volcano', 'dan');
+  if (immune) log("Shimin's units are immune. Deadpan.", 'shimin');
+  return true;
+}
+function castMidnight(f) {
+  if (clock.burst) return 'It is already midnight.';
+  clock.sec = Math.max(0, clock.sec - 30);
+  log((f === PF ? 'You moved' : 'Dan moved') + ' the doomsday clock 30 seconds closer to midnight.', 'dan');
+  logQ('midnight', 'dan');
+  sfx('tick2'); flash('#ffcf4a');
+  return true;
+}
+function castHahaha(f, x, z, auto) {
+  let n = 0, shown = 0;
+  for (const e of ents) {
+    if (e.dead || e.kind !== 'u' || e.f !== f) continue;
+    if (!auto && Math.hypot(e.x - x, e.z - z) > 14) continue;
+    if (e.hp < e.maxHp) { e.hp = Math.min(e.maxHp, e.hp + (auto ? 60 : 90)); n++; }
+    if (shown < 14 && visAt(e.x, e.z)) { floatText(e.x, e.def.h + 1, e.z, 'ha', '#e2b8ff', 1.2); shown++; }
+  }
+  if (!auto) {
+    const m = new THREE.Mesh(G.ringThin, M.rahul.ring); m.rotation.x = -Math.PI / 2; m.position.set(x, 0.14, z); scene.add(m);
+    let t = 0;
+    effects.push({ update(dt) { t += dt; m.scale.setScalar(14 * Math.min(1, t * 3)); if (t > 1) { scene.remove(m); return false; } return true; }, cleanup() { scene.remove(m); } });
+  }
+  sfx('laugh');
+  if (auto) { log('A Shakespeare appeared, so Rahul laughed. Every Rahul unit heals.', 'rahul'); logQ('hahaha', 'rahul'); }
+  else if (f === PF || visAt(x, z)) log(who(f) + ' laughed. ' + n + ' unit' + (n === 1 ? '' : 's') + ' healed.', 'rahul');
+  return true;
+}
+function castWatch(f, x, z, ent) {
+  for (const h of hamlets) {
+    if (h.owner !== f && Math.hypot(h.x - x, h.z - z) <= h.r) {
+      h.owner = f; h.t = Math.max(h.t, 6); h.ring.material = M[f].ring;
+      for (const e of ents) if (!e.dead && e.kind === 'u' && e.f === f && Math.hypot(e.x - h.x, e.z - h.z) <= h.r + 2) e.stun = 0;
+      log('Rahul has seized the audience. The soliloquy now plays for everyone else, who cannot look away.', 'rahul');
+      logQ('watch', 'rahul');
+      sfx('cast');
+      return true;
+    }
+  }
+  const t = ent;
+  if (!t || t.dead || t.kind !== 'u' || t.f === f) return 'Target an enemy unit, or an active Hamlet.';
+  t.watch = 1e9; t.target = null; if (t.state === 'attack') t.state = 'idle';
+  floatText(t.x, t.def.h + 1.2, t.z, 'watching', '#e2b8ff', 1.6);
+  if (f === PF || t.f === PF) log(nameOf(t) + ' is now watching a soliloquy. Indefinitely.', 'rahul');
+  if (!F.rahul.watchQ) { F.rahul.watchQ = true; logQ('watch', 'rahul'); }
+  sfx('cast');
+  return true;
+}
+function castHype(f, x, z) {
+  if (blockedAt(x, z)) { const s = freeSpotNear(x, z, 2); x = s[0]; z = s[1]; }
+  for (let i = 0; i < 8; i++) {
+    const s = freeSpotNear(x, z, 1.5 + (i % 4));
+    const u = makeUnit('persuader', f, s[0], s[1]);
+    u.ax = u.x; u.az = u.z;
+  }
+  F[f].hype = 15;
+  boom(x, z, 5); sfx('hype');
+  if (f === PF || visAt(x, z) || PF !== 'rahul') log('Hype Train: eight Persuaders arrive. No one checked the schedule.', 'rahul');
+  return true;
+}
+function updHamlets(dt) {
+  for (let i = hamlets.length - 1; i >= 0; i--) {
+    const h = hamlets[i];
+    h.t -= dt;
+    h.sp.position.y = 7.2 + Math.sin(matchT * 2) * 0.25;
+    h.sp.visible = h.ring.visible = visAt(h.x, h.z);
+    if (h.owner === 'rahul') {
+      for (const e of ents) if (!e.dead && e.kind === 'u' && e.f !== 'rahul' && !e.def.hero && Math.hypot(e.x - h.x, e.z - h.z) <= h.r) e.stun = Math.max(e.stun, 0.3);
+    }
+    if (h.t <= 0) { scene.remove(h.sp); scene.remove(h.ring); h.sp.material.dispose(); hamlets.splice(i, 1); }
+  }
+}
+
+// ================================================================ creeps + phantoms
+function campName(c) {
+  const ns = c.z < -15 ? 'north' : c.z > 15 ? 'south' : '', ew = c.x < -15 ? 'west' : c.x > 15 ? 'east' : '';
+  return ns || ew ? 'the ' + ns + (ns && ew ? '-' : '') + ew + ' camp' : 'the center';
+}
+function spawnCamp(c, quiet) {
+  c.members = [];
+  for (let i = 0; i < c.n; i++) {
+    const a = (i / c.n) * TAU, x = c.x + Math.cos(a) * 2.6, z = c.z + Math.sin(a) * 2.6;
+    const u = makeUnit('creep', 'neutral', x, z);
+    const m = rint(c.m0, c.m1), pw = 1.6 - (m - 4) * 0.08;
+    u.months = m; u.cname = pick(CREEP_NAMES); u.maxHp = u.hp = Math.round(120 * pw); u.dmgK = pw; u.home = { x, z };
+    u.mesh.scale.setScalar(1.35 * (0.85 + pw * 0.2));
+    c.members.push(u);
+  }
+  if (!quiet) logT('campspawn', 20, 'A new open-weight model dropped at ' + campName(c) + '. It is ' + c.members[0].months + ' months behind the frontier. Benchmarks pending.', 'neutral');
+}
+function updCamps(dt) {
+  for (const c of camps) {
+    if (c.members.some((u) => !u.dead && u.f === 'neutral')) { c.timer = -1; continue; }
+    if (c.timer < 0) c.timer = 55;
+    c.timer -= dt;
+    if (c.timer <= 0) { c.timer = -1; spawnCamp(c, false); }
+  }
+}
+let phantomT = 12;
+const PHANTOM_LINES = ['Phantom Episode: %s was hallucinated. It had a very confident tooltip.', 'Phantom Episode: %s not found. The fog made it up.', 'Phantom Episode: that sighting of %s cited a paper that does not exist.', 'Phantom Episode: %s was never there. Neither was the benchmark.'];
+function spawnPhantom() {
+  for (let tries = 0; tries < 16; tries++) {
+    const g = groundAt(rnd(W * 0.08, W * 0.92), rnd(H * 0.12, H * 0.7));
+    if (!g || Math.abs(g.x) > HALF - 6 || Math.abs(g.z) > HALF - 6) continue;
+    if (visAt(g.x, g.z) || blockedAt(g.x, g.z)) continue;
+    let near = false;
+    for (let a = 0; a < 6 && !near; a++) if (visAt(g.x + Math.cos(a) * 5, g.z + Math.sin(a) * 5)) near = true;
+    if (near) continue;
+    const f = pick(FACS.filter((k) => k !== PF)), type = pick(TRAIN[f].slice(1));
+    const grp = new THREE.Group();
+    MESH[type](grp, M[f]);
+    grp.traverse((o) => { if (o.isMesh) o.material = PHM[f]; });
+    grp.position.set(g.x, 0, g.z);
+    scene.add(grp);
+    phantoms.push({ m: grp, x: g.x, z: g.z, f, type, t: 0, dir: rnd(TAU), spd: rnd(1, 3) });
+    return;
+  }
+}
+function updPhantoms(dt) {
+  if (revealAll) return;
+  phantomT -= dt;
+  if (phantomT <= 0) { phantomT = rnd(7, 13); if (phantoms.length < 5) spawnPhantom(); }
+  for (let i = phantoms.length - 1; i >= 0; i--) {
+    const p = phantoms[i];
+    p.t += dt;
+    const nx = p.x + Math.sin(p.dir) * p.spd * dt, nz = p.z + Math.cos(p.dir) * p.spd * dt;
+    if (!blockedAt(nx, nz)) { p.x = nx; p.z = nz; } else p.dir += Math.PI * 0.7;
+    p.m.position.set(p.x, 0.15 + 0.15 * Math.sin(p.t * 3), p.z); p.m.rotation.y = p.dir;
+    p.m.visible = Math.random() > 0.04;
+    if (visAt(p.x, p.z) || p.t > 30) {
+      scene.remove(p.m);
+      if (p.t <= 30) { boom(p.x, p.z, 1.4); logT('phantom', 7, pick(PHANTOM_LINES).replace('%s', FMETA[p.f].name + "'s " + U[p.type].name), 'warn'); }
+      phantoms.splice(i, 1);
+    }
+  }
+}
+
+// ================================================================ clock + scoring
+function updClock(dt) {
+  if (!clock.burst) {
+    clock.sec -= BASE_RATE * dt;
+    for (const th of [60, 30, 10]) {
+      if (clock.sec <= th && !clock.warned[th]) {
+        clock.warned[th] = true;
+        log(th === 60 ? 'One minute to midnight. The bubble is "fine".' : th === 30 ? 'Thirty seconds to midnight. Analysts are calling it a healthy correction in advance.' : 'Ten seconds to midnight. Someone is still raising a seed round.', 'warn');
+        sfx('tick2');
+      }
+    }
+    if (clock.sec <= 0) burst();
+    else if (clock.sec < 15) { const s = Math.ceil(clock.sec); if (s !== clock.lastTick) { clock.lastTick = s; sfx('tick'); } }
+  } else {
+    clock.corr -= dt;
+    if (clock.corr <= 0) endByValue();
+  }
+}
+function burst() {
+  clock.sec = 0; clock.burst = true; clock.corr = CORRECTION;
+  log('Midnight. The AI bubble has burst. Token income collapses for everyone.', 'warn');
+  log('Shimin is hit hardest: two acres in Washington are now just two acres in Washington.', 'shimin');
+  log("Dan's hardware is paid for, so his income only halves.", 'dan');
+  flash(); sfx('burst');
+  toast('Midnight. The bubble burst. ' + CORRECTION + ' seconds of correction, then the auditors count Delivered Value.');
+}
+function dvOf(f) {
+  let v = 0;
+  for (const e of ents) {
+    if (e.dead || e.f !== f) continue;
+    if (e.kind === 'u') v += e.def.dv;
+    else if (e.built) v += e.def.dv + (e.level - 1) * 300;
+  }
+  return v + (F[f] ? F[f].creeps * 40 : 0);
+}
+function endByValue() {
+  const s = FACS.map((k) => ({ k, v: dvOf(k) })).sort((a, b) => b.v - a.v);
+  endGame(s[0].k === PF, 'value', s[0].k);
+}
+function endGame(win, reason, winner) {
+  if (state === 'over' || state === 'menu') return;
+  state = 'over'; revealAll = true; mode = null; updateFog();
+  const rows = FACS.map((k) => ({ k, v: dvOf(k) })).sort((a, b) => b.v - a.v);
+  const wn = FMETA[winner || rows[0].k].name;
+  const lines = {
+    'true.hqs': 'Both enemy HQs are offline. You delivered value. Nobody can define value, so this is unassailable.',
+    'true.value': 'Midnight came and the bubble burst. You still had the most Delivered Value, which is the only metric we made up today.',
+    'false.hq': 'Your HQ went offline. The podcast continues without you. It has before.',
+    'false.value': 'Midnight came and the bubble burst. ' + wn + ' delivered more value. Allegedly.'
+  };
+  $('endt').textContent = win ? 'Delivered.' : 'Deprecated.';
+  $('endt').style.color = win ? '#5ee08a' : '#ff5a5a';
+  $('ends').textContent = (lines[win + '.' + reason] || '') + ' Match length ' + fmtT(matchT) + ', difficulty ' + diff.name + '.';
+  $('endtab').innerHTML = '<tr><th>Host</th><th>Delivered Value</th><th>Creeps cleared</th><th>HQ</th></tr>' + rows.map((r) =>
+    '<tr><td style="color:' + FMETA[r.k].css + '">' + FMETA[r.k].name + (r.k === PF ? ' (you)' : '') + '</td><td>' + fmtN(r.v) + '</td><td>' + F[r.k].creeps + '</td><td>' + (!F[r.k].arrived ? 'never showed' : F[r.k].alive ? 'online' : 'offline') + '</td></tr>').join('');
+  $('endq').innerHTML = win ? qhtml('maze') : qhtml('opus');
+  $('end').hidden = false;
+  sfx(win ? 'win' : 'lose');
+}
+
+// ================================================================ AI
+const AI_COMP = { shimin: [['reviewer', 5], ['opus', 3], ['scout', 1]], dan: [['quant', 6], ['beastly', 3], ['haiku', 1]], rahul: [['persuader', 5], ['hottake', 4], ['grandmaster', 3]] };
+function aiBuild(f, type) {
+  const d = BD[type], hq = F[f].hq;
+  if (!hq || F[f].tokens < d.cost) return false;
+  const a0 = Math.atan2(-hq.z, -hq.x);
+  for (let i = 0; i < 40; i++) {
+    const a = a0 + (Math.random() - 0.5) * 3, r = 11 + Math.random() * 14;
+    const x = snap(hq.x + Math.cos(a) * r), z = snap(hq.z + Math.sin(a) * r);
+    if (canPlace(f, type, x, z)) { placeBuilding(f, type, x, z); return true; }
+  }
+  return false;
+}
+function pickTarget(f) {
+  const cands = FACS.filter((k) => k !== f && F[k].arrived && F[k].alive && F[k].hq);
+  if (!cands.length) return null;
+  if (cands.length === 1) return F[cands[0]].hq;
+  const pl = cands.includes(PF) && Math.random() < diff.focus;
+  if (pl) return F[PF].hq;
+  return F[pick(cands.filter((k) => k !== PF).concat(cands.includes(PF) ? [] : cands))].hq;
+}
+function groupOrder(list, x, z, kind) {
+  const offs = formation(list.length);
+  list.forEach((u, i) => {
+    let gx = x + offs[i][0], gz = z + offs[i][1];
+    if (blockedAt(gx, gz)) { gx = x; gz = z; }
+    u.state = u.def.worker || u.def.haiku ? 'move' : kind;
+    u.gx = gx; u.gz = gz; u.target = null; u.resume = 'idle'; resetNav(u);
+  });
+}
+function formation(n) {
+  const out = [[0, 0]];
+  let ring = 1;
+  while (out.length < n) {
+    const cnt = ring * 6;
+    for (let i = 0; i < cnt && out.length < n; i++) { const a = (i / cnt) * TAU; out.push([Math.cos(a) * ring * 2.3, Math.sin(a) * ring * 2.3]); }
+    ring++;
+  }
+  return out;
+}
+function findCluster(f, radius, minCount) {
+  const mine = ents.filter((e) => !e.dead && e.f === f && (e.kind === 'u' || e.def.hq));
+  const foes = ents.filter((e) => !e.dead && e.kind === 'u' && e.f !== f && e.f !== 'neutral' && e.f !== undefined);
+  let best = null, bn = 0;
+  for (const a of foes) {
+    let near = false;
+    for (const m of mine) if (Math.abs(m.x - a.x) < 30 && Math.abs(m.z - a.z) < 30) { near = true; break; }
+    if (!near) continue;
+    let n = 0;
+    for (const b of foes) if (Math.hypot(a.x - b.x, a.z - b.z) <= radius) n++;
+    if (n > bn) { bn = n; best = a; }
+  }
+  return bn >= minCount ? { x: best.x, z: best.z, n: bn } : null;
+}
+function ownCount(f, p, r) { let n = 0; for (const e of ents) if (!e.dead && e.kind === 'u' && e.f === f && Math.hypot(e.x - p.x, e.z - p.z) <= r) n++; return n; }
+function aiAbilities(f, army) {
+  const F_ = F[f];
+  if (!F_.alive || Math.random() > diff.abil || matchT < 25) return;
+  const A = AB[f], can = (k) => F_.cd[k] <= 0 && F_.tokens >= A[k].cost;
+  if (f === 'shimin') {
+    if (can('t')) { const c = findCluster(f, 20, 7); if (c && ownCount(f, c, 49) <= c.n / 2) { cast(f, 't', c.x, c.z); return; } }
+    if (can('q')) { const c = findCluster(f, 13, 3); if (c) { cast(f, 'q', c.x, c.z); return; } }
+    if (can('e')) { const c = findCluster(f, 12, 3); if (c) { cast(f, 'e', c.x, c.z); return; } }
+  } else if (f === 'dan') {
+    if (can('q')) {
+      let best = null, bd = 45;
+      for (const e of ents) {
+        if (e.dead || e.f !== 'neutral' || e.kind !== 'u' || e.checkT > 0) continue;
+        for (const u of army) { const d = Math.hypot(u.x - e.x, u.z - e.z); if (d < bd) { bd = d; best = e; } }
+      }
+      if (best) { cast(f, 'q', best.x, best.z, best); return; }
+    }
+    if (can('e')) { const c = findCluster(f, 15, 3); if (c && enemyNear('dan', c.x, c.z, 20) && enemyNear('dan', c.x, c.z, 20).f !== 'shimin') { cast(f, 'e'); return; } }
+    if (can('t') && !clock.burst) {
+      const mine = dvOf(f), top = Math.max(...FACS.filter((k) => k !== f).map(dvOf));
+      if (matchT > 240 && mine >= top * 1.1 && Math.random() < 0.4) { cast(f, 't'); return; }
+    }
+  } else if (f === 'rahul') {
+    if (can('e')) {
+      const h = hamlets.find((hh) => hh.owner !== f && army.some((u) => Math.hypot(u.x - hh.x, u.z - hh.z) < hh.r + 4));
+      if (h) { cast(f, 'e', h.x, h.z, null); return; }
+      let best = null, bv = 0;
+      for (const e of ents) {
+        if (e.dead || e.kind !== 'u' || e.f === f || e.f === 'neutral' || e.watch > 0 || e.def.worker) continue;
+        if (e.def.dv <= bv) continue;
+        if (army.some((u) => Math.hypot(u.x - e.x, u.z - e.z) < 18)) { bv = e.def.dv; best = e; }
+      }
+      if (best && bv >= 150) { cast(f, 'e', best.x, best.z, best); return; }
+    }
+    if (can('q')) {
+      const hurt = army.filter((u) => u.hp < u.maxHp * 0.6);
+      if (hurt.length >= 3) { const h0 = hurt[0]; if (hurt.filter((u) => Math.hypot(u.x - h0.x, u.z - h0.z) < 14).length >= 3) { cast(f, 'q', h0.x, h0.z); return; } }
+    }
+    if (can('t')) { const fighter = army.find((u) => u.state === 'attack' && u.target && u.target.f !== 'neutral'); if (fighter) { cast(f, 't', fighter.x, fighter.z); return; } }
+  }
+}
+const WAVE_LINES = {
+  shimin: 'Shimin is pushing with max thinking. Expect latency, then damage.',
+  dan: "Dan is sending a wave. Each PR is small. There are a lot of PRs.",
+  rahul: "Rahul's swarm is inbound. They just want to talk."
+};
+function aiTick(f) {
+  const F_ = F[f];
+  if (!F_.arrived) return;
+  const t = matchT, age = t - F_.arrivedAt;
+  const army = [], workers = [];
+  for (const e of ents) if (!e.dead && e.kind === 'u' && e.f === f) (e.def.worker ? workers : army).push(e);
+  const hq = F_.hq;
+  if (hq && F_.alive) {
+    const wtype = WORKER[f], wt = { shimin: 7, dan: 10, rahul: 9 }[f];
+    const qW = hq.queue.filter((q) => q === wtype).length;
+    if (workers.length + qW < wt && hq.queue.length < 2 && !(f === 'dan' && F_.heat > 70)) train(f, wtype);
+    if (f === 'shimin') {
+      if (!hasAny(f, 'harness') && age > 30) aiBuild(f, 'harness');
+      else if (hq.level < 3 && !hq.queue.includes('up') && ((hq.level === 1 && age > 110) || (hq.level === 2 && age > 250)) && F_.tokens >= UPG[hq.level].cost + 60) upgradeHQ(f);
+    } else if (f === 'dan') {
+      const n = ents.filter((e) => !e.dead && e.f === f && e.type === 'tetris').length;
+      if ((age > 120 && n < 1) || (age > 260 && n < 2) || (F_.tokens > 900 && n < 3)) aiBuild(f, 'tetris');
+    } else if (!hasAny(f, 'greenroom') && age > 20) aiBuild(f, 'greenroom');
+    let pq = 0;
+    for (const e of ents) if (!e.dead && e.kind === 'b' && e.f === f) pq += e.queue.filter((q) => q !== wtype && q !== 'up').length;
+    const maxQ = f === 'dan' ? (F_.heat < 45 ? 3 : F_.heat < 75 ? 1 : 0) : F_.tokens > 900 ? 3 : 2;
+    if (pq < maxQ && age > 12) {
+      const opts = AI_COMP[f].filter(([ty]) => {
+        const d = U[ty];
+        if (d.req && !hasBuilt(f, d.req)) return false;
+        if (d.from === 'harness' && !hasBuilt(f, 'harness')) return false;
+        if (d.hero && heroTaken(f)) return false;
+        if (ty === 'scout' && army.some((u) => u.type === 'scout')) return false;
+        return true;
+      });
+      if (opts.length) {
+        const tot = opts.reduce((s, o) => s + o[1], 0);
+        let r = Math.random() * tot, ch = opts[0][0];
+        for (const o of opts) { r -= o[1]; if (r <= 0) { ch = o[0]; break; } }
+        if (F_.tokens >= costOf(f, ch)) train(f, ch);
+      }
+    }
+  }
+  for (const u of army) if (u.ctx < 0.16 && u.state !== 'compact' && !u.atBase && !enemyNear(f, u.x, u.z, 9)) { u.state = 'compact'; u.target = null; resetNav(u); }
+  const home = hq || FMETA[f].base;
+  const threat = hq ? enemyNear(f, hq.x, hq.z, 30) : null;
+  if (threat) {
+    for (const u of army) if ((u.state === 'idle' || u.state === 'move') && Math.hypot(u.x - hq.x, u.z - hq.z) < 70) { u.state = 'amove'; u.gx = threat.x; u.gz = threat.z; u.resume = 'idle'; resetNav(u); }
+    return aiAbilities(f, army);
+  }
+  const ready = army.filter((u) => u.state === 'idle' && u.ctx > 0.45 && Math.hypot(u.x - home.x, u.z - home.z) < 45);
+  const fighters = ready.filter((u) => !u.def.haiku);
+  const waveTime = f === 'rahul' && F_.ai ? Math.max(diff.firstWave, RAHUL_ETA + 45) : diff.firstWave;
+  if (t > waveTime && (fighters.length >= F_.wave || (fighters.length >= 3 && t - F_.lastPush > 110))) {
+    const tgt = pickTarget(f);
+    if (tgt) {
+      groupOrder(ready, tgt.x, tgt.z, 'amove');
+      F_.wave = Math.min(18, F_.wave + 2); F_.lastPush = t;
+      if (tgt.f === PF) { log(WAVE_LINES[f], f); sfx('tick2'); }
+      if (f === 'dan' && ready.some((u) => u.def.haiku) && Math.random() < 0.5) { const h = pick(HAIKUS); log("Dan's Haiku, marching: " + h.join(' / '), 'dan'); }
+    }
+  } else if (age > 45 && t - F_.lastCreep > 40 && fighters.length >= 4) {
+    let camp = null, cd = 1e9;
+    for (const c of camps) {
+      if (!c.members.some((u) => !u.dead && u.f === 'neutral')) continue;
+      const d = Math.hypot(c.x - home.x, c.z - home.z);
+      if (d < cd) { cd = d; camp = c; }
+    }
+    if (camp && cd < 110) { groupOrder(fighters.slice(0, 4), camp.x, camp.z, 'amove'); F_.lastCreep = t; }
+  }
+  aiAbilities(f, army);
+}
+
+// ================================================================ factions + match
+function updFactions(dt) {
+  for (const k of FACS) {
+    const F_ = F[k];
+    if (!F_.arrived) continue;
+    for (const c of ['q', 'e', 't']) if (F_.cd[c] > 0) F_.cd[c] = Math.max(0, F_.cd[c] - dt);
+    if (F_.stall > 0) { F_.stall -= dt; if (F_.stall <= 0 && k === PF) log('Usage limit reset. Production resumes. Spend those tokens.', 'shimin'); }
+    if (F_.hype > 0) F_.hype -= dt;
+    if (F_.rantBuff > 0) F_.rantBuff -= dt;
+    if (k === 'shimin' && !F_.usageArmed && F_.tokens < FMETA.shimin.cap * 0.85) F_.usageArmed = true;
+    if (k === 'dan') {
+      const ql = F_.hq ? F_.hq.queue.length : 0;
+      F_.heat = clamp(F_.heat + (ql >= 4 ? 8 : ql >= 3 ? 2 : -10) * dt, 0, 120);
+      if (!F_.hot && F_.heat >= 100) { F_.hot = true; if (PF === 'dan') { log('The Framework Desktop is thermal throttling. Production at 35% until it cools down.', 'warn'); toast('Thermal throttling. Queue less.'); } }
+      if (F_.hot && F_.heat < 30) { F_.hot = false; if (PF === 'dan') log('The Framework Desktop has cooled down. It sounds like a laptop again.', 'dan'); }
+      if (PF === 'dan' && F_.cd.e <= 0 && !F_.rantReadyLogged) { F_.rantReadyLogged = true; log("Dan's Rant is fully charged. Press E.", 'dan'); logQ('rant', 'dan'); }
+    }
+  }
+}
+function setupBase(k) {
+  const b = FMETA[k].base, F_ = F[k];
+  const hq = makeBuilding(FMETA[k].hq, k, b.x, b.z, true);
+  hq.seen = k === PF;
+  F_.hq = hq; F_.arrivedAt = matchT; F_.alive = true;
+  hq.rally = defaultRally(hq);
+  const n = k === 'dan' ? 5 : k === 'rahul' && k === PF ? 5 : 4;
+  for (let i = 0; i < n; i++) {
+    const s = freeSpotNear(hq.x, hq.z, hq.r + 2.2);
+    const u = makeUnit(WORKER[k], k, s[0], s[1]);
+    u.state = 'gather'; u.vein = nearestVein(u);
+  }
+  for (const c of ['q', 'e', 't']) F_.cd[c] = AB[k][c].init || 0;
+}
+function rahulArrives() {
+  const F_ = F.rahul;
+  F_.arrived = true; F_.tokens = 400;
+  setupBase('rahul');
+  for (let i = 0; i < 4; i++) { const s = freeSpotNear(F_.hq.x, F_.hq.z, F_.hq.r + 3); const u = makeUnit('persuader', 'rahul', s[0], s[1]); u.ax = u.x; u.az = u.z; }
+  log('Rahul is covering for Dan.', 'rahul');
+  logQ('covering', 'dan');
+  sfx('arrive');
+}
+let fogT = 0, aiT = 0.5, scoutT = 30, jetlagDone = false;
+function simStep(dt) {
+  matchT += dt;
+  flowBudget = 8;
+  for (let i = timers.length - 1; i >= 0; i--) if (matchT >= timers[i].t) { const fn = timers[i].fn; timers.splice(i, 1); fn(); if (state !== 'play') return; }
+  if (!F.rahul.arrived && matchT >= RAHUL_ETA) rahulArrives();
+  if (!jetlagDone && matchT >= JETLAG) { jetlagDone = true; log("Dan's units have adjusted to the time zone. Full speed.", 'dan'); }
+  updFactions(dt);
+  for (const e of ents) if (!e.dead && e.kind === 'b') updBuilding(e, dt);
+  for (const e of ents) if (!e.dead && e.kind === 'u') updUnit(e, dt);
+  separate();
+  updProjs(dt);
+  for (let i = effects.length - 1; i >= 0; i--) if (!effects[i].update(dt)) effects.splice(i, 1);
+  updHamlets(dt); updParticles(dt); updCamps(dt); updPhantoms(dt);
+  fogT -= dt; if (fogT <= 0) { fogT = 0.12; updateFog(); }
+  aiT -= dt;
+  if (aiT <= 0) { aiT = 1; for (const k of FACS) if (F[k].ai) aiTick(k); }
+  scoutT -= dt;
+  if (scoutT <= 0) {
+    scoutT = rnd(28, 42);
+    if (PF === 'shimin' && ents.some((e) => !e.dead && e.f === PF && e.type === 'scout') && Math.random() < 0.6) {
+      if (Math.random() < 0.5) { log('Playwright Scout reports:', 'shimin'); logQ('colors', 'shimin'); }
+      else log('Playwright Scout verified the base actually works. 11 passed, 1 flaky, 0 explained.', 'shimin');
+    }
+  }
+  if (anyDead) { anyDead = false; ents = ents.filter((e) => !e.dead); }
+  updClock(dt);
+}
+function clearWorld() {
+  for (const e of ents) scene.remove(e.mesh);
+  for (const v of veins) scene.remove(v.mesh);
+  for (const p of phantoms) scene.remove(p.m);
+  for (const h of hamlets) { scene.remove(h.sp); scene.remove(h.ring); }
+  for (const p of particles) scene.remove(p.m);
+  for (const p of projs) { p.mesh.visible = false; projPool.push(p); }
+  for (const e of effects) if (e.cleanup) e.cleanup();
+  ents = []; veins = []; phantoms = []; hamlets = []; particles = []; projs = []; effects = []; floats = []; ringLabels = []; timers = []; camps = [];
+  for (let i = 0; i < grid.length; i++) if (grid[i] === 2) grid[i] = 0;
+  flowCache.clear(); sel = []; mode = null; anyDead = false;
+  for (const k in logTimes) delete logTimes[k];
+}
+
+// ================================================================ camera + picking
+const camS = { x: 0, z: 0, dist: 150, pitch: 0.96 };
+const keys = new Set();
+const mouse = { x: -1, y: -1, inside: false, down: false, sx: 0, sy: 0, drag: false };
+function updCam(dt) {
+  if (state === 'menu') {
+    const t = performance.now() / 1000;
+    camS.x = Math.sin(t * 0.06) * 34; camS.z = 8 + Math.cos(t * 0.05) * 22; camS.dist = 150;
+  } else {
+    let mx = 0, mz = 0;
+    if (keys.has('w') || keys.has('arrowup')) mz -= 1;
+    if (keys.has('s') || keys.has('arrowdown')) mz += 1;
+    if (keys.has('a') || keys.has('arrowleft')) mx -= 1;
+    if (keys.has('d') || keys.has('arrowright')) mx += 1;
+    if (mouse.inside && state === 'play' && !helpOpen) {
+      if (mouse.x >= 0 && mouse.x < 8) mx -= 1; else if (mouse.x > W - 8) mx += 1;
+      if (mouse.y >= 0 && mouse.y < 8) mz -= 1; else if (mouse.y > H - 8) mz += 1;
+    }
+    const sp = camS.dist * 1.1;
+    camS.x = clamp(camS.x + clamp(mx, -1, 1) * sp * dt, -HALF + 8, HALF - 8);
+    camS.z = clamp(camS.z + clamp(mz, -1, 1) * sp * dt, -HALF + 8, HALF + 4);
+  }
+  cam.position.set(camS.x, camS.dist * Math.sin(camS.pitch), camS.z + camS.dist * Math.cos(camS.pitch));
+  cam.lookAt(camS.x, 0, camS.z);
+  cam.updateMatrixWorld();
+}
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), tv = new THREE.Vector3(), sp2 = { x: 0, y: 0 };
+function groundAt(sx, sy) {
+  ndc.set((sx / W) * 2 - 1, -(sy / H) * 2 + 1);
+  ray.setFromCamera(ndc, cam);
+  const o = ray.ray.origin, d = ray.ray.direction;
+  if (Math.abs(d.y) < 1e-6) return null;
+  const t = -o.y / d.y;
+  if (t < 0) return null;
+  return { x: o.x + d.x * t, z: o.z + d.z * t };
+}
+function toScreen(x, y, z) {
+  tv.set(x, y, z).project(cam);
+  if (tv.z > 1 || tv.z < -1) return null;
+  sp2.x = ((tv.x + 1) / 2) * W; sp2.y = ((1 - tv.y) / 2) * H;
+  return sp2;
+}
+function pickAt(sx, sy, filter) {
+  let best = null, bd = 1e9;
+  const k = H / (2 * Math.tan((cam.fov * Math.PI) / 360));
+  for (const e of ents) {
+    if (e.dead || e.kind !== 'u' || !e.mesh.visible) continue;
+    if (filter && !filter(e)) continue;
+    const p = toScreen(e.x, e.def.h * 0.65, e.z);
+    if (!p) continue;
+    const dc = Math.hypot(cam.position.x - e.x, cam.position.y, cam.position.z - e.z) || 1;
+    const rad = Math.max(13, ((e.r + 0.8) * k) / dc);
+    const d = Math.hypot(p.x - sx, p.y - sy);
+    if (d < rad && d < bd) { bd = d; best = e; }
+  }
+  if (best) return best;
+  const g = groundAt(sx, sy);
+  if (g) for (const e of ents) {
+    if (e.dead || e.kind !== 'b' || !e.mesh.visible) continue;
+    if (filter && !filter(e)) continue;
+    if (Math.abs(g.x - e.x) <= e.r + 0.6 && Math.abs(g.z - e.z) <= e.r + 0.6) return e;
+  }
+  return null;
+}
+function veinAt(x, z) { for (const v of veins) if (v.amount > 0 && Math.hypot(v.x - x, v.z - z) < v.r + 2) return v; return null; }
+
+// ================================================================ selection + orders
+let infoDirty = true, hover = null, lastClick = { t: 0, id: -1 };
+function setSel(list) {
+  for (const e of sel) e.sel = false;
+  sel = list.filter((e) => !e.dead).slice(0, 80);
+  for (const e of sel) e.sel = true;
+  infoDirty = true;
+}
+const myUnits = () => sel.filter((e) => e.kind === 'u' && !e.dead && e.f === PF);
+function leftClick(sx, sy, shift) {
+  if (mode) { applyMode(sx, sy, shift); return; }
+  const e = pickAt(sx, sy);
+  if (!e) { if (!shift) setSel([]); return; }
+  if (e.f !== PF) { setSel([e]); return; }
+  const now = performance.now();
+  if (!shift && e.kind === 'u' && lastClick.id === e.id && now - lastClick.t < 380) {
+    setSel(ents.filter((u) => !u.dead && u.kind === 'u' && u.f === PF && u.type === e.type && (() => { const p = toScreen(u.x, 1, u.z); return p && p.x > 0 && p.x < W && p.y > 0 && p.y < H; })()));
+  } else if (shift) {
+    if (e.sel) setSel(sel.filter((s) => s !== e)); else setSel(sel.filter((s) => s.f === PF).concat([e]));
+  } else setSel([e]);
+  lastClick = { t: now, id: e.id };
+  sfx('sel');
+}
+function boxSelect(x0, y0, x1, y1, shift) {
+  const lx = Math.min(x0, x1), hx = Math.max(x0, x1), ly = Math.min(y0, y1), hy = Math.max(y0, y1);
+  let list = ents.filter((e) => {
+    if (e.dead || e.kind !== 'u' || e.f !== PF) return false;
+    const p = toScreen(e.x, e.def.h * 0.5, e.z);
+    return p && p.x >= lx && p.x <= hx && p.y >= ly && p.y <= hy;
+  });
+  if (list.some((u) => !u.def.worker)) list = list.filter((u) => !u.def.worker);
+  if (shift) list = sel.filter((e) => e.f === PF && e.kind === 'u').concat(list.filter((u) => !u.sel));
+  setSel(list);
+  if (list.length) sfx('sel');
+}
+function orderAttack(list, t) {
+  const hk = list.filter((u) => u.def.haiku);
+  if (hk.length) writeHaiku(hk.length);
+  for (const u of list) {
+    if (u.def.haiku) continue;
+    resetNav(u); u.watch = 0;
+    if (u.def.worker || !(u.def.dmg > 0 || u.def.convert)) { u.state = 'move'; u.gx = t.x; u.gz = t.z; continue; }
+    u.state = 'attack'; u.target = t; u.resume = 'idle';
+  }
+}
+function writeHaiku(n) {
+  const h = pick(HAIKUS);
+  log('Haiku: ' + h.join(' / ') + (n > 1 ? '   (x' + n + ' copies)' : ''), 'dan');
+  if (!F[PF].haikuQ) { F[PF].haikuQ = true; logQ('haiku', 'dan'); }
+  sfx('haiku');
+}
+function rightClick(sx, sy, shift) {
+  if (mode) { mode = null; return; }
+  const g = groundAt(sx, sy);
+  if (!g) return;
+  const list = myUnits();
+  if (!list.length) {
+    const b = sel.find((e) => e.kind === 'b' && e.f === PF);
+    if (b) { b.rally = { x: g.x, z: g.z }; marker(g.x, g.z, false); toast('Rally point set for ' + b.def.name + '.'); }
+    return;
+  }
+  const tgt = pickAt(sx, sy, (e) => e.f !== PF);
+  if (tgt && !shift) { orderAttack(list, tgt); marker(tgt.x, tgt.z, true); sfx('cmd'); return; }
+  const v = veinAt(g.x, g.z);
+  if (v && list.some((u) => u.def.worker)) {
+    for (const u of list) if (u.def.worker) { u.state = 'gather'; u.vein = v; u.sub = u.carry > 0 ? 'ret' : 'go'; resetNav(u); }
+    const rest = list.filter((u) => !u.def.worker);
+    if (rest.length) groupOrder(rest, g.x, g.z, 'amove');
+    marker(v.x, v.z, false); sfx('cmd'); return;
+  }
+  groupOrder(list, g.x, g.z, shift ? 'move' : 'amove');
+  marker(g.x, g.z, !shift);
+  sfx('cmd');
+}
+function compactSel() {
+  const list = myUnits().filter((u) => !u.def.worker);
+  if (!list.length) return fail('Select some units to compact.');
+  for (const u of list) { u.state = 'compact'; u.target = null; resetNav(u); }
+  log('Compaction: ' + list.length + ' unit' + (list.length === 1 ? '' : 's') + ' heading home to forget things.', PF);
+  sfx('cmd');
+}
+function selectArmy() {
+  const list = ents.filter((e) => !e.dead && e.kind === 'u' && e.f === PF && !e.def.worker);
+  if (!list.length) return fail('You have no army. You have a podcast.');
+  setSel(list); sfx('sel');
+}
+function camToBase() { const hq = F[PF].hq; if (hq) { camS.x = hq.x; camS.z = hq.z; } }
+function applyMode(sx, sy, shift) {
+  const g = groundAt(sx, sy);
+  if (!g) return;
+  if (mode.kind === 'build') {
+    const type = mode.type, r = placeBuilding(PF, type, g.x, g.z);
+    if (typeof r === 'string') return fail(r);
+    sfx('build');
+    log('Construction started: ' + BD[type].name + '.', PF);
+    if (type === 'tetris' && !F[PF].tetQ) { F[PF].tetQ = true; logQ('tetris', 'dan'); }
+    if (!shift) mode = null;
+    return;
+  }
+  const key = mode.key, a = AB[PF][key];
+  let ent = null;
+  if (a.target === 'creep') {
+    ent = pickAt(sx, sy, (e) => e.kind === 'u' && e.f === 'neutral');
+    if (!ent) return fail('Target a neutral open-weight model.');
+  } else if (a.target === 'enemy') {
+    ent = pickAt(sx, sy, (e) => e.kind === 'u' && e.f !== PF);
+  } else if (!visAt(g.x, g.z)) return fail("Can't cast into the fog. That's how you get Phantom Episodes.");
+  const r = cast(PF, key, ent ? ent.x : g.x, ent ? ent.z : g.z, ent);
+  if (r !== true) return fail(r);
+  mode = null;
+}
+
+// ================================================================ command card
+let cmdBtns = [];
+const HK_LABEL = { ' ': 'SPC' };
+const SHORT = { qwen: 'Qwen Miner', quant: 'Q4 Quant x2', drone: 'Drone', persuader: 'Persuader x2', shimint: 'Fourth-Order Effects', dant: '2 Min to Midnight', rahule: "I'd Watch It All Day" };
+function buildCmd() {
+  const el = $('cmd');
+  el.innerHTML = '';
+  cmdBtns = [];
+  const fc = FMETA[PF].css;
+  const add = (b) => {
+    const d = document.createElement('button');
+    d.type = 'button'; d.className = 'btn'; d.style.setProperty('--fc', fc);
+    d.innerHTML = '<span class="nm">' + esc(b.label) + '</span><span class="hk">' + esc(HK_LABEL[b.hk] || b.hk.toUpperCase()) + '</span><span class="cost"></span><span class="cdv"></span><span class="cdt"></span>';
+    d.addEventListener('click', (ev) => { ev.preventDefault(); initAudio(); activate(b); d.blur(); });
+    d.addEventListener('mouseenter', () => showTip(b));
+    d.addEventListener('mouseleave', hideTip);
+    el.appendChild(d);
+    b.el = d; b.costEl = d.querySelector('.cost'); b.cdv = d.querySelector('.cdv'); b.cdt = d.querySelector('.cdt'); b.last = '';
+    cmdBtns.push(b);
+  };
+  TRAIN[PF].forEach((ty, i) => add({ kind: 'train', id: ty, hk: String(i + 1), label: SHORT[ty] || U[ty].name }));
+  for (const [hk, id] of BUILD[PF]) add({ kind: 'build', id, hk, label: id === 'up' ? 'Develop the Acres' : BD[id].name });
+  add({ kind: 'cmd', id: 'compact', hk: 'g', label: 'Compaction' });
+  add({ kind: 'cmd', id: 'army', hk: ' ', label: 'Select army' });
+  if (BUILD[PF].length < 2) add({ kind: 'cmd', id: 'base', hk: 'b', label: 'Camera to base' });
+  for (const k of ['q', 'e', 't']) add({ kind: 'ability', id: k, hk: k, label: SHORT[PF + k] || AB[PF][k].name });
+  add({ kind: 'cmd', id: 'help', hk: 'h', label: 'Help' });
+}
+function activate(b) {
+  if (b.id === 'help') { toggleHelp(); return; }
+  if (state !== 'play' || paused || helpOpen) return;
+  if (b.kind === 'train') { const r = train(PF, b.id); if (r === true) sfx('cmd'); else fail(r); }
+  else if (b.kind === 'build') {
+    if (b.id === 'up') {
+      const lvl = F[PF].hq ? F[PF].hq.level : 0, r = upgradeHQ(PF);
+      if (r === true) { sfx('cmd'); log('Developing: ' + UPG[lvl].name + '.', 'shimin'); if (!F[PF].acreQ) { F[PF].acreQ = true; logQ('acres', 'shimin'); } }
+      else fail(r);
+    } else {
+      if (F[PF].tokens < BD[b.id].cost) return fail('Not enough tokens.');
+      mode = { kind: 'build', type: b.id }; sfx('cmd');
+    }
+  } else if (b.kind === 'ability') {
+    const r = canCast(PF, b.id);
+    if (r !== true) return fail(r);
+    if (AB[PF][b.id].target === 'none') { const r2 = cast(PF, b.id); if (r2 !== true) fail(r2); }
+    else { mode = { kind: 'cast', key: b.id }; sfx('cmd'); }
+  } else if (b.id === 'compact') compactSel();
+  else if (b.id === 'army') selectArmy();
+  else if (b.id === 'base') camToBase();
+}
+function btnState(b) {
+  const F_ = F[PF];
+  let cost = '', off = false, frac = 0, txt = '';
+  if (b.kind === 'train') {
+    const d = U[b.id];
+    cost = String(costOf(PF, b.id));
+    off = F_.tokens < costOf(PF, b.id) || (d.req && !hasBuilt(PF, d.req)) || (d.from === 'harness' && !hasBuilt(PF, 'harness')) || (d.hero && heroTaken(PF)) || !F_.alive;
+  } else if (b.kind === 'build') {
+    if (b.id === 'up') {
+      const hq = F_.hq;
+      if (!hq || hq.level >= 3) { cost = 'MAX'; off = true; }
+      else { cost = String(UPG[hq.level].cost); off = F_.tokens < UPG[hq.level].cost || hq.queue.includes('up'); if (hq.queue.includes('up')) txt = 'busy'; }
+    } else { cost = String(BD[b.id].cost); off = F_.tokens < BD[b.id].cost || !F_.alive; }
+  } else if (b.kind === 'ability') {
+    const a = AB[PF][b.id], c = F_.cd[b.id];
+    cost = a.cost ? String(a.cost) : '';
+    off = F_.tokens < a.cost || c > 0 || !F_.alive;
+    if (c > 0) { frac = c / Math.max(a.cd, a.init || 0); txt = a.rant ? 'day ' + rantDays(F_) : Math.ceil(c) + 's'; }
+  }
+  const armed = !!mode && ((mode.kind === 'cast' && b.kind === 'ability' && mode.key === b.id) || (mode.kind === 'build' && b.kind === 'build' && mode.type === b.id));
+  const key = cost + '|' + off + '|' + frac.toFixed(2) + '|' + txt + '|' + armed;
+  if (key === b.last) return;
+  b.last = key;
+  b.costEl.textContent = cost;
+  b.el.classList.toggle('off', !!off);
+  b.el.classList.toggle('armed', armed);
+  b.cdv.style.height = (frac * 100).toFixed(0) + '%';
+  b.cdt.textContent = txt;
+}
+function showTip(b) {
+  const el = $('tip');
+  let h = '';
+  if (b.kind === 'train') {
+    const d = U[b.id];
+    h = '<h4 style="color:' + FMETA[PF].css + '">' + esc(d.name) + '</h4><div class="meta">' + costOf(PF, b.id) + ' tokens &middot; ' + d.time + 's &middot; pop ' + d.pop + (d.batch ? ' &middot; ships x' + d.batch : '') + ' &middot; HP ' + d.hp + '</div>' + esc(d.d) + (d.qk ? qhtml(d.qk) : '');
+  } else if (b.kind === 'build') {
+    if (b.id === 'up') {
+      const hq = F[PF].hq, lv = hq ? hq.level : 3;
+      h = '<h4 style="color:#3cc8ff">Develop the Two Acres</h4>' + (lv < 3 ? '<div class="meta">' + UPG[lv].cost + ' tokens &middot; ' + UPG[lv].time + 's</div>' + esc(UPG[lv].name + '. ' + UPG[lv].d) : 'Fully developed.') + ' Watch the 2,000-token cap.' + qhtml('acres');
+    } else {
+      const d = BD[b.id];
+      h = '<h4 style="color:' + FMETA[PF].css + '">' + esc(d.name) + '</h4><div class="meta">' + d.cost + ' tokens &middot; ' + d.time + 's &middot; HP ' + d.hp + '</div>' + esc(d.d) + ' Click the map near your HQ to place.' + (d.qk ? qhtml(d.qk) : '');
+    }
+  } else if (b.kind === 'ability') {
+    const a = AB[PF][b.id];
+    h = '<h4 style="color:' + FMETA[PF].css + '">' + esc(a.name) + (a.super ? ' &middot; superweapon' : '') + '</h4><div class="meta">' + (a.cost ? a.cost + ' tokens &middot; ' : '') + (a.rant ? 'charges 17.5 days (' + a.cd + 's)' : 'cooldown ' + a.cd + 's') + (a.init ? ' &middot; first charge ' + a.init + 's' : '') + '</div>' + esc(a.d) + (a.qk ? qhtml(a.qk) : '') + (a.qk2 ? qhtml(a.qk2) : '');
+  } else if (b.id === 'compact') {
+    h = '<h4>Compaction</h4>Send selected units home. Standing near your HQ or production building restores context. At 13% context a unit degrades sharply.' + qhtml('ctx13');
+  } else if (b.id === 'army') h = '<h4>Select army</h4>Selects every combat unit you own. Hotkey: Space.';
+  else if (b.id === 'base') h = '<h4>Camera to base</h4>Jump the camera to your HQ.';
+  else h = '<h4>Help</h4>Factions, controls, the doomsday clock, and the Phantom Episode.';
+  el.innerHTML = h;
+  el.hidden = false;
+}
+function hideTip() { $('tip').hidden = true; }
+
+// ================================================================ HUD + info panel
+const chip = (lbl, val, title, color) => '<div class="chip"' + (title ? ' title="' + esc(title) + '"' : '') + (color ? ' style="border-color:' + color + '"' : '') + '><span class="lbl">' + lbl + '</span>' + val + '</div>';
+const gauge = (v, col) => '<span class="gauge"><i style="width:' + Math.round(clamp(v, 0, 1) * 100) + '%;background:' + col + '"></i></span>';
+let dvCache = { shimin: 0, dan: 0, rahul: 0 }, dvT = 0;
+function updHUD(dt) {
+  const F_ = F[PF];
+  if (!F_) return;
+  dvT -= dt;
+  if (dvT <= 0) { dvT = 0.3; for (const k of FACS) dvCache[k] = dvOf(k); }
+  let h = '<div class="chip" style="border-color:' + FMETA[PF].css + ';color:' + FMETA[PF].css + '" title="' + esc(FDESC[PF].li.join(' / ')) + '"><b>' + FMETA[PF].name.toUpperCase() + '</b></div>';
+  h += chip('Tokens', '<span class="tok">' + fmtN(Math.max(0, F_.tokens)) + '</span>' + (PF === 'shimin' ? ' / 2,000' : ''), PF === 'shimin' ? 'The 20x plan: hard cap of 2,000 tokens. Hit it and production stalls for 10 seconds.' : PF === 'dan' ? 'Token Miser: everything costs half.' : '');
+  h += chip('Pop', popUsed(PF) + '/' + FMETA[PF].popCap);
+  if (PF === 'shimin' && F_.hq) h += chip('Two Acres', 'Lv ' + F_.hq.level + ' &middot; +' + PASSIVE[F_.hq.level] + '/s');
+  if (PF === 'shimin' && F_.stall > 0) h += chip('Usage limit', '<span style="color:#ffcf4a">' + Math.ceil(F_.stall) + 's</span>', '', '#ffcf4a');
+  if (PF === 'dan') {
+    h += chip('Thermal', gauge(F_.heat / 100, F_.hot ? '#ff5a5a' : '#ff8a2a') + (F_.hot ? ' <span style="color:#ff5a5a">THROTTLED</span>' : ''), 'Every queued item adds heat, and a queue of four or more keeps heating. At 100 the Framework Desktop throttles to 35% speed until it cools.');
+    h += chip('Rant', gauge(1 - F_.cd.e / AB.dan.e.cd, '#ff8a2a') + ' ' + (F_.cd.e > 0 ? 'day ' + rantDays(F_) + '/17.5' : '<span style="color:#ffcf4a">READY (E)</span>'), 'Charges for two and a half weeks.');
+  }
+  if (matchT < JETLAG && (PF === 'dan')) h += chip('Jet lag', Math.ceil(JETLAG - matchT) + 's', 'Dan’s units are slow for the first 60 seconds.');
+  if (PF === 'rahul') h += chip('Employer', 'neutral', 'No insignia: Arena Judges cannot delete your units.');
+  if (clock.burst) h += chip('Bubble', '<span style="color:#ff5a5a">burst</span>', '', '#ff5a5a');
+  const res = $('res');
+  if (res._h !== h) { res.innerHTML = h; res._h = h; }
+  const ck = $('clock');
+  ck.textContent = clock.burst ? 'MIDNIGHT' : fmtT(clock.sec);
+  ck.classList.toggle('danger', clock.burst || clock.sec < 30);
+  $('clocklbl').textContent = clock.burst ? 'correction ' + fmtT(clock.corr) : 'to midnight';
+  $('rec').innerHTML = '<b>&#9679;</b> REC ' + fmtT(matchT) + ' &middot; ' + esc(diff.name);
+  let s = '<div class="hd">Delivered Value</div>';
+  for (const k of FACS) {
+    const val = !F[k].arrived ? 'ETA ' + fmtT(RAHUL_ETA - matchT) : fmtN(dvCache[k]) + (F[k].alive ? '' : ' (HQ down)');
+    s += '<div class="row' + (k === PF ? ' me' : '') + '" style="color:' + FMETA[k].css + '"><span>' + FMETA[k].name + (k === PF ? ' (you)' : '') + '</span><span>' + val + '</span></div>';
+  }
+  const sc = $('scorechip');
+  if (sc._h !== s) { sc.innerHTML = s; sc._h = s; }
+  for (const b of cmdBtns) btnState(b);
+}
+function bar(v, col) { return '<div class="bar"><i style="width:' + Math.round(clamp(v, 0, 1) * 100) + '%;background:' + col + '"></i></div>'; }
+function updInfo() {
+  const el = $('info');
+  const list = sel.filter((e) => !e.dead);
+  let h = '';
+  if (!list.length) {
+    const d = FDESC[PF];
+    h = '<h3 style="color:' + FMETA[PF].css + '">' + FMETA[PF].name + '</h3><div class="sub">' + esc(d.an) + ' &middot; HQ: ' + esc(d.hq) + ' &middot; ' + esc(d.bl) + '</div><ul>' + d.li.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul><div class="flav">Drag to select, right click to attack-move, Shift+right click to move, G to compact. H for help.</div>' + qhtml(d.qk);
+  } else if (list.length === 1) {
+    const e = list[0], col = FMETA[e.f].css;
+    if (e.kind === 'u') {
+      const nm = e.type === 'creep' ? e.cname : e.def.name;
+      h = '<h3 style="color:' + col + '">' + esc(nm) + '</h3><div class="sub">' + (e.f === PF ? 'Yours' : FMETA[e.f].name) + (e.type === 'creep' ? ' &middot; ' + e.months + ' months behind the frontier' : '') + ' &middot; ' + e.state + '</div>';
+      h += '<div class="kv">HP ' + Math.ceil(e.hp) + ' / ' + e.maxHp + '</div>' + bar(e.hp / e.maxHp, col);
+      if (e.f !== 'neutral') h += '<div class="kv">Context ' + Math.round(e.ctx * 100) + '%' + (e.ctx <= 0.13 ? ' <span class="warnt">degraded: inventing APIs (G to compact)</span>' : '') + '</div>' + bar(e.ctx, e.ctx <= 0.13 ? '#ff5a5a' : '#7fb2ff');
+      const st = [];
+      if (e.stun > 0) st.push('watching Hamlet ' + Math.ceil(e.stun) + 's');
+      if (e.pacify > 0) st.push('discussing what it means to be human ' + Math.ceil(e.pacify) + 's');
+      if (e.watch > 0) st.push('would watch it all day');
+      if (e.glitch > 0) st.push('glitching ' + Math.ceil(e.glitch) + 's');
+      if (e.rant > 0) st.push('ranted at');
+      if (e.checkT > 0) st.push('Tiananmen check in progress');
+      if (e.noBudget) st.push('out of thinking budget');
+      if (e.conv > 0.02) st.push('being persuaded ' + Math.round(e.conv * 100) + '%');
+      if (st.length) h += '<div class="kv warnt">' + esc(st.join(' · ')) + '</div>';
+      h += '<div class="flav">' + esc(e.def.d) + '</div>';
+    } else {
+      h = '<h3 style="color:' + col + '">' + esc(e.def.name) + '</h3><div class="sub">' + (e.f === PF ? 'Yours' : FMETA[e.f].name) + (e.type === 'hq_shimin' ? ' &middot; level ' + e.level : '') + (e.built ? '' : ' &middot; constructing ' + Math.round(e.prog * 100) + '%') + '</div>';
+      h += '<div class="kv">HP ' + Math.ceil(e.hp) + ' / ' + e.maxHp + '</div>' + bar(e.hp / e.maxHp, col);
+      if (e.f === PF && e.queue.length) {
+        const it = e.queue[0], tm = it === 'up' ? UPG[e.level].time : U[it].time;
+        h += '<div class="kv">Building ' + esc(it === 'up' ? UPG[e.level].name : U[it].name) + (e.queue.length > 1 ? ' (+' + (e.queue.length - 1) + ' queued)' : '') + '</div>' + bar(e.pt / tm, '#e6ff5c');
+      }
+      if (e.type === 'hq_dan') h += '<div class="kv">Thermal ' + Math.round(F.dan.heat) + (F.dan.hot ? ' <span class="warnt">throttled</span>' : '') + '</div>';
+      h += '<div class="flav">' + esc(e.def.d) + (e.f === PF ? ' Right click the map to set a rally point.' : '') + '</div>' + (e.def.qk ? qhtml(e.def.qk) : '');
+    }
+  } else {
+    const counts = {};
+    let ctx = 0, n = 0;
+    for (const e of list) { const nm = e.type === 'creep' ? 'Captured model' : e.def.name; counts[nm] = (counts[nm] || 0) + 1; if (e.kind === 'u') { ctx += e.ctx; n++; } }
+    h = '<h3 style="color:' + FMETA[PF].css + '">' + list.length + ' selected</h3><div class="sub">Average context ' + Math.round((ctx / Math.max(1, n)) * 100) + '%</div><div class="chips">' + Object.keys(counts).map((k) => '<span class="uchip">' + esc(k) + ' x' + counts[k] + '</span>').join('') + '</div>';
+    if (list.some((u) => u.def.haiku)) h += '<div class="flav">Includes Haiku. Ordering an attack will produce poetry.</div>';
+  }
+  el.innerHTML = h;
+}
+
+// ================================================================ overlay (bars, labels, bubbles)
+function otext(t, x, y, col, size, bold, alpha) {
+  octx.font = (bold ? '600 ' : '') + size + 'px "JetBrains Mono", Menlo, Consolas, monospace';
+  octx.globalAlpha = alpha === undefined ? 1 : alpha;
+  octx.lineWidth = 3; octx.strokeStyle = 'rgba(0,0,0,0.85)'; octx.strokeText(t, x, y);
+  octx.fillStyle = col; octx.fillText(t, x, y);
+  octx.globalAlpha = 1;
+}
+function obar(x, y, w, h, v, col) {
+  octx.fillStyle = 'rgba(0,0,0,0.75)'; octx.fillRect(x - 1, y - 1, w + 2, h + 2);
+  octx.fillStyle = col; octx.fillRect(x, y, w * clamp(v, 0, 1), h);
+}
+function obubble(t, x, y, col) {
+  octx.font = '11px "JetBrains Mono", Menlo, Consolas, monospace';
+  const w = octx.measureText(t).width + 10;
+  octx.fillStyle = 'rgba(10,12,20,0.85)'; octx.fillRect(x - w / 2, y - 9, w, 17);
+  octx.strokeStyle = col; octx.lineWidth = 1; octx.strokeRect(x - w / 2 + 0.5, y - 8.5, w - 1, 16);
+  octx.fillStyle = col; octx.fillText(t, x, y);
+}
+const GLITCH = ['▓▒░', 'NaN', 'undefined', '░▒▓', '[object Object]'];
+function drawOverlay(dt) {
+  octx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  octx.clearRect(0, 0, W, H);
+  if (state === 'menu') return;
+  octx.textAlign = 'center'; octx.textBaseline = 'middle';
+  const zk = 80 / camS.dist;
+  let bub = 0;
+  for (const e of ents) {
+    if (e.dead || !e.mesh.visible) continue;
+    const isU = e.kind === 'u';
+    const p = toScreen(e.x, isU ? e.def.h * 1.35 + 0.6 : e.def.hq ? 7.2 : 5.6, e.z);
+    if (!p) continue;
+    const px = p.x, py = p.y;
+    if (px < -80 || px > W + 80 || py < -40 || py > H + 40) continue;
+    const bw = isU ? clamp(e.r * 22 * zk, 16, 46) : clamp(e.r * 12 * zk, 40, 100);
+    let y = py;
+    if (!isU && e.def.hq) otext(e.def.name, px, py - 12, FMETA[e.f].css, 11, true);
+    if (isU && e.f === 'neutral' && camS.dist < 110) otext(e.cname + ' · ' + e.months + ' mo behind', px, py - 10, '#4fd18b', 10);
+    const showHp = e.sel || e.hp < e.maxHp - 0.5 || hover === e || (isU && e.f === PF && !e.def.worker && e.ctx < 0.6);
+    if (showHp) { obar(px - bw / 2, y, bw, 4, e.hp / e.maxHp, e.hp / e.maxHp < 0.3 ? '#ff5a5a' : FMETA[e.f].css); y += 6; }
+    if (isU && e.f === PF && !e.def.worker && showHp) {
+      obar(px - bw / 2, y, bw, 3, e.ctx, e.ctx <= 0.13 ? '#ff5a5a' : '#7fb2ff');
+      if (e.ctx <= 0.13) otext('13%', px + bw / 2 + 14, y + 1, '#ff5a5a', 9, true);
+      y += 5;
+    }
+    if (!isU) {
+      if (!e.built) { obar(px - bw / 2, y, bw, 3, e.prog, '#ffffff'); y += 5; }
+      else if (e.queue.length && e.f === PF) { const it = e.queue[0], tm = it === 'up' ? UPG[e.level].time : U[it].time; obar(px - bw / 2, y, bw, 3, e.pt / tm, '#e6ff5c'); y += 5; }
+      continue;
+    }
+    if (e.checkT > 0) { otext('Tiananmen check', px, py - 24, '#ffcf4a', 10, true); obar(px - 26, py - 16, 52, 5, 1 - e.checkT / 3, '#ffcf4a'); }
+    if (e.conv > 0.02) { obar(px - bw / 2, y, bw, 3, e.conv, '#c65bff'); y += 5; }
+    if (e.stun > 0.35 && e.id % 3 === 0 && bub < 5) { bub++; obubble('To be, or not to be...', px, py - 18, '#ffe2a8'); }
+    else if (e.pacify > 0 && e.id % 3 === 0 && bub < 7) { bub++; obubble(e.phrase, px, py - 18, '#ffffff'); }
+    else if (e.watch > 0) obubble('would watch it all day', px, py - 18, '#e2b8ff');
+    else if (e.glitch > 0 && Math.random() < 0.5) otext(pick(GLITCH), px, py - 14, '#ff5a5a', 10, true);
+    else if (e.noBudget) otext('out of thinking budget', px, py - 14, '#ffcf4a', 9);
+    else if (e.rant > 0 && e.id % 4 === 0) otext('ranted at', px, py - 14, '#ff8a2a', 9);
+  }
+  for (const l of ringLabels) {
+    if (l.rg.age > 6 || !l.rg.mesh.visible) continue;
+    const p = toScreen(l.x, 0.5, l.z + l.rg.cur);
+    if (p) otext(l.text, p.x, p.y + 10, l.rg.k === 7 ? '#ffffff' : '#bfe9ff', 13, true, Math.max(0, 1 - l.rg.age / 6));
+  }
+  for (let i = floats.length - 1; i >= 0; i--) {
+    const f = floats[i];
+    f.t += dt;
+    if (f.t > f.life) { floats.splice(i, 1); continue; }
+    const p = toScreen(f.x, f.y + f.t * 1.6, f.z);
+    if (p) otext(f.text, p.x, p.y, f.color, 12, true, 1 - f.t / f.life);
+  }
+  if (mouse.drag) {
+    octx.strokeStyle = FMETA[PF].css; octx.lineWidth = 1;
+    octx.fillStyle = 'rgba(120,200,255,0.08)';
+    const x = Math.min(mouse.sx, mouse.x), y = Math.min(mouse.sy, mouse.y), w = Math.abs(mouse.x - mouse.sx), h = Math.abs(mouse.y - mouse.sy);
+    octx.fillRect(x, y, w, h); octx.strokeRect(x + 0.5, y + 0.5, w, h);
+  }
+  if (mode && state === 'play') {
+    const lbl = mode.kind === 'build' ? 'Place ' + BD[mode.type].name + ' · right click cancels' : AB[PF][mode.key].name + ': ' + (AB[PF][mode.key].target === 'creep' ? 'click a neutral model' : AB[PF][mode.key].target === 'enemy' ? 'click an enemy unit or a Hamlet' : 'click a visible area') + ' · right click cancels';
+    otext(lbl, mouse.x, mouse.y + 28, '#ffffff', 11, true);
+  }
+}
+
+// ================================================================ minimap
+const mini = $('mini'), mctx = mini.getContext('2d'), MW = 176;
+const fogC = document.createElement('canvas'); fogC.width = fogC.height = FN;
+const fogCtx = fogC.getContext('2d'), fogImg = fogCtx.createImageData(FN, FN);
+let miniBg = null;
+const mm = (v) => ((v + HALF) / MAP) * MW;
+function buildMiniBg() {
+  miniBg = document.createElement('canvas'); miniBg.width = miniBg.height = MW;
+  const g = miniBg.getContext('2d');
+  g.fillStyle = '#121826'; g.fillRect(0, 0, MW, MW);
+  for (const k of FACS) { const b = FMETA[k].base; g.fillStyle = FMETA[k].css; g.globalAlpha = 0.18; g.beginPath(); g.arc(mm(b.x), mm(b.z), (15 / MAP) * MW, 0, TAU); g.fill(); }
+  g.globalAlpha = 1;
+  g.fillStyle = '#5b7bd6';
+  for (const w of WALLS) g.fillRect(mm(w[0]), mm(w[1]), Math.max(1, mm(w[2]) - mm(w[0])), Math.max(1, mm(w[3]) - mm(w[1])));
+  g.strokeStyle = '#5b7bd6'; g.lineWidth = 2; g.strokeRect(1, 1, MW - 2, MW - 2);
+  g.strokeStyle = '#2f8a5a'; g.lineWidth = 1;
+  for (const c of CAMP_DEF) { g.beginPath(); g.arc(mm(c.x), mm(c.z), 3.5, 0, TAU); g.stroke(); }
+}
+function drawMini() {
+  if (!miniBg) buildMiniBg();
+  mctx.drawImage(miniBg, 0, 0);
+  mctx.fillStyle = '#e6ff5c';
+  for (const v of veins) if (v.amount > 0 && (revealAll || explAt(v.x, v.z))) mctx.fillRect(mm(v.x) - 2, mm(v.z) - 2, 4, 4);
+  for (const e of ents) {
+    if (e.dead) continue;
+    if (e.kind === 'b') {
+      if (!(e.f === PF || revealAll || e.seen)) continue;
+      const s = Math.max(4, (e.def.size / MAP) * MW);
+      mctx.fillStyle = FMETA[e.f].css; mctx.fillRect(mm(e.x) - s / 2, mm(e.z) - s / 2, s, s);
+    } else {
+      if (!(e.f === PF || revealAll || visAt(e.x, e.z))) continue;
+      mctx.fillStyle = FMETA[e.f].css; mctx.fillRect(mm(e.x) - 1.5, mm(e.z) - 1.5, 3, 3);
+    }
+  }
+  if (!revealAll) {
+    const d = fogImg.data;
+    for (let k = 0; k < FN * FN; k++) { d[k * 4] = 5; d[k * 4 + 1] = 7; d[k * 4 + 2] = 11; d[k * 4 + 3] = vis[k] ? 0 : expl[k] ? 120 : 215; }
+    fogCtx.putImageData(fogImg, 0, 0);
+    mctx.drawImage(fogC, 0, 0, MW, MW);
+  }
+  for (const p of phantoms) { mctx.fillStyle = FMETA[p.f].css; mctx.fillRect(mm(p.x) - 1.5, mm(p.z) - 1.5, 3, 3); }
+  const corners = [groundAt(0, 0), groundAt(W, 0), groundAt(W, H), groundAt(0, H)];
+  if (corners.every((c) => c)) {
+    mctx.strokeStyle = '#ffffff'; mctx.lineWidth = 1; mctx.beginPath();
+    corners.forEach((c, i) => { const x = clamp(mm(c.x), 0, MW), y = clamp(mm(c.z), 0, MW); if (i) mctx.lineTo(x, y); else mctx.moveTo(x, y); });
+    mctx.closePath(); mctx.stroke();
+  }
+}
+let miniDrag = false;
+function miniPos(e) { const r = mini.getBoundingClientRect(); return { x: ((e.clientX - r.left) / r.width) * MAP - HALF, z: ((e.clientY - r.top) / r.height) * MAP - HALF }; }
+mini.addEventListener('mousedown', (e) => {
+  e.preventDefault();
+  if (state !== 'play' && state !== 'count') return;
+  const p = miniPos(e);
+  if (e.button === 0) { camS.x = clamp(p.x, -HALF + 8, HALF - 8); camS.z = clamp(p.z, -HALF + 8, HALF + 4); miniDrag = true; }
+  else if (e.button === 2 && state === 'play') { const l = myUnits(); if (l.length) { groupOrder(l, p.x, p.z, e.shiftKey ? 'move' : 'amove'); marker(p.x, p.z, !e.shiftKey); sfx('cmd'); } }
+});
+mini.addEventListener('mousemove', (e) => { if (miniDrag) { const p = miniPos(e); camS.x = clamp(p.x, -HALF + 8, HALF - 8); camS.z = clamp(p.z, -HALF + 8, HALF + 4); } });
+mini.addEventListener('contextmenu', (e) => e.preventDefault());
+
+// ================================================================ visuals per frame
+const ghost = new THREE.Mesh(G.box, FX.ghostOK); ghost.visible = false; scene.add(ghost);
+const aimRing = new THREE.Mesh(G.ringThin, FX.ringOK); aimRing.rotation.x = -Math.PI / 2; aimRing.visible = false; scene.add(aimRing);
+function updGhost() {
+  if (!mode || state !== 'play') { ghost.visible = false; aimRing.visible = false; return; }
+  const g = groundAt(mouse.x, mouse.y);
+  if (!g) return;
+  if (mode.kind === 'build') {
+    const s = BD[mode.type].size, x = snap(g.x), z = snap(g.z);
+    ghost.scale.set(s, 2.5, s); ghost.position.set(x, 1.25, z);
+    ghost.material = canPlace(PF, mode.type, x, z) && F[PF].tokens >= BD[mode.type].cost ? FX.ghostOK : FX.ghostBad;
+    ghost.visible = true; aimRing.visible = false;
+  } else {
+    const a = AB[PF][mode.key];
+    aimRing.scale.setScalar(a.radius || 2); aimRing.position.set(g.x, 0.22, g.z);
+    aimRing.material = a.target === 'area' && !visAt(g.x, g.z) ? FX.ringBad : FX.ringOK;
+    aimRing.visible = true; ghost.visible = false;
+  }
+}
+function updVisuals(dt) {
+  const t = performance.now() / 1000;
+  for (const e of ents) {
+    if (e.dead) continue;
+    const m = e.mesh;
+    if (e.kind === 'u') {
+      const seen = e.f === PF || revealAll || visAt(e.x, e.z);
+      m.visible = seen && !(e.glitch > 0 && Math.random() < 0.25);
+      if (!seen) continue;
+      m.position.x = e.x; m.position.z = e.z;
+      let y = 0;
+      if (e.type === 'scout') y = 0.5 + Math.sin(t * 4 + e.id) * 0.15;
+      else if (e.type === 'creep' || e.type === 'persuader') y = 0.15 + Math.abs(Math.sin(t * 3 + e.id)) * 0.25;
+      if (e.pacify > 0) y = 0.25 + Math.sin(t * 2 + e.id) * 0.2;
+      if (e.hitT > 0) y += 0.15;
+      m.position.y = y;
+      const dd = ((e.face - m.rotation.y + Math.PI) % TAU + TAU) % TAU - Math.PI;
+      m.rotation.y += dd * Math.min(1, dt * 10);
+      m.rotation.z = e.ctx <= 0.13 && e.f !== 'neutral' ? Math.sin(t * 9 + e.id) * 0.14 : e.stun > 0 ? Math.sin(t * 5 + e.id) * 0.2 : 0;
+      e.ring.visible = e.sel || hover === e;
+      if (e.spins === undefined) e.spins = collectSpins(m);
+      for (const s of e.spins) s.rotation.y += dt * 1.6;
+    } else {
+      m.visible = e.f === PF || revealAll || e.seen;
+      e.ring.visible = e.sel || hover === e;
+      if (e.spins === undefined) e.spins = collectSpins(m);
+      for (const s of e.spins) { if (s.userData.spin === 2) s.rotation.z += dt * 3; else s.rotation.y += dt * 1.2; }
+    }
+  }
+  for (const v of veins) { if (v.amount > 0) { v.mesh.scale.y = 0.35 + 0.65 * (v.amount / v.max); v.mesh.visible = revealAll || explAt(v.x, v.z); } }
+}
+
+// ================================================================ input
+const cv = renderer.domElement;
+function loc(e) { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+cv.addEventListener('mousedown', (e) => {
+  if (state !== 'play' || paused || helpOpen) return;
+  initAudio();
+  const p = loc(e);
+  if (e.button === 0) { mouse.down = true; mouse.sx = p.x; mouse.sy = p.y; mouse.drag = false; }
+  else if (e.button === 2) rightClick(p.x, p.y, e.shiftKey);
+});
+window.addEventListener('mousemove', (e) => {
+  const p = loc(e);
+  mouse.x = p.x; mouse.y = p.y; mouse.inside = true;
+  if (mouse.down && !mode && Math.hypot(p.x - mouse.sx, p.y - mouse.sy) > 6) mouse.drag = true;
+});
+window.addEventListener('mouseup', (e) => {
+  miniDrag = false;
+  if (e.button !== 0 || !mouse.down) return;
+  mouse.down = false;
+  if (state !== 'play' || paused || helpOpen) { mouse.drag = false; return; }
+  const p = loc(e);
+  if (mouse.drag) { mouse.drag = false; boxSelect(mouse.sx, mouse.sy, p.x, p.y, e.shiftKey); return; }
+  if (e.target === cv) leftClick(p.x, p.y, e.shiftKey);
+});
+document.documentElement.addEventListener('mouseleave', () => { mouse.inside = false; });
+window.addEventListener('blur', () => { keys.clear(); mouse.inside = false; mouse.down = false; mouse.drag = false; });
+cv.addEventListener('contextmenu', (e) => e.preventDefault());
+cv.addEventListener('wheel', (e) => { e.preventDefault(); if (state === 'menu') return; camS.dist = clamp(camS.dist * (e.deltaY > 0 ? 1.1 : 0.9), 34, 140); }, { passive: false });
+let hoverT = 0;
+function updHover(dt) {
+  hoverT -= dt;
+  if (hoverT > 0) return;
+  hoverT = 0.06;
+  hover = state === 'play' && mouse.inside && !mouse.drag ? pickAt(mouse.x, mouse.y) : null;
+  cv.style.cursor = mode ? 'crosshair' : hover && hover.f !== PF && myUnits().length ? 'crosshair' : 'default';
+}
+function togglePause() {
+  if (state !== 'play') return;
+  paused = !paused;
+  $('pause').hidden = !paused;
+}
+function toggleHelp() {
+  helpOpen = !helpOpen;
+  $('help').hidden = !helpOpen;
+}
+window.addEventListener('keydown', (e) => {
+  const k = e.key.length === 1 ? e.key.toLowerCase() : e.key.toLowerCase();
+  if (k === 'h' || e.key === '?') { toggleHelp(); e.preventDefault(); return; }
+  if (state === 'menu') {
+    if (helpOpen) { if (k === 'escape') toggleHelp(); return; }
+    if (k === '1' || k === '2' || k === '3') { menuPick = FACS[Number(k) - 1]; buildMenu(); }
+    if (k === 'enter') startMatch(menuPick, menuDiff);
+    return;
+  }
+  if (k === 'escape') {
+    if (helpOpen) toggleHelp(); else if (mode) mode = null; else setSel([]);
+    return;
+  }
+  if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(k)) { keys.add(k); e.preventDefault(); return; }
+  if (state !== 'play') return;
+  if (k === 'p') { togglePause(); return; }
+  if (k === 'm') { muted = !muted; toast(muted ? 'Muted.' : 'Unmuted.'); return; }
+  if (paused || helpOpen || e.repeat) { if (k === ' ') e.preventDefault(); return; }
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  initAudio();
+  if (k === 'b') { camToBase(); return; }
+  if (k === ' ') e.preventDefault();
+  const b = cmdBtns.find((x) => x.hk === k);
+  if (b) { activate(b); e.preventDefault(); }
+});
+window.addEventListener('keyup', (e) => { keys.delete(e.key.toLowerCase()); });
+
+// ================================================================ menu + match flow
+let menuPick = 'shimin', menuDiff = 'buddy', countId = 0;
+function buildMenu() {
+  const el = $('cards');
+  el.innerHTML = '';
+  FACS.forEach((k, i) => {
+    const d = FDESC[k], b = document.createElement('button');
+    b.type = 'button'; b.className = 'card' + (k === menuPick ? ' on' : ''); b.style.setProperty('--fc', FMETA[k].css);
+    b.innerHTML = '<div class="an">' + (i + 1) + ' &middot; ' + esc(d.an) + '</div><h2>' + FMETA[k].name + '</h2><div class="bl">' + esc(d.bl) + '</div><div class="hqn">HQ: <b>' + esc(d.hq) + '</b></div><ul>' + d.li.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' +
+      (k === 'rahul' ? '<div class="hqn">Picked by you: starts on time with a cheaper, faster-spawning HQ.</div>' : '') + qhtml(d.qk);
+    b.addEventListener('click', () => { menuPick = k; buildMenu(); initAudio(); sfx('sel'); });
+    el.appendChild(b);
+  });
+}
+for (const b of document.querySelectorAll('#diffseg button')) {
+  b.addEventListener('click', () => { menuDiff = b.dataset.d; for (const o of document.querySelectorAll('#diffseg button')) o.classList.toggle('on', o === b); initAudio(); sfx('sel'); });
+}
+$('startbtn').addEventListener('click', () => { initAudio(); startMatch(menuPick, menuDiff); });
+$('helpbtn').addEventListener('click', () => toggleHelp());
+$('helpclose').addEventListener('click', () => toggleHelp());
+$('againbtn').addEventListener('click', () => { initAudio(); startMatch(PF, diffKey); });
+$('menubtn').addEventListener('click', () => showMenu());
+function menuScene() {
+  clearWorld();
+  PF = menuPick;
+  F = {};
+  for (const k of FACS) F[k] = newFac(k, true);
+  F.neutral = { k: 'neutral', ai: true, tokens: 0, creeps: 0, hype: 0, rantBuff: 0, cd: {} };
+  for (const v of VEIN_DEF) makeVein(v[0], v[1], v[2]);
+  for (const k of FACS) {
+    const b = FMETA[k].base;
+    makeBuilding(FMETA[k].hq, k, b.x, b.z, true).seen = true;
+    for (let i = 0; i < 4; i++) { const s = freeSpotNear(b.x, b.z, 8); makeUnit(TRAIN[k][i], k, s[0], s[1]); }
+  }
+  camps = CAMP_DEF.map((c) => Object.assign({}, c, { timer: -1, members: [] }));
+  for (const c of camps) spawnCamp(c, true);
+  revealAll = true; updateFog();
+}
+function showMenu() {
+  state = 'menu'; paused = false;
+  $('end').hidden = true; $('pause').hidden = true; $('count').hidden = true;
+  $('top').hidden = true; $('bottom').hidden = true; hideTip(); $('toast').hidden = true;
+  logEl.innerHTML = '';
+  menuScene();
+  buildMenu();
+  $('menu').hidden = false;
+}
+function startMatch(fac, dk) {
+  clearWorld();
+  PF = fac; diffKey = dk; diff = DIFFS[dk] || DIFFS.buddy;
+  F = {};
+  for (const k of FACS) F[k] = newFac(k, k !== PF);
+  F.neutral = { k: 'neutral', ai: true, tokens: 0, creeps: 0, hype: 0, rantBuff: 0, cd: {} };
+  matchT = 0; jetlagDone = false; fogT = 0; aiT = 0.5; scoutT = 30; phantomT = 14;
+  clock.sec = 120; clock.burst = false; clock.corr = CORRECTION; clock.warned = {}; clock.lastTick = -1;
+  for (const v of VEIN_DEF) makeVein(v[0], v[1], v[2]);
+  for (const k of FACS) if (F[k].arrived) setupBase(k);
+  camps = CAMP_DEF.map((c) => Object.assign({}, c, { timer: -1, members: [] }));
+  for (const c of camps) spawnCamp(c, true);
+  revealAll = false; vis.fill(0); expl.fill(0); updateFog();
+  paused = false; helpOpen = false; $('help').hidden = true; $('pause').hidden = true;
+  buildCmd(); setSel([]); hideTip();
+  const hq = F[PF].hq;
+  camS.x = hq.x; camS.z = hq.z + (hq.z > 0 ? 8 : -6); camS.dist = 68;
+  $('menu').hidden = true; $('end').hidden = true; $('top').hidden = false; $('bottom').hidden = false; $('toast').hidden = true;
+  logEl.innerHTML = '';
+  for (const k of FACS) dvCache[k] = dvOf(k);
+  countdown();
+}
+function countdown() {
+  state = 'count';
+  const id = ++countId, el = $('count'), n = $('countn'), s = $('counts');
+  el.hidden = false;
+  const steps = [['3', 'Recording in'], ['2', 'Levels look fine'], ['1', 'Dan has unmuted'], ['GO', 'Two Minutes to Midnight']];
+  let i = 0;
+  const step = () => {
+    if (id !== countId || state !== 'count') return;
+    if (i >= steps.length) { el.hidden = true; state = 'play'; introLogs(); return; }
+    n.textContent = steps[i][0]; s.textContent = steps[i][1];
+    n.classList.remove('pop'); void n.offsetWidth; n.classList.add('pop');
+    sfx(i === 3 ? 'go' : 'tick');
+    i++;
+    setTimeout(step, i === 4 ? 800 : 700);
+  };
+  step();
+}
+function introLogs() {
+  log('Recording. Probably.', 'sys');
+  log('Welcome to the ever-changing AI maze.', 'sys');
+  logQ('maze', 'sys');
+  const intro = { shimin: ['You are Shimin. Few units, all expensive. Develop the Two Acres with X. Mind the 2,000-token cap.', 'shimin'], dan: ['You are Dan. Everything builds at the Framework Desktop. Do not queue too much.', 'dan'], rahul: ['You are Rahul. Persuade, do not kill. Build a Green Room (Z) for the rest of the tech tree.', 'rahul'] }[PF];
+  later(2.5, () => log(intro[0], intro[1]));
+  later(5, () => { log("Dan's units are jet lagged for the first 60 seconds.", 'dan'); logQ('jetlag', 'dan'); });
+  if (PF !== 'rahul') later(8, () => log('Rahul is not here yet. He arrives at 2:00.', 'rahul'));
+  later(11, () => { log('Open-weight models are camping around the map. Kill them for tokens.', 'neutral'); logQ('gap', 'neutral'); });
+  later(15, () => log('Fog of war is hallucination. Watch for Phantom Episodes. H for help.', 'sys'));
+}
+
+// ================================================================ main loop
+let last = performance.now();
+function frame(now) {
+  requestAnimationFrame(frame);
+  const rdt = Math.min(0.1, Math.max(0, (now - last) / 1000));
+  last = now;
+  try {
+    if (state === 'play' && !paused && !helpOpen) {
+      let rem = Math.min(rdt, 0.05) * timeScale;
+      while (rem > 1e-6 && state === 'play') { const st = Math.min(rem, 0.05); simStep(st); rem -= st; }
+      logClock += rdt;
+    }
+    updCam(rdt);
+    updVisuals(rdt);
+    updGhost();
+    updHover(rdt);
+    renderer.render(scene, cam);
+    drawOverlay(rdt);
+    if (toastT > 0) { toastT -= rdt; if (toastT <= 0) $('toast').hidden = true; }
+    if (state !== 'menu') {
+      hudT -= rdt;
+      if (hudT <= 0) { hudT = 0.1; updHUD(0.1); fadeLog(); }
+      infoT -= rdt;
+      if (infoT <= 0 || infoDirty) { infoT = 0.25; infoDirty = false; updInfo(); }
+      miniT -= rdt;
+      if (miniT <= 0) { miniT = 0.12; drawMini(); }
+    }
+  } catch (err) {
+    if (!frame.errShown) { frame.errShown = true; console.error(err); }
+  }
+}
+let hudT = 0, infoT = 0, miniT = 0;
+window.addEventListener('resize', resize);
+resize();
+buildMap();
+showMenu();
+updCam(0);
+requestAnimationFrame(frame);
+
+// tiny hook for the hosts (and the smoke test): speed up time, inspect state
+window.__adiCraft = {
+  speed(n) { timeScale = clamp(Number(n) || 1, 0.25, 16); return timeScale; },
+  cam(x, z, d) { camS.x = x; camS.z = z; if (d) camS.dist = d; return true; },
+  find(type, fac) { return ents.filter((e) => !e.dead && e.type === type && (!fac || e.f === fac) && e.mesh.visible).map((e) => { const p = toScreen(e.x, 1, e.z); return p ? { x: Math.round(p.x), y: Math.round(p.y), f: e.f, wx: Math.round(e.x), wz: Math.round(e.z), st: e.state } : null; }).filter(Boolean); },
+  reveal(on) { revealAll = on === undefined ? !revealAll : !!on; updateFog(); return revealAll; },
+  tokens(n) { if (F[PF]) F[PF].tokens += Number(n) || 0; return F[PF] ? Math.round(F[PF].tokens) : 0; },
+  info() { return { state, t: Math.round(matchT), clock: Math.round(clock.sec), burst: clock.burst, ents: ents.length, dv: FACS.map((k) => k + ':' + dvOf(k)).join(' '), tokens: FACS.map((k) => k + ':' + Math.round(F[k] ? F[k].tokens : 0)).join(' ') }; }
+};
+})();
+</script>
+
+</body>
+</html>

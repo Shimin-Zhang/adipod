@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Artifacts" description="Things we built on the ADI Pod. A StarCraft-style RTS where the hosts are the factions, and an arena where eleven models grade each other. Some of these were benchmarks that got out of hand.">
+  <section class="artifacts">
+    <h1>Artifacts</h1>
+    <p class="lede">Things we built on the show. Most of them started as a way to test a new model and then got out of hand.</p>
+
+    <article class="artifact">
+      <h2>ADI Craft</h2>
+      <p class="kicker">A StarCraft-style RTS where the three of us are the factions.</p>
+      <p>Shimin is the Protoss analogue: few units, all expensive, everything runs on max thinking, and the HQ is a goat farm on two acres in Washington. Dan is the Terran: cheap, local, pays half for everything, and runs his army off a Framework desktop with a pyramid capstone on top. Rahul is the Zerg: he shows up at the two-minute mark because he is covering for Dan, and his units persuade yours instead of killing them. His superweapon is a Thunderdome. For technical writers.</p>
+      <p>It started as a model benchmark. We handed Opus 5.5 the show's transcripts and one prompt: build a playable 3D RTS where the hosts are the factions, and derive every unit and ability from something we actually said on air. The first version was a one-shot. Then we wrote a game bible in which every goat, pigeon and chain link is cited to an episode, and had four agents rebuild the art at full polygon count. Every quote in a tooltip is verbatim and attributed, because we check.</p>
+      <p class="actions">
+        <a class="play" href="/artifacts/adi-craft/">Play ADI Craft</a>
+        <a class="secondary" href="/artifacts/adi-craft/v1/">The raw one-shot (v1)</a>
+      </p>
+      <p class="fine">Desktop and a mouse. Press 1, 2 or 3 to pick a host, Enter to start, H for help. Balance has not been tested by a human, so pick Filthy Casual.</p>
+    </article>
+
+    <article class="artifact">
+      <h2>AI-on-AI Arena</h2>
+      <p class="kicker">Eleven models answer one question, then grade each other.</p>
+      <p>The question is what the second, third and fourth order effects of AI on society will be. Each model writes its answer, then every model scores every answer for reasoning, originality and correctness, and guesses which model wrote it. Opus 4.7 won the first round. Gemini 3.1 Pro came last. Every model spotted Grok, because it kept bringing up xAI. We walked through the results in <a href="/22">episode 22</a>.</p>
+      <p class="actions">
+        <a class="play" href="https://shimin.io/ai-on-ai-arena/" target="_blank" rel="noopener">Open the arena</a>
+      </p>
+    </article>
+  </section>
+</BaseLayout>
+
+<style>
+  .artifacts {
+    padding: 2rem 0;
+    max-width: 760px;
+  }
+  .lede {
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+  }
+  .artifact {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .artifact h2 {
+    margin: 0 0 0.25rem;
+  }
+  .kicker {
+    color: var(--color-accent);
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.25rem 0 0.5rem;
+  }
+  .actions a {
+    display: inline-block;
+    padding: 0.55rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .actions .play {
+    background: var(--color-cta-bg);
+    color: var(--color-cta-text);
+  }
+  .actions .play:hover {
+    background: var(--color-cta-bg-hover);
+  }
+  .actions .secondary {
+    border: 1px solid var(--color-border);
+    color: var(--color-cta-secondary-text);
+  }
+  .actions .secondary:hover {
+    border-color: var(--color-accent);
+  }
+  .fine {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+</style>

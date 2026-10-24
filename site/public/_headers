@@ -12,3 +12,6 @@
 
 /topics/*.md
   X-Robots-Tag: noindex
+
+/artifacts/adi-craft/*
+  X-Robots-Tag: noindex
