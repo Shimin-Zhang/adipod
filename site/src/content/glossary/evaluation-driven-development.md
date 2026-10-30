@@ -2,7 +2,7 @@
 term: "Evaluation-Driven Development"
 definition: "A methodology for building AI features where each feature is treated as a testable hypothesis and the pull request is gated on an offline evaluation pipeline -- gold-standard and synthetic datasets scored by code-metric and LLM-as-judge evaluators -- instead of on traditional unit tests."
 slug: "evaluation-driven-development"
-episodes: ["31"]
+episodes: ["31", "45"]
 aliases: ["EDD", "eval-driven development", "eval-first development"]
 ---
 
@@ -21,6 +21,8 @@ The moving parts the episode pulled out:
 Shimin's framing on the show was that moving from unit tests to evals is like moving from Newtonian physics to quantum mechanics: the old rules don't vanish, they stop being the right level of description once the system is probabilistic by design. EDD is the non-deterministic era's analog to test-driven development -- you build the measurement in before the feature, and you let the eval, not a green checkmark on a unit test, decide whether the PR ships.
 
 It also fits the show's recurring throughline that the leverage in AI engineering keeps moving up the stack: the hard part is no longer writing the feature but specifying how you'll know it works, which is exactly the judgment a human still has to supply.
+
+[Episode 45](/episodes/45-anthropics-s-1-amazons-ai-memo-to-engineers-de-slopped-qwen-claude-auto-evals/) looked at a first-party version of the eval gate. The claude-api skill's `/claude-api build-eval` and `/claude-api hillclimb` commands ([Lance Martin, claude.dev](https://claude.dev/blog/automating-eval-design-and-hillclimbing/)) turn the workflow into a guided one: Claude interviews you, samples inputs (production transcripts first, then tickets, hand-written cases, synthetic ones), proposes the cheapest grader that fits (a programmatic check where outputs are constrained, an LLM judge with a rubric of checkable claims where they aren't, never the model under test), and runs a baseline with a confidence interval. The post's four properties of a good eval tighten EDD's gold-standard/synthetic and code/judge split: tasks mirror production, performance improves with stronger models and more thinking, there is headroom below 100% at the frontier, and run-to-run variance is low. Hillclimbing then splits the set into train and test, makes one change per round, and reverts anything that lifts train but not test, which is the benchmaxxing guard built in. [Hamel Husain's review](https://hamel.dev/blog/posts/claude-auto-evals/) is the counterweight: it pushed him to create an eval before looking at the data, asked him to validate judgments without enough context, and bundled four failures into one evaluator, so he'd hold off for now while crediting its one-shot issue discovery as the strongest he's seen. Shimin's test on his own writing skill was the on-air demo, and his target of 70 to 85 percent rather than all green is the EDD mindset in one number.
 
 ## Related Concepts
 

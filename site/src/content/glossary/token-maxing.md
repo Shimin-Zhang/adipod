@@ -2,7 +2,7 @@
 term: "Token-Maxing"
 definition: "The practice of measuring or incentivizing AI-era engineering productivity by raw token consumption -- leaderboards, spend targets, and tokens-per-PR ratios -- on the assumption that more tokens burned means more value produced."
 slug: "token-maxing"
-episodes: ["32"]
+episodes: ["32", "45"]
 aliases: ["token maxing", "tokens per PR", "token leaderboards"]
 ---
 
@@ -17,6 +17,8 @@ Dan's rant traced the lineage directly: this is the lines-of-code fallacy with a
 The counterexample from the episode kills the metric cleanly. Dan's boss asked him a set of heavy technical questions; answering them properly required building a large amount of throwaway code. He pointed an LLM at it, burned an enormous number of tokens in 45 minutes on work that would have taken him a week by hand, explored three primary approaches, found the flaws in each — and threw all of the code away. Zero pull requests. The output was a recommendations document: human judgment applied to LLM output, which is supposedly what engineers are still paid for. On a tokens-per-PR leaderboard, the most valuable work of the project scores zero.
 
 The deeper point is the one that predates AI: a 10x engineer was never the one who typed ten times the code — it's the one who finds the approach ten 1x engineers wouldn't. Metrics that count output artifacts (lines, PRs, now tokens) systematically misprice the exploration, verification, and thrown-away prototypes where that judgment actually gets exercised. Token spend is a cost to account for, not a proxy for value in either direction.
+
+[Episode 45](/episodes/45-anthropics-s-1-amazons-ai-memo-to-engineers-de-slopped-qwen-claude-auto-evals/) found the word in an official document. Amazon's [memo to its software engineers](https://www.aboutamazon.com/news/company-news/amazon-software-engineer-role-guideline-ai) on the role of the developer in the age of AI, published by VP and Distinguished Engineer Terk Terkowitz, admits that the company measures AI adoption with input metrics like token usage and tool adoption and throughput metrics like code changes and reviews, calls them "deeply flawed, primarily because they are disconnected from what matters," and warns that "tokenmaxxing is at odds with frugality" and that measuring lines of code is at odds with "invent and simplify." It keeps them anyway, because they correlate with the outputs that matter for now, and tells leaders to study the 10th and 90th percentiles of adoption rather than chase the average. Dan's response was the lineage again: pull requests, lines of code, and Jira tickets were never good proxies either. The memo's own escape hatch is the line the hosts liked most: "If your work does not benefit from current AI tooling, that is a finding, not a failing."
 
 ## Related Concepts
 
