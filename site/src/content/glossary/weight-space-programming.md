@@ -1,0 +1,35 @@
+---
+term: "Weight-Space Programming"
+definition: "A general-purpose LLM reading or editing another neural network's weights directly, as text, around a natural-language spec, with no optimizer and no gradient descent. Named in MIT CSAIL's November 2026 post 'Sparks of Weight-Space Programming,' in which GPT-6 Astra identified what small networks do from their weights alone, repaired a failing policy by editing 3.5% of its weights, wrote game-playing policies from scratch, and lifted Qwen3.5-0.8B from 7.9% to 48.1% on MATH-500 by editing 0.016% of its weights."
+slug: "weight-space-programming"
+episodes: ["46"]
+aliases: ["weight space programming", "LLMs reading neural network weights", "LLM weight editing"]
+---
+
+## Context
+
+Weight-space programming was the deep dive on [Episode 46](/episodes/46-one-year-of-bad-takes-llms-that-write-neural-network-weights-inside-an-ai-benchmark/). The source is ["Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights"](https://rikiyat.github.io/blog/weight-space-programming/), a blog post by Rikiya Takehi and Jayden Teoh (co-first authors), Alex Zhang and Omar Khattab at MIT CSAIL, published November 2, 2026. The authors ask that it be cited as a blog post, not a paper. Their definition: a general-purpose LLM "reads and writes a network's weights directly (i.e., not through an optimizer, and in particular not with gradient descent) around some natural language spec, sometimes even with no environment feedback at all." Every experiment uses GPT-6 Astra, and the complete logs are public.
+
+The post is organized around three verbs. **Read:** given four PPO policies (17,253 weights each) for the authors' own 10x10 grid versions of Breakout, Pong, Pac-Man and Freeway, as raw text with no tools and no answer options, Astra named every game, noticing for Breakout that "the agent's weights lie along the bottom row, a paddle." It identified three 12x12 diffusion models (circles, squares, triangles) from their weights, and, given only the middle blocks of three 7.2M-parameter character-level transformers trained on Python, romaji and English, named each one's language in six of six attempts and found every induction head with no false positives. **Fix:** a Kinetix car-on-ramp policy with 171,664 weights that had never once succeeded (the car has to back up, jump a red strip and reach a blue box) went from 0% to 100% of 1,024 episodes after Astra, prompted to explain the failure and fix only its cause, edited 3.5% of the weights in a single reply. **Write:** asked for MinAtar Breakout, Seaquest and Asterix policies from scratch, with no data, loss, gradients, tools or rollouts, Astra wrote weights as text that scored 517.4 on Breakout against 15.8 for PPO trained 100 million steps and 25.3 at 500 million, about 20x, and beat PPO-100M on all three games.
+
+The two experiments that made the rounds go beyond the context window, through a Python sandbox with a forward-pass budget. Astra wrote a 1.48-million-weight 9x9 Go network that wins more than half its games against smaller PPO nets with zero forward passes and beats an equal-sized PPO net trained on 20 million games with 50. And it took Qwen3.5-0.8B from 7.9% to 48.1% on MATH-500 (GSM8K 13.8% to 67.1%, IFEval 21.0% to 62.3%, answers hitting the 32,768-token limit 93% to 33%) in 50 forward passes, by tracing the model's looping to one direction in the MLPs of layers 15 and 19 and subtracting it from 64 output columns each: 131,072 weights, 0.016% of the model. With 10 or 25 passes the gains were small.
+
+[Alex Krentsel reproduced the results](https://x.com/AlexKrentsel/status/2117376683724660898) the same day and added a chart of the ability by model generation, scoring each written network against a PPO network trained 500 million steps as 1x. GPT-5 sits near zero, GPT-5.2 through 5.5 at 0.3 to 0.4x, Opus 5 at about 1.3x; then GPT-6.1 Sol at 18x, Claude Opus 5.5 at 20x and GPT-6 Astra at 22x. The capability arrived with the current generation rather than growing gradually, which is why the post landed when it did.
+
+## The Limits
+
+The show's angle was the two things Astra could not do. On Gemma 3 270M, which rarely loops (8.5% of answers), Astra could not improve the model; MATH-500 went from 6.8 to a best of 7.7, a gain Astra itself reported as not established. The authors' framing is that editing "could remove an obstacle that hid an ability, but it could not add an ability the model lacked." The Qwen result is a bug fix of a known failure of tiny reasoning models, not a model learning math from a prompt. And from weights alone, Astra could not tell which of two Gemma 3 270M fine-tunes was the sycophant in four attempts; allowed to see attention patterns on texts it wrote itself, with no model outputs, it picked the sycophant in all three pairs and localized the difference to one attention head.
+
+Shimin's read is that this is not a model that speaks weights the way it speaks base64. Astra's reasoning traces show it finding positions and patterns and explaining them, which is what makes the results legible and also what caps them. Dan's hot take, filed to his own folder on air, is that weights are a language the model simply learned to read, and the Gemma result is the first point against it.
+
+## Why It Matters
+
+Shimin's analogy is chained exploits: every individual step is something a human could do, and no human would do all of them, because it would take years. Dan's is punch cards and assembly, which real working software was once written in, one word at a time. On that reading, weight-space programming is less a new kind of intelligence than a new kind of patience, which is the same thing that made the "find a vulnerability in PHP" prompt work. It is also an interpretability result. [Superposition](/glossary/superposition/) was the reason the field stopped reading neurons directly and reached for sparse autoencoders; Astra finding induction heads and a looping direction from raw weights is a point for the "already clean" side of that argument. The hosts' guesses at why the ability appeared now, long-horizon RL, cybersecurity training, or labs already using models to tune weights internally, are guesses, and the hosts said so.
+
+The practical version, for now, is small. The method works on networks a frontier model can hold in context or reach through a sandbox with a forward-pass budget, and it fixes what it can diagnose. Dan's plan to de-slop a larger model with the biggest frontier model he can pay for survives, as long as he gives it a sandbox.
+
+## Related Concepts
+
+- [Superposition](/glossary/superposition/) -- the hypothesis that made reading weights directly look hopeless, and the one these results argue against
+- [Hallucination neurons](/blog/hallucination-neurons-llm/) -- the other case of a failure mode mapping to an identifiable, editable part of a model
+- [Agent sycophancy](/glossary/agent-sycophancy/) -- the trait Astra could detect from attention patterns but not from weights alone
